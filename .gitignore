@@ -124,4 +124,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#Server
+Server*
+
 # End of https://www.toptal.com/developers/gitignore/api/java,windows,eclipse
