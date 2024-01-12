@@ -21,10 +21,10 @@
 				<div class="inner">
 					<nav>
 						<ul>
-							<li><a href="#intro">Welcome</a></li>
-							<li><a href="#one">Who we are</a></li>
-							<li><a href="#two">What we do</a></li>
-							<li><a href="#three">Get in touch</a></li>
+							<li><a href="#intro">문제 목록</a></li>
+							<li><a href="#one">문제 출제</a></li>
+							<li><a href="#two">찜목록</a></li>
+							<li><a href="#three">후원 랭킹</a></li>	
 						</ul>
 					</nav>
 				</div>
@@ -36,12 +36,14 @@
 				<!-- Intro -->
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
-							<h1>Hyperspace</h1>
-							<p>Just another fine responsive site template designed by <a href="http://html5up.net">HTML5 UP</a><br />
-							and released for free under the <a href="http://html5up.net/license">Creative Commons</a>.</p>
+							<h1>밸런스 게임</h1>
+							
 							<ul class="actions">
-								<li><a href="#one" class="button scrolly">Learn more</a></li>
+								<li><a href="#one" class="button scrolly">게임하기</a></li></ul>
+								<ul class="actions">
+								<li><a href="#one" class="button scrolly">로그인</a></li>
 							</ul>
+							
 						</div>
 					</section>
 
@@ -206,6 +208,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			
 	</body>
 </html>
