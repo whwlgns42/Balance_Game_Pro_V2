@@ -26,6 +26,18 @@ public class QuestionDTO {
 	 
 
 	private String searchCondition;
+	private boolean save;
+
+
+	public boolean isSave() {
+		return save;
+	}
+
+
+
+	public void setSave(boolean save) {
+		this.save = save;
+	}
 
 
 
