@@ -77,37 +77,37 @@ public class FrontController extends HttpServlet {
 		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기
 			forward = new JoinAction().execute(request, response); // TODO 구현하기
 
-		}  else if(action.equals("/wish.do")) {
-			
-		}else if(action.equals("/wishListPage.do")) {
+		} else if (action.equals("/wish.do")) { // 찜하기 기능
+
+		} else if (action.equals("/wishListPage.do")) { // 찜하기 페이지 이동
 			forward = new WishListPageAction().execute(request, response);
-		}else if(action.equals("/makeTitle.do")) {
+		} else if (action.equals("/makeTitle.do")) { // 문제 출제 기능
 			forward = new MakeTitleAction().execute(request, response);
-		}else if(action.equals("/makeTitlePage.do")) {
+		} else if (action.equals("/makeTitlePage.do")) { // 문제 출제 페이지 이동 
 			forward = new MakeTitlePageAction().execute(request, response);
-		}else if(action.equals("/result.do")) {
+		} else if (action.equals("/result.do")) { // 게임결과 기능
 			forward = new ResultAction().execute(request, response);
-		}else if(action.equals("/resultPage.do")) {
+		} else if (action.equals("/resultPage.do")) { // 게임 결과 페이지 이동
 			forward = new ResultPageAction().execute(request, response);
-		}else if(action.equals("/writeComment.do")) {
+		} else if (action.equals("/writeComment.do")) { // 댓글작성 기능
 			forward = new WriteCommentAction().execute(request, response);
-		}else if(action.equals("/titleListPage.do")) {
+		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동
 			forward = new TitleListPageAction().execute(request, response);
-		}else if(action.equals("/mypageUpdate.do")) {
+		} else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
 			forward = new MyPageUpdateAction().execute(request, response);
-		}else if(action.equals("/pwCheck.do")) {
+		} else if (action.equals("/pwCheck.do")) { // 2차 비밀번호 체크 기능 
 			forward = new PwCheckAcion().execute(request, response);
-		}else if(action.equals("/pwCheckPage.do")) {
+		} else if (action.equals("/pwCheckPage.do")) { // 2차 비밀번호 체크 페이지 이동
 			forward = new PwCheckPageAcion().execute(request, response);
-		}else if(action.equals("/game.do")) {
+		} else if (action.equals("/game.do")) { // 게임하기 기능
 			forward = new GameAction().execute(request, response);
-		}else if(action.equals("/gamePage.do")) {
+		} else if (action.equals("/gamePage.do")) { // 게임하기 페이지 이동
 			forward = new GamePageAction().execute(request, response);
-		}else if(action.equals("/sponsorPage.do")) {
+		} else if (action.equals("/sponsorPage.do")) { // 후원하기 페이지 이동
 			forward = new SponsorPageAction().execute(request, response);
-		}else if(action.equals("/sponsor.do")) {
+		} else if (action.equals("/sponsor.do")) { // 후원하기 기능
 			forward = new SponsorAction().execute(request, response);
-		}else if(action.equals("/smsCheck.do")) {
+		} else if (action.equals("/smsCheck.do")) { // 문자인증번호 발송 기능 (비동기)
 			forward = new SmsCheckAction().execute(request, response);
 		} else if (action.equals("/adminPage.do")) { // 관리자 메인 페이지 이동 -- 관리자 관련 페이지 이동
 			forward = new AdminPageAcion().execute(request, response);
