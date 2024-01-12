@@ -3,7 +3,7 @@ package model.answer;
 public class AnswerDTO {
 	private int aId;
 
-	private int mId;
+	private String loginId;
 
 	private int qId;
 
@@ -27,12 +27,12 @@ public class AnswerDTO {
 		this.aId = aId;
 	}
 
-	public int getmId() {
-		return mId;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setmId(int mId) {
-		this.mId = mId;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 	public int getqId() {
@@ -75,8 +75,6 @@ public class AnswerDTO {
 		this.answerCntB = answerCntB;
 	}
 
-
-    
 
   
 }

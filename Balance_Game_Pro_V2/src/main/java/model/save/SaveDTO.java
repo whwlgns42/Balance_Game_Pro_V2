@@ -7,7 +7,7 @@ public class SaveDTO {
 
 	private int qId;
 
-	private int mId;
+	private String loginId;
 
 	 
 
@@ -53,16 +53,16 @@ public class SaveDTO {
 
 
 
-	public int getmId() {
-		return mId;
+	public String getLoginId() {
+		return loginId;
 	}
 
 
 
 
 
-	public void setmId(int mId) {
-		this.mId = mId;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 
@@ -80,5 +80,9 @@ public class SaveDTO {
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+
+
+
+
     
 }

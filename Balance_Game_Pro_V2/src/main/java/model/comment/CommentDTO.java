@@ -5,7 +5,7 @@ public class CommentDTO {
 
 	private int qId; // questions 테이블의 idx를 참조
 
-	private int mId; // users 테이블의 idx를 참조
+	private String loginId; // users 테이블의 idx를 참조
 
 	private String content;
 
@@ -35,12 +35,12 @@ public class CommentDTO {
 		this.qId = qId;
 	}
 
-	public int getmId() {
-		return mId;
+	public String getLoginId() {
+		return loginId;
 	}
 
-	public void setmId(int mId) {
-		this.mId = mId;
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 	public String getContent() {
@@ -74,6 +74,7 @@ public class CommentDTO {
 	public void setMemberLoginId(String memberLoginId) {
 		this.memberLoginId = memberLoginId;
 	}
-    
+
+
   
 }

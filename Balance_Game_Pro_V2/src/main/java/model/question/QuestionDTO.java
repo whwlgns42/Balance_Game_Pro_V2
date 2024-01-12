@@ -5,7 +5,7 @@ import java.util.Date;
 public class QuestionDTO {
 	private int qId;
 
-	private int writer; // 이 경우, 작성자는 User 테이블의 idx 컬럼을 참조할 수 있습니다.
+	private String writer; // 이 경우, 작성자는 User 테이블의 idx 컬럼을 참조할 수 있습니다.
 
 	private String title;
 
@@ -53,13 +53,16 @@ public class QuestionDTO {
 
 
 
-	public int getWriter() {
+
+
+
+	public String getWriter() {
 		return writer;
 	}
 
 
 
-	public void setWriter(int writer) {
+	public void setWriter(String writer) {
 		this.writer = writer;
 	}
 
