@@ -3,34 +3,57 @@ package model.support;
 import java.util.Date;
 
 public class SupportDTO {
-	private int suid;
-	private int mid;
+
+	private int suId;
+
+	private int mId;
+
 	private int amount;
 
-   
-    //-------java------
-	
-    private String searchCondition;
+	 
+
+	 
+
+	//-------java------
+
+	 
+
+	private String searchCondition;
 
 
-	public int getSuid() {
-		return suid;
+
+
+
+	public int getSuId() {
+		return suId;
 	}
 
 
-	public void setSuid(int suid) {
-		this.suid = suid;
+
+
+
+	public void setSuId(int suId) {
+		this.suId = suId;
 	}
 
 
-	public int getMid() {
-		return mid;
+
+
+
+	public int getmId() {
+		return mId;
 	}
 
 
-	public void setMid(int mid) {
-		this.mid = mid;
+
+
+
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
+
+
+
 
 
 	public int getAmount() {
@@ -38,9 +61,15 @@ public class SupportDTO {
 	}
 
 
+
+
+
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+
+
 
 
 	public String getSearchCondition() {
@@ -48,12 +77,12 @@ public class SupportDTO {
 	}
 
 
+
+
+
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
-    
-    
-    
     
 	
 

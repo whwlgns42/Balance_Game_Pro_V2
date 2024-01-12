@@ -3,43 +3,70 @@ package model.save;
 import java.util.Date;
 
 public class SaveDTO {
-	private int sid;
-	private int qid;
-	private int mid;
-    
-	
+	private int sId;
+
+	private int qId;
+
+	private int mId;
+
+	 
+
+	 
+
 	//------java-------
-    private String searchCondition;
+
+	private String searchCondition;
 
 
-	public int getSid() {
-		return sid;
+
+
+
+	public int getsId() {
+		return sId;
 	}
 
 
-	public void setSid(int sid) {
-		this.sid = sid;
+
+
+
+	public void setsId(int sId) {
+		this.sId = sId;
 	}
 
 
-	public int getQid() {
-		return qid;
+
+
+
+	public int getqId() {
+		return qId;
 	}
 
 
-	public void setQid(int qid) {
-		this.qid = qid;
+
+
+
+	public void setqId(int qId) {
+		this.qId = qId;
 	}
 
 
-	public int getMid() {
-		return mid;
+
+
+
+	public int getmId() {
+		return mId;
 	}
 
 
-	public void setMid(int mid) {
-		this.mid = mid;
+
+
+
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
+
+
+
 
 
 	public String getSearchCondition() {
@@ -47,9 +74,11 @@ public class SaveDTO {
 	}
 
 
+
+
+
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
-    
     
 }
