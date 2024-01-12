@@ -8,17 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Action;
 import controller.ActionForward;
-import model.member.MemberDAO;
-import model.member.MemberDTO;
 
-public class JoinAction implements Action{
+public class LogoutAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ActionForward forward = new ActionForward();
-		
-		MemberDTO memberDTO = new MemberDTO();
 		return null;
 	}
 

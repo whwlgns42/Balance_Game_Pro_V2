@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.user.Join;
+import controller.actions.JoinAction;
+import controller.actions.LogoutAction;
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -22,13 +22,11 @@ public class FrontController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("111");
 		doAction(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("2222");
 		doAction(request, response);
 	}
 
@@ -46,10 +44,16 @@ public class FrontController extends HttpServlet {
 			forward.setPath("main.jsp");
 			forward.setRedirect(true);
 		} else if (action.equals("/joinPage.do")) { // 회원가입 페이지 이동 TODO 구현하기
+			forward = new ActionForward();
+			forward.setPath("join.jsp");
+			forward.setRedirect(true);
 		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기
-			forward = new Join().execute(request, response); // TODO 구현하기
+			forward = new JoinAction().execute(request, response); // TODO 구현하기
+			
 
 		} else if (action.equals("/logout.do")) { // TODO 구현하기
+			forward = new LogoutAction().execute(request, response);
+		
 		} else if (action.equals("/testPage.do")) { // TODO 구현하기
 
 		} else if (action.equals("/mypage.do")) { // TODO 구현하기
