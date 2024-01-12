@@ -92,7 +92,7 @@ public class FrontController extends HttpServlet {
 			forward = new ResultPageAction().execute(request, response);
 		} else if (action.equals("/writeComment.do")) { // 댓글작성 기능
 			forward = new WriteCommentAction().execute(request, response);
-		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동
+		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동.
 			forward = new TitleListPageAction().execute(request, response);
 		} else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
 			forward = new MyPageUpdateAction().execute(request, response);
