@@ -12,6 +12,10 @@ import model.Util.JDBCUtil;
 public class SupportDAO {
 	public ArrayList<SupportDTO> selectAll(SupportDTO sDTO) {
 		
+		if(sDTO.getSearchCondition().equals("후원목록")) {
+			//모델
+		}
+		
 		return null;
 
 	}
@@ -23,7 +27,9 @@ public class SupportDAO {
 	} 
 
 	public boolean insert(SupportDTO sDTO) {
-		
+		if(sDTO.getSearchCondition().equals("후원")) {
+			//모델
+		}
 		return false;
 	}
    public boolean update(SupportDTO sDTO) {

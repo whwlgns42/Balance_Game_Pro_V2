@@ -29,7 +29,9 @@ public class QuestionDAO {
 		if(qDTO.getSearchCondition().equals("문제상세조회")) {
 			//박현구
 		}
-		
+		else if(qDTO.getSearchCondition().equals("질문랜덤생성")) {
+			//박현구
+		}
 		return null;
 	} 
 

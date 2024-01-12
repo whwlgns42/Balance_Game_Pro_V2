@@ -29,9 +29,9 @@ public class MemberDAO {
 
 	}
 
-	public boolean insert(MemberDTO mDTO) { // 회원가입 (추후 구현 예정)
+	public boolean insert(MemberDTO mDTO) { // 회원가입
 	
-		if(mDTO.getSearchCondition().equals("문제생성")) {
+		if(mDTO.getSearchCondition().equals("회원가입")) {
 			//조지훈
 		}
 		
@@ -39,6 +39,13 @@ public class MemberDAO {
 	}
 
 	public boolean update(MemberDTO mDTO) { // 개인정보 변경 (추후 구현 예정)
+		if(mDTO.getSearchCondition().equals("회원탈퇴")) {
+			//손성용
+		}
+		else if(mDTO.getSearchCondition().equals("회원변경")) {
+			//모델
+		}
+		
 		
 		return false;
 	}
