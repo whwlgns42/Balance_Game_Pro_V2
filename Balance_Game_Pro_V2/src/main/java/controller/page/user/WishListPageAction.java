@@ -1,5 +1,5 @@
+package controller.page.user;
 
-package controller.page;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -10,8 +10,7 @@ import controller.common.Action;
 import controller.common.ActionForward;
 
 
-
-public class ResultPageAction implements Action{
+public class WishListPageAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

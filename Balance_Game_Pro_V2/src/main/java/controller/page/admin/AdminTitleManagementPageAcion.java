@@ -1,4 +1,4 @@
-package controller.page;
+package controller.page.admin;
 
 import java.io.IOException;
 
@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import controller.common.Action;
 import controller.common.ActionForward;
 
-
-public class WishListPageAction implements Action{
+public class AdminTitleManagementPageAcion implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return null;
+		ActionForward forward = new ActionForward();
+		forward.setPath("adminTitleManagement.jsp");
+		forward.setRedirect(true);
+		return forward;
 	}
 
 }

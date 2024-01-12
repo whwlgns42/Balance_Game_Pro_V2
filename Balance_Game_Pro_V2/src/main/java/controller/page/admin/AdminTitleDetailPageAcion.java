@@ -1,4 +1,4 @@
-package controller.page;
+package controller.page.admin;
 
 import java.io.IOException;
 
@@ -9,16 +9,14 @@ import javax.servlet.http.HttpServletResponse;
 import controller.common.Action;
 import controller.common.ActionForward;
 
-public class AdminMemberManagementPageAcion implements Action{
-//
+public class AdminTitleDetailPageAcion implements Action {
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		 
 		ActionForward forward = new ActionForward();
-		forward.setPath("adminMemberManagement.jsp");
+		forward.setPath("adminTitleDetail.jsp");
 		forward.setRedirect(true);
 		return forward;
 	}
-
 }

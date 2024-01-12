@@ -14,8 +14,14 @@ public class AdminTitleCreateAcion implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		return null;
+		//문제생성
+		ActionForward forward = new ActionForward();
+		forward.setPath("adminTitleManagementPage.do");
+		forward.setRedirect(false);
+		
+		
+		
+		return forward;
 	}
 
 }

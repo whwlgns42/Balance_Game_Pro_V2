@@ -1,4 +1,4 @@
-package controller.page;
+package controller.page.user;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 
 
 
-public class TitleListPageAction implements Action{
+public class MypageAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
