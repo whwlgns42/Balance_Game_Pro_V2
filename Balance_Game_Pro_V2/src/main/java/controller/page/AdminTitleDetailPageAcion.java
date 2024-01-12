@@ -14,7 +14,9 @@ public class AdminTitleDetailPageAcion implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return null;
+		ActionForward forward = new ActionForward();
+		forward.setPath("adminTitleDetail.jsp");
+		forward.setRedirect(true);
+		return forward;
 	}
-
 }

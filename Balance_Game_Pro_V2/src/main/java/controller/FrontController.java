@@ -16,6 +16,7 @@ import controller.admin.AdminTitleDeleteAcion;
 import controller.admin.AdminTitleRefuseAcion;
 import controller.admin.AdminTitleUpdateAcion;
 import controller.common.ActionForward;
+import controller.page.AdminMemberDetailPageAction;
 import controller.page.AdminMemberManagementPageAcion;
 import controller.page.AdminPageAcion;
 import controller.page.AdminTitleAccessPageAcion;
@@ -109,22 +110,25 @@ public class FrontController extends HttpServlet {
 			forward = new SponsorAction().execute(request, response);
 		} else if (action.equals("/smsCheck.do")) { // 문자인증번호 발송 기능 (비동기)
 			forward = new SmsCheckAction().execute(request, response);
-		} else if (action.equals("/adminPage.do")) { // 관리자 메인 페이지 이동 -- 관리자 관련 페이지 이동
+		} else if (action.equals("/adminPage.do")) { // 관리자 메인 페이지 이동 -- 관리자 관련 페이지 이동 (o)
 			forward = new AdminPageAcion().execute(request, response);
 
-		} else if (action.equals("/adminTitleManagementPage.do")) { // 관리자 문제관리페이지 가기
-			forward = new AdminTitleManagementPageAcion().execute(request, response);
+		} else if (action.equals("/adminTitleManagementPage.do")) { // 관리자 문제관리페이지 가기  (o)
+			forward = new AdminTitleManagementPageAcion().execute(request, response); 
 
-		} else if (action.equals("/adminTitleDetailPage.do")) { // 관리자 문제 상세페이지 가기
+		} else if (action.equals("/adminTitleDetailPage.do")) { // 관리자 문제 상세페이지 가기 (o)
 			forward = new AdminTitleDetailPageAcion().execute(request, response);
 
-		} else if (action.equals("/adminMemberManagementPage.do")) { // 관리자 유저관리페이지 가기
+		} else if (action.equals("/adminMemberManagementPage.do")) { // 관리자 유저관리페이지 가기 (o)
 			forward = new AdminMemberManagementPageAcion().execute(request, response);
 
-		} else if (action.equals("/adminTitleDetaileAccessPage.do")) { // 관리자 문제승인상세페이지 가기
+		} else if (action.equals("/adminMemberManagementPage.do")) { // 관리자 유저상세페이지 가기 (o)
+			forward = new AdminMemberDetailPageAction().execute(request, response);
+		} 
+		else if (action.equals("/adminTitleDetaileAccessPage.do")) { // 관리자 문제승인상세페이지 가기 (o)
 			forward = new AdminTitleDetaileAccessPageAcion().execute(request, response);
 
-		} else if (action.equals("/adminTitleAccessPage.do")) { // 관리자 문제승인페이지 가기
+		} else if (action.equals("/adminTitleAccessPage.do")) { // 관리자 문제승인페이지 가기 (o)
 			forward = new AdminTitleAccessPageAcion().execute(request, response);
 
 		} else if (action.equals("/adminTitleAccess.do")) { // 문제승인하기 -- 관리자 관련 기능 액션
