@@ -25,7 +25,7 @@
 			<nav>
 				<ul>
 					<li><a href="#intro">문제 목록</a></li>
-					<li><a href="#one">문제 출제</a></li>
+					<li><a href="makeTitlePage.do">문제 출제</a></li>
 					<li><a href="#two">찜목록</a></li>
 					<li><a href="#three">후원 랭킹</a></li>
 				</ul>
@@ -42,7 +42,7 @@
 				<h1>밸런스 게임</h1>
 
 				<ul class="actions">
-					<li><a href="#one" class="button scrolly">게임하기</a></li>
+					<li><a href="testPage.do" class="button scrolly">게임하기</a></li>
 				</ul>
 				<ul class="actions">
 					<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>

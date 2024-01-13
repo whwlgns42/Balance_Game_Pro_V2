@@ -14,7 +14,7 @@ public class MemberDAO {
 
 	// 회원가입 SQL
 	private static final String INSERT = "INSERT INTO MEMBER (MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE) VALUES((SELECT NVL(MAX(MID),0) + 1 FROM MEMBER),?,?,?,?,?,?,?)";
-	// 아이디 중복 체크
+	// 아이디 중복 체크 SQL
 	private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
 
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색

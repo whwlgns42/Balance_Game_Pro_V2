@@ -16,6 +16,7 @@ import controller.admin.AdminTitleDeleteAcion;
 import controller.admin.AdminTitleRefuseAcion;
 import controller.admin.AdminTitleUpdateAcion;
 import controller.common.ActionForward;
+import controller.page.AlertPageAction;
 import controller.page.admin.AdminMemberDetailPageAction;
 import controller.page.admin.AdminMemberManagementPageAcion;
 import controller.page.admin.AdminPageAcion;
@@ -41,6 +42,8 @@ import controller.user.ResultAction;
 import controller.user.SmsCheckAction;
 import controller.user.SponsorAction;
 import controller.user.WriteCommentAction;
+
+
 
 @WebServlet("*.do")
 public class FrontController extends HttpServlet {
@@ -71,16 +74,16 @@ public class FrontController extends HttpServlet {
 		ActionForward forward = null;
 		if (action.equals("/main.do")) { // 메인 페이지 이동 TODO 구현하기
 			forward = new MainPageAction().execute(request, response);
-		} else if (action.equals("/joinPage.do")) { // 회원가입 페이지 이동 TODO 구현하기
+		} else if (action.equals("/joinPage.do")) { // 회원가입 페이지 이동 TODO 페이지 꾸미기 필요
 			forward = new JoinPageAction().execute(request, response);
-		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기
+		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기 // 구현 완료
 			forward = new JoinAction().execute(request, response); // TODO 구현하기
 		} else if (action.equals("/wish.do")) { // 찜하기 기능
 		} else if (action.equals("/wishListPage.do")) { // 찜하기 페이지 이동
 			forward = new WishListPageAction().execute(request, response);
 		} else if (action.equals("/makeTitle.do")) { // 문제 출제 기능
 			forward = new MakeTitleAction().execute(request, response);
-		} else if (action.equals("/makeTitlePage.do")) { // 문제 출제 페이지 이동 
+		} else if (action.equals("/makeTitlePage.do")) { // 문제 출제 페이지 이동
 			forward = new MakeTitlePageAction().execute(request, response);
 		} else if (action.equals("/result.do")) { // 게임결과 기능
 			forward = new ResultAction().execute(request, response);
@@ -146,9 +149,7 @@ public class FrontController extends HttpServlet {
 			forward = new AdminMemberDeleteActionAcion().execute(request, response);
 
 		} else if (action.equals("/alert.do")) { // TODO 알림창 구현하기
-			forward = new ActionForward();
-			forward.setPath("alert.jsp");
-			forward.setRedirect(false);
+			forward = new AlertPageAction().execute(request, response);
 		}
 
 		if (forward == null) { // TODO 구현하기

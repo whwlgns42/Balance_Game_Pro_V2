@@ -149,6 +149,15 @@ public class QuestionDTO {
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "QuestionDTO [qId=" + qId + ", 작성자 =" + writer + ", 제목 =" + title + ", 답변A =" + answer_A
+				+ ", 답변B =" + answer_B + ", 문제 설명 =" + explanation + ", 카테고리 =" + category
+				+ ", 상태값 =" + searchCondition + "]";
+	}
 	
 	
     
