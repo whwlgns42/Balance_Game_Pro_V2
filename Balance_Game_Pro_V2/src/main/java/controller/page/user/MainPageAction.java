@@ -1,4 +1,4 @@
-package controller.user;
+package controller.page.user;
 
 import java.io.IOException;
 
@@ -9,14 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import controller.common.Action;
 import controller.common.ActionForward;
 
-
-
-public class mainAction implements Action{
+public class MainPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return null;
+
+		ActionForward forward = new ActionForward();
+		forward.setPath("main.jsp");
+		forward.setRedirect(true);
+		return forward;
 	}
 
 }
