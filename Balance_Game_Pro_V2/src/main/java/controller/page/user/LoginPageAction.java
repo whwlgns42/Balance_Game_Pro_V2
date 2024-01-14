@@ -12,10 +12,15 @@ import controller.common.ActionForward;
 
 public class LoginPageAction implements Action {
 
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		return null;
-	}
+		
+		@Override
+		public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			ActionForward forward = new ActionForward();
+			forward.setPath("login.jsp");
+			forward.setRedirect(true);
+			return forward;
+		}
+
 
 }

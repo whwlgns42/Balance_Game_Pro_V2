@@ -48,7 +48,7 @@
 					<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>
 				</ul>
 				<ul class="actions">
-					<li><a href="#one" class="button scrolly">로그인</a></li>
+					<li><a href="loginPage.do" class="button scrolly">로그인</a></li>
 				</ul>
 
 			</div>

@@ -26,6 +26,7 @@ import controller.page.admin.AdminTitleDetaileAccessPageAcion;
 import controller.page.admin.AdminTitleManagementPageAcion;
 import controller.page.user.GamePageAction;
 import controller.page.user.JoinPageAction;
+import controller.page.user.LoginPageAction;
 import controller.page.user.MainPageAction;
 import controller.page.user.MakeTitlePageAction;
 import controller.page.user.PwCheckPageAcion;
@@ -35,6 +36,8 @@ import controller.page.user.TitleListPageAction;
 import controller.page.user.WishListPageAction;
 import controller.user.GameAction;
 import controller.user.JoinAction;
+import controller.user.LoginAction;
+import controller.user.LogoutAction;
 import controller.user.MakeTitleAction;
 import controller.user.MyPageUpdateAction;
 import controller.user.PwCheckAcion;
@@ -78,6 +81,12 @@ public class FrontController extends HttpServlet {
 			forward = new JoinPageAction().execute(request, response);
 		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기 // 구현 완료
 			forward = new JoinAction().execute(request, response); // TODO 구현하기
+		} else if (action.equals("/loginPage.do")) {
+			forward = new LoginPageAction().execute(request, response);
+		} else if (action.equals("/login.do")) {
+			forward = new LoginAction().execute(request, response);
+		} else if (action.equals("/logout.do")) {
+			forward = new LogoutAction().execute(request, response); // 로그아웃 기능
 		} else if (action.equals("/wish.do")) { // 찜하기 기능
 		} else if (action.equals("/wishListPage.do")) { // 찜하기 페이지 이동
 			forward = new WishListPageAction().execute(request, response);
