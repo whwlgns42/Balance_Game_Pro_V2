@@ -121,7 +121,7 @@ public class FrontController extends HttpServlet {
 		} else if (action.equals("/adminMemberManagementPage.do")) { // 관리자 유저관리페이지 가기 (o)
 			forward = new AdminMemberManagementPageAcion().execute(request, response);
 
-		} else if (action.equals("/adminMemberManagementPage.do")) { // 관리자 유저상세페이지 가기 (o)
+		} else if (action.equals("/adminMemberDetailPage.do")) { // 관리자 유저상세페이지 가기 (o)
 			forward = new AdminMemberDetailPageAction().execute(request, response);
 		} 
 		else if (action.equals("/adminTitleDetaileAccessPage.do")) { // 관리자 문제승인상세페이지 가기 (o)
