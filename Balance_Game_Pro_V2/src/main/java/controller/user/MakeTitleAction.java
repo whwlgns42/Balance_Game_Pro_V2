@@ -25,7 +25,7 @@ public class MakeTitleAction implements Action {
 		HttpSession session = request.getSession();
 		questionDTO.setSearchCondition("문제생성");
 		questionDTO.setWriter((String) session.getAttribute("loginId")); // 로그인 아이디
-		questionDTO.setCategory(request.getParameter("category")); // 카테고리
+		//questionDTO.setCategory(Integer.parseInt(request.getParameter("category"))); // 카테고리
 		questionDTO.setTitle(request.getParameter("title")); // 문제 제목
 		questionDTO.setAnswer_A(request.getParameter("answer_A")); // 문제 답변A
 		questionDTO.setAnswer_B(request.getParameter("answer_B")); // 문제 답변A

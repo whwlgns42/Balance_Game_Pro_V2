@@ -49,7 +49,7 @@ public class QuestionDAO {
 				pstmt.setString(3, qDTO.getAnswer_A()); // 답변A
 				pstmt.setString(4, qDTO.getAnswer_B()); // 답변B
 				pstmt.setString(5, qDTO.getExplanation()); // 문제설명
-				pstmt.setString(6, qDTO.getCategory()); // 카테고리
+				pstmt.setInt(6, qDTO.getCategory()); // 카테고리
 				int result = pstmt.executeUpdate();
 				if (result <= 0) {
 					return false;
