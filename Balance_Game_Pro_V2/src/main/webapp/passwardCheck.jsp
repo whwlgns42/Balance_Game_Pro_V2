@@ -23,10 +23,10 @@
                <section id="intro" class="wrapper style1 fullscreen fade-up">
                   <div class="inner">
                      <h1>password check</h1>
-                     <form>
+                     <form action="pwCheck.do" method="POST">
         <div>
             <label for="password">password:</label>
-            <input type="password" id="password" name="password">
+            <input type="password" id="mPw" name="mPw">
         </div>
         <div>
             <button type="submit">button</button>

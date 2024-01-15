@@ -161,6 +161,16 @@ public class MemberDTO {
 		this.searchCondition = searchCondition;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "MemberDTO [mId=" + mId + ", loginId=" + loginId + ", mPw=" + mPw + ", name=" + name + ", email=" + email
+				+ ", address=" + address + ", gender=" + gender + ", age=" + age + ", grade=" + grade + ", mAdmin="
+				+ mAdmin + ", searchCondition=" + searchCondition + "]";
+	}
+
+	
     
     
 }

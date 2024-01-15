@@ -10,12 +10,22 @@
 </head>
 <body>
 	<script>
-	Swal.fire({
-	    text: "${msg}",
-	    icon: "success", // 성공버튼 누르면
-	  }).then(() => { // 메인 페이지로 이동
-	    location.href = "main.do";
-	  });
+	if("${status}" == "success") {
+		Swal.fire({
+		    text: "${msg}",
+		    icon: "success", // 성공버튼 누르면
+		  }).then(() => { // 메인 페이지로 이동
+		    location.href = "${redirect}";
+		  });
+	}else if("${status}" == "fail"){
+		Swal.fire({
+		    text: "${msg}",
+		    icon: "error", // 성공버튼 누르면
+		  }).then(() => { // 메인 페이지로 이동
+		    location.href = "${redirect}";
+		  });
+	}
+	
 	</script>
 
 </body>

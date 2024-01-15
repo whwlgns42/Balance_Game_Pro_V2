@@ -55,13 +55,14 @@
 			<div class="inner">
 				<h1>밸런스 게임</h1>
 
-				<ul class="actions">
-					<li><a href="testPage.do" class="button scrolly">게임하기</a></li>
-				</ul>
+				
 			
 				<%
 				if(loginData == null) {
 					%>
+					<ul class="actions">
+					<li><a href="loginPage.do" class="button scrolly">게임하기</a></li>
+					</ul>
 					<ul class="actions">
 						<li><a href="loginPage.do" class="button scrolly">로그인</a></li>
 					</ul>
@@ -71,9 +72,15 @@
 					<%
 				}else{
 					%>
-					<ul class="actions">
-						<li><a href="myPage.do" class="button scrolly">마이페이지</a></li>
-					</ul>
+						<ul class="actions">
+							<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
+						</ul>
+						<ul class="actions">
+							<li><a href="logout.do" class="button scrolly">로그아웃</a></li>
+						</ul>
+						<ul class="actions">
+							<li><a href="pwCheckPage.do" class="button scrolly">마이페이지</a></li>
+						</ul>
 					<%
 				}
 				%>

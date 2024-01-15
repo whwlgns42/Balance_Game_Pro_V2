@@ -28,15 +28,29 @@
   </style>
 	</head>
 	<body class="is-preload">
-
+	<%String loginData = (String) session.getAttribute("loginId"); %>
 		<!-- Header -->
 			<header id="header">
-				<a href="index.html" class="title">Hyperspace</a>
+				<a href="main.do" class="title">자비스</a>
 				<nav>
+				<%
+				if(loginData == null) {
+					%>
 					<ul>
-						<li><a href="index.html">로그인</a></li>
-						<li><a href="generic.html" class="active">회원가입</a></li>
+						<li><a href="loginPage.do">로그인</a></li>
+						<li><a href="joinPage.do" class="active">회원가입</a></li>
 					</ul>
+					<% 
+				}else {
+					%>
+					<ul>
+						<li><a href="logout.do">로그아웃</a></li>
+						<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+					</ul>
+					<%
+				}
+				%>
+					
 				</nav>
 			</header>
 

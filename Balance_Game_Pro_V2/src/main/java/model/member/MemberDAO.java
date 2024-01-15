@@ -18,6 +18,8 @@ public class MemberDAO {
 	private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
 	// 로그인 SQL
 	private static final String LOGIN = "SELECT MID, LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
+	// 비밀번호 2차인증 SQL
+	private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
 	// 마이페이지 SQL
 	private static final String MY_INFO = "SELECT LOGIN_ID, NAME, GENDER, EMAIL, ADDRESS FROM MEMBER WHERE LOGIN_ID = ? ";
 	// 내정보 변경하기 SQL
@@ -71,6 +73,7 @@ public class MemberDAO {
 				JDBCUtil.disconnect(pstmt, conn);
 			}
 		} else if (mDTO.getSearchCondition().equals("내정보")) {
+			// 조지훈
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(MY_INFO);
@@ -83,6 +86,25 @@ public class MemberDAO {
 					data.setGender(rs.getString("GENDER"));
 					data.setEmail(rs.getString("EMAIL"));
 					data.setAddress(rs.getString("ADDRESS"));
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				JDBCUtil.disconnect(pstmt, conn);
+			}
+		}else if (mDTO.getSearchCondition().equals("2차인증")) {
+			// 조지훈
+			conn = JDBCUtil.connect();
+			try {
+				pstmt = conn.prepareStatement(CERTIFICATION);
+				pstmt.setString(1, mDTO.getLoginId());
+				pstmt.setString(2, mDTO.getmPw());
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					data = new MemberDTO();
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setmPw(rs.getString("MPW"));
 				}
 				rs.close();
 			} catch (SQLException e) {
@@ -121,7 +143,7 @@ public class MemberDAO {
 	public boolean update(MemberDTO mDTO) { // 개인정보 변경 (추후 구현 예정)
 		if (mDTO.getSearchCondition().equals("회원탈퇴")) {
 			// 손성용
-		} else if (mDTO.getSearchCondition().equals("회원변경")) { // input: loginId //  output : 이메일, 이름 변경하기
+		} else if (mDTO.getSearchCondition().equals("회원변경")) { // input: loginId // output : 이메일, 이름 변경하기
 			// 모델
 			conn = JDBCUtil.connect();
 			try {
