@@ -14,6 +14,7 @@
             <font id="id_feedback" size="2"></font>
         </div>
         비번 <input type="password" name="mPw" id="password"> <br>
+        비번확인 <input type="password" name="mpwCh" id="passwordCh"> <br>
         이름 <input type="text" name="name" id="name" maxlength="3"> <br>
         이메일 <input type="email" name="email" id="email"> <br>
         주소 <input type="text" name="address" id="address"> 예) 서울시 땡땡구 땡땡동 132-1번지, 서울시 땡땡구 가나길 2<br> 
@@ -29,6 +30,7 @@
         function validateForm() {
             let loginId = $('#loginIdCheck').val();
             let password = $('#password').val();
+            let passwordCheck = $('#passwordCh').val();
             let name = $('#name').val();
             let email = $('#email').val();
             let address = $('#address').val();
@@ -37,7 +39,7 @@
             let genderFemale = $('#female').prop('checked');
 
             // 아이디는 5글자 이상
-            let loginIdPattern = /^[a-zA-Z]{5,10}$/;
+            let loginIdPattern = /^[a-zA-Z0-9]{5,10}$/;
             if (!loginIdPattern.test(loginId)) {
                 Swal.fire({
                 	  title: "아이디",
@@ -53,6 +55,14 @@
                 Swal.fire({
                   title: "비밀번호",
               	  text: "특수문자와 영어를 포함하여 6자 이상으로 입력해주세요.",
+              	  icon: "warning"
+              	});
+                return false;
+            }
+            if (password != passwordCheck) {
+                Swal.fire({
+                  title: "비밀번호",
+              	  text: "비밀번호가 일치하지 않습니다 다시 확인해 주세요.",
               	  icon: "warning"
               	});
                 return false;
@@ -119,7 +129,7 @@
             let loginId = $('#loginIdCheck').val();
             if (loginId.length >= 5) {
                 $.ajax({
-                    url: "idCheckAsync",
+                    url: "idCheckAsyncs",
                     type: "POST",
                     data: {
                         loginId: loginId

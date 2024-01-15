@@ -29,6 +29,7 @@ import controller.page.user.JoinPageAction;
 import controller.page.user.LoginPageAction;
 import controller.page.user.MainPageAction;
 import controller.page.user.MakeTitlePageAction;
+import controller.page.user.MypageAction;
 import controller.page.user.PwCheckPageAcion;
 import controller.page.user.ResultPageAction;
 import controller.page.user.SponsorPageAction;
@@ -102,7 +103,9 @@ public class FrontController extends HttpServlet {
 			forward = new WriteCommentAction().execute(request, response);
 		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동.
 			forward = new TitleListPageAction().execute(request, response);
-		} else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
+		} else if (action.equals("/myPage.do")) { // 마이페이지 이동
+			forward = new MypageAction().execute(request, response);
+		}else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
 			forward = new MyPageUpdateAction().execute(request, response);
 		} else if (action.equals("/pwCheck.do")) { // 2차 비밀번호 체크 기능 
 			forward = new PwCheckAcion().execute(request, response);
