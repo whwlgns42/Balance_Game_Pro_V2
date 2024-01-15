@@ -15,7 +15,7 @@ public class QuestionDTO {
 
 	private String explanation;
 
-	private int category;
+	private String category;
 
 	private String qAccess;
 
@@ -116,15 +116,13 @@ public class QuestionDTO {
 
 
 
-
-
-	public int getCategory() {
+	public String getCategory() {
 		return category;
 	}
 
 
 
-	public void setCategory(int category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 
