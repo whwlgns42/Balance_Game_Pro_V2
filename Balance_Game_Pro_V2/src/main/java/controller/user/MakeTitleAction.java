@@ -37,13 +37,13 @@ public class MakeTitleAction implements Action {
 			forward.setRedirect(false);
 			request.setAttribute("status", "success");
 			request.setAttribute("msg", "문제 등록에 성공하였습니다.");
-			request.setAttribute("direct", "main.do");
+			request.setAttribute("redirect", "main.do");
 		} else {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "success");
 			request.setAttribute("msg", "문제 등록에 실패하였습니다. 다시 입력해주세요");
-			request.setAttribute("direct", "makeTitlePage.do");
+			request.setAttribute("redirect", "makeTitlePage.do");
 		}
 		return forward;
 	}
