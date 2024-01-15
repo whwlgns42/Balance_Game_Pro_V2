@@ -13,8 +13,8 @@
         <div>
             <font id="id_feedback" size="2"></font>
         </div>
-        비번 <input type="password" name="mPw" id="password"> <br>
-        비번확인 <input type="password" name="mpwCh" id="passwordCh"> <br>
+        비번 <input type="password" name="mPw" id="password"  maxlength="15"> <br>
+        비번확인 <input type="password" name="mpwCh" id="passwordCh"  maxlength="15"> <br>
         이름 <input type="text" name="name" id="name" maxlength="3"> <br>
         이메일 <input type="email" name="email" id="email"> <br>
         주소 <input type="text" name="address" id="address"> 예) 서울시 땡땡구 땡땡동 132-1번지, 서울시 땡땡구 가나길 2<br> 
@@ -50,11 +50,11 @@
             }
 
             // 비밀번호는 특수문자, 영어 포함
-            let passwordPattern = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{6,}$/;
+            let passwordPattern = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{6,15}$/;
             if (!passwordPattern.test(password)) {
                 Swal.fire({
                   title: "비밀번호",
-              	  text: "특수문자와 영어를 포함하여 6자 이상으로 입력해주세요.",
+              	  text: "특수문자와 영어를 포함하여 6자 이상 15자이하로 입력해주세요.",
               	  icon: "warning"
               	});
                 return false;
@@ -129,7 +129,7 @@
             let loginId = $('#loginIdCheck').val();
             if (loginId.length >= 5) {
                 $.ajax({
-                    url: "idCheckAsyncs",
+                    url: "idCheckAsync",
                     type: "POST",
                     data: {
                         loginId: loginId

@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
-@WebServlet("/idCheckAsyncs")
+@WebServlet("/idCheckAsync")
 public class IdCheckAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 import controller.common.Action;
 import controller.common.ActionForward;
 
-
-public class WishListPageAction implements Action{
+public class WishListPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return null;
+		ActionForward forward = new ActionForward();
+		forward.setPath("wishList.jsp");
+		forward.setRedirect(true);
+		return forward;
 	}
 
 }

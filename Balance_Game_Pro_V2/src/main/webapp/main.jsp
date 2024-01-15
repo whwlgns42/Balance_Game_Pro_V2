@@ -29,7 +29,7 @@
 						%>
 						<li><a href="#">문제 목록</a></li>
 						<li><a href="loginPage.do">문제 출제</a></li>
-						<li><a href="#two">찜목록</a></li>
+						<li><a href="loginPage.do">찜목록</a></li>
 						<li><a href="#loginPage">후원 랭킹</a></li>
 						<%
 					}else {
@@ -58,14 +58,15 @@
 				<ul class="actions">
 					<li><a href="testPage.do" class="button scrolly">게임하기</a></li>
 				</ul>
-				<ul class="actions">
-					<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>
-				</ul>
+			
 				<%
 				if(loginData == null) {
 					%>
 					<ul class="actions">
 						<li><a href="loginPage.do" class="button scrolly">로그인</a></li>
+					</ul>
+					<ul class="actions">
+						<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>
 					</ul>
 					<%
 				}else{
