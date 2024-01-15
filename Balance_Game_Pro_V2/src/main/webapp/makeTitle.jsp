@@ -11,13 +11,7 @@
 <body>
 	문제 출제 페이지
 	<form action="makeTitle.do" method="POST" onsubmit="return validation()">
-		<select name="category" id="category">
-			<option value="카테고리1">카테고리1</option>
-			<option value="카테고리2">카테고리2</option>
-			<option value="카테고리3">카테고리3</option>
-			<option value="카테고리4">카테고리4</option>
-			<option value="카테고리5">카테고리5</option>
-		</select><br>
+		
 		주제 : <input type="text" id="title" name="title" placeholder="문제 주제를 입력해주세요" > <br>
 		답A : <input type="text" id="answer_A" name="answer_A" placeholder="답변A를 입력해주세요" > <br>
 		답B : <input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요" > <br>
@@ -27,20 +21,13 @@
 	
 	<script>
 	function validation() {
-		let category = $("#category").val();
+		
 		let title = $("#title").val();
 		let answer_A = $("#answer_A").val();
 		let answer_B = $("#answer_B").val();
 		let explanation = $("#explanation").val();
 		
-		if(!category) {
-			 Swal.fire({
-           	  title: "카테고리",
-           	  text: "카테고리를 선택해주세요.",
-           	  icon: "warning"
-           	});
-           return false;
-		}
+	
 		
 		if(!title) {
 			 Swal.fire({

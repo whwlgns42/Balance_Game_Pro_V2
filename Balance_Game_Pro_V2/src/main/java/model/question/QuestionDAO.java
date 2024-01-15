@@ -13,7 +13,7 @@ public class QuestionDAO {
 	private PreparedStatement pstmt;
 
 	// 회원가입 SQL
-	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
@@ -49,7 +49,6 @@ public class QuestionDAO {
 				pstmt.setString(3, qDTO.getAnswer_A()); // 답변A
 				pstmt.setString(4, qDTO.getAnswer_B()); // 답변B
 				pstmt.setString(5, qDTO.getExplanation()); // 문제설명
-				pstmt.setInt(6, qDTO.getCategory()); // 카테고리
 				int result = pstmt.executeUpdate();
 				if (result <= 0) {
 					return false;
