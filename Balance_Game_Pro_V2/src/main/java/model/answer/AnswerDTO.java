@@ -15,6 +15,7 @@ public class AnswerDTO {
 
 	private String searchCondition;
 
+	private String ansTitle;
 	private int answerCntA;
 
 	private int answerCntB;
@@ -75,6 +76,21 @@ public class AnswerDTO {
 		this.answerCntB = answerCntB;
 	}
 
+	public String getAnsTitle() {
+		return ansTitle;
+	}
 
+	public void setAnsTitle(String ansTitle) {
+		this.ansTitle = ansTitle;
+	}
+
+	@Override
+	public String toString() {
+		return "AnswerDTO [aId=" + aId + ", loginId=" + loginId + ", qId=" + qId + ", answer=" + answer
+				+ ", searchCondition=" + searchCondition + ", ansTitle=" + ansTitle + ", answerCntA=" + answerCntA
+				+ ", answerCntB=" + answerCntB + "]";
+	}
+
+	
   
 }
