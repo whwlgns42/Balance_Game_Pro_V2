@@ -62,9 +62,11 @@
 		성별 <input type="text" value="${myPageData.gender}"><br>
 		이메일 <input type="email" name="email" value="${myPageData.email}"><br>
 		주소 <input readonly type="text" value="${myPageData.address}"><br>
+	
 	<button onclick="location.href='makeTitlePage.do';">문제출제하기</button>
 	<button onclick="location.href='wishListPage.do';">찜목록</button>
 		<input type="submit" value="변경">
+	</div>
 	</form>
 							
 						</div>
