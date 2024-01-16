@@ -27,7 +27,7 @@ public class QuestionDTO {
 
 	private String searchCondition;
 	private boolean save;
-
+	private String loginId;
 
 	public boolean isSave() {
 		return save;
@@ -37,6 +37,18 @@ public class QuestionDTO {
 
 	public void setSave(boolean save) {
 		this.save = save;
+	}
+
+
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
 
 
