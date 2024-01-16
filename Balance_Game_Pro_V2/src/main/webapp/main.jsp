@@ -30,14 +30,14 @@
 						<li><a href="#">문제 목록</a></li>
 						<li><a href="loginPage.do">문제 출제</a></li>
 						<li><a href="loginPage.do">찜목록</a></li>
-						<li><a href="#loginPage">후원 랭킹</a></li>
+						<li><a href="loginPage.do">후원 랭킹</a></li>
 						<%
 					}else {
 						%>
 						<li><a href="#intro">문제 목록</a></li>
 						<li><a href="makeTitlePage.do">문제 출제</a></li>
 						<li><a href="#two">찜목록</a></li>
-						<li><a href="#three">후원 랭킹</a></li>
+						<li><a href="sponsorPage.do">후원 랭킹</a></li>
 						<% 
 					}
 				%>
