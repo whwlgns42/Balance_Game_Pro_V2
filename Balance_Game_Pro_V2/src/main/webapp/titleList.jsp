@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
    Hyperspace by HTML5 UP
@@ -6,26 +8,33 @@
 -->
 <html>
 <head>
-    <style>
-        .button-container {
-            text-align: left;
-            margin-top: 10px;
-        }
+<style>
+.button-container {
+   text-align: right;
+   margin-top: 10px;
+}
+</style>
+<style>
+.button-container {
+   text-align: left;
+   margin-top: 10px;
+}
 
-        .button-container button {
-            margin-left: 5px;
-        }
+.button-container button {
+   margin-left: 5px;
+}
+</style>
+<style>
+.button-container1 {
+   text-align: right;
+   margin-top: 10px;
+}
 
-        .button-container1 {
-            text-align: right;
-            margin-top: 10px;
-        }
+.button-container1 button {
+   margin-left: 5px;
+}
 
-        .button-container1 button {
-            margin-left: 5px;
-        }
-
-        .special-button {
+       .special-button {
             text-align: right;
             margin-top: 1px;
         }
@@ -42,8 +51,7 @@
         .special-button2 button {
             margin-left: 5px;
         }
-    </style>
-
+</style>
 <title>Generic - Hyperspace by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
