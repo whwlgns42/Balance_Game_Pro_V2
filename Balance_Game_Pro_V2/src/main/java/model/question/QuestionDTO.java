@@ -1,6 +1,6 @@
 package model.question;
 
-import java.util.Date;
+
 
 public class QuestionDTO {
 	private int qId;
@@ -41,13 +41,13 @@ public class QuestionDTO {
 
 
 
-	public int getqId() {
+	public int getQId() {
 		return qId;
 	}
 
 
 
-	public void setqId(int qId) {
+	public void setQId(int qId) {
 		this.qId = qId;
 	}
 
