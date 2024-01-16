@@ -6,32 +6,44 @@
 -->
 <html>
 <head>
-<style>
-.button-container {
-   text-align: right;
-   margin-top: 10px;
-}
-</style>
-<style>
-.button-container {
-   text-align: left;
-   margin-top: 10px;
-}
+    <style>
+        .button-container {
+            text-align: left;
+            margin-top: 10px;
+        }
 
-.button-container button {
-   margin-left: 5px;
-}
-</style>
-<style>
-.button-container1 {
-   text-align: right;
-   margin-top: 10px;
-}
+        .button-container button {
+            margin-left: 5px;
+        }
 
-.button-container1 button {
-   margin-left: 5px;
-}
-</style>
+        .button-container1 {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .button-container1 button {
+            margin-left: 5px;
+        }
+
+        .special-button {
+            text-align: right;
+            margin-top: 1px;
+        }
+
+        .special-button button {
+            margin-left: 5px;
+        }
+
+        .special-button2 {
+            text-align: right;
+            margin-top: 1px;
+        }
+
+        .special-button2 button {
+            margin-left: 5px;
+        }
+    </style>
+
 <title>Generic - Hyperspace by HTML5 UP</title>
 <meta charset="utf-8" />
 <meta name="viewport"
@@ -68,16 +80,16 @@
                   <button>titleCreate</button><br>
                </div>
                <div class="button-container">
-                  <button>title button 1</button><br>
-                  <button>title button 2</button><br>
-                  <button>title button 3</button><br>
-                  <button>title button 4</button><br>
-                  <button>title button 5</button><br>
-                  <button>title button 6</button><br>
-                  <button>title button 7</button><br>
-                  <button>title button 8</button><br>
-                  <button>title button 9</button><br>
-                  <button>title button 10</button><br>
+                  <button>title button 1</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 2</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 3</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 4</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 5</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 6</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 7</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 8</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 9</button><button class="special-button">game</button><button class="special-button2">result</button><br>
+                  <button>title button 10</button><button class="special-button">game</button><button class="special-button2">result</button><br>
                </div>
             </body>
             
