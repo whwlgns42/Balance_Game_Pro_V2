@@ -32,9 +32,11 @@ public class MyPageUpdateAction implements Action {
 		boolean myInfoUpdate = memberDAO.update(memberDTO);
 		if(myInfoUpdate) {
 			// 내정보 변경 성공
+			System.out.println("ffff");
+
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
-			request.setAttribute("result", "success");
+			request.setAttribute("status", "success");
 			request.setAttribute("msg", "정보가 수정되었습니다.");
 			request.setAttribute("redirect", "main.do");
 			
@@ -42,7 +44,7 @@ public class MyPageUpdateAction implements Action {
 			// 내정보 변경 실패
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
-			request.setAttribute("result", "fail");
+			request.setAttribute("status", "fail");
 			request.setAttribute("msg", "정보 변경에 실패하였습니다.");
 			request.setAttribute("redirect", "myPage.do");
 			
