@@ -16,6 +16,7 @@ public class SaveDTO {
 	//------java-------
 
 	private String searchCondition;
+	private String saveTitle;
 
 
 
@@ -83,6 +84,22 @@ public class SaveDTO {
 
 
 
+
+
+	public String getSaveTitle() {
+		return saveTitle;
+	}
+
+	public void setSaveTitle(String saveTitle) {
+		this.saveTitle = saveTitle;
+	}
+
+
+	@Override
+	public String toString() {
+		return "SaveDTO [sId=" + sId + ", qId=" + qId + ", loginId=" + loginId + ", searchCondition=" + searchCondition
+				+ ", saveTitle=" + saveTitle + "]";
+	}
 
     
 }

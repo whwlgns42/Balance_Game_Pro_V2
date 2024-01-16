@@ -24,7 +24,7 @@ public class AnswerDAO {
 		// 질문 테이블의 pk와 답변 테이블의 질문 fk와 비교 - join문
 		// 맞다면 질문 테이블의 login_id와 멤버테이블의 fk를 비교 - join문
 		// 그거에 맞는 질문 목록을 출력
-		// 질문목록  - qid를 가지고 와야해....
+		// 질문목록 - AnwserDTO에 ansTitle추가 
 
 		conn = JDBCUtil.connect();
 		ArrayList<AnswerDTO> datas = new ArrayList<AnswerDTO>();

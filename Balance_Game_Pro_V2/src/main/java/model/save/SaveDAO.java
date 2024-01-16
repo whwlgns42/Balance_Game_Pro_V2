@@ -10,13 +10,29 @@ import model.Util.JDBCUtil;
 
 public class SaveDAO {
 
+	private Connection conn;
+	private PreparedStatement pstmt;
+	
+	private final String SELECTALL="SELECT Q.TITLE, Q.ANSWER_A, Q.ANSWER_B , Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
+	
 	public ArrayList<SaveDTO> selectAll(SaveDTO sDTO) {
 
-		if(sDTO.getSearchCondition().equals("찜문제")) {
-			//박현구
+		//전은주
+		conn = JDBCUtil.connect();
+		ArrayList<SaveDTO> datas = new ArrayList<SaveDTO>();
+		try {
+			pstmt = conn.prepareStatement(SELECTALL);
+			pstmt.setString(1, sDTO.getLoginId());
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				SaveDTO dto = new SaveDTO();
+				dto.setSaveTitle(rs.getString("TITLE"));
+				datas.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		return null;
+		return datas;
 
 	}
 
