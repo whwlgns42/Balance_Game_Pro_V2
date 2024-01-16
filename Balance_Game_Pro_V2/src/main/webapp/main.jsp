@@ -61,7 +61,7 @@
 				if(loginData == null) {
 					%>
 					<ul class="actions">
-					<li><a href="loginPage.do" class="button scrolly">게임하기</a></li>
+					<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
 					</ul>
 					<ul class="actions">
 						<li><a href="loginPage.do" class="button scrolly">로그인</a></li>
