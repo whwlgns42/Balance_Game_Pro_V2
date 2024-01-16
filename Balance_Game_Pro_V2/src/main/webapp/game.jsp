@@ -1,3 +1,4 @@
+<%@page import="model.question.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -25,10 +26,52 @@
       margin-top: 10px; /* 선택지와 찜하기 버튼 사이의 간격을 조절합니다. */
       color: #333; /* 초기에는 어두운 회색으로 표시 */
     }
+    .major {
+    margin-top: 50px;
+    margin-left: 50px;
+    } 
   </style>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+		crossorigin="anonymous"></script>
+		
+			<script type="text/javascript">
+		$(document).ready(function() {
+
+			$(".btn").on("click", function() {
+				console.log("[로그]");
+				//요소 값 가져오기
+				//https://luahius.tistory.com/158
+				$.ajax({  
+					type : "POST",
+					url : "SaveAsync.do",
+					data : {
+						'loginId' : <%=session.getAttribute("loginId")%>
+					},
+					dataType : 'text',
+					success : function(data) {
+
+
+
+					},
+					error : function(error) {
+						console.log('에러발생');
+						console.log('에러의 종류:' + error);
+					}
+
+				});
+
+			});
+
+		});
+	</script>
 	</head>
 	<body class="is-preload">
-	<%String loginData = (String) session.getAttribute("loginId"); %>
+	<%String loginData = (String) session.getAttribute("loginId"); 
+	
+	QuestionDTO qDTO=(QuestionDTO)request.getAttribute("data");
+	
+	%>
 		<!-- Header -->
 			<header id="header">
 				<a href="main.do" class="title">자비스</a>
@@ -56,18 +99,32 @@
 
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+				<h3 class="major">밸런스 게임</h3>
 				<!-- Main -->
 					<section id="main" class="wrapper">
 						<div class="inner">
-							<h1 class="major">밸런스 게임</h1>
-							<span class="image "><img src="images/pic09.jpg" alt="" /></span>
-							 <button class="like-button" onclick="toggleLike(2)">찜하기</button>
+							
+							<!-- <span class="image "><img src="images/pic09.jpg" alt="" /></span> -->
+							 <!-- <button class="like-button" onclick="toggleLike(2)">찜하기</button> -->
+							 
+							<%
+								//System.out.println(qDTO.isSave());
+								System.out.println("Game : "+qDTO.isSave());
+								if(!qDTO.isSave()){
+							%>
+  								<img class="btn" src="images/찜x.png" alt="찜이 안되어 있습니다">
+							<%
+								}else{
+							%>
+								<img class="btn" src="images/찜o.png" alt="찜이 안되어 있습니다" >
+							<%
+								}	
+							%>
 						</div>
 						<div class="inner">
-          					<button onclick="selectOption(1)">평생 떡볶이 먹기</button>
-          					<button onclick="selectOption(2)">평생 떡볶이 안먹기</button>
-          					 <button class="like-button" onclick="toggleLike(2)">찜하기</button>
+          					<button onclick="selectOption(1)"><%=qDTO.getAnswer_A() %></button>
+          					<button onclick="selectOption(2)"><%=qDTO.getAnswer_B() %></button>
+        
         				</div>
 					</section>
 
