@@ -80,7 +80,7 @@ public class QuestionDAO {
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(UPDATE_ACCESS);
-				pstmt.setInt(1, qDTO.getqId());
+				pstmt.setInt(1, qDTO.getQId());
 				int result = pstmt.executeUpdate();
 				if(result <= 0) {
 					return false;
