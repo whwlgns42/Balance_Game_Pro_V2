@@ -17,7 +17,7 @@ public class MemberDAO {
 	// 아이디 중복 체크 SQL
 	private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
 	// 로그인 SQL
-	private static final String LOGIN = "SELECT MID, LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
+	private static final String LOGIN = "SELECT MID, LOGIN_ID, MADMIN FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
 	// 비밀번호 2차인증 SQL
 	private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
 	// 마이페이지 SQL
@@ -49,6 +49,7 @@ public class MemberDAO {
 					data = new MemberDTO();
 					data.setmId(rs.getInt("MID"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setmAdmin(rs.getString("MADMIN"));
 				}
 				rs.close();
 			} catch (SQLException e) {

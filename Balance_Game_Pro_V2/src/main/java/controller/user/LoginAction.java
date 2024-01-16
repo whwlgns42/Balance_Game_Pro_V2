@@ -12,30 +12,40 @@ import controller.common.ActionForward;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
-
-public class LoginAction implements Action{
+public class LoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-	
+
 		MemberDTO memberDTO = new MemberDTO();
 		MemberDAO memberDAO = new MemberDAO();
 		HttpSession session = request.getSession();
 		memberDTO.setSearchCondition("로그인");
 		memberDTO.setLoginId(request.getParameter("loginId"));
 		memberDTO.setmPw(request.getParameter("mPw"));
-		MemberDTO loginData =  memberDAO.selectOne(memberDTO);
-		if(loginData != null) {
-			// 로그인 성공
-			forward.setPath("alert.do");
-			request.setAttribute("status", "success");
-			session.setAttribute("loginId", loginData.getLoginId());
-			request.setAttribute("msg", loginData.getLoginId() + "님 로그인 하셨습니다.");
-			request.setAttribute("redirect", "main.do");
-			forward.setRedirect(false);
-		}else {
+		MemberDTO loginData = memberDAO.selectOne(memberDTO);
+
+		if (loginData != null) {
+			if ("ADMIN".equals(loginData.getmAdmin())) {
+				forward.setPath("alert.do");
+				request.setAttribute("status", "success");
+				session.setAttribute("loginId", loginData.getLoginId());
+				request.setAttribute("msg", loginData.getLoginId() + " 관리자님 로그인 하셨습니다.");
+				request.setAttribute("redirect", "adminPage.do");
+				forward.setRedirect(false);
+				return forward;
+			} else {
+				// 로그인 성공
+				forward.setPath("alert.do");
+				request.setAttribute("status", "success");
+				session.setAttribute("loginId", loginData.getLoginId());
+				request.setAttribute("msg", loginData.getLoginId() + "님 로그인 하셨습니다.");
+				request.setAttribute("redirect", "main.do");
+				forward.setRedirect(false);
+			}
+		} else {
 			// 로그인 실패
 			forward.setPath("alert.do");
 			request.setAttribute("status", "fail");
@@ -45,5 +55,4 @@ public class LoginAction implements Action{
 		}
 		return forward;
 	}
-
 }
