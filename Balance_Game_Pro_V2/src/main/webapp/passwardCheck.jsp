@@ -28,10 +28,10 @@
                      <form action="pwCheck.do" method="POST">
         <div>
             <label for="password">password:</label>
-            <input type="password" id="mPw" name="mPw">
         </div>
-        <div>
-            <button type="submit">button</button>
+        <div style="display: flex; justify-content: center;">
+            <input type="password" id="mPw" name="mPw" style="margin-right: 30px;">
+            <button type="submit">확인</button>
         </div>
     </form>
                   </div>

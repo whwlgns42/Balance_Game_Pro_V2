@@ -496,8 +496,6 @@
 		        $("#id_feedback").css('color', '#dc3545');
 		    }
 		}
-	
-		
 		 // 나이를 입력할때 숫자만 입력 가능하도록 정규표현식 사용
 		function validateAge(input) {
 	        input.value = input.value.replace(/[^0-9]/g, '');
