@@ -30,8 +30,16 @@
 </head>
 
 <body class="is-preload">
-<%String loginId = (String)session.getAttribute("loginId"); %>
-<%=loginId + "<<<<<<" %>
+	<%
+	String loginId = (String) session.getAttribute("loginId");
+	%>
+	<%
+	if (loginId == null) {
+	%>
+	<script>location.href='alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do';</script>
+	<%
+	}
+	%>
 	<!-- Header -->
 	<header id="header">
 		<a href="index.html" class="title">Hyperspace</a>
@@ -106,6 +114,7 @@
 
 	<script>
 	
+	
 	var amount;
 	var loginId = "<%=loginId%>";
 
@@ -114,7 +123,7 @@
 	        const { value: formValues } = await Swal.fire({
 	            title: "후원금액",
 	            html: `
-	                <input id="swal-input1" class="swal2-input">
+	            	<input id="swal-input1" class="swal2-input" oninput="this.value = this.value.replace(/[^0-9]/g, '');">원
 	            `,
 	            focusConfirm: false,
 	            preConfirm: () => {
@@ -126,7 +135,7 @@
 	            /*  Swal.fire(amount + "원을\n후원하셨습니다.");  */
 	        	Swal.fire({
 	        		  title: "후원",
-	        		  text: "정말로" + amount + "원을 후원 하시겠습니까?",
+	        		  text: "[" + amount + "] 원을 후원 하시겠습니까?",
 	        		  icon: "warning",
 	        		  showCancelButton: true,
 	        		  confirmButtonColor: "#3085d6",
@@ -171,15 +180,14 @@
 	                                        }
 	                                    }).done(function (data) {
 	                                        if (everythings_fine) {
-	                                            msg = '후원해주셔서 감사합니다.';
+	                                            msg = '후원해주셔서 감사합니다.'
+	                                            /* msg = '후원해주셔서 감사합니다.\n후원 금액 : ' + rsp.paid_amount + '원';
 	                                            msg += '\n고유ID : ' + rsp.imp_uid;
-	                                            msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-	                                            msg += '\n후원 금액 : ' + rsp.paid_amount + '원';
-
-	                                            alert(msg);
+	                                            msg += '\n상점 거래ID : ' + rsp.merchant_uid; 
+	                                            msg += '\n후원 금액 : ' + rsp.paid_amount + '원'; */
 
 	                                            // 성공시 이동할 페이지
-	                                            // redirectToSuccessPage(msg);
+	                                             redirectToSuccessPage(msg);
 	                                        } else {
 	                                            // 결제가 되지 않았습니다.
 	                                            // 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
@@ -188,7 +196,7 @@
 	                                    });
 	                                } else {
 	                                    msg = '결제에 실패하였습니다.';
-	                                    msg += '에러내용 : ' + rsp.error_msg;
+	                                   // msg += '에러내용 : ' + rsp.error_msg;
 	                                    // 실패시 이동할 페이지
 	                                    redirectToFailPage(msg);
 	                                }
@@ -196,12 +204,12 @@
 
 	                        // 성공 페이지로 이동하는 함수
 	                        function redirectToSuccessPage(msg) {
-	                            location.href = '<%=request.getContextPath()%>/success.jsp?msg=' + msg;
+	                            location.href = 'alert.do?msg=' + msg +'&status=success&redirect=main.do'; // 성공시 메인화면
 	                        }
 
 	                        // 실패 페이지로 이동하는 함수
 	                        function redirectToFailPage(msg) {
-	                            location.href = '<%=request.getContextPath()%>/fail.jsp?msg=' + msg;
+	                        	 location.href = 'alert.do?msg=' + msg +'&status=fail&redirect=main.do'; // 실패시 메인화면
 	                        }
 	                }
 	            });
@@ -294,6 +302,5 @@
 	
    
     </script>
-<%=loginId + "<<<<<<" %>
 </body>
 </html>
