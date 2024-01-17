@@ -26,20 +26,45 @@ public class QuestionDTO {
 	 
 
 	private String searchCondition;
-	private boolean save;
+	private int save;
+	private int answerCntA;
+	private int answerCntB;
 
-	public boolean isSave() {
+
+
+	public int getAnswerCntA() {
+		return answerCntA;
+	}
+
+
+
+	public void setAnswerCntA(int answerCntA) {
+		this.answerCntA = answerCntA;
+	}
+
+
+
+	public int getAnswerCntB() {
+		return answerCntB;
+	}
+
+
+
+	public void setAnswerCntB(int answerCntB) {
+		this.answerCntB = answerCntB;
+	}
+
+
+
+	public int getSave() {
 		return save;
 	}
 
 
 
-	public void setSave(boolean save) {
+	public void setSave(int save) {
 		this.save = save;
 	}
-
-
-
 
 
 

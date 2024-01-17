@@ -62,11 +62,8 @@ public class QuestionDAO {
 					
 					data.setExplanation(rs.getString("EXPLANATION"));
 					
-					if(rs.getInt("SAVE_RESULT")>=1) {
-						data.setSave(true);
-					}else {
-						data.setSave(false);
-					}
+					data.setSave(rs.getInt("SAVE_SID"));
+					
 					
 				}
 				rs.close();
