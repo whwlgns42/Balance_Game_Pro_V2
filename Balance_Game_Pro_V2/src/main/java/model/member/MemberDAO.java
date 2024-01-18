@@ -24,9 +24,14 @@ public class MemberDAO {
 	private static final String MY_INFO = "SELECT LOGIN_ID, NAME, GENDER, EMAIL, ADDRESS FROM MEMBER WHERE LOGIN_ID = ? ";
 	// 내정보 변경하기 SQL
 	private static final String MY_INFO_UPDATE = "UPDATE MEMBER SET NAME = ?, EMAIL = ? WHERE LOGIN_ID = ? ";
-
+	// 유저 전체 조회
+	private static final String SELECTALL_USER = "";
+	// 유저 상세 조회
+	private static final String SELECTONE_USER = "";
+	
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		if (mDTO.getSearchCondition().equals("전체조회")) {
+			
 			// 박찬우
 		}
 

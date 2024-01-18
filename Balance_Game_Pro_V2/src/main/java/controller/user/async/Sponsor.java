@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.Lifecycle.SingleUse;
 
-import com.google.gson.Gson;
 
 import controller.common.ActionForward;
 import model.support.SupportDAO;
@@ -33,7 +32,6 @@ public class Sponsor extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Gson gson = new Gson();
 		HttpSession session = request.getSession();
 		session.getAttribute("loginId");
 
@@ -48,8 +46,6 @@ public class Sponsor extends HttpServlet {
 		if (support) {
 			// 후원성공
 			System.out.println("후원성공");
-			String jsonData = gson.toJson(support);
-			response.getWriter().print(jsonData);
 		} else {
 			// 후원실패
 			System.out.println("후원실패");
