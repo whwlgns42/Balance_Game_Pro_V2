@@ -25,23 +25,80 @@ public class MemberDAO {
 	// 내정보 변경하기 SQL
 	private static final String MY_INFO_UPDATE = "UPDATE MEMBER SET NAME = ?, EMAIL = ? WHERE LOGIN_ID = ? ";
 	// 유저 전체 조회
-	private static final String SELECTALL_USER = "";
+	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER";
 	// 유저 상세 조회
-	private static final String SELECTONE_USER = "";
+	private static final String SELECTONE_USER = "SELECT * FROM MEMBER WHERE id = ?";
 	
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
+		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
 		if (mDTO.getSearchCondition().equals("전체조회")) {
-			
+			System.out.println("1111");
 			// 박찬우
+			conn = JDBCUtil.connect();
+			System.out.println("2222");
+			try {
+				System.out.println("3333");
+				pstmt = conn.prepareStatement(SELECTALL_USER);
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					System.out.println("4444");
+					MemberDTO member = new MemberDTO();
+					member.setmId(rs.getInt("MID"));
+					member.setLoginId(rs.getString("LOGIN_ID"));
+					member.setmPw(rs.getString("MPW"));
+					member.setName(rs.getString("NAME"));
+					member.setEmail(rs.getString("EMAIL"));
+					member.setAddress(rs.getString("ADDRESS"));
+					member.setGender(rs.getString("GENDER"));
+					member.setAge(rs.getInt("AGE"));
+					member.setGrade(rs.getString("GRADE"));
+					datas.add(member);
+				}
+				System.out.println("555");
+				rs.close();
+			} catch (SQLException e) {
+				System.out.println("6666");
+				e.printStackTrace();
+				return null;
+			} finally {
+				System.out.println("77777");
+				JDBCUtil.disconnect(pstmt, conn);
+			}
 		}
+		return datas;
 
-		return null;
 	}
 
 	public MemberDTO selectOne(MemberDTO mDTO) { // 단일 검색
 		MemberDTO data = null;
 		if (mDTO.getSearchCondition().equals("유저조회")) {
 			// 박찬우
+			conn = JDBCUtil.connect();
+			try {
+				pstmt = conn.prepareStatement(SELECTONE_USER);
+				pstmt.setInt(1, mDTO.getmId());
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+					data = new MemberDTO();
+					data.setmId(rs.getInt("ID"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setmPw(rs.getString("PW"));
+					data.setName(rs.getString("NAME"));
+					data.setEmail(rs.getString("EMAIL"));
+					data.setAddress(rs.getString("ADDRESS"));
+					data.setGender(rs.getString("GENDER"));
+					data.setAge(rs.getInt("AGE"));
+					data.setGrade(rs.getString("GRADE"));
+					data.setmAdmin(rs.getString("ADMIN"));
+				}
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}finally {
+				JDBCUtil.disconnect(pstmt, conn);
+			}
+			
 		} else if (mDTO.getSearchCondition().equals("로그인")) {
 			// 손성용
 			conn = JDBCUtil.connect();
