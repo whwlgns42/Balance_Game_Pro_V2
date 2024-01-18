@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -10,38 +10,33 @@
 <head>
 <title>Hyperspace by HTML5 UP</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 </head>
 <body class="is-preload">
-<%String loginData = (String)session.getAttribute("loginId"); %>
+	<%
+	String loginData = (String) session.getAttribute("loginId");
+	%>
 	<!-- Sidebar -->
 	<section id="sidebar">
 		<div class="inner">
 			<nav>
 				<ul>
-				<%
-					if(loginData == null) {
-						%>
+					<c:if test="${empty loginId }">
 						<li><a href="#">문제 목록</a></li>
 						<li><a href="loginPage.do">문제 출제</a></li>
 						<li><a href="loginPage.do">찜목록</a></li>
 						<li><a href="loginPage.do">후원 랭킹</a></li>
-						<%
-					}else {
-						%>
+					</c:if>
+					<c:if test="${not empty loginId }">
 						<li><a href="#intro">문제 목록</a></li>
 						<li><a href="makeTitlePage.do">문제 출제</a></li>
 						<li><a href="#two">찜목록</a></li>
 						<li><a href="sponsorPage.do">후원 랭킹</a></li>
-						<% 
-					}
-				%>
-						
+					</c:if>
 				</ul>
 			</nav>
 		</div>
@@ -55,13 +50,10 @@
 			<div class="inner">
 				<h1>밸런스 게임</h1>
 
-				
-			
-				<%
-				if(loginData == null) {
-					%>
+
+				<c:if test="${empty loginId }">
 					<ul class="actions">
-					<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
+						<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
 					</ul>
 					<ul class="actions">
 						<li><a href="loginPage.do" class="button scrolly">로그인</a></li>
@@ -69,21 +61,18 @@
 					<ul class="actions">
 						<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>
 					</ul>
-					<%
-				}else{
-					%>
-						<ul class="actions">
-							<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
-						</ul>
-						<ul class="actions">
-							<li><a href="logout.do" class="button scrolly">로그아웃</a></li>
-						</ul>
-						<ul class="actions">
-							<li><a href="pwCheckPage.do" class="button scrolly">마이페이지</a></li>
-						</ul>
-					<%
-				}
-				%>
+				</c:if>
+				<c:if test="${not empty loginId }">
+					<ul class="actions">
+						<li><a href="gamePage.do" class="button scrolly">게임하기</a></li>
+					</ul>
+					<ul class="actions">
+						<li><a href="logout.do" class="button scrolly">로그아웃</a></li>
+					</ul>
+					<ul class="actions">
+						<li><a href="pwCheckPage.do" class="button scrolly">마이페이지</a></li>
+					</ul>
+				</c:if>
 
 			</div>
 		</section>

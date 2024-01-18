@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <!--
    Hyperspace by HTML5 UP
@@ -16,30 +16,20 @@
 </style>
 <title>Generic - Hyperspace by HTML5 UP</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="is-preload">
-	<%
-	String loginId = (String) session.getAttribute("loginId");
-	%>
-	<%
-	if (loginId == null) {
-	%>
-	<script>location.href='alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do';</script>
-	<%
-	}
-	%>
+	<c:if test="${empty loginId}">
+		<c:redirect url="alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do"></c:redirect>
+	</c:if>
 	<!-- Header -->
 	<header id="header">
 		<a href="index.html" class="title">Hyperspace</a>
@@ -63,8 +53,8 @@
 					<h2>sponsor rank</h2>
 					<table>
 						<tr>
-							<td>1. chanwoo<br>2. chanwoo<br>3. chanwoo<br>4.
-								chanwoo<br>5. chanwoo<br>6. chanwoo
+							<td>
+								1. chanwoo<br>2. chanwoo<br>3. chanwoo<br>4. chanwoo<br>5. chanwoo<br>6. chanwoo
 							</td>
 
 
@@ -116,7 +106,7 @@
 	
 	
 	var amount;
-	var loginId = "<%=loginId%>";
+	var loginId = "${loginId}";
 
 	 $(document).ready(function () {
 	    $("#sponsorButton2").click(async function () {  // async 키워드 추가
