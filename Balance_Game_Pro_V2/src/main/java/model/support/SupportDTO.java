@@ -20,7 +20,25 @@ public class SupportDTO {
 
 	private String searchCondition;
 
-	private String title;
+	private String name;
+	
+	private int total;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
 
 	public int getSuId() {
 		return suId;
@@ -52,14 +70,6 @@ public class SupportDTO {
 
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 

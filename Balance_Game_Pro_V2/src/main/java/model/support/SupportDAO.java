@@ -14,13 +14,36 @@ public class SupportDAO {
 
 	private static final String SUPPPORT_AMOUNT = "INSERT INTO SUPPORT(SUID, LOGIN_ID, AMOUNT) VALUES((SELECT NVL(MAX(SUID),0) + 1 FROM SUPPORT), ?, ?) ";
 
+	private static final String SELECTALL = "SELECT S.LOGIN_ID, SUM(S.AMOUNT), M.NAME\r\n" + "FROM SUPPORT S\r\n"
+			+ "JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID\r\n" + "GROUP BY S.LOGIN_ID, M.NAME";
+
 	public ArrayList<SupportDTO> selectAll(SupportDTO sDTO) {
+		ArrayList<SupportDTO> datas = new ArrayList<SupportDTO>();
 
-		if (sDTO.getSearchCondition().equals("후원목록")) {
-			// 모델
+		conn = JDBCUtil.connect();
+		try {
+			if (sDTO.getSearchCondition().equals("후원목록")) {
+				// 모델
+				pstmt = conn.prepareStatement(SELECTALL);
+
+			}
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				SupportDTO data = new SupportDTO();
+				data.setTotal(rs.getInt("TOTAL"));
+				data.setLoginId(rs.getString("LOGIN_ID"));
+				data.setName(rs.getString("NAME"));
+				datas.add(data);
+			}
+
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
-
-		return null;
+		return datas;
 
 	}
 
