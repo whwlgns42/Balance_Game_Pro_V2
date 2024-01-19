@@ -24,7 +24,7 @@ public class AdminTitleDeleteAcion implements Action{
 		QuestionDTO qDTO = new QuestionDTO();
 		QuestionDAO qDAO = new QuestionDAO();
 		
-		qDTO.setQId(Integer.parseInt(request.getParameter("qid")));
+		qDTO.setqId(Integer.parseInt(request.getParameter("qid")));
 		qDAO.delete(qDTO);
 		
 		return forward;

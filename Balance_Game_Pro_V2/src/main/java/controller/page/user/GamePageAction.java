@@ -31,8 +31,19 @@ public class GamePageAction implements Action{
 		System.out.println(loginId);
 		
 		qDto.setWriter(loginId);
-		qDto=qDao.selectOne(qDto);
-		System.out.println("GamePageAction : "+qDto.isSave());
+//		
+//		qDto=qDao.selectOne(qDto); 
+		
+//		테스트 코드
+		qDto.setqId(1);
+		qDto.setTitle("게임테스트");
+		qDto.setAnswer_A("답변11");
+		qDto.setAnswer_B("답변222");
+		qDto.setExplanation("게임설명");
+		qDto.setSave(1);
+//		테스트 코드
+		
+		System.out.println("GamePageAction : "+qDto.getSave());
 		
 		request.setAttribute("data", qDto);
 		
