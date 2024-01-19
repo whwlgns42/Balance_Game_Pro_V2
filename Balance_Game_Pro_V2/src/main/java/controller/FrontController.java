@@ -15,7 +15,9 @@ import controller.admin.AdminTitleCreateAcion;
 import controller.admin.AdminTitleDeleteAcion;
 import controller.admin.AdminTitleRefuseAcion;
 import controller.admin.AdminTitleUpdateAcion;
+import controller.common.Action;
 import controller.common.ActionForward;
+import controller.handler.HandlerMapper;
 import controller.page.AlertPageAction;
 import controller.page.admin.AdminMemberDetailPageAction;
 import controller.page.admin.AdminMemberManagementPageAcion;
@@ -53,8 +55,11 @@ import controller.user.WriteCommentAction;
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	private HandlerMapper handler;
+	
 	public FrontController() {
 		super();
+		handler = new HandlerMapper();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -72,59 +77,60 @@ public class FrontController extends HttpServlet {
 
 		String uri = request.getRequestURI();
 		String cp = request.getContextPath();
-		String action = uri.substring(cp.length());
-		System.out.println(action);
+		String commend = uri.substring(cp.length());
+		System.out.println(commend + "<<<" );
+		Action action = handler.getAction(commend);
+		ActionForward forward = action.execute(request, response);
+//		if (action.equals("/main.do")) { // 메인 페이지 이동 TODO 구현하기
+//			forward = new MainPageAction().execute(request, response);
+//		} else if (action.equals("/joinPage.do")) { // 회원가입 페이지 이동 TODO 페이지 꾸미기 필요
+//			forward = new JoinPageAction().execute(request, response);
+//		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기 // 구현 완료
+//			forward = new JoinAction().execute(request, response); // TODO 구현하기
+//		} else if (action.equals("/loginPage.do")) {
+//			forward = new LoginPageAction().execute(request, response);
+//		} else if (action.equals("/login.do")) {
+//			forward = new LoginAction().execute(request, response);
+//		} else if (action.equals("/logout.do")) {
+//			forward = new LogoutAction().execute(request, response); // 로그아웃 기능
+//		} else if (action.equals("/wish.do")) { // 찜하기 기능
+//		} else if (action.equals("/wishListPage.do")) { // 찜하기 페이지 이동
+//			forward = new WishListPageAction().execute(request, response);
+//		} else if (action.equals("/makeTitle.do")) { // 문제 출제 기능
+//			forward = new MakeTitleAction().execute(request, response);
+//		} else if (action.equals("/makeTitlePage.do")) { // 문제 출제 페이지 이동
+//			forward = new MakeTitlePageAction().execute(request, response);
+//		} else if (action.equals("/result.do")) { // 게임결과 기능
+//			forward = new ResultAction().execute(request, response);
+//		} else if (action.equals("/resultPage.do")) { // 게임 결과 페이지 이동
+//			forward = new ResultPageAction().execute(request, response);
+//		} else if (action.equals("/writeComment.do")) { // 댓글작성 기능
+//			forward = new WriteCommentAction().execute(request, response);
+//		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동.
+//			forward = new TitleListPageAction().execute(request, response);
+//		} else if (action.equals("/myPage.do")) { // 마이페이지 이동
+//			forward = new MypageAction().execute(request, response);
+//		}else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
+//			forward = new MyPageUpdateAction().execute(request, response);
+//		} else if (action.equals("/pwCheck.do")) { // 2차 비밀번호 체크 기능 
+//			forward = new PwCheckAcion().execute(request, response);
+//		} else if (action.equals("/pwCheckPage.do")) { // 2차 비밀번호 체크 페이지 이동
+//			forward = new PwCheckPageAcion().execute(request, response);
+//		} else if (action.equals("/game.do")) { // 게임하기 기능
+//			forward = new GameAction().execute(request, response);
+//		} else if (action.equals("/gamePage.do")) { // 게임하기 페이지 이동
+//			forward = new GamePageAction().execute(request, response);
+//		} else if (action.equals("/sponsorPage.do")) { // 후원하기 페이지 이동
+//			forward = new SponsorPageAction().execute(request, response);
+//		} else if (action.equals("/sponsor.do")) { // 후원하기 기능
+//			forward = new SponsorAction().execute(request, response);
+//		} else if (action.equals("/smsCheck.do")) { // 문자인증번호 발송 기능 (비동기)
+//			forward = new SmsCheckAction().execute(request, response);
+//		} else if (action.equals("/adminPage.do")) { // 관리자 메인 페이지 이동 -- 관리자 관련 페이지 이동 (o)
+//			forward = new AdminPageAcion().execute(request, response);
+//		}
 
-		ActionForward forward = null;
-		if (action.equals("/main.do")) { // 메인 페이지 이동 TODO 구현하기
-			forward = new MainPageAction().execute(request, response);
-		} else if (action.equals("/joinPage.do")) { // 회원가입 페이지 이동 TODO 페이지 꾸미기 필요
-			forward = new JoinPageAction().execute(request, response);
-		} else if (action.equals("/join.do")) { // 회원가입 하기 TODO 구현하기 // 구현 완료
-			forward = new JoinAction().execute(request, response); // TODO 구현하기
-		} else if (action.equals("/loginPage.do")) {
-			forward = new LoginPageAction().execute(request, response);
-		} else if (action.equals("/login.do")) {
-			forward = new LoginAction().execute(request, response);
-		} else if (action.equals("/logout.do")) {
-			forward = new LogoutAction().execute(request, response); // 로그아웃 기능
-		} else if (action.equals("/wish.do")) { // 찜하기 기능
-		} else if (action.equals("/wishListPage.do")) { // 찜하기 페이지 이동
-			forward = new WishListPageAction().execute(request, response);
-		} else if (action.equals("/makeTitle.do")) { // 문제 출제 기능
-			forward = new MakeTitleAction().execute(request, response);
-		} else if (action.equals("/makeTitlePage.do")) { // 문제 출제 페이지 이동
-			forward = new MakeTitlePageAction().execute(request, response);
-		} else if (action.equals("/result.do")) { // 게임결과 기능
-			forward = new ResultAction().execute(request, response);
-		} else if (action.equals("/resultPage.do")) { // 게임 결과 페이지 이동
-			forward = new ResultPageAction().execute(request, response);
-		} else if (action.equals("/writeComment.do")) { // 댓글작성 기능
-			forward = new WriteCommentAction().execute(request, response);
-		} else if (action.equals("/titleListPage.do")) { // 댓글 작성 페이지 이동.
-			forward = new TitleListPageAction().execute(request, response);
-		} else if (action.equals("/myPage.do")) { // 마이페이지 이동
-			forward = new MypageAction().execute(request, response);
-		}else if (action.equals("/mypageUpdate.do")) { // 내정보 수정하기 기능 (이름 / 이메일)
-			forward = new MyPageUpdateAction().execute(request, response);
-		} else if (action.equals("/pwCheck.do")) { // 2차 비밀번호 체크 기능 
-			forward = new PwCheckAcion().execute(request, response);
-		} else if (action.equals("/pwCheckPage.do")) { // 2차 비밀번호 체크 페이지 이동
-			forward = new PwCheckPageAcion().execute(request, response);
-		} else if (action.equals("/game.do")) { // 게임하기 기능
-			forward = new GameAction().execute(request, response);
-		} else if (action.equals("/gamePage.do")) { // 게임하기 페이지 이동
-			forward = new GamePageAction().execute(request, response);
-		} else if (action.equals("/sponsorPage.do")) { // 후원하기 페이지 이동
-			forward = new SponsorPageAction().execute(request, response);
-		} else if (action.equals("/sponsor.do")) { // 후원하기 기능
-			forward = new SponsorAction().execute(request, response);
-		} else if (action.equals("/smsCheck.do")) { // 문자인증번호 발송 기능 (비동기)
-			forward = new SmsCheckAction().execute(request, response);
-		} else if (action.equals("/adminPage.do")) { // 관리자 메인 페이지 이동 -- 관리자 관련 페이지 이동 (o)
-			forward = new AdminPageAcion().execute(request, response);
-
-		} else if (action.equals("/adminTitleManagementPage.do")) { // 관리자 문제관리페이지 가기  (o)
+		 if (action.equals("/adminTitleManagementPage.do")) { // 관리자 문제관리페이지 가기  (o)
 			forward = new AdminTitleManagementPageAcion().execute(request, response); 
 
 		} else if (action.equals("/adminTitleDetailPage.do")) { // 관리자 문제 상세페이지 가기 (o)

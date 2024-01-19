@@ -28,11 +28,11 @@ public class GamePageAction implements Action{
 		
 		HttpSession session=request.getSession();
 		String loginId= (String)session.getAttribute("loginId");
-		System.out.println(loginId);
+		System.out.println(loginId + "게임페이지 들어올때 로그인 아이디");
 		
 		qDto.setWriter(loginId);
 //		
-//		qDto=qDao.selectOne(qDto); 
+//		qDto=qDao.selectOne(qDto);  나중에 주석풀기
 		
 //		테스트 코드
 		qDto.setqId(1);
