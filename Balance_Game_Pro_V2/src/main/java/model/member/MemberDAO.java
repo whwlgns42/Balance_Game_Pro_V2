@@ -27,7 +27,7 @@ public class MemberDAO {
 	// 유저 전체 조회
 	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER";
 	// 유저 상세 조회
-	private static final String SELECTONE_USER = "SELECT * FROM MEMBER WHERE id = ?";
+	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER WHERE LOGIN_ID = ?";
 	
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
@@ -76,11 +76,11 @@ public class MemberDAO {
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(SELECTONE_USER);
-				pstmt.setInt(1, mDTO.getmId());
+				pstmt.setString(1, mDTO.getLoginId());
 				ResultSet rs = pstmt.executeQuery();
 				if(rs.next()) {
 					data = new MemberDTO();
-					data.setmId(rs.getInt("ID"));
+					data.setmId(rs.getInt("MID"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
 					data.setmPw(rs.getString("PW"));
 					data.setName(rs.getString("NAME"));
