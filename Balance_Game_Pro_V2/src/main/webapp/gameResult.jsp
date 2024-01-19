@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -10,8 +9,7 @@
 <head>
 <title>Generic - Hyperspace by HTML5 UP</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -45,54 +43,53 @@
 	</div>
 
 	<div class="card-footer">
-  <form onsubmit="addComment(event)">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="댓글을 입력하세요" required>
-    </div>
-    <button type="submit" class="btn btn-primary">작성</button>
-  </form>
-  <div class="comments mt-3">
-  </div>
-</div>
+		<form onsubmit="addComment(event)">
+			<div class="form-group">
+				<input type="text" class="form-control" placeholder="댓글을 입력하세요" required>
+			</div>
+			<button type="submit" class="btn btn-primary">작성</button>
+		</form>
+		<div class="comments mt-3"></div>
+	</div>
 	<div class="table-wrapper">
-										<table class="alt">
-											<thead>
-												<tr>
-													<th>Name</th>
-													<th>Description</th>
-													<th>Price</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>작성자</td>
-													<td>댓글</td>
-													<td>작성일자</td>
-												</tr>
-												<tr>
-													<td>작성자</td>
-													<td>댓글</td>
-													<td>작성일자</td>
-												</tr>
-												<tr>
-													<td>작성자</td>
-													<td>댓글</td>
-													<td>작성일자</td>
-												</tr>
-												<tr>
-													<td>작성자</td>
-													<td>댓글</td>
-													<td>작성일자</td>
-												</tr>
-												<tr>
-													<td>작성자</td>
-													<td>댓글</td>
-													<td>작성일자</td>
-												</tr>
-											</tbody>
-											
-										</table>
-									</div>
+		<table class="alt">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>작성자</td>
+					<td>댓글</td>
+					<td>작성일자</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>댓글</td>
+					<td>작성일자</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>댓글</td>
+					<td>작성일자</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>댓글</td>
+					<td>작성일자</td>
+				</tr>
+				<tr>
+					<td>작성자</td>
+					<td>댓글</td>
+					<td>작성일자</td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
 
 	<!-- Footer -->
 	<footer id="footer" class="wrapper alt">
@@ -102,9 +99,9 @@
 				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 			</ul>
 		</div>
-		
+
 	</footer>
-	
+
 
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
