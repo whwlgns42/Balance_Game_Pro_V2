@@ -9,12 +9,34 @@ import java.util.ArrayList;
 import model.Util.JDBCUtil;
 
 public class CategoryDAO {
+	private Connection conn;
+	private PreparedStatement pstmt;
+	private static final String SELECTALL="SELECT CGID,CATEGORY FROM CATEGORY";
 
 	public ArrayList<CategoryDTO> selectAll(CategoryDTO sDTO) {
+		ArrayList<CategoryDTO> datas=new ArrayList<CategoryDTO>();
 
-	
-		
-		return null;
+		conn=JDBCUtil.connect();
+		try {
+			pstmt=conn.prepareStatement(SELECTALL);
+
+			ResultSet rs=pstmt.executeQuery();
+
+			while(rs.next()) {
+				CategoryDTO data=new CategoryDTO();
+				data.setCgId(rs.getInt("CGID"));
+				data.setCategory(rs.getString("CATEGORY"));
+				datas.add(data);
+			}
+
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+
+		return datas;
 
 	}
 
