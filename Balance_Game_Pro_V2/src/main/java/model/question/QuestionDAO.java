@@ -44,12 +44,15 @@ public class QuestionDAO {
 
 	private static final String SELECT_ONE_DETAIL="SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,\r\n"
 			+ "COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
-			+ "COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B \r\n"
+			+ "COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B,\r\n"
+			+ "NVL(S.SID, 0) AS SAVE_SID\r\n"
 			+ "FROM QUESTIONS Q\r\n"
 			+ "JOIN ANSWERS A ON A.QID=Q.QID\r\n"
 			+ "JOIN CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
-			+ "WHERE Q.QID=?\r\n"
-			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY";
+			+ "LEFT JOIN\r\n"
+			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = 'user'\r\n"
+			+ "WHERE Q.QID=1\r\n"
+			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID";
 	
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
@@ -129,10 +132,11 @@ public class QuestionDAO {
 				data.setAnswer_B(rs.getString("ANSWER_B"));
 				
 				data.setExplanation(rs.getString("EXPLANATION"));
-				data.setS_category("CATEGORY");
+				data.setS_category(rs.getString("CATEGORY"));
 				
-				//data.setSave(rs.getInt("SAVE_SID"));
-				
+				data.setAnswerCntA(rs.getInt("COUNT_A"));
+				data.setAnswerCntB(rs.getInt("COUNT_B"));
+				data.setSave(rs.getInt("SAVE_SID"));
 				
 			}
 			rs.close();	
