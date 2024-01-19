@@ -11,49 +11,141 @@ import model.Util.JDBCUtil;
 public class QuestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
-
+	
+	private static final String SELECTALL_TRUE ="SELECT\r\n"
+			+ "    Q.QID, Q.TITLE, C.CATEGORY,\r\n"
+			+ "    COALESCE(S.SID, 0) AS SAVE_SID \r\n"
+			+ "FROM\r\n"
+			+ "    QUESTIONS Q\r\n"
+			+ "JOIN\r\n"
+			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
+			+ "LEFT JOIN\r\n"
+			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = '?'\r\n"
+			+ "WHERE Q.Q_ACCESS = 'T'";
+	private static final String SELECTALL_FALSE ="SELECT Q.QID,Q.TITLE,C.CATEGORY \r\n"
+			+ "FROM QUESTIONS Q\r\n"
+			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n"
+			+ "WHERE Q_ACCESS='F'";
+	
+	
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
 	// TODO SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로 한개의 문제 정보 가져오기) 찜확인 추가
-	private static final String SELECT_ONE = "SELECT CASE \r\n"
-			+ "           WHEN EXISTS (SELECT * FROM SAVE WHERE LOGIN_ID=?) THEN 1\r\n"
-			+ "           ELSE 0\r\n"
-			+ "       END AS SAVE_RESULT,\r\n"
-			+ "       QID, TITLE, ANSWER_A, ANSWER_B, WRITER, EXPLANATION, C.CATEGORY\r\n"
-			+ "FROM (SELECT * FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
-			+ "JOIN CATEGORY C\r\n"
-			+ "ON Q.CATEGORY = C.CGID\r\n"
-			+ "WHERE ROWNUM = 1 AND Q_ACCESS='T'";
+	private static final String SELECT_ONE_RANDOM = "SELECT COALESCE(S.SID, 0) AS SAVE_SID,\r\n"
+			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER, Q.EXPLANATION, C.CATEGORY\r\n"
+			+ "FROM \r\n"
+			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,WRITER,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
+			+ "JOIN \r\n"
+			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
+			+ "LEFT JOIN\r\n"
+			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n"
+			+ "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
+	private static final String SELECT_ONE_DETAIL="SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,\r\n"
+			+ "COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
+			+ "COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B \r\n"
+			+ "FROM QUESTIONS Q\r\n"
+			+ "JOIN ANSWERS A ON A.QID=Q.QID\r\n"
+			+ "JOIN CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
+			+ "WHERE Q.QID=?\r\n"
+			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY";
+	
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
-		if (qDTO.getSearchCondition().equals("문제전체조회")) {
-			// 모델
-			// 승인된 문제
-		} else if (qDTO.getSearchCondition().equals("승인문제조회")) {
-			// 모델
+		
+		ArrayList<QuestionDTO> datas=new ArrayList<QuestionDTO>();
+
+		conn=JDBCUtil.connect();
+		try {
+			
+			if (qDTO.getSearchCondition().equals("문제전체조회")) {
+				// 모델
+				// 승인된 문제
+
+				pstmt=conn.prepareStatement(SELECTALL_TRUE);
+				pstmt.setString(1, qDTO.getWriter());
+				
+				ResultSet rs=pstmt.executeQuery();
+
+				while(rs.next()) {
+					QuestionDTO data=new QuestionDTO();
+					data.setqId(rs.getInt("QID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setS_category(rs.getString("CATEGORY"));
+					data.setSave(rs.getInt("SAVE_SID"));
+					datas.add(data);
+				}
+
+				rs.close();
+				
+			} else if (qDTO.getSearchCondition().equals("승인문제조회")) {
+				// 모델
+				pstmt=conn.prepareStatement(SELECTALL_FALSE);
+				
+				ResultSet rs=pstmt.executeQuery();
+
+				while(rs.next()) {
+					QuestionDTO data=new QuestionDTO();
+					data.setqId(rs.getInt("QID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setS_category(rs.getString("CATEGORY"));
+					datas.add(data);
+				}
+
+				rs.close();
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
 
-		return null;
+		return datas;
+
 	}
 
 	// 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회
 	public QuestionDTO selectOne(QuestionDTO qDTO) {
 		QuestionDTO data = null;
+		conn = JDBCUtil.connect();
+		try {
 		if (qDTO.getSearchCondition().equals("문제상세조회")) {
 			// 박현구
+			pstmt = conn.prepareStatement(SELECT_ONE_DETAIL);
+			pstmt.setInt(1, qDTO.getqId());
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				data = new QuestionDTO();
+				data.setqId(rs.getInt("QID"));
+				data.setTitle(rs.getString("TITLE"));
+				
+				//data.setWriter(rs.getString("WRITER"));
+	
+				data.setAnswer_A(rs.getString("ANSWER_A"));
+				data.setAnswer_B(rs.getString("ANSWER_B"));
+				
+				data.setExplanation(rs.getString("EXPLANATION"));
+				data.setS_category("CATEGORY");
+				
+				//data.setSave(rs.getInt("SAVE_SID"));
+				
+				
+			}
+			rs.close();	
+			
 		} else if (qDTO.getSearchCondition().equals("질문랜덤생성")) {
 			// 박현구
-			conn = JDBCUtil.connect();
-			try {
-				pstmt = conn.prepareStatement(SELECT_ONE);
+			
+				pstmt = conn.prepareStatement(SELECT_ONE_RANDOM);
 				pstmt.setString(1, qDTO.getWriter());
 				ResultSet rs = pstmt.executeQuery();
-
 				if (rs.next()) {
 					data = new QuestionDTO();
-					data.setQId(rs.getInt("QID"));
+					data.setqId(rs.getInt("QID"));
 					data.setWriter(rs.getString("WRITER"));
 					data.setTitle(rs.getString("TITLE"));
 					
@@ -66,13 +158,14 @@ public class QuestionDAO {
 					
 					
 				}
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				JDBCUtil.disconnect(pstmt, conn);
-			}
-			
+				rs.close();	
+		}
+
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
 		return data;
 	}

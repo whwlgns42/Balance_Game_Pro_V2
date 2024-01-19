@@ -29,6 +29,32 @@ public class QuestionDTO {
 	private int save;
 	private int answerCntA;
 	private int answerCntB;
+	private String s_category;
+	
+
+
+
+	public int getqId() {
+		return qId;
+	}
+
+
+
+	public void setqId(int qId) {
+		this.qId = qId;
+	}
+
+
+
+	public String getS_category() {
+		return s_category;
+	}
+
+
+
+	public void setS_category(String s_category) {
+		this.s_category = s_category;
+	}
 
 
 
@@ -67,16 +93,6 @@ public class QuestionDTO {
 	}
 
 
-
-	public int getQId() {
-		return qId;
-	}
-
-
-
-	public void setQId(int qId) {
-		this.qId = qId;
-	}
 
 
 
