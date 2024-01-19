@@ -17,6 +17,7 @@ public class AnswerDAO {
 
 	private final String SELECTALL_MYLIST = "SELECT Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER FROM QUESTIONS Q JOIN ANSWERS A ON Q.QID=A.QID JOIN MEMBER M ON A.LOGIN_ID = ?";
 
+	private static final String INSERT="INSERT INTO ANSWERS (AID,QID,LOGIN_ID,ANSWER) VALUES ((SELECT NVL(MAX(AID),0) + 1 FROM ANSWERS),?,?,?)";
 	public ArrayList<AnswerDTO> selectAll(AnswerDTO aDTO) { // TODO 이용자가 풀었던 문제에대한 답변 정보 전체 조회
 		// 전은주
 		// 한글코딩
@@ -50,19 +51,31 @@ public class AnswerDAO {
 		return datas;
 	}
 
-	public AnswerDTO selectOne(AnswerDTO aDTO) { // TODO 이용자가 문제를 풀었던건지 조회하기
-		if (aDTO.getSearchCondition().equals("선택결과")) {
-			// 박현구
-		}
-
+	public AnswerDTO selectOne(AnswerDTO aDTO) { 
+	
 		return null;
 	}
 
 	public boolean insert(AnswerDTO aDTO) { // TODO INSERT : 문제를 풀때 유저의 정보와 문제번호, 문제의 답변을 저장
-		if (aDTO.getSearchCondition().equals("답변저장")) {
-			// 박현구
+		conn=JDBCUtil.connect();
+		try {
+			if (aDTO.getSearchCondition().equals("답변저장")) {
+				// 박현구
+				pstmt=conn.prepareStatement(INSERT);
+				pstmt.setInt(1, aDTO.getqId());
+				pstmt.setString(2, aDTO.getLoginId());
+				pstmt.setString(3, aDTO.getAnswer());
+				int rs=pstmt.executeUpdate();
+				if(rs<=0) {
+					return false;
+				}
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
-
 		return false;
 	}
 
