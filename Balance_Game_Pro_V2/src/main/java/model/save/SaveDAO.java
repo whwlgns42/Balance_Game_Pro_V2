@@ -15,6 +15,8 @@ public class SaveDAO {
 
 	private final String SELECTALL = "SELECT Q.TITLE, Q.ANSWER_A, Q.ANSWER_B , Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
 
+	private static final String SELECTONE="SELECT 1 FROM SAVE WHERE LOGIN_ID=? AND QID=?";
+
 	private static final String INSERT = "INSERT INTO SAVE (SID, QID,LOGIN_ID) \r\n"
 			+ "VALUES((SELECT NVL(MAX(SID),0) + 1 FROM SAVE),?,?)";
 
@@ -44,8 +46,22 @@ public class SaveDAO {
 	}
 
 	public SaveDTO selectOne(SaveDTO sDTO) {
-
-		return null;
+		conn = JDBCUtil.connect();
+		SaveDTO data=null;
+		try {
+			pstmt = conn.prepareStatement(SELECTONE);
+			pstmt.setString(1, sDTO.getLoginId());
+			pstmt.setInt(2, sDTO.getqId());
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				data = new SaveDTO();
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
 	}
 
 	public boolean insert(SaveDTO sDTO) {
@@ -78,11 +94,15 @@ public class SaveDAO {
 		try {
 			if (sDTO.getSearchCondition().equals("qm찜삭제")) {
 				// 박현구
+				System.out.println(sDTO.getqId());
+				System.out.println(sDTO.getLoginId());
+				
 				pstmt=conn.prepareStatement(DELETE_QID_LID);
 				pstmt.setInt(1, sDTO.getqId());
 				pstmt.setString(2, sDTO.getLoginId());
 				int rs=pstmt.executeUpdate();
 				if(rs<=0) {
+					System.out.println("[실패]");
 					return false;
 				}
 				

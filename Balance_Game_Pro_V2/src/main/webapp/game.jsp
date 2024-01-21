@@ -1,6 +1,6 @@
 <%@page import="model.question.QuestionDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -11,7 +11,8 @@
 <head>
 <title>게임 페이지</title>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -34,34 +35,98 @@
 	margin-top: 50px;
 	margin-left: 50px;
 }
+
+#save {
+	width: 40px;
+	height: 40px;
+}
+
+#title {
+	
+}
+
+#title h1 {
+	display: inline-block;
+}
+
+#answer_A, #answer_B {
+	border: 50px;
+	border-color: black;
+	border-radius: 0;
+	color: blue;
+	cursor: auto;
+	display: inline-block;
+	font-size: 50px;
+	font-weight: 200px;
+	width: 200px;
+	height: 200px;
+	letter-spacing: normal;
+	line-height: normal;
+	outline: 100px;
+	padding: 0;
+	position: static;
+	text-align: center;
+	text-decoration: none;
+	text-transform: none;
+	white-space: normal;
+}
+
+#answer_A :hover {
+	background-color: #6DD66D;
+}
+
+#answer_B :hover {
+	background-color: #FFB900;
+}
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
 
-		$(".btn").on("click", function() {
-			console.log("[로그]");
-			//요소 값 가져오기
-			//https://luahius.tistory.com/158
-			$.ajax({
-				type : "POST",
-				url : "SaveAsync.do",
-				data : {
-					'loginId' :
-<%=session.getAttribute("loginId")%>
-	},
-				dataType : 'text',
-				success : function(data) {
+		$(".save").on("click", function() {
+			console.log("[성공]");
+			var loginId='<%=session.getAttribute("loginId")%>';
+			'<%
+					QuestionDTO data =(QuestionDTO) request.getAttribute("data");
+				%>';
+				var qId='<%=data.getqId()%>';
+			
+			if ( loginId== "null") {
+				console.log("[로그]로그인 x");
+				alert('로그인이 필요합니다');
+				//location.href='loginPage.do';
+			} 
+			else if(loginId != "null"){
 
-				},
-				error : function(error) {
-					console.log('에러발생');
-					console.log('에러의 종류:' + error);
-				}
+				console.log("[로그] 로그인 o");
+				//요소 값 가져오기
+				//https://luahius.tistory.com/158
+				$.ajax({
+					type : "POST",
+					url : "SaveAsync.do",
+					data : {
+						'loginId' :loginId,'qId' : qId},
+					dataType : 'text',
+					success : function(data) {
+						console.log(data);
+						if(data=="실패"){
+							//console.log("실패");
+						}else{
+							$(".save").attr("src", "images/"+data);
+						}
+						
+						//document.getElementById(".save").src="images/찜o.png";
+					},
+					error : function(error) {
+						console.log('에러발생');
+						console.log('에러의 종류:' + error);
+					}
 
-			});
-
+				});
+			} 
 		});
 
 	});
@@ -70,30 +135,31 @@
 <body class="is-preload">
 	<%
 	String loginData = (String) session.getAttribute("loginId");
-
 	QuestionDTO qDTO = (QuestionDTO) request.getAttribute("data");
 	%>
 	<!-- Header -->
 	<header id="header">
 		<a href="main.do" class="title">자비스</a>
 		<nav>
+			<%
+			if (loginData == null) {
+			%>
+			<ul>
+				<li><a href="loginPage.do">로그인</a></li>
+				<li><a href="joinPage.do" class="active">회원가입</a></li>
+			</ul>
+			<%
+			} else {
+			%>
+			<ul>
+				<li><a href="logout.do">로그아웃</a></li>
+				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+			</ul>
+			<%
+			}
+			%>
 
-			<c:choose>
-				<c:when test="${empty loginId}">
-					<ul>
-						<li><a href="loginPage.do" class="active">로그인</a></li>
-						<li><a href="joinPage.do" class="active">회원가입</a></li>
-					</ul>
-				</c:when>
-				<c:otherwise>
-					<ul>
-						<li><a href="logout.do">로그아웃</a></li>
-						<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
-					</ul>
-				</c:otherwise>
-			</c:choose>
 		</nav>
-
 	</header>
 
 	<!-- Wrapper -->
@@ -102,24 +168,41 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-
+				<div id="title">
+					<h1><%=qDTO.getTitle()%></h1>
+					 <%
+					//System.out.println(qDTO.isSave());
+					System.out.println("Game : " + qDTO.getSave());
+					if (qDTO.getSave() <= 0) {
+						%>
+					<img class="save" src="images/찜x.png" alt="찜이 안되어 있습니다">
+					<%
+					} else {
+					%>
+					<img class="save" src="images/찜o.png" alt="찜이 되어 있습니다">
+					<%
+					}
+					%> 
+					<!-- <img id="save" src="images/찜x.png" alt="찜이 되어 있습니다"> -->
+				</div>
 				<!-- <span class="image "><img src="images/pic09.jpg" alt="" /></span> -->
 				<!-- <button class="like-button" onclick="toggleLike(2)">찜하기</button> -->
 
-				<c:choose>
-					<c:when test="${data.save le 0}"> <!-- jstl 비교연산자  -->
-						<img class="btn" src="images/찜x.png" alt="찜이 안되어 있습니다">
-					</c:when>
-					<c:otherwise>
-						<img class="btn" src="images/찜o.png" alt="찜이 되어 있습니다">
-					</c:otherwise>
-				</c:choose>
 
+
+				<div class="inner">
+					<button id="answer_A" onclick="">
+						<%=qDTO.getAnswer_A()%>
+						
+					</button>
+					<button id="answer_B" onclick="">
+					<%=qDTO.getAnswer_B()%>
+						
+					</button>
+
+				</div>
 			</div>
-			<div class="inner">
-				<button onclick="selectOption(1)">${data.answer_A}</button>
-				<button onclick="selectOption(2)">${data.answer_B}</button>
-			</div>
+
 		</section>
 
 	</div>
