@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+#joinBtn {
+	margin-left: 110px;
+}
+</style>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
 <!-- Google Font: Source Sans Pro -->
@@ -58,6 +63,9 @@
 							<!-- /.col -->
 							<div class="col-4">
 								<input class="btn btn-primary btn-block" type="submit" value="로그인">
+							</div>
+							<div class="col-4" id="joinBtn">
+								<input class="btn btn-primary btn-block" value="회원가입" onclick="location.href='joinPage.do'">
 							</div>
 							<!-- /.col -->
 						</div>
