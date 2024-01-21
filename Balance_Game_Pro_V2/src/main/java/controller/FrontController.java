@@ -166,9 +166,10 @@ public class FrontController extends HttpServlet {
 		} else if (action.equals("/adminMemberDelete.do")) { // 멤버삭제하기
 			forward = new AdminMemberDeleteActionAcion().execute(request, response);
 
-		} else if (action.equals("/alert.do")) { // TODO 알림창 구현하기
-			forward = new AlertPageAction().execute(request, response);
-		}
+		} 
+//		else if (action.equals("/alert.do")) { // TODO 알림창 구현하기
+//			forward = new AlertPageAction().execute(request, response);
+//		}
 
 		if (forward == null) { // TODO 구현하기
 			// 에러 상황

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.common.Action;
+import controller.page.AlertPageAction;
 import controller.page.user.GamePageAction;
 import controller.page.user.JoinPageAction;
 import controller.page.user.LoginPageAction;
@@ -57,6 +58,8 @@ public class HandlerMapper {
 		mappings.put("/sponsorPage.do", new SponsorPageAction());
 		mappings.put("/sponsor.do", new SponsorAction());
 		mappings.put("/smsCheck.do", new SmsCheckAction());
+		mappings.put("/alert.do", new AlertPageAction());
+		
 		// 밑으로 관리자 부분 작성해주시면 됩니다.~ 작성자 조지훈 !!!
 	}
 
