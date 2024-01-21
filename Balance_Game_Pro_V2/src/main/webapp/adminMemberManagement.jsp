@@ -1,31 +1,3 @@
-<%-- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>관리자 유저관리</title>
-</head>
-<body>
-${member[0].loginId} 여기
-<%
-ArrayList<MemberDTO> mdatas = (ArrayList<MemberDTO>)request.getAttribute("member");
-if(mdatas == null || mdatas.isEmpty()){
-%>
-    <p>회원 정보가 없습니다.</p>
-<%
-} else {
-    for(MemberDTO data: mdatas){
-%>
-    <li><%=data.getLoginId()%></li>
-<%
-    }
-}
-%>
-</body>
-</html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- --%>
-
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"

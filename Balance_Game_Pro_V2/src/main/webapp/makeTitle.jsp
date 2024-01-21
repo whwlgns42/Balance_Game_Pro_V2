@@ -8,7 +8,7 @@ input {
 margin: inherit;
 }
 </style>
-<meta charset="EUC-KR">
+<meta charset="utf-8" />
 <title>문제 출제 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -24,11 +24,11 @@ margin: inherit;
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">Hyperspace</a>
+		<a href="main.do" class="title">밸런스게임</a>
 		<nav>
 			<ul>
-				<li><a href="index.html">로그아웃</a></li>
-				<li><a href="elements.html">마이페이지</a></li>
+				<li><a href="logout.do" class="active">로그아웃</a></li>
+				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -54,7 +54,6 @@ margin: inherit;
 				</form>
 			</div>
 		</section>
-
 	</div>
 
 	<!-- Footer -->
