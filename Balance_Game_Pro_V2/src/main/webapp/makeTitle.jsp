@@ -3,6 +3,11 @@
 <html>
 
 <head>
+<style >
+input {
+margin: inherit;
+}
+</style>
 <meta charset="EUC-KR">
 <title>문제 출제 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -44,7 +49,7 @@
 					<input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요">
 					<label for="explanation">출제 이유:</label>
 					<input type="text" id="explanation" name="explanation" placeholder="출제 이유를 입력해주세요">
-					<input type="submit" value="전송">
+					<input type="submit" value="문제생성">
 
 				</form>
 			</div>

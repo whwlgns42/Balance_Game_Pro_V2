@@ -32,11 +32,11 @@
 	</c:if>
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">Hyperspace</a>
+		<a href="main.do" class="title">밸런스게임</a>
 		<nav>
 			<ul>
-				<li><a href="index.html">login</a></li>
-				<li><a href="elements.html">joinMembership</a></li>
+				<li><a href="loginPage.do" class="active">login</a></li>
+				<li><a href="elements.html" class="active">joinMembership</a></li>
 			</ul>
 		</nav>
 	</header>
