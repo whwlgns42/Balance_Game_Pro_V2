@@ -20,7 +20,7 @@ public class QuestionDAO {
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
 
 	
-	private static final String SELECTALL_CRAWLLING = "SELECT COUNT(*) FROM QUESTIONS";
+	private static final String SELECTALL_CRAWLLING = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B , EXPLANATION FROM QUESTIONS Q";
 	
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
@@ -94,21 +94,24 @@ public class QuestionDAO {
 				rs.close();
 			
 			}else if(qDTO.getSearchCondition().equals("크롤링")){
+				System.out.println("로그 qDAO: 크롤링");
 				//크롤링 조회
 				pstmt = conn.prepareStatement(SELECTALL_CRAWLLING);
 				ResultSet rs = pstmt.executeQuery();
 				
-				int rowCnt =0;
-				
 				while(rs.next()) {
-					rowCnt = rs.getInt(1);
+					QuestionDTO data = new QuestionDTO();
+					data.setAnswer_A(rs.getString("ANSWER_A"));
+					data.setAnswer_B(rs.getString("ANSWER_B"));
+					data.setqId(rs.getInt("QID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setWriter(rs.getString("WRITER"));
+					data.setExplanation(rs.getString("EXPLANATION"));
+					datas.add(data);
 				}
-				
-				if(rowCnt ==0 ) {
-					return null;
-				}
+				rs.close();
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
