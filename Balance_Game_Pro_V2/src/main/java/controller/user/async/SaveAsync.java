@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.save.SaveDAO;
 import model.save.SaveDTO;
 
-@WebServlet("/SaveAsync.do")
+@WebServlet("/saveAsync.do")
 public class SaveAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
