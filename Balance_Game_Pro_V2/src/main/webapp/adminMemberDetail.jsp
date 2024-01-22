@@ -246,12 +246,9 @@ th {
 										<input class="form-control" type="text" name="age" value="<%=member.getAge()%>">
 									</div>
 
-
-
-
 									<!-- 다른 필드에 대한 입력 폼도 필요에 따라 추가 -->
-
-									<input type="hidden" name="memberId" value="<%=member.getmId()%>">
+									<%-- <input type="hidden" name="memberId" value="<%=member.getmId()%>"> --%>
+									<!-- 유저 삭제문 -->
 								</div>
 							</form>
 							<%
@@ -294,8 +291,10 @@ th {
 
 							<div class="card-footer">
 								<div class="float-left">
-									<button type="button" class="btn btn-block btn-danger">회원삭제</button>
-
+									<form action="adminMemberDelete.do" method="post">
+										<input type="hidden" name="loginId" value="<%=member.getLoginId()%>">
+										<button type="submit" class="btn btn-block btn-danger">회원삭제</button>
+									</form>
 								</div>
 								<div class="float-right">
 									<button type="button" class="btn btn-block btn-primary">회원정보수정</button>

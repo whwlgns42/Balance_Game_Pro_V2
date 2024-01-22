@@ -28,7 +28,9 @@ public class MemberDAO {
 	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER";
 	// 유저 상세 조회
 	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER WHERE LOGIN_ID = ?";
-	
+	// 유저 삭제
+	private static final String DELETE = "DELETE FROM MEMBER WHERE LOGIN_ID = ?";
+
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
 		if (mDTO.getSearchCondition().equals("전체조회")) {
@@ -40,7 +42,7 @@ public class MemberDAO {
 				System.out.println("3333");
 				pstmt = conn.prepareStatement(SELECTALL_USER);
 				ResultSet rs = pstmt.executeQuery();
-				while(rs.next()) {
+				while (rs.next()) {
 					System.out.println("4444");
 					MemberDTO member = new MemberDTO();
 					member.setmId(rs.getInt("MID"));
@@ -70,10 +72,10 @@ public class MemberDAO {
 	}
 
 	public MemberDTO selectOne(MemberDTO mDTO) { // 단일 검색
-		 if (mDTO == null) {
-		        // mDTO가 null이면 예외 처리 또는 다른 로직 수행
-		        return null;
-		    }
+		if (mDTO == null) {
+			// mDTO가 null이면 예외 처리 또는 다른 로직 수행
+			return null;
+		}
 		MemberDTO data = null;
 		if (mDTO.getSearchCondition().equals("유저조회")) {
 			System.out.println(mDTO);
@@ -83,7 +85,7 @@ public class MemberDAO {
 				pstmt = conn.prepareStatement(SELECTONE_USER);
 				pstmt.setString(1, mDTO.getLoginId());
 				ResultSet rs = pstmt.executeQuery();
-				if(rs.next()) {  
+				if (rs.next()) {
 					data = new MemberDTO();
 					data.setmId(rs.getInt("MID"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
@@ -99,10 +101,10 @@ public class MemberDAO {
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return null;
-			}finally {
+			} finally {
 				JDBCUtil.disconnect(pstmt, conn);
 			}
-			
+
 		} else if (mDTO.getSearchCondition().equals("로그인")) {
 			// 손성용
 			conn = JDBCUtil.connect();
@@ -160,7 +162,7 @@ public class MemberDAO {
 			} finally {
 				JDBCUtil.disconnect(pstmt, conn);
 			}
-		}else if (mDTO.getSearchCondition().equals("2차인증")) {
+		} else if (mDTO.getSearchCondition().equals("2차인증")) {
 			// 조지훈
 			conn = JDBCUtil.connect();
 			try {
@@ -231,8 +233,29 @@ public class MemberDAO {
 	}
 
 	public boolean delete(MemberDTO mDTO) { // 회원탈퇴
-		// 손성용
-		return false;
-	}
+		if (mDTO.getSearchCondition().equals("회원삭제")) {
+			conn = JDBCUtil.connect();
+			try {
+				pstmt = conn.prepareStatement(DELETE);
+				pstmt.setString(1, mDTO.getLoginId());
+				int result = pstmt.executeUpdate();
 
+				// 삭제 결과 확인
+				if (result > 0) {
+					// 삭제 성공
+					return true;
+				} else {
+					// 행이 영향을 받지 않았으므로 삭제 실패
+					return false;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			} finally {
+				JDBCUtil.disconnect(pstmt, conn);
+			}
+		}
+		return false;
+
+	}
 }

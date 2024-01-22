@@ -22,15 +22,31 @@ public class AdminMemberDeleteAction implements Action{
 		//모델의 멤버DAO delete로 보냄
 		
 		ActionForward forward = new ActionForward();
-		forward.setPath("adminMemberManagementPage.do");
-		forward.setRedirect(true);
-		
 		MemberDTO mDTO =new MemberDTO();
 		MemberDAO mDAO =new MemberDAO();
-		mDTO.setLoginId((String)request.getAttribute("loginId"));
-		mDAO.delete(mDTO);
+		mDTO.setLoginId(request.getParameter("loginId"));
+		mDTO.setSearchCondition("회원삭제");
+		System.out.println(request.getParameter("loginId"));
 		
-		return forward;
+		boolean deleteResult = mDAO.delete(mDTO);
+		System.out.println(mDAO.delete(mDTO)+"<<<<<");
+		
+		if(deleteResult) {
+			System.out.println("삭제 성공");
+			forward.setPath("adminMemberManagementPage.do");
+			forward.setRedirect(true);
+			return forward;
+			
+		}else {
+			System.out.println("삭제 실패");
+				forward = new ActionForward();
+	            forward.setPath("alert.do");
+	            forward.setRedirect(false);
+	            request.setAttribute("status", "fail");
+	            request.setAttribute("fail", "잘못된 요청입니다.");
+	            request.setAttribute("redirect", "adminMemberManagementPage.do");
+	            return forward;
+		}
 	}
 
 }

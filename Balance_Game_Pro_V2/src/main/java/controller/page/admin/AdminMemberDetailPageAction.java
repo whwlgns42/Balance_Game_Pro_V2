@@ -43,5 +43,11 @@ public class AdminMemberDetailPageAction implements Action{
 
 	    return forward;
 	}
+	
+	
+	
+	
+	
+	
 
 }
