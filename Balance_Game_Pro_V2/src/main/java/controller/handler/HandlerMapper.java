@@ -3,7 +3,7 @@ package controller.handler;
 import java.util.HashMap;
 import java.util.Map;
 
-import controller.admin.AdminMemberDeleteActionAcion;
+import controller.admin.AdminMemberDeleteAction;
 import controller.admin.AdminTitleAccessAcion;
 import controller.admin.AdminTitleCreateAcion;
 import controller.admin.AdminTitleDeleteAcion;
@@ -86,7 +86,7 @@ public class HandlerMapper {
       mappings.put("/adminTitleCreate.do", new AdminTitleCreateAcion());
       mappings.put("/adminTitleDelete.do", new AdminTitleDeleteAcion());
       mappings.put("/adminTitleUpdate.do", new AdminTitleUpdateAcion());
-      mappings.put("/adminMemberDelete.do", new AdminMemberDeleteActionAcion());
+      mappings.put("/adminMemberDelete.do", new AdminMemberDeleteAction());
       mappings.put("/alert.do", new AlertPageAction());
 
    }

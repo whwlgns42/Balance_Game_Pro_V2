@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
-public class AdminMemberDeleteActionAcion implements Action{
+public class AdminMemberDeleteAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

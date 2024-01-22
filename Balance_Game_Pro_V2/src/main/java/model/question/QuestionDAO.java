@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Util.JDBCUtil;
+import model.util.JDBCUtil;
 
 public class QuestionDAO {
 	private Connection conn;
@@ -19,6 +19,9 @@ public class QuestionDAO {
 	private static final String SELECTALL_FALSE = "SELECT Q.QID,Q.TITLE,C.CATEGORY \r\n" + "FROM QUESTIONS Q\r\n"
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
 
+	
+	private static final String SELECTALL_CRAWLLING = "SELECT COUNT(*) FROM QUESTIONS";
+	
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
@@ -89,6 +92,21 @@ public class QuestionDAO {
 				}
 
 				rs.close();
+			
+			}else {
+				//크롤링 조회
+				pstmt = conn.prepareStatement(SELECTALL_CRAWLLING);
+				ResultSet rs = pstmt.executeQuery();
+				
+				int rowCnt =0;
+				
+				while(rs.next()) {
+					rowCnt = rs.getInt(1);
+				}
+				
+				if(rowCnt ==0 ) {
+					return null;
+				}
 			}
 
 		} catch (SQLException e) {
