@@ -28,21 +28,10 @@ public class GamePageAction implements Action{
 		
 		HttpSession session=request.getSession();
 		String loginId= (String)session.getAttribute("loginId");
-		System.out.println(loginId + "게임페이지 들어올때 로그인 아이디");
+		System.out.println(loginId);
 		
 		qDto.setWriter(loginId);
-//		
-//		qDto=qDao.selectOne(qDto);  나중에 주석풀기
-		
-//		테스트 코드
-		qDto.setqId(1);
-		qDto.setTitle("게임테스트");
-		qDto.setAnswer_A("답변11");
-		qDto.setAnswer_B("답변222");
-		qDto.setExplanation("게임설명");
-		qDto.setSave(1);
-//		테스트 코드
-		
+		qDto=qDao.selectOne(qDto);
 		System.out.println("GamePageAction : "+qDto.getSave());
 		
 		request.setAttribute("data", qDto);
