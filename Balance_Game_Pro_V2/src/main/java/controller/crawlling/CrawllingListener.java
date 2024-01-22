@@ -29,8 +29,9 @@ public class CrawllingListener implements ServletContextListener {
 		
 		QuestionDTO qDTO = new QuestionDTO();
 		QuestionDAO qDAO = new QuestionDAO();
+		qDTO.setSearchCondition("크롤링");
 		
-		if(qDAO.selectAll(qDTO) == null) {
+		if(qDAO.selectAll(qDTO) != null) {
 			return;
 		}
 
@@ -72,9 +73,16 @@ public class CrawllingListener implements ServletContextListener {
 			String answer_B = answer.get(j + 1).text();
 			String resultAns_B = answer_B.replaceAll("\\^", "");
 			datas.get(i).setAnswer_B(resultAns_B);
+			datas.get(i).setWriter("관리자");
 			i++;
 		}
-		System.out.println(datas);
+		
+		
+		for(QuestionDTO data : datas) {
+			qDAO.insert(qDTO);
+		}
+			
+		
 	}
 
 }

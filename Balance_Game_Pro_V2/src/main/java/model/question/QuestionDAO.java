@@ -93,7 +93,7 @@ public class QuestionDAO {
 
 				rs.close();
 			
-			}else {
+			}else if(qDTO.getSearchCondition().equals("크롤링")){
 				//크롤링 조회
 				pstmt = conn.prepareStatement(SELECTALL_CRAWLLING);
 				ResultSet rs = pstmt.executeQuery();
