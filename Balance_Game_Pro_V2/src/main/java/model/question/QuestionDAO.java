@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.util.JDBCUtil;
+import model.Util.JDBCUtil;
 
 public class QuestionDAO {
 	private Connection conn;
