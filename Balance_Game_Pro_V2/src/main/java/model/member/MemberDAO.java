@@ -70,26 +70,30 @@ public class MemberDAO {
 	}
 
 	public MemberDTO selectOne(MemberDTO mDTO) { // 단일 검색
+		 if (mDTO == null) {
+		        // mDTO가 null이면 예외 처리 또는 다른 로직 수행
+		        return null;
+		    }
 		MemberDTO data = null;
 		if (mDTO.getSearchCondition().equals("유저조회")) {
+			System.out.println(mDTO);
 			// 박찬우
 			conn = JDBCUtil.connect();
 			try {
 				pstmt = conn.prepareStatement(SELECTONE_USER);
 				pstmt.setString(1, mDTO.getLoginId());
 				ResultSet rs = pstmt.executeQuery();
-				if(rs.next()) {
+				if(rs.next()) {  
 					data = new MemberDTO();
 					data.setmId(rs.getInt("MID"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
-					data.setmPw(rs.getString("PW"));
+					data.setmPw(rs.getString("MPW"));
 					data.setName(rs.getString("NAME"));
 					data.setEmail(rs.getString("EMAIL"));
 					data.setAddress(rs.getString("ADDRESS"));
 					data.setGender(rs.getString("GENDER"));
 					data.setAge(rs.getInt("AGE"));
 					data.setGrade(rs.getString("GRADE"));
-					data.setmAdmin(rs.getString("ADMIN"));
 				}
 				rs.close();
 			} catch (SQLException e) {

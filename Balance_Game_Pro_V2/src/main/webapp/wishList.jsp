@@ -33,7 +33,7 @@
 	margin-left: 5px;
 }
 </style>
-<title>Generic - Hyperspace by HTML5 UP</title>
+<title>찜목록</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
@@ -46,7 +46,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">Hyperspace</a>
+		<a href="index.html" class="title">찜목록</a>
 		<nav>
 			<ul>
 				<li><a href="index.html">login</a></li>

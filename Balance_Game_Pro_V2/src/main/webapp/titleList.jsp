@@ -51,7 +51,7 @@
 	margin-left: 5px;
 }
 </style>
-<title>Generic - Hyperspace by HTML5 UP</title>
+<title>문제 목록</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
@@ -64,7 +64,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">Hyperspace</a>
+		<a href="index.html" class="title">밸런스게임</a>
 		<nav>
 			<ul>
 				<li><a href="index.html">login</a></li>
@@ -79,7 +79,7 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">titleList</h1>
+				<h1 class="major">문제 목록</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
 				<body>
 					<div class="button-container1">
