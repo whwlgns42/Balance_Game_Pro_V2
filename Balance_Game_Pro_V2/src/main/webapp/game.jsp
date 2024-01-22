@@ -1,6 +1,7 @@
 <%@page import="model.question.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -36,9 +37,9 @@
 	margin-left: 50px;
 }
 
-#save {
-	width: 40px;
-	height: 40px;
+.save {
+	width: 50px;
+	height: 50px;
 }
 
 #title {
@@ -71,12 +72,22 @@
 	white-space: normal;
 }
 
-#answer_A :hover {
+#answer_A:hover {
 	background-color: #6DD66D;
 }
 
-#answer_B :hover {
+#answer_B:hover {
 	background-color: #FFB900;
+}
+ul.actions li #input {
+    width: 70%;
+}
+ul.actions {
+    margin: 0 auto;
+}
+#comment{
+	width:60%;
+	margin: 0 auto;
 }
 </style>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -85,39 +96,38 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		$("#comment").hide();
+		var qId = ${data.qId};
 		$(".save").on("click", function() {
 			console.log("[성공]");
-			var loginId='<%=session.getAttribute("loginId")%>';
-			'<%
-					QuestionDTO data =(QuestionDTO) request.getAttribute("data");
-				%>';
-				var qId='<%=data.getqId()%>';
+			var loginId = "${loginId}";
 			
-			if ( loginId== "null") {
+			console.log(loginId);
+			if (loginId == "") {
 				console.log("[로그]로그인 x");
 				alert('로그인이 필요합니다');
 				//location.href='loginPage.do';
-			} 
-			else if(loginId != "null"){
+			} else {
 
 				console.log("[로그] 로그인 o");
 				//요소 값 가져오기
 				//https://luahius.tistory.com/158
 				$.ajax({
 					type : "POST",
-					url : "SaveAsync.do",
+					url : "saveAsync.do",
 					data : {
-						'loginId' :loginId,'qId' : qId},
+						'loginId' : loginId,
+						'qId' : qId
+					},
 					dataType : 'text',
 					success : function(data) {
 						console.log(data);
-						if(data=="실패"){
-							//console.log("실패");
-						}else{
-							$(".save").attr("src", "images/"+data);
+						if (data == "실패") {
+							console.log("실패");
+						} else {
+							$(".save").attr("src", "images/" + data);
 						}
-						
+
 						//document.getElementById(".save").src="images/찜o.png";
 					},
 					error : function(error) {
@@ -126,38 +136,80 @@
 					}
 
 				});
-			} 
+			}
+		});
+
+		$(".answer").on("click", function() {
+			console.log("클릭");
+			$(".answer").css("height", "100px");
+			$(".answer").css("line-height", "100px");
+			$(".answer").css("font-size", "30px");
+			$(".answer").css("transition", "1000ms");
+
+			$("#title h1").css("font-size", "30px");
+			$("#title h1").css("transition", "1000ms");
+
+			$(".save").css("width", "30px");
+			$(".save").css("height", "30px");
+			$(".save").css("transition", "1000ms");
+
+			
+			
+			$.ajax({
+				type : "POST",
+				url : "commentAsync.do",
+				data : {
+					'qId' : qId
+				},
+				dataType : 'json',
+				success : function(data) {
+					
+					var elem = "";
+					$.each(data, function(index,data) {
+ 						elem +="<tr>";
+						elem +="<td>"+data.memberName+"( "+data.loginId+" )</td>";
+						elem +="<td>"+data.content+"</td>";
+						elem +="</tr>"; 
+						console.log(data.name);
+					});
+					$("table tbody").append(elem);
+					//document.getElementById(".save").src="images/찜o.png";
+				},
+				error : function(error) {
+					console.log('에러발생');
+					console.log('에러의 종류:' + error);
+				}
+
+			});
+			
+			
+			$("#comment").show();
 		});
 
 	});
 </script>
 </head>
 <body class="is-preload">
-	<%
+	<%-- 	<%
 	String loginData = (String) session.getAttribute("loginId");
 	QuestionDTO qDTO = (QuestionDTO) request.getAttribute("data");
-	%>
+	%> --%>
 	<!-- Header -->
 	<header id="header">
 		<a href="main.do" class="title">자비스</a>
 		<nav>
-			<%
-			if (loginData == null) {
-			%>
-			<ul>
-				<li><a href="loginPage.do">로그인</a></li>
-				<li><a href="joinPage.do" class="active">회원가입</a></li>
-			</ul>
-			<%
-			} else {
-			%>
-			<ul>
-				<li><a href="logout.do">로그아웃</a></li>
-				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
-			</ul>
-			<%
-			}
-			%>
+			<c:if test="${loginId ==null}">
+				<ul>
+					<li><a href="loginPage.do">로그인</a></li>
+					<li><a href="joinPage.do" class="active">회원가입</a></li>
+				</ul>
+			</c:if>
+			<c:if test="${loginId !=null}">
+				<ul>
+					<li><a href="logout.do">로그아웃</a></li>
+					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+				</ul>
+			</c:if>
 
 		</nav>
 	</header>
@@ -169,20 +221,14 @@
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<div id="title">
-					<h1><%=qDTO.getTitle()%></h1>
-					 <%
-					//System.out.println(qDTO.isSave());
-					System.out.println("Game : " + qDTO.getSave());
-					if (qDTO.getSave() <= 0) {
-						%>
-					<img class="save" src="images/찜x.png" alt="찜이 안되어 있습니다">
-					<%
-					} else {
-					%>
-					<img class="save" src="images/찜o.png" alt="찜이 되어 있습니다">
-					<%
-					}
-					%> 
+					<h1>${data.title}</h1>
+
+					<c:if test="${data.save <= 0}">
+						<img class="save" src="images/찜x.png" alt="찜이 안되어 있습니다">
+					</c:if>
+					<c:if test="${data.save > 0}">
+						<img class="save" src="images/찜o.png" alt="찜이 되어 있습니다">
+					</c:if>
 					<!-- <img id="save" src="images/찜x.png" alt="찜이 되어 있습니다"> -->
 				</div>
 				<!-- <span class="image "><img src="images/pic09.jpg" alt="" /></span> -->
@@ -191,20 +237,48 @@
 
 
 				<div class="inner">
-					<button id="answer_A" onclick="">
-						<%=qDTO.getAnswer_A()%>
-						
-					</button>
-					<button id="answer_B" onclick="">
-					<%=qDTO.getAnswer_B()%>
-						
-					</button>
+					<button class="answer" id="answer_A" type="button" value="A">
+						${data.getAnswer_A()}</button>
+					<button class="answer" id="answer_A" type="button" value="B">
+						${data.getAnswer_B()}</button>
 
 				</div>
 			</div>
 
 		</section>
 
+	</div>
+
+	<div id="wrapper">
+		<div class="inner" id="comment">
+		
+		
+		
+			<c:if test="${loginId !=null}">
+				<ul class="actions">
+			<li id="input"><div class="col-12">
+				<input type="text" placeholder="댓글을 입력하세요"
+					required>
+			</div></li>
+			<li><button type="button" class="button small">작성</button></li>
+		</ul>
+			</c:if>
+			
+			<div class="table-wrapper">
+				<table>
+					<thead>
+						<tr>
+							<th>Name(LoginId)</th>
+							<th>CONTENT</th>
+						</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
+
+				</table>
+			</div>
+		</div>
 	</div>
 
 	<!-- Footer -->
