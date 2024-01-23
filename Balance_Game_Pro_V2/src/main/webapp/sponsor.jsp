@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
 
 <!DOCTYPE HTML>
-<!--
-   Hyperspace by HTML5 UP
-   html5up.net | @ajlkn
-   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
 <style>
@@ -16,7 +12,7 @@
 	margin-top: 10px;
 }
 </style>
-<title>Generic - Hyperspace by HTML5 UP</title>
+<title>후원하기</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
@@ -38,7 +34,7 @@
 		<nav>
 			<ul>
 				<li><a href="loginPage.do" class="active">login</a></li>
-				<li><a href="elements.html" class="active">joinMembership</a></li>
+				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -49,19 +45,33 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">sponsor</h1>
+				<h1 class="major">후원하기</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
-					<h2>sponsor rank</h2>
-					<table>
-						<tr>
-							<td>
-								 <c:forEach var="data" items="${datas}" varStatus="loop">
-                                    ${loop.index + 1}. ${data.loginId}님이
-                                    <fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
-                                </c:forEach>
-							</td>
-						</tr>
-					</table>
+				<h2>오늘의 후원 랭킹</h2>
+				<table>
+					<tr>
+						<td>
+							<c:forEach var="data" items="${datas}" varStatus="loop">
+								<c:choose>
+									<c:when test="${loop.index + 1 == 1}">
+										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+									</c:when>
+									<c:when test="${loop.index + 1 == 2}">
+										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+									</c:when>
+									<c:when test="${loop.index + 1 == 3}">
+										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+									</c:when>
+									<c:otherwise>
+            							${loop.index + 1}위
+        							</c:otherwise>
+								</c:choose>
+   										 ${data.loginId}님이
+    							<fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
+							</c:forEach>
+						</td>
+					</tr>
+				</table>
 				<div class="button-container">
 					<button id="sponsorButton">후원하기</button>
 				</div>
@@ -69,26 +79,16 @@
 		</section>
 
 	</div>
-
-	<!-- Footer -->
-	<footer id="footer" class="wrapper alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; Untitled. All rights reserved.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
-
+	<common:footer></common:footer>
 	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/wpd"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
-	
+
 	<!-- 후원하기 카카오페이  -->
 	<script>
 	
