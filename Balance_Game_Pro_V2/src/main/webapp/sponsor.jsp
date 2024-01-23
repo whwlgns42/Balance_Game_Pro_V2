@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <!DOCTYPE HTML>
 <!--
    Hyperspace by HTML5 UP
@@ -49,18 +51,17 @@
 			<div class="inner">
 				<h1 class="major">sponsor</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
-				<body>
 					<h2>sponsor rank</h2>
 					<table>
 						<tr>
 							<td>
-								<c:forEach var="data" items="${datas}" varStatus="loop">
-									${loop.index+1}. ${data.loginId}님이 ${data.total} 원 후원하셨습니다.<br>
-								</c:forEach>
+								 <c:forEach var="data" items="${datas}" varStatus="loop">
+                                    ${loop.index + 1}. ${data.loginId}님이
+                                    <fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
+                                </c:forEach>
 							</td>
 						</tr>
 					</table>
-				</body>
 				<div class="button-container">
 					<button id="sponsorButton">후원하기</button>
 				</div>
