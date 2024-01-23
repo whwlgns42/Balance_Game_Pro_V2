@@ -34,16 +34,12 @@ public class MemberDAO {
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
 		if (mDTO.getSearchCondition().equals("전체조회")) {
-			System.out.println("1111");
 			// 박찬우
 			conn = JDBCUtil.connect();
-			System.out.println("2222");
 			try {
-				System.out.println("3333");
 				pstmt = conn.prepareStatement(SELECTALL_USER);
 				ResultSet rs = pstmt.executeQuery();
 				while (rs.next()) {
-					System.out.println("4444");
 					MemberDTO member = new MemberDTO();
 					member.setmId(rs.getInt("MID"));
 					member.setLoginId(rs.getString("LOGIN_ID"));
@@ -56,14 +52,11 @@ public class MemberDAO {
 					member.setGrade(rs.getString("GRADE"));
 					datas.add(member);
 				}
-				System.out.println("555");
 				rs.close();
 			} catch (SQLException e) {
-				System.out.println("6666");
 				e.printStackTrace();
 				return null;
 			} finally {
-				System.out.println("77777");
 				JDBCUtil.disconnect(pstmt, conn);
 			}
 		}
@@ -78,7 +71,6 @@ public class MemberDAO {
 		}
 		MemberDTO data = null;
 		if (mDTO.getSearchCondition().equals("유저조회")) {
-			System.out.println(mDTO);
 			// 박찬우
 			conn = JDBCUtil.connect();
 			try {

@@ -1,26 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="model.save.*, java.util.ArrayList"%>
-<%-- <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>유저 마이 페이지</title>
-</head>
-<body>
-	마이페이지
-	<br>
-	<form action="mypageUpdate.do" method="POST">
-		아이디 <input readonly type="text" value="${myPageData.loginId}"><br>
-		이름 <input type="text" name="name" value="${myPageData.name}"><br>
-		성별 <input type="text" value="${myPageData.gender}"><br>
-		이메일 <input type="email" name="email" value="${myPageData.email}"><br>
-		주소 <input readonly type="text" value="${myPageData.address}"><br>
-		<input type="submit" value="변경">
-	</form>
-	<button onclick="location.href='makeTitlePage.do';">문제출제하기</button>
-	<button onclick="location.href='wishListPage.do';">찜목록</button>
-	
-</body>
-</html> --%>
+
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -44,8 +23,8 @@
 		<a href="index.html" class="title">밸런스게임</a>
 		<nav>
 			<ul>
-				<li><a href="index.html">로그아웃</a></li>
-				<li><a href="elements.html">마이페이지</a></li>
+				<li><a href="logout.do" class="active">로그아웃</a></li>
+				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -56,7 +35,12 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">마이 페이지</h1>
+				<h1 class="major" style="margin-bottom: 20px;">마이 페이지</h1>
+				<div style="margin-bottom: 30px;">
+					<button style="font-size: 10px; margin-right: 20px;" onclick="location.href='makeTitlePage.do';">문제출제하기</button>
+					<button style="font-size: 10px;" onclick="location.href='wishListPage.do';">찜목록</button>
+
+				</div>
 				<form action="mypageUpdate.do" method="POST">
 					아이디
 					<input readonly type="text" value="${myPageData.loginId}">
@@ -69,14 +53,12 @@
 					<br> 주소
 					<input readonly type="text" value="${myPageData.address}">
 					<br>
-
-					<button onclick="location.href='makeTitlePage.do';">문제출제하기</button>
-					<button onclick="location.href='wishListPage.do';">찜목록</button>
 					<input type="submit" value="변경">
+				</form>
+				
 			</div>
-			</form>
-	</div>
-	</section>
+		</section>
+
 
 	</div>
 

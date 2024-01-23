@@ -14,7 +14,7 @@ import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
 import net.nurigo.sdk.message.model.Message;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
-@WebServlet("/AuthServlet")
+@WebServlet("/authServlet")
 public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
