@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Util.JDBCUtil;
+import model.util.JDBCUtil;
 
 public class QuestionDAO {
 	private Connection conn;
@@ -19,6 +19,16 @@ public class QuestionDAO {
 	private static final String SELECTALL_FALSE = "SELECT Q.QID,Q.TITLE,C.CATEGORY \r\n" + "FROM QUESTIONS Q\r\n"
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
 
+	
+	  private static final String SELECTALL_CRAWLLING = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B , EXPLANATION FROM QUESTIONS Q";
+	   
+	   private static final String SELECTALL_ADMIN_TRUE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'T' ";
+	   
+	   private static final String SELECTALL_ADMIN_FALSE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'F' ";
+
+
+	
+	
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
@@ -41,10 +51,13 @@ public class QuestionDAO {
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.QID=?\r\n"
 			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID";
 
+	 private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, WRITER, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
+
+	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
 			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,EXPLANATION=?,CATEGORY=?,Q_ACCESS=? \r\n" + "WHERE QID=?";
 
-	
+	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET Q_ACCESS='T' WHERE QID=?";
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
@@ -89,7 +102,54 @@ public class QuestionDAO {
 				}
 
 				rs.close();
-			}
+			}else if(qDTO.getSearchCondition().equals("크롤링")){
+	            System.out.println("로그 qDAO: 크롤링");
+	            //크롤링 조회
+	            pstmt = conn.prepareStatement(SELECTALL_CRAWLLING);
+	            ResultSet rs = pstmt.executeQuery();
+	            
+	            while(rs.next()) {
+	               QuestionDTO data = new QuestionDTO();
+	               data.setAnswer_A(rs.getString("ANSWER_A"));
+	               data.setAnswer_B(rs.getString("ANSWER_B"));
+	               data.setqId(rs.getInt("QID"));
+	               data.setTitle(rs.getString("TITLE"));
+	               data.setWriter(rs.getString("WRITER"));
+	               data.setExplanation(rs.getString("EXPLANATION"));
+	               datas.add(data);
+	            }
+	            rs.close();
+	         }else if(qDTO.getSearchCondition().equals("관리자문제전체조회")) {
+	            pstmt = conn.prepareStatement(SELECTALL_ADMIN_TRUE);
+	            ResultSet rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	               QuestionDTO data = new QuestionDTO();
+	               data.setAnswer_A(rs.getString("ANSWER_A"));
+	               data.setAnswer_B(rs.getString("ANSWER_B"));
+	               data.setqId(rs.getInt("QID"));
+	               data.setTitle(rs.getString("TITLE"));
+	               data.setWriter(rs.getString("WRITER"));
+	               data.setExplanation(rs.getString("EXPLANATION"));
+	               
+	               datas.add(data);
+	            }
+	            rs.close();
+	         }else if(qDTO.getSearchCondition().equals("관리자승인문제조회")) {
+	            pstmt = conn.prepareStatement(SELECTALL_ADMIN_FALSE);
+	            ResultSet rs = pstmt.executeQuery();
+	            while(rs.next()) {
+	               QuestionDTO data = new QuestionDTO();
+	               data.setAnswer_A(rs.getString("ANSWER_A"));
+	               data.setAnswer_B(rs.getString("ANSWER_B"));
+	               data.setqId(rs.getInt("QID"));
+	               data.setTitle(rs.getString("TITLE"));
+	               data.setWriter(rs.getString("WRITER"));
+	               data.setExplanation(rs.getString("EXPLANATION"));
+	               datas.add(data);
+	            }
+	            rs.close();
+	         }
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -153,7 +213,24 @@ public class QuestionDAO {
 
 				}
 				rs.close();
-			}
+			}else if(qDTO.getSearchCondition().equals("관리자문제상세조회")) {
+	            pstmt = conn.prepareStatement(SELECT_ONE_ADMIN);
+	            pstmt.setInt(1, qDTO.getqId());
+	            ResultSet rs = pstmt.executeQuery();
+	            if (rs.next()) {
+	               data = new QuestionDTO();
+	               data.setqId(rs.getInt("QID"));
+	               data.setWriter(rs.getString("WRITER"));
+	               data.setTitle(rs.getString("TITLE"));
+	               data.setAnswer_A(rs.getString("ANSWER_A"));
+	               data.setAnswer_B(rs.getString("ANSWER_B"));
+	               data.setExplanation(rs.getString("EXPLANATION"));
+	               data.setCategory(rs.getInt("CATEGORY"));
+	               data.setqAccess(rs.getString("Q_ACCESS"));
+	               data.setRegdate(rs.getString("REG_DATE"));
+	            }
+	         }
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -222,8 +299,15 @@ public class QuestionDAO {
 					return false;
 				}
 			} else if (qDTO.getSearchCondition().equals("승인")) {
-				// 전은주
-			}
+	            // 전은주
+	            pstmt = conn.prepareStatement(UPDATE_ACCESS);
+	            pstmt.setInt(1, qDTO.getqId());
+	            int rs = pstmt.executeUpdate();
+	            if(rs <=0) {
+	               return false;
+	            }
+	         }
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
