@@ -37,7 +37,6 @@ import controller.user.MakeTitleAction;
 import controller.user.MyPageUpdateAction;
 import controller.user.PwCheckAcion;
 import controller.user.ResultAction;
-import controller.user.SmsCheckAction;
 import controller.user.SponsorAction;
 import controller.user.WishAction;
 
@@ -72,7 +71,6 @@ public class HandlerMapper {
       mappings.put("/gamePage.do", new GamePageAction());
       mappings.put("/sponsorPage.do", new SponsorPageAction());
       mappings.put("/sponsor.do", new SponsorAction());
-      mappings.put("/smsCheck.do", new SmsCheckAction());
       // 관리자
       mappings.put("/adminPage.do", new AdminPageAcion());
       mappings.put("/adminTitleManagementPage.do", new AdminTitleManagementPageAcion());
