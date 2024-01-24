@@ -50,6 +50,8 @@ public class QuestionDAO {
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = 'user'\r\n" + "WHERE Q.QID=1\r\n"
 			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID";
 
+	private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, WRITER, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
+	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
 			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,EXPLANATION=?,CATEGORY=?,Q_ACCESS=? \r\n" + "WHERE QID=?";
 	
@@ -209,6 +211,22 @@ public class QuestionDAO {
 
 				}
 				rs.close();
+			}else if(qDTO.getSearchCondition().equals("관리자문제상세조회")) {
+				pstmt = conn.prepareStatement(SELECT_ONE_ADMIN);
+				pstmt.setInt(1, qDTO.getqId());
+				ResultSet rs = pstmt.executeQuery();
+				if (rs.next()) {
+					data = new QuestionDTO();
+					data.setqId(rs.getInt("QID"));
+					data.setWriter(rs.getString("WRITER"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setAnswer_A(rs.getString("ANSWER_A"));
+					data.setAnswer_B(rs.getString("ANSWER_B"));
+					data.setExplanation(rs.getString("EXPLANATION"));
+					data.setCategory(rs.getInt("CATEGORY"));
+					data.setqAccess(rs.getString("Q_ACCESS"));
+					data.setRegdate(rs.getString("REG_DATE"));
+				}
 			}
 
 		} catch (SQLException e) {

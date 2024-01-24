@@ -18,6 +18,8 @@ public class QuestionDTO {
 	private int category;
 
 	private String qAccess;
+	
+	private String regdate;
 
 	 
 
@@ -193,6 +195,16 @@ public class QuestionDTO {
 
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
+	}
+
+	public String getRegdate() {
+		return regdate;
+	}
+
+
+
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
 	}
 
 
