@@ -227,7 +227,6 @@ public class QuestionDAO {
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               data.setCategory(rs.getInt("CATEGORY"));
 	               data.setqAccess(rs.getString("Q_ACCESS"));
-	               data.setRegdate(rs.getString("REG_DATE"));
 	            }
 	         }
 

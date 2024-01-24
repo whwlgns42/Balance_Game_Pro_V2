@@ -29,7 +29,7 @@ if(mdatas == null || mdatas.isEmpty()){
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList,model.member.MemberDTO"%>
+	import="java.util.ArrayList,model.member.MemberDTO, model.question.QuestionDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -308,9 +308,7 @@ th {
 									<div class="card-tools">
 										<div class="input-group input-group-sm" style="width: 100px;">
 											<button>문제출제</button>
-											<div class="input-group-append">
-												
-											</div>
+											<div class="input-group-append"></div>
 										</div>
 									</div>
 								</div>
@@ -319,23 +317,42 @@ th {
 									<table class="table table-hover text-nowrap">
 										<thead>
 											<tr>
-												<th>ID</th>
-												<th>User</th>
+												<th>NO</th>
+												<th>Writer</th>
+												<th>Title</th>
 												<th>Date</th>
-												<th>Status</th>
-												<th>Reason</th>
 											</tr>
 										</thead>
 										<tbody>
 											<%
-												
+											ArrayList<QuestionDTO> qdatas =(ArrayList<QuestionDTO>) request.getAttribute("qdatas_f");
+											if (qdatas == null || qdatas.isEmpty()) {
+											%>
+											<tr>
+												<td colspan="1">출제문제가 없습니다</td>
+											</tr>
+											<%
+											} else {
+											for (QuestionDTO data : qdatas) {
+											%>
+											<tr>
+												<td><a
+													href="adminTitleDetaileAccessPage.do?qid=<%=data.getqId()%>"><%=data.getqId()%></a>
+												</td>
+												<td><%=data.getWriter()%></td>
+												<td><%=data.getTitle()%></td>
+												<td><%=data.getRegdate()%></td>
+											</tr>
+											<%
+											}
+											}
 											%>
 										</tbody>
 									</table>
 								</div>
 
 							</div>
-							
+
 
 
 						</div>

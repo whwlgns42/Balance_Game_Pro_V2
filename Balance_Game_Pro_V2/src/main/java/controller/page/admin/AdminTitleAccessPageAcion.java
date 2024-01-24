@@ -18,13 +18,12 @@ public class AdminTitleAccessPageAcion implements Action{
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-		forward.setPath("adminTitleAccess.jsp");
-		forward.setRedirect(true);
 		
 		QuestionDTO qDTO = new QuestionDTO();
 		QuestionDAO qDAO = new QuestionDAO();
 		qDTO.setSearchCondition("관리자승인문제조회");
 		ArrayList<QuestionDTO> qdatas_f = qDAO.selectAll(qDTO);
+		System.out.println("qdatas_f"+qdatas_f);
 		if(qdatas_f == null) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
@@ -33,10 +32,9 @@ public class AdminTitleAccessPageAcion implements Action{
 			request.setAttribute("redirect", "adminPage.do");
 			return forward;
 		}
-		forward.setPath("adminTitleManagement.jsp");
+		forward.setPath("adminTitleAccess.jsp");
 		forward.setRedirect(false);
-		request.setAttribute("qdatas", qdatas_f);
-		System.out.println("qdatas" + qdatas_f);
+		request.setAttribute("qdatas_f", qdatas_f);
 		return forward;
 	}
 }
