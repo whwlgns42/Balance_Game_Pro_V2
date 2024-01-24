@@ -1,6 +1,7 @@
 package controller.user.async;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,16 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Lifecycle.SingleUse;
-
-
-import controller.common.ActionForward;
 import model.support.SupportDAO;
 import model.support.SupportDTO;
 
-/**
- * Servlet implementation class Sponsor
- */
 @WebServlet("/sponsor")
 public class Sponsor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -34,7 +28,6 @@ public class Sponsor extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		session.getAttribute("loginId");
-
 		SupportDTO supportDTO = new SupportDTO();
 		SupportDAO supportDAO = new SupportDAO();
 		supportDTO.setLoginId(request.getParameter("loginId"));
@@ -45,10 +38,10 @@ public class Sponsor extends HttpServlet {
 		boolean support = supportDAO.insert(supportDTO);
 		if (support) {
 			// 후원성공
-			System.out.println("후원성공");
+			response.getWriter().print("성공");
 		} else {
 			// 후원실패
-			System.out.println("후원실패");
+			response.getWriter().print("실패");
 		}
 	}
 
