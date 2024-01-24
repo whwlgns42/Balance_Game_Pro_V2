@@ -1,5 +1,7 @@
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.ArrayList,model.member.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList,model.member.MemberDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,25 +10,32 @@
 <title>유저관리 상세 페이지</title>
 
 <!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Tempusdominus Bootstrap 4 -->
-<link rel="stylesheet" href="adminLte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- iCheck -->
-<link rel="stylesheet" href="adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- JQVMap -->
 <link rel="stylesheet" href="adminLte/plugins/jqvmap/jqvmap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="adminLte/dist/css/adminlte.min.css">
 <!-- overlayScrollbars -->
-<link rel="stylesheet" href="adminLte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Daterange picker -->
-<link rel="stylesheet" href="adminLte/plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
-<link rel="stylesheet" href="adminLte/plugins/summernote/summernote-bs4.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/summernote/summernote-bs4.min.css">
 <style>
 .message {
 	border-top: 1px solid #ccc;
@@ -92,18 +101,24 @@ th {
 	<div class="wrapper">
 
 		<!-- Preloader -->
-		<div class="preloader flex-column justify-content-center align-items-center">
-			<img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+		<div
+			class="preloader flex-column justify-content-center align-items-center">
+			<img class="animation__shake" src="dist/img/AdminLTELogo.png"
+				alt="AdminLTELogo" height="60" width="60">
 		</div>
 
 		<!-- Navbar -->
-		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+		<nav
+			class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.jpg" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-			<li class="nav-item d-none d-sm-inline-block">유저상세 페이지</li>
-			<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
+				<li class="nav-item d-none d-sm-inline-block">유저상세 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -115,7 +130,8 @@ th {
 						<div class="dropdown-divider"></div>
 						<div class="dropdown-divider"></div>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+						<a href="#" class="dropdown-item dropdown-footer">See All
+							Messages</a>
 					</div>
 				</li>
 				<!-- Notifications Dropdown Menu -->
@@ -128,7 +144,10 @@ th {
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a href="adminPage.do" class="brand-link"> <img src="images/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> <span class="brand-text font-weight-light">관리자</span>
+			<a href="adminPage.do" class="brand-link"> <img
+				src="images/logo.jpg" alt="AdminLTE Logo"
+				class="brand-image img-circle elevation-3" style="opacity: .8">
+				<span class="brand-text font-weight-light">관리자</span>
 			</a>
 
 			<!-- Sidebar -->
@@ -140,22 +159,28 @@ th {
 
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<ul class="nav nav-pills nav-sidebar flex-column"
+						data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-						<li class="nav-item menu-open"><a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
+						<li class="nav-item menu-open"><a href="#"
+							class="nav-link active"> <i
+								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									관리 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="adminPage.do" class="nav-link "> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link "> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -231,21 +256,23 @@ th {
 
 								<div class="card-body">
 									<div class="form-group">
-										<label for="name">이름:</label>
-										<input class="form-control" type="text" name="name" value="<%=member.getName()%>">
+										<label for="name">이름:</label> <input class="form-control"
+											type="text" name="name" value="<%=member.getName()%>">
 									</div>
 									<div class="form-group">
-										<label for="email">이메일:</label>
-										<input class="form-control" type="text" name="email" value="<%=member.getEmail()%>">
+										<label for="email">이메일:</label> <input class="form-control"
+											type="text" name="email" value="<%=member.getEmail()%>">
 									</div>
 									<div class="form-group">
-										<label for="address">주소:</label>
-										<input class="form-control" type="text" name="address" value="<%=member.getAddress()%>">
+										<label for="address">주소:</label> <input class="form-control"
+											type="text" name="address" value="<%=member.getAddress()%>">
 									</div>
 									<div class="form-group">
-										<label for="age">나이:</label>
-										<input class="form-control" type="text" name="age" value="<%=member.getAge()%>">
+										<label for="age">나이:</label> <input class="form-control"
+											type="text" name="age" value="<%=member.getAge()%>">
 									</div>
+									
+
 
 									<!-- 다른 필드에 대한 입력 폼도 필요에 따라 추가 -->
 									<%-- <input type="hidden" name="memberId" value="<%=member.getmId()%>"> --%>
@@ -293,13 +320,19 @@ th {
 							<div class="card-footer">
 								<div class="float-left">
 									<form action="adminMemberDelete.do" method="post">
-										<input type="hidden" name="loginId" value="<%=member.getLoginId()%>">
+										<input type="hidden" name="loginId"
+											value="<%=member.getLoginId()%>">
 										<button type="submit" class="btn btn-block btn-danger">회원삭제</button>
 									</form>
 								</div>
+								
 								<div class="float-right">
-									<button type="button" class="btn btn-block btn-primary">회원정보수정</button>
-
+									<!-- 수정된 정보를 전송할 폼 -->
+									<form action="updateMember.do" method="post">
+										<input type="hidden" name="memberId"
+											value="<%=member.getmId()%>">
+										<button type="submit" class="btn btn-primary">정보 수정</button>
+									</form>
 								</div>
 							</div>
 
@@ -313,28 +346,34 @@ th {
 						</div>
 
 						<div class="card-body">
-							<div id="jsGrid1" class="jsgrid" style="position: relative; height: 100%; width: 100%;">
+							<div id="jsGrid1" class="jsgrid"
+								style="position: relative; height: 100%; width: 100%;">
 								<div class="jsgrid-grid-header jsgrid-header-scrollbar">
 									<table class="jsgrid-table">
 										<tr class="jsgrid-header-row">
-											<th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 150px;">Name</th>
-											<th class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable" style="width: 50px;">Age</th>
-											<th class="jsgrid-header-cell jsgrid-header-sortable" style="width: 200px;">Address</th>
-											<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">Country</th>
-											<th class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable" style="width: 100px;">Is Married</th>
+											<th class="jsgrid-header-cell jsgrid-header-sortable"
+												style="width: 150px;">Name</th>
+											<th
+												class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable"
+												style="width: 50px;">Age</th>
+											<th class="jsgrid-header-cell jsgrid-header-sortable"
+												style="width: 200px;">Address</th>
+											<th
+												class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
+												style="width: 100px;">Country</th>
+											<th
+												class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
+												style="width: 100px;">Is Married</th>
 										</tr>
 										<tr class="jsgrid-filter-row" style="display: none;">
-											<td class="jsgrid-cell" style="width: 150px;">
-												<input type="text">
-											</td>
-											<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">
-												<input type="number">
-											</td>
-											<td class="jsgrid-cell" style="width: 200px;">
-												<input type="text">
-											</td>
-											<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-												<select>
+											<td class="jsgrid-cell" style="width: 150px;"><input
+												type="text"></td>
+											<td class="jsgrid-cell jsgrid-align-right"
+												style="width: 50px;"><input type="number"></td>
+											<td class="jsgrid-cell" style="width: 200px;"><input
+												type="text"></td>
+											<td class="jsgrid-cell jsgrid-align-center"
+												style="width: 100px;"><select>
 													<option value="0"></option>
 													<option value="1">United States</option>
 													<option value="2">Canada</option>
@@ -343,24 +382,20 @@ th {
 													<option value="5">Brazil</option>
 													<option value="6">China</option>
 													<option value="7">Russia</option>
-												</select>
-											</td>
-											<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-												<input type="checkbox" readonly="">
-											</td>
+											</select></td>
+											<td class="jsgrid-cell jsgrid-align-center"
+												style="width: 100px;"><input type="checkbox"
+												readonly=""></td>
 										</tr>
 										<tr class="jsgrid-insert-row" style="display: none;">
-											<td class="jsgrid-cell" style="width: 150px;">
-												<input type="text">
-											</td>
-											<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">
-												<input type="number">
-											</td>
-											<td class="jsgrid-cell" style="width: 200px;">
-												<input type="text">
-											</td>
-											<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-												<select>
+											<td class="jsgrid-cell" style="width: 150px;"><input
+												type="text"></td>
+											<td class="jsgrid-cell jsgrid-align-right"
+												style="width: 50px;"><input type="number"></td>
+											<td class="jsgrid-cell" style="width: 200px;"><input
+												type="text"></td>
+											<td class="jsgrid-cell jsgrid-align-center"
+												style="width: 100px;"><select>
 													<option value="0"></option>
 													<option value="1">United States</option>
 													<option value="2">Canada</option>
@@ -369,11 +404,9 @@ th {
 													<option value="5">Brazil</option>
 													<option value="6">China</option>
 													<option value="7">Russia</option>
-												</select>
-											</td>
-											<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-												<input type="checkbox">
-											</td>
+											</select></td>
+											<td class="jsgrid-cell jsgrid-align-center"
+												style="width: 100px;"><input type="checkbox"></td>
 										</tr>
 									</table>
 								</div>
@@ -382,48 +415,67 @@ th {
 										<tbody>
 											<tr class="jsgrid-row">
 												<td class="jsgrid-cell" style="width: 150px;">Otto Clay</td>
-												<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">61</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap #897-1459 Quam Avenue</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">China</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-													<input type="checkbox" disabled="">
-												</td>
+												<td class="jsgrid-cell jsgrid-align-right"
+													style="width: 50px;">61</td>
+												<td class="jsgrid-cell" style="width: 200px;">Ap
+													#897-1459 Quam Avenue</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;">China</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;"><input type="checkbox"
+													disabled=""></td>
 											</tr>
 											<tr class="jsgrid-alt-row">
-												<td class="jsgrid-cell" style="width: 150px;">Connor Johnston</td>
-												<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">73</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap #370-4647 Dis Av.</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">Russia</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-													<input type="checkbox" disabled="">
-												</td>
+												<td class="jsgrid-cell" style="width: 150px;">Connor
+													Johnston</td>
+												<td class="jsgrid-cell jsgrid-align-right"
+													style="width: 50px;">73</td>
+												<td class="jsgrid-cell" style="width: 200px;">Ap
+													#370-4647 Dis Av.</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;">Russia</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;"><input type="checkbox"
+													disabled=""></td>
 											</tr>
 											<tr class="jsgrid-row">
-												<td class="jsgrid-cell" style="width: 150px;">Lacey Hess</td>
-												<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">29</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap #365-8835 Integer St.</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">Russia</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-													<input type="checkbox" disabled="">
-												</td>
+												<td class="jsgrid-cell" style="width: 150px;">Lacey
+													Hess</td>
+												<td class="jsgrid-cell jsgrid-align-right"
+													style="width: 50px;">29</td>
+												<td class="jsgrid-cell" style="width: 200px;">Ap
+													#365-8835 Integer St.</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;">Russia</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;"><input type="checkbox"
+													disabled=""></td>
 											</tr>
 											<tr class="jsgrid-alt-row">
-												<td class="jsgrid-cell" style="width: 150px;">Timothy Henson</td>
-												<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">78</td>
-												<td class="jsgrid-cell" style="width: 200px;">911-5143 Luctus Ave</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">United States</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-													<input type="checkbox" disabled="">
-												</td>
+												<td class="jsgrid-cell" style="width: 150px;">Timothy
+													Henson</td>
+												<td class="jsgrid-cell jsgrid-align-right"
+													style="width: 50px;">78</td>
+												<td class="jsgrid-cell" style="width: 200px;">911-5143
+													Luctus Ave</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;">United States</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;"><input type="checkbox"
+													disabled=""></td>
 											</tr>
 											<tr class="jsgrid-row">
-												<td class="jsgrid-cell" style="width: 150px;">Ramona Benton</td>
-												<td class="jsgrid-cell jsgrid-align-right" style="width: 50px;">43</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap #614-689 Vehicula Street</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">Brazil</td>
-												<td class="jsgrid-cell jsgrid-align-center" style="width: 100px;">
-													<input type="checkbox" disabled="">
-												</td>
+												<td class="jsgrid-cell" style="width: 150px;">Ramona
+													Benton</td>
+												<td class="jsgrid-cell jsgrid-align-right"
+													style="width: 50px;">43</td>
+												<td class="jsgrid-cell" style="width: 200px;">Ap
+													#614-689 Vehicula Street</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;">Brazil</td>
+												<td class="jsgrid-cell jsgrid-align-center"
+													style="width: 100px;"><input type="checkbox"
+													disabled=""></td>
 											</tr>
 
 										</tbody>
@@ -431,8 +483,11 @@ th {
 								</div>
 
 							</div>
-							<div class="jsgrid-load-shader" style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div>
-							<div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div>
+							<div class="jsgrid-load-shader"
+								style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div>
+							<div class="jsgrid-load-panel"
+								style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please,
+								wait...</div>
 						</div>
 					</div>
 
@@ -483,11 +538,13 @@ th {
 	<script src="adminLte/plugins/moment/moment.min.js"></script>
 	<script src="adminLte/plugins/daterangepicker/daterangepicker.js"></script>
 	<!-- Tempusdominus Bootstrap 4 -->
-	<script src="adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 	<!-- Summernote -->
 	<script src="adminLte/plugins/summernote/summernote-bs4.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="adminLte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script
+		src="adminLte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="adminLte/dist/js/adminlte.js"></script>
 
