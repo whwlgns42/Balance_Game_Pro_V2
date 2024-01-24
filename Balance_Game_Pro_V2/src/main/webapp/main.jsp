@@ -34,7 +34,7 @@
 					<c:if test="${not empty loginId }">
 						<li><a href="#intro">문제 목록</a></li>
 						<li><a href="makeTitlePage.do">문제 출제</a></li>
-						<li><a href="#two">찜목록</a></li>
+						<li><a href="wishListPage.do">찜목록</a></li>
 						<li><a href="sponsorPage.do">후원 랭킹</a></li>
 					</c:if>
 				</ul>

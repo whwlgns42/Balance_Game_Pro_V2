@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 <!--
    Hyperspace by HTML5 UP
@@ -67,8 +68,10 @@
 		<a href="index.html" class="title">밸런스게임</a>
 		<nav>
 			<ul>
-				<li><a href="index.html">login</a></li>
-				<li><a href="elements.html">joinMembership</a></li>
+				<c:if test="${not empty loginId }">
+					<li><a href="loginout.do">로그아웃</a></li>
+					<li><a href="">joinMembership</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</header>

@@ -20,7 +20,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">밸런스게임</a>
+		<a href="main.do" class="title">밸런스게임</a>
 		<nav>
 			<ul>
 				<li><a href="logout.do" class="active">로그아웃</a></li>

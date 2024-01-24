@@ -33,8 +33,10 @@
 		<a href="main.do" class="title">밸런스게임</a>
 		<nav>
 			<ul>
-				<li><a href="loginPage.do" class="active">login</a></li>
-				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+				<c:if test="${not empty loginId }">
+					<li><a href="loginPage.do" class="active">로그아웃</a></li>
+					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</header>
