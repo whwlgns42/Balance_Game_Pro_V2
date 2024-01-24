@@ -307,8 +307,18 @@ th {
 								<div class="card-header">
 									<h3 class="card-title">문제목록</h3>
 									<div class="card-tools">
+
 										<div class="input-group input-group-sm" style="width: 100px;">
-											<a href="adminTitleCreate.do"><button>문제출제</button></a>
+											<a href="adminTitleCreate.do"><button type="button"
+													class="btn btn-block btn-primary">문제출제</button></a>
+											<div class="input-group-append"></div>
+										</div>
+									</div>
+									<div class="card-tools">
+
+										<div class="input-group input-group-sm" style="width: 120px;">
+											<a href="adminTitleAccessPage.do"><button type="button"
+													class="btn btn-block btn-success">문제승인</button></a>
 											<div class="input-group-append"></div>
 										</div>
 									</div>
@@ -327,7 +337,7 @@ th {
 										<tbody>
 											<%
 											ArrayList<QuestionDTO> qdatas = (ArrayList<QuestionDTO>) request.getAttribute("qdatas");
-											if (qdatas.isEmpty()) {
+											if (qdatas == null || qdatas.isEmpty()) {
 											%>
 											<tr>
 												<td colspan="1">출제된 문제가 없습니다.</td>
