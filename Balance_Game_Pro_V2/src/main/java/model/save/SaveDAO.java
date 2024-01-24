@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Util.JDBCUtil;
+import model.util.JDBCUtil;
 
 public class SaveDAO {
 

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Util.JDBCUtil;
+import model.util.JDBCUtil;
 
 public class QuestionDAO {
 	private Connection conn;
@@ -46,6 +46,8 @@ public class QuestionDAO {
 
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
 			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,EXPLANATION=?,CATEGORY=?,Q_ACCESS=? \r\n" + "WHERE QID=?";
+	
+	private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET Q_ACCESS='T' WHERE QID=?";
 
 	
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
@@ -243,6 +245,12 @@ public class QuestionDAO {
 				}
 			} else if (qDTO.getSearchCondition().equals("승인")) {
 				// 전은주
+				pstmt = conn.prepareStatement(UPDATE_ACCESS);
+				pstmt.setInt(1, qDTO.getqId());
+				int rs = pstmt.executeUpdate();
+				if(rs <=0) {
+					return false;
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

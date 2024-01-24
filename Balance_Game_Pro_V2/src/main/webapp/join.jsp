@@ -55,6 +55,7 @@
 			alert('성공');
 		}else{
 			alert('실패');
+			document.getElementById("subBtn").disabled = true;
 		}
 	}
 

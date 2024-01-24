@@ -14,26 +14,31 @@ import model.question.QuestionDTO;
 
 public class AdminTitleAccessAcion implements Action{
 
-	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		ActionForward forward = new ActionForward();
-		forward.setPath("adminTitleAccessPage.do");
-		forward.setRedirect(true);
-		
-		QuestionDTO qDTO = new QuestionDTO();
-		QuestionDAO qDAO = new QuestionDAO();
-		HttpSession session = request.getSession();
-		
-		qDTO.setTitle(request.getParameter("title"));
-		qDTO.setAnswer_A(request.getParameter("answer_A"));
-		qDTO.setAnswer_B(request.getParameter("answer_B"));
-		qDTO.setWriter((String)session.getAttribute("member"));
-		qDAO.insert(qDTO);
-		
-		
-		return forward;
-	}
+   @Override
+   public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
+         throws ServletException, IOException {
+      //문제승인 
+      ActionForward forward = new ActionForward();
+      
+      QuestionDTO qDTO = new QuestionDTO();
+      QuestionDAO qDAO = new QuestionDAO();
+      qDTO.setSearchCondition("승인");
+      qDTO.setqId(Integer.parseInt(request.getParameter("qid")));
+      boolean flag = qDAO.update(qDTO);
+      if(!flag) {
+         forward.setPath("alert.do");
+         forward.setRedirect(false);
+         request.setAttribute("status", "fail");
+         request.setAttribute("msg", "실패했습니다");
+         request.setAttribute("redirect", "adminTitleAccessPage.do");
+         return forward;
+      }
+      forward.setPath("alert.do");
+      forward.setRedirect(false);
+      request.setAttribute("status", "success");
+      request.setAttribute("msg", "성공했습니다");
+      request.setAttribute("redirect", "adminTitleAccessPage.do");
+      return forward;
+   }
 
 }
