@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -98,9 +99,10 @@ ul.actions {
 	$(document).ready(function() {
 		$("#comment").hide();
 		var qId = ${data.qId};
+		var loginId = "${loginId}";
 		$(".save").on("click", function() {
 			console.log("[성공]");
-			var loginId = "${loginId}";
+			
 			
 			console.log(loginId);
 			if (loginId == "") {
@@ -140,12 +142,45 @@ ul.actions {
 		});
 
 		$(".answer").on("click", function() {
-			console.log("클릭");
+			console.log($(this).prop("value"));
+			$.ajax({
+				type : "POST",
+				url : "answerAsync.do",
+				data : {
+					'qId' : qId,
+					'loginId' : loginId,
+					'answer' : $(this).prop('value')
+				},
+				dataType : 'json',
+				success : function(data) {
+					console.log(data.answerCntA);
+					console.log(data.answerCntB);
+					var total=data.answerCntA+data.answerCntB;
+					console.log(total);
+					$("#answer_A").text(Math.round(((data.answerCntA*1.0)/total)*100)+"%");									
+					$("#answer_B").text(Math.round(((data.answerCntB*1.0)/total)*100)+"%");									
+				},
+				error : function(error) {
+					
+					console.log('에러발생');
+					console.log('에러의 종류:' + error);
+				}
+
+			});
+			
+			
+
+	
+			
+			
+			
+			
 			$(".answer").css("height", "100px");
 			$(".answer").css("line-height", "100px");
 			$(".answer").css("font-size", "30px");
 			$(".answer").css("transition", "1000ms");
-
+			$(".answer").attr("disabled",false);
+			
 			$("#title h1").css("font-size", "30px");
 			$("#title h1").css("transition", "1000ms");
 
@@ -167,8 +202,12 @@ ul.actions {
 					var elem = "";
 					$.each(data, function(index,data) {
  						elem +="<tr>";
-						elem +="<td>"+data.memberName+"( "+data.loginId+" )</td>";
-						elem +="<td>"+data.content+"</td>";
+						if(typeof data.loginId  != "undefined"){
+ 							elem +="<td>"+data.memberName+"( "+data.loginId+" )</td>";
+						}else{
+							elem +="<td>탈퇴한 사용자</td>"
+						}
+ 						elem +="<td>"+data.content+"</td>";
 						elem +="</tr>"; 
 						console.log(data.name);
 					});
@@ -176,6 +215,8 @@ ul.actions {
 					//document.getElementById(".save").src="images/찜o.png";
 				},
 				error : function(error) {
+					$("#table").append("출력할 댓글이 없습니다");
+					
 					console.log('에러발생');
 					console.log('에러의 종류:' + error);
 				}
@@ -239,7 +280,7 @@ ul.actions {
 				<div class="inner">
 					<button class="answer" id="answer_A" type="button" value="A">
 						${data.getAnswer_A()}</button>
-					<button class="answer" id="answer_A" type="button" value="B">
+					<button class="answer" id="answer_B" type="button" value="B">
 						${data.getAnswer_B()}</button>
 
 				</div>
@@ -264,7 +305,7 @@ ul.actions {
 		</ul>
 			</c:if>
 			
-			<div class="table-wrapper">
+			<div class="table-wrapper" id="table">
 				<table>
 					<thead>
 						<tr>

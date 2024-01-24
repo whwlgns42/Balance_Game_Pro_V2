@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.util.JDBCUtil;
+import model.Util.JDBCUtil;
 
 public class CommentDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
-	private static final String SELECTALL_Q = "SELECT C.CID,C.QID,C.LOGIN_ID,C.CONTENT,M.NAME\r\n"
+	private static final String SELECTALL_Q = "SELECT C.CID,C.QID,M.LOGIN_ID,C.CONTENT,M.NAME\r\n"
 			+ "FROM COMMENTS C\r\n" + "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n" + "WHERE C.QID=?";
 	private static final String SELECTALL_M = "SELECT C.CID,C.QID,C.LOGIN_ID,C.CONTENT,M.NAME\r\n"
 			+ "FROM COMMENTS C\r\n" + "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n" + "WHERE C.LOGIN_ID=?";
