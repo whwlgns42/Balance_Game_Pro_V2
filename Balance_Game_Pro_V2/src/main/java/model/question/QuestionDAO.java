@@ -22,6 +22,12 @@ public class QuestionDAO {
 	
 	private static final String SELECTALL_CRAWLLING = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B , EXPLANATION FROM QUESTIONS Q";
 	
+	private static final String SELECTALL_ADMIN_TRUE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION FROM QUESTIONS Q WHERE Q_ACCESS = 'T' ";
+	
+	private static final String SELECTALL_ADMIN_FALSE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION FROM QUESTIONS Q WHERE Q_ACCESS = 'F' ";
+
+	
+	
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
@@ -101,6 +107,34 @@ public class QuestionDAO {
 				pstmt = conn.prepareStatement(SELECTALL_CRAWLLING);
 				ResultSet rs = pstmt.executeQuery();
 				
+				while(rs.next()) {
+					QuestionDTO data = new QuestionDTO();
+					data.setAnswer_A(rs.getString("ANSWER_A"));
+					data.setAnswer_B(rs.getString("ANSWER_B"));
+					data.setqId(rs.getInt("QID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setWriter(rs.getString("WRITER"));
+					data.setExplanation(rs.getString("EXPLANATION"));
+					datas.add(data);
+				}
+				rs.close();
+			}else if(qDTO.getSearchCondition().equals("관리자문제전체조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_ADMIN_TRUE);
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					QuestionDTO data = new QuestionDTO();
+					data.setAnswer_A(rs.getString("ANSWER_A"));
+					data.setAnswer_B(rs.getString("ANSWER_B"));
+					data.setqId(rs.getInt("QID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setWriter(rs.getString("WRITER"));
+					data.setExplanation(rs.getString("EXPLANATION"));
+					datas.add(data);
+				}
+				rs.close();
+			}else if(qDTO.getSearchCondition().equals("관리자승인문제조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_ADMIN_FALSE);
+				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
 					QuestionDTO data = new QuestionDTO();
 					data.setAnswer_A(rs.getString("ANSWER_A"));

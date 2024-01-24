@@ -29,7 +29,7 @@ if(mdatas == null || mdatas.isEmpty()){
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="java.util.ArrayList,model.member.MemberDTO"%>
+	import="java.util.ArrayList,model.member.MemberDTO, model.question.QuestionDTO"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,10 +140,13 @@ th {
 			class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.jpg" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-			<li class="nav-item d-none d-sm-inline-block">문제관리 페이지</li>
-			<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
+				<li class="nav-item d-none d-sm-inline-block">문제관리 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 			<!-- Right navbar links -->
 			<ul class="navbar-nav ml-auto">
@@ -187,19 +190,24 @@ th {
 						data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-						<li class="nav-item menu-open"><a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
+						<li class="nav-item menu-open"><a href="#"
+							class="nav-link active"> <i
+								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									관리 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="adminPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -300,10 +308,8 @@ th {
 									<h3 class="card-title">문제목록</h3>
 									<div class="card-tools">
 										<div class="input-group input-group-sm" style="width: 100px;">
-											<a href = "adminTitleCreate.do"><button>문제출제</button></a>
-											<div class="input-group-append">
-												
-											</div>
+											<a href="adminTitleCreate.do"><button>문제출제</button></a>
+											<div class="input-group-append"></div>
 										</div>
 									</div>
 								</div>
@@ -312,52 +318,42 @@ th {
 									<table class="table table-hover text-nowrap">
 										<thead>
 											<tr>
-												<th>ID</th>
+												<th>NO</th>
 												<th>User</th>
-												<th>Date</th>
-												<th>Status</th>
+												<th>Title</th>
 												<th>Reason</th>
 											</tr>
 										</thead>
 										<tbody>
+											<%
+											ArrayList<QuestionDTO> qdatas = (ArrayList<QuestionDTO>) request.getAttribute("qdatas");
+											if (qdatas.isEmpty()) {
+											%>
 											<tr>
-												<td>183</td>
-												<td>John Doe</td>
-												<td>11-7-2014</td>
-												<td><span class="tag tag-success">Approved</span></td>
-												<td>Bacon ipsum dolor sit amet salami venison chicken
-													flank fatback doner.</td>
+												<td colspan="1">출제된 문제가 없습니다.</td>
 											</tr>
+											<%
+											} else{
+												for(QuestionDTO data : qdatas){
+											%>
 											<tr>
-												<td>219</td>
-												<td>Alexander Pierce</td>
-												<td>11-7-2014</td>
-												<td><span class="tag tag-warning">Pending</span></td>
-												<td>Bacon ipsum dolor sit amet salami venison chicken
-													flank fatback doner.</td>
+											<td><a href="adminMemberDetailPage.do?qid=<%=data.getqId() %>" ><%=data.getqId() %></a></td>
+											<td><%=data.getWriter() %></td>
+											<td><%=data.getTitle() %></td>
+											<td><%=data.getExplanation() %></td>
 											</tr>
-											<tr>
-												<td>657</td>
-												<td>Bob Doe</td>
-												<td>11-7-2014</td>
-												<td><span class="tag tag-primary">Approved</span></td>
-												<td>Bacon ipsum dolor sit amet salami venison chicken
-													flank fatback doner.</td>
-											</tr>
-											<tr>
-												<td>175</td>
-												<td>Mike Doe</td>
-												<td>11-7-2014</td>
-												<td><span class="tag tag-danger">Denied</span></td>
-												<td>Bacon ipsum dolor sit amet salami venison chicken
-													flank fatback doner.</td>
-											</tr>
+											<%
+												}
+											}
+											%>		
+											
+
 										</tbody>
 									</table>
 								</div>
 
 							</div>
-							
+
 
 
 						</div>
