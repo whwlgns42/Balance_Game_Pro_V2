@@ -52,15 +52,18 @@
 }
 
 #answer_A, #answer_B {
+/* 	padding-left:20px;
+	padding-right:20px; */
 	border: 50px;
 	border-color: black;
 	border-radius: 0;
 	color: blue;
 	cursor: auto;
 	display: inline-block;
-	font-size: 50px;
-	font-weight: 200px;
-	width: 200px;
+	font-size: 30px;
+	font-weight: 100px;
+	/* width: 200px; */
+	min-width :200px;
 	height: 200px;
 	letter-spacing: normal;
 	line-height: normal;
@@ -80,7 +83,7 @@
 #answer_B:hover {
 	background-color: #FFB900;
 }
-ul.actions li #input {
+ul.actions #input {
     width: 70%;
 }
 ul.actions {
@@ -167,19 +170,13 @@ ul.actions {
 				}
 
 			});
-			
-			
 
-	
-			
-			
-			
 			
 			$(".answer").css("height", "100px");
 			$(".answer").css("line-height", "100px");
 			$(".answer").css("font-size", "30px");
 			$(".answer").css("transition", "1000ms");
-			$(".answer").attr("disabled",false);
+			$(".answer").attr("disabled",true);
 			
 			$("#title h1").css("font-size", "30px");
 			$("#title h1").css("transition", "1000ms");
@@ -215,7 +212,7 @@ ul.actions {
 					//document.getElementById(".save").src="images/찜o.png";
 				},
 				error : function(error) {
-					$("#table").append("출력할 댓글이 없습니다");
+					$("#table").append("<div id='noComment'>출력할 댓글이 없습니다<div>");
 					
 					console.log('에러발생');
 					console.log('에러의 종류:' + error);
@@ -227,6 +224,47 @@ ul.actions {
 			$("#comment").show();
 		});
 
+		$("#write").on("click", function() {
+			console.log("댓글 입력");
+			$.ajax({
+				type : "POST",
+				url : "commentWriteAsync.do",
+				data : {
+					'qId' : qId,
+					'loginId' : loginId,
+					'comment' : $('#inputComment').val()
+					
+				},
+				dataType : 'json',
+				success : function(data) {								
+
+					var elem = "";
+					
+ 					elem +="<tr>";
+						
+ 					elem +="<td>"+data.memberName+"( "+data.loginId+" )</td>";
+						
+ 					elem +="<td>"+data.content+"</td>";
+					elem +="</tr>"; 
+					console.log(data.name);
+					if($("#noComment").length>0){	
+						$("#noComment").text("");
+					}
+					$("table tbody").append(elem);
+					//document.getElementById(".save").src="images/찜o.png";
+				},
+				error : function(error) {
+
+					console.log('에러발생');
+					console.log('에러의 종류:' + error);
+				}
+
+			});
+			
+			
+		});
+		
+		
 	});
 </script>
 </head>
@@ -298,10 +336,9 @@ ul.actions {
 			<c:if test="${loginId !=null}">
 				<ul class="actions">
 			<li id="input"><div class="col-12">
-				<input type="text" placeholder="댓글을 입력하세요"
-					required>
+				<input type="text" placeholder="댓글을 입력하세요" id="inputComment">
 			</div></li>
-			<li><button type="button" class="button small">작성</button></li>
+			<li><button type="button" class="button small" id="write">작성</button></li>
 		</ul>
 			</c:if>
 			
