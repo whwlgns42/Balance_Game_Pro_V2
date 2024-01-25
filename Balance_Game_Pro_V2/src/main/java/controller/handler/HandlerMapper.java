@@ -13,12 +13,12 @@ import controller.common.Action;
 import controller.page.AlertPageAction;
 import controller.page.admin.AdminCreateTitlePageAction;
 import controller.page.admin.AdminMemberDetailPageAction;
-import controller.page.admin.AdminMemberManagementPageAcion;
-import controller.page.admin.AdminPageAcion;
-import controller.page.admin.AdminTitleAccessPageAcion;
-import controller.page.admin.AdminTitleDetailPageAcion;
-import controller.page.admin.AdminTitleDetaileAccessPageAcion;
-import controller.page.admin.AdminTitleManagementPageAcion;
+import controller.page.admin.AdminMemberManagementPageAction;
+import controller.page.admin.AdminPageAction;
+import controller.page.admin.AdminTitleAccessPageAction;
+import controller.page.admin.AdminTitleDetailPageAction;
+import controller.page.admin.AdminTitleDetaileAccessPageAction;
+import controller.page.admin.AdminTitleManagementPageAction;
 import controller.page.user.GamePageAction;
 import controller.page.user.JoinPageAction;
 import controller.page.user.LoginPageAction;
@@ -37,10 +37,10 @@ import controller.user.LogoutAction;
 import controller.user.MakeTitleAction;
 import controller.user.MyPageUpdateAction;
 import controller.user.PwCheckAcion;
+import controller.user.ResignAction;
 import controller.user.ResultAction;
 import controller.user.SponsorAction;
 import controller.user.WishAction;
-import controller.user.ResignAction;
 
 public class HandlerMapper {
    // 멤버변수
@@ -75,13 +75,13 @@ public class HandlerMapper {
       mappings.put("/sponsorPage.do", new SponsorPageAction());
       mappings.put("/sponsor.do", new SponsorAction());
       // 관리자
-      mappings.put("/adminPage.do", new AdminPageAcion());
-      mappings.put("/adminTitleManagementPage.do", new AdminTitleManagementPageAcion());
-      mappings.put("/adminTitleDetailPage.do", new AdminTitleDetailPageAcion());
-      mappings.put("/adminMemberManagementPage.do", new AdminMemberManagementPageAcion());
+      mappings.put("/adminPage.do", new AdminPageAction());
+      mappings.put("/adminTitleManagementPage.do", new AdminTitleManagementPageAction());
+      mappings.put("/adminTitleDetailPage.do", new AdminTitleDetailPageAction());
+      mappings.put("/adminMemberManagementPage.do", new AdminMemberManagementPageAction());
       mappings.put("/adminMemberDetailPage.do", new AdminMemberDetailPageAction());
-      mappings.put("/adminTitleDetaileAccessPage.do", new AdminTitleDetaileAccessPageAcion());
-      mappings.put("/adminTitleAccessPage.do", new AdminTitleAccessPageAcion());
+      mappings.put("/adminTitleDetaileAccessPage.do", new AdminTitleDetaileAccessPageAction());
+      mappings.put("/adminTitleAccessPage.do", new AdminTitleAccessPageAction());
       mappings.put("/adminTitleAccess.do", new AdminTitleAccessAction());
       mappings.put("/adminTitleRefuse.do", new AdminTitleRefuseAction());
       mappings.put("/adminTitleCreate.do", new AdminTitleCreateAction());

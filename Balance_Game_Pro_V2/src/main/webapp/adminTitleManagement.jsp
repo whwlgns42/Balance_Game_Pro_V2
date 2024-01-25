@@ -307,7 +307,6 @@ th {
 												<th>Title</th>
 												<th>Reason</th>
 											</tr>
-											
 										</thead>
 										<tbody>
 											<c:if test="${empty qdatas_t}">

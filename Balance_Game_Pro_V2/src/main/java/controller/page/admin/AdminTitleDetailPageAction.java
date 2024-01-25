@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
-public class AdminTitleDetailPageAcion implements Action {
+public class AdminTitleDetailPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
