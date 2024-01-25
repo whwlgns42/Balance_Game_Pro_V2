@@ -33,7 +33,7 @@ public class GamePageAction implements Action {
 		QuestionDAO qDao = new QuestionDAO();
 		String loginId = (String) session.getAttribute("loginId");
 		
-		qDto.setWriter(loginId);
+		qDto.setWriter(loginId!=null?loginId:"");
 		qDto.setSearchCondition("문제전체조회");
 		if(qDao.selectAll(qDto).size()>list.size()) {
 		while (true) {
