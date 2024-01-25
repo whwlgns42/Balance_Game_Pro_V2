@@ -19,23 +19,22 @@ public class AdminMemberManagementPageAcion implements Action {
 			throws ServletException, IOException {
 
 		ActionForward forward = new ActionForward();
-		MemberDTO memberDTO = new MemberDTO();
-		MemberDAO memberDAO = new MemberDAO();
-		memberDTO.setSearchCondition("전체조회");
-		ArrayList<MemberDTO> members = memberDAO.selectAll(memberDTO);
-		if (members != null) {
-			System.out.println("데이터 있음");
-			request.setAttribute("member", members);
-			forward.setPath("adminMemberManagement.jsp");
-			forward.setRedirect(false);
-		} else {
-			System.out.println("데이터 없음");
+		MemberDTO mDTO = new MemberDTO();
+		MemberDAO mDAO = new MemberDAO();
+		mDTO.setSearchCondition("전체조회");
+		ArrayList<MemberDTO> mdatas = mDAO.selectAll(mDTO);
+		System.out.println("member" + mdatas);
+		if (mdatas == null) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "fail");
 			request.setAttribute("fail", "회원이 존재하지 않습니다.");
 			request.setAttribute("redirect", "adminPage.do");
+			return forward;
 		}
+		forward.setPath("adminMemberManagement.jsp");
+		request.setAttribute("member", mdatas);
+		forward.setRedirect(false);
 		return forward;
 	}
 

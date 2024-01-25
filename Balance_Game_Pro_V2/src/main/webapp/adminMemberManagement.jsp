@@ -1,5 +1,9 @@
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.ArrayList,model.member.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList,model.member.MemberDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,25 +12,32 @@
 <title>관리자 유저관리 페이지</title>
 
 <!-- Google Font: Source Sans Pro -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Tempusdominus Bootstrap 4 -->
-<link rel="stylesheet" href="adminLte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
 <!-- iCheck -->
-<link rel="stylesheet" href="adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
 <!-- JQVMap -->
 <link rel="stylesheet" href="adminLte/plugins/jqvmap/jqvmap.min.css">
 <!-- Theme style -->
 <link rel="stylesheet" href="adminLte/dist/css/adminlte.min.css">
 <!-- overlayScrollbars -->
-<link rel="stylesheet" href="adminLte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
 <!-- Daterange picker -->
-<link rel="stylesheet" href="adminLte/plugins/daterangepicker/daterangepicker.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
-<link rel="stylesheet" href="adminLte/plugins/summernote/summernote-bs4.min.css">
+<link rel="stylesheet"
+	href="adminLte/plugins/summernote/summernote-bs4.min.css">
 <style>
 .message {
 	border-top: 1px solid #ccc;
@@ -92,18 +103,24 @@ th {
 	<div class="wrapper">
 
 		<!-- Preloader -->
-		<div class="preloader flex-column justify-content-center align-items-center">
-			<img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+		<div
+			class="preloader flex-column justify-content-center align-items-center">
+			<img class="animation__shake" src="dist/img/AdminLTELogo.png"
+				alt="AdminLTELogo" height="60" width="60">
 		</div>
 
 		<!-- Navbar -->
-		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+		<nav
+			class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.jpg" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-			<li class="nav-item d-none d-sm-inline-block">유저관리 페이지</li>
-			<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
+				<li class="nav-item d-none d-sm-inline-block">유저관리 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 			<!-- Right navbar links -->
 			<ul class="navbar-nav ml-auto">
@@ -114,7 +131,8 @@ th {
 						<div class="dropdown-divider"></div>
 						<div class="dropdown-divider"></div>
 						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+						<a href="#" class="dropdown-item dropdown-footer">See All
+							Messages</a>
 					</div>
 				</li>
 				<!-- Notifications Dropdown Menu -->
@@ -127,7 +145,10 @@ th {
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a href="adminPage.do" class="brand-link"> <img src="images/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> <span class="brand-text font-weight-light">관리자</span>
+			<a href="adminPage.do" class="brand-link"> <img
+				src="images/logo.jpg" alt="AdminLTE Logo"
+				class="brand-image img-circle elevation-3" style="opacity: .8">
+				<span class="brand-text font-weight-light">관리자</span>
 			</a>
 
 			<!-- Sidebar -->
@@ -139,22 +160,28 @@ th {
 
 				<!-- Sidebar Menu -->
 				<nav class="mt-2">
-					<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+					<ul class="nav nav-pills nav-sidebar flex-column"
+						data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-						<li class="nav-item menu-open"><a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
+						<li class="nav-item menu-open"><a href="#"
+							class="nav-link active"> <i
+								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									관리 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="adminPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -189,7 +216,8 @@ th {
 								<div class="icon">
 									<i class="ion ion-bag"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+								<a href="#" class="small-box-footer">More info <i
+									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 						<!-- ./col -->
@@ -206,7 +234,8 @@ th {
 								<div class="icon">
 									<i class="ion ion-stats-bars"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+								<a href="#" class="small-box-footer">More info <i
+									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 						<!-- ./col -->
@@ -221,7 +250,8 @@ th {
 								<div class="icon">
 									<i class="ion ion-person-add"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+								<a href="#" class="small-box-footer">More info <i
+									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 						<!-- ./col -->
@@ -236,7 +266,8 @@ th {
 								<div class="icon">
 									<i class="ion ion-pie-graph"></i>
 								</div>
-								<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+								<a href="#" class="small-box-footer">More info <i
+									class="fas fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 						<!-- ./col -->
@@ -251,7 +282,8 @@ th {
 									<h3 class="card-title">유저목록</h3>
 									<div class="card-tools">
 										<div class="input-group input-group-sm" style="width: 150px;">
-											<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+											<input type="text" name="table_search"
+												class="form-control float-right" placeholder="Search">
 											<div class="input-group-append">
 												<button type="submit" class="btn btn-default">
 													<i class="fas fa-search"></i>
@@ -272,32 +304,25 @@ th {
 												<th>성별</th>
 											</tr>
 										</thead>
-
 										<tbody>
-											<%
-											ArrayList<MemberDTO> mdatas = (ArrayList<MemberDTO>) request.getAttribute("member");
-											if (mdatas == null || mdatas.isEmpty()) {
-											%>
-											<tr>
-												<td colspan="1">회원 정보가 없습니다.</td>
-											</tr>
-											<%
-											} else {
-											for (MemberDTO data : mdatas) {
-											%>
-											<tr>
-												<td>
-													<a href="adminMemberDetailPage.do?loginId=<%=data.getLoginId()%>"><%=data.getLoginId()%></a>
-												</td>
-												<td><%=data.getAddress()%></td>
-												<td><%=data.getEmail()%></td>
-												<td><%=data.getAge()%></td>
-												<td><%=data.getGender()%></td>
-											</tr>
-											<%
-											}
-											}
-											%>
+											<c:if test="${empty member}">
+												<tr>
+													<td colspan="1">회원 정보가 없습니다.</td>
+												</tr>
+
+											</c:if>
+
+											<c:forEach var="data" items="${member }">
+												<tr>
+													<td><a href="adminMemberDetailPage.do?loginId=${data.loginId }">${data.loginId }</a></td>
+													<td>${data.address}</td>
+													<td>${data.email }</td>
+													<td>${data.age }</td>
+													<td>${data.gender }</td>
+												</tr>
+
+											</c:forEach>
+
 											<!-- <tr>
 												<td>183</td>
 												<td>John Doe</td>
@@ -391,11 +416,13 @@ th {
 	<script src="adminLte/plugins/moment/moment.min.js"></script>
 	<script src="adminLte/plugins/daterangepicker/daterangepicker.js"></script>
 	<!-- Tempusdominus Bootstrap 4 -->
-	<script src="adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+	<script
+		src="adminLte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
 	<!-- Summernote -->
 	<script src="adminLte/plugins/summernote/summernote-bs4.min.js"></script>
 	<!-- overlayScrollbars -->
-	<script src="adminLte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+	<script
+		src="adminLte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 	<!-- AdminLTE App -->
 	<script src="adminLte/dist/js/adminlte.js"></script>
 
