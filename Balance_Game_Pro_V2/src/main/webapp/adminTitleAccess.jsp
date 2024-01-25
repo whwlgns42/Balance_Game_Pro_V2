@@ -1,35 +1,10 @@
-<%-- 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>관리자 유저관리</title>
-</head>
-<body>
-${member[0].loginId} 여기
-<%
-ArrayList<MemberDTO> mdatas = (ArrayList<MemberDTO>)request.getAttribute("member");
-if(mdatas == null || mdatas.isEmpty()){
-%>
-    <p>회원 정보가 없습니다.</p>
-<%
-} else {
-    for(MemberDTO data: mdatas){
-%>
-    <li><%=data.getLoginId()%></li>
-<%
-    }
-}
-%>
-</body>
-</html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
- --%>
-
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList,model.member.MemberDTO, model.question.QuestionDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -324,29 +299,22 @@ th {
 											</tr>
 										</thead>
 										<tbody>
-											<%
-											ArrayList<QuestionDTO> qdatas =(ArrayList<QuestionDTO>) request.getAttribute("qdatas_f");
-											if (qdatas == null || qdatas.isEmpty()) {
-											%>
-											<tr>
-												<td colspan="1">출제문제가 없습니다</td>
-											</tr>
-											<%
-											} else {
-											for (QuestionDTO data : qdatas) {
-											%>
-											<tr>
-												<td><a
-													href="adminTitleDetaileAccessPage.do?qid=<%=data.getqId()%>"><%=data.getqId()%></a>
-												</td>
-												<td><%=data.getWriter()%></td>
-												<td><%=data.getTitle()%></td>
-												<td><%=data.getRegdate()%></td>
-											</tr>
-											<%
-											}
-											}
-											%>
+											<c:if test="${fn:length(qdatas_f) <=0 }">
+												<tr>
+													<td colspan="1">출제문제가 없습니다</td>
+												</tr>
+											</c:if>
+									
+											<c:forEach var="data" items="${qdatas_f}">
+												<tr>
+													<td>
+													<a href="adminTitleDetaileAccessPage.do?qid=${data.qid}">${data.qid}</a>
+													</td>
+													<td>${data.writer}</td>
+													<td>${data.title}</td>
+													<td>${data.regdate}</td>
+												</tr>
+											</c:forEach>
 										</tbody>
 									</table>
 								</div>
