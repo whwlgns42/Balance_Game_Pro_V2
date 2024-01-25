@@ -8,7 +8,7 @@ import controller.admin.AdminTitleAccessAction;
 import controller.admin.AdminTitleCreateAction;
 import controller.admin.AdminTitleDeleteAction;
 import controller.admin.AdminTitleRefuseAction;
-import controller.admin.AdminTitleUpdateAcion;
+import controller.admin.AdminTitleUpdateAction;
 import controller.common.Action;
 import controller.page.AlertPageAction;
 import controller.page.admin.AdminCreateTitlePageAction;
@@ -86,7 +86,7 @@ public class HandlerMapper {
       mappings.put("/adminTitleRefuse.do", new AdminTitleRefuseAction());
       mappings.put("/adminTitleCreate.do", new AdminTitleCreateAction());
       mappings.put("/adminTitleDelete.do", new AdminTitleDeleteAction());
-      mappings.put("/adminTitleUpdate.do", new AdminTitleUpdateAcion());
+      mappings.put("/adminTitleUpdate.do", new AdminTitleUpdateAction());
       mappings.put("/adminMemberDelete.do", new AdminMemberDeleteAction());
       mappings.put("/alert.do", new AlertPageAction());
       mappings.put("/adminCreateTitlePage.do", new AdminCreateTitlePageAction());

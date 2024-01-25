@@ -12,7 +12,7 @@ import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 import oracle.net.aso.q;
 
-public class AdminTitleUpdateAion implements Action{
+public class AdminTitleUpdateAction implements Action{
 
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
