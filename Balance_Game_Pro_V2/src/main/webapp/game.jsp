@@ -101,8 +101,12 @@ ul.actions {
 <script type="text/javascript">
 	$(document).ready(function() {
 		$("#comment").hide();
+		//if(${data.qId}=)
+		//질문 pk없을시 메인으로
 		var qId = ${data.qId};
 		var loginId = "${loginId}";
+		
+		
 		$(".save").on("click", function() {
 			console.log("[성공]");
 			
@@ -212,7 +216,6 @@ ul.actions {
 					//document.getElementById(".save").src="images/찜o.png";
 				},
 				error : function(error) {
-					$("#table").append("<div id='noComment'>출력할 댓글이 없습니다<div>");
 					
 					console.log('에러발생');
 					console.log('에러의 종류:' + error);
@@ -223,16 +226,30 @@ ul.actions {
 			
 			$("#comment").show();
 		});
-
+		var isRun = false;
 		$("#write").on("click", function() {
 			console.log("댓글 입력");
+			var content= $('#inputContent').val();
+			//$('#inputContent').val('');
+			 if(isRun == true) {
+			        return;
+			    }
+			 isRun = true;
+			
+		
+			
+			
+			$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">'); ////
+		
+			console.log('확인1: '+content);
+			if(content){
 			$.ajax({
 				type : "POST",
 				url : "commentWriteAsync.do",
 				data : {
 					'qId' : qId,
 					'loginId' : loginId,
-					'comment' : $('#inputComment').val()
+					'comment' : content
 					
 				},
 				dataType : 'json',
@@ -246,11 +263,13 @@ ul.actions {
 						
  					elem +="<td>"+data.content+"</td>";
 					elem +="</tr>"; 
-					console.log(data.name);
+					console.log('확인2: '+data.name);
 					if($("#noComment").length>0){	
 						$("#noComment").text("");
 					}
 					$("table tbody").append(elem);
+					
+					 isRun  = false;
 					//document.getElementById(".save").src="images/찜o.png";
 				},
 				error : function(error) {
@@ -261,7 +280,16 @@ ul.actions {
 
 			});
 			
+			}
 			
+		});
+		
+		$("#inputContent").on("keydown", function(e) {
+			console.log(e.code);
+			if(e.code=='Enter' || e.code=='NumpadEnter'){
+				console.log("엔터침"+e.code);
+				$("#write").click();
+			}
 		});
 		
 		
@@ -330,16 +358,24 @@ ul.actions {
 
 	<div id="wrapper">
 		<div class="inner" id="comment">
-		
+		<form action="resultPage.do" method="post">		
+		<button>이전</button>
+		</form>
+		<form action="gamePage.do" method="post">
+		<button>다음</button>
+		</form>
 		
 		
 			<c:if test="${loginId !=null}">
+
+			
 				<ul class="actions">
-			<li id="input"><div class="col-12">
-				<input type="text" placeholder="댓글을 입력하세요" id="inputComment">
+			<li id="input"><div id='apple'>
+				<input type="text" placeholder="댓글을 입력하세요" id="inputContent">
 			</div></li>
-			<li><button type="button" class="button small" id="write">작성</button></li>
+			<li><button class="button" id="write">작성</button></li>
 		</ul>
+
 			</c:if>
 			
 			<div class="table-wrapper" id="table">
@@ -355,6 +391,7 @@ ul.actions {
 					</tbody>
 
 				</table>
+				<div id='noComment'>출력할 댓글이 없습니다</div>
 			</div>
 		</div>
 	</div>

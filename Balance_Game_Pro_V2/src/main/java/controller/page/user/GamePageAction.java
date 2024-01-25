@@ -29,10 +29,9 @@ public class GamePageAction implements Action{
 		HttpSession session=request.getSession();
 		String loginId= (String)session.getAttribute("loginId");
 		System.out.println(loginId);
-		
 		qDto.setWriter(loginId);
 		qDto=qDao.selectOne(qDto);
-		System.out.println("GamePageAction : "+qDto.getSave());
+		//System.out.println("GamePageAction : "+qDto.getSave());
 		
 		request.setAttribute("data", qDto);
 		

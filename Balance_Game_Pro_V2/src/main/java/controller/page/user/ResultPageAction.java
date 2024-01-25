@@ -16,7 +16,11 @@ public class ResultPageAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return null;
+		
+		ActionForward forward = new ActionForward();
+		forward.setPath("gameResult.jsp");
+		forward.setRedirect(false);
+		return forward;
 	}
 
 }
