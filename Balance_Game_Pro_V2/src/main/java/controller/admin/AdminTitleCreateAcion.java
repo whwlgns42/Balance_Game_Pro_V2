@@ -29,6 +29,7 @@ public class AdminTitleCreateAcion implements Action{
       HttpSession session = request.getSession();
       
       qDTO.setSearchCondition("관리자문제생성");
+      qDTO.setWriter(request.getParameter("writer"));
       qDTO.setTitle(request.getParameter("title"));
       qDTO.setAnswer_A(request.getParameter("answer_A"));
       qDTO.setAnswer_B(request.getParameter("answer_B"));
