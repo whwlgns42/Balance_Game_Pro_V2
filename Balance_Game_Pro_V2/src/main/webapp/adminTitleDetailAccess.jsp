@@ -191,15 +191,15 @@
 										<label class="form-check-label" for="exampleCheck1">19 문제</label>
 									</div>
 									<form action="adminTitleDelete.do" method="POST">
-										<input type="hidden" name="qid" value="${qDTO.qid}" />
+										<input type="hidden" name="qid" value="${qDTO.qId}" />
 										<button type="submit" class="btn btn-block btn-danger">문제 삭제</button>
 									</form>
 									<form action="adminTitleUpdate.do" method="POST">
-										<input type="hidden" name="qid" value="${qDTO.qid}" />
+										<input type="hidden" name="qid" value="${qDTO.qId}" />
 										<button type="submit" class="btn btn-block btn-primary">문제 수정</button>
 									</form>
 									<form action="adminTitleAccess.do" method="POST">
-										<input type="hidden" name="qid" value="${qDTO.qid}" />
+										<input type="hidden" name="qid" value="${qDTO.qId}" />
 									<button type="submit" class="btn btn-block btn-success">문제 승인</button>
 									</form>
 								</div>

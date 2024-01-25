@@ -35,6 +35,7 @@ public class GamePageAction implements Action {
 		
 		qDto.setWriter(loginId!=null?loginId:"");
 		qDto.setSearchCondition("문제전체조회");
+		System.out.println("그래"+qDao.selectAll(qDto));
 		if(qDao.selectAll(qDto).size()>list.size()) {
 		while (true) {
 			int i=0;

@@ -308,7 +308,7 @@ th {
 											<c:forEach var="data" items="${qdatas_f}">
 												<tr>
 													<td>
-													<a href="adminTitleDetaileAccessPage.do?qid=${data.qid}">${data.qid}</a>
+													<a href="adminTitleDetaileAccessPage.do?qid=${data.qId}">${data.qId}</a>
 													</td>
 													<td>${data.writer}</td>
 													<td>${data.title}</td>
