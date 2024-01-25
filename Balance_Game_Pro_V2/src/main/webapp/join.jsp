@@ -263,11 +263,17 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         }
 
         // 모든 조건을 통과하면 회원가입 진행
-        if (!authNumCheck() === 1 || authStatus <= 0) {
+        if (authStatus <= 0 || authStatus <= 0) { /* authStatus : 인증성공여부  */
             showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
             return false;
         }
         
+       	if(!authNumCk) {
+            showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
+            return false;
+       		
+       	}        
+       
         if(useIdCheck == 0) {
             showError("중복", "중복된 아이디 입니다");
             return false;
