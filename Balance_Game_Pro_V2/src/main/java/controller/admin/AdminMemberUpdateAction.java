@@ -22,7 +22,6 @@ public class AdminMemberUpdateAction implements Action {
 	        MemberDTO memberDTO = new MemberDTO();
 	        MemberDAO memberDAO = new MemberDAO();
 	        HttpSession session = request.getSession();
-	        request.setCharacterEncoding("UTF-8");
 	        memberDTO.setLoginId((String) session.getAttribute("loginId"));
 	        memberDTO.setName(request.getParameter("name"));
 	        memberDTO.setEmail(request.getParameter("email"));
