@@ -14,8 +14,9 @@ public class QuestionDAO {
 
 	private static final String SELECTALL_TRUE = "SELECT\r\n" + "    Q.QID, Q.TITLE, C.CATEGORY,\r\n"
 			+ "    COALESCE(S.SID, 0) AS SAVE_SID \r\n" + "FROM\r\n" + "    QUESTIONS Q\r\n" + "JOIN\r\n"
-			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT JOIN\r\n"
-			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = '?'\r\n" + "WHERE Q.Q_ACCESS = 'T'";
+			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT OUTER JOIN\r\n"
+			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.Q_ACCESS = 'T'";
+	
 	private static final String SELECTALL_FALSE = "SELECT Q.QID,Q.TITLE,C.CATEGORY \r\n" + "FROM QUESTIONS Q\r\n"
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
 
@@ -40,7 +41,7 @@ public class QuestionDAO {
 	private static final String SELECT_ONE_RANDOM = "SELECT COALESCE(S.SID, 0) AS SAVE_SID,\r\n"
 			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER, Q.EXPLANATION, C.CATEGORY\r\n" + "FROM \r\n"
 			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,WRITER,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
-			+ "LEFT OUTER JOIN \r\n" + "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT OUTER JOIN\r\n"
+			+ "JOIN \r\n" + "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT JOIN\r\n"
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
 	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,\r\n"

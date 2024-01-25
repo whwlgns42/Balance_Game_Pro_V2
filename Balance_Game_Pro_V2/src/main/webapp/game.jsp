@@ -1,3 +1,4 @@
+<%@page import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
 <%@page import="model.question.QuestionDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -292,6 +293,13 @@ ul.actions {
 			}
 		});
 		
+		console.log(${list});
+		$("#next").on("click", function() {
+			
+			//localStorage.setItem("list",${list});
+			location.href='gamePage.do';
+			
+		});
 		
 	});
 </script>
@@ -358,12 +366,11 @@ ul.actions {
 
 	<div id="wrapper">
 		<div class="inner" id="comment">
-		<form action="resultPage.do" method="post">		
-		<button>이전</button>
-		</form>
-		<form action="gamePage.do" method="post">
-		<button>다음</button>
-		</form>
+		
+<!-- 		<button id="prev">이전</button> -->
+
+		<button id="next">다음</button>
+
 		
 		
 			<c:if test="${loginId !=null}">
