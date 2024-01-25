@@ -315,13 +315,13 @@ th {
 												</tr>
 											</c:if>
 											
-											<c:forEach var="data" items="qdatas_t">
+											<c:forEach var="data" items="${qdatas_t}">
 												<tr>
 												<td><a
-													href="adminMemberDetailPage.do?qid=${data.qid }">${data.qid }</a></td>
-												<td>${data.writer }</td>
-												<td>${data.title }</td>
-												<td>${data.explanation }</td>
+													href="adminMemberDetailPage.do?qid=${data.qId}">${data.qId}</a></td>
+												<td>${data.writer}</td>
+												<td>${data.title}</td>
+												<td>${data.explanation}</td>
 											</tr>
 											</c:forEach>
 										</tbody>

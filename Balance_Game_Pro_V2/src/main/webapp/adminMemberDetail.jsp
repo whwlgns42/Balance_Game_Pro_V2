@@ -215,20 +215,16 @@ th {
 							</div>
 
 							<c:choose>
-								<c:when test="${not empty member }">
-
-									<form action="updateMember.do" method="post">
+								<c:when test="${not empty member}">
 										<table border="1">
 											<tr>
 												<th style="width: 78px;">ID</th>
-												<td>${member.mid}</td>
+												<td>${member.mId}</td>
 											</tr>
 											<tr>
 												<th>Login ID</th>
 												<td>${member.loginId}</td>
 											</tr>
-
-
 										</table>
 
 										<div class="card-body">
@@ -248,50 +244,12 @@ th {
 												<label for="age">나이:</label> <input class="form-control"
 													type="text" name="age" value="${member.age}">
 											</div>
-
-
-
-											<!-- 다른 필드에 대한 입력 폼도 필요에 따라 추가 -->
-											<%-- <input type="hidden" name="memberId" value="<%=member.getmId()%>"> --%>
-											<!-- 유저 삭제문 -->
 										</div>
-									</form>
 								</c:when>
 								<c:otherwise>
 									<p>회원 정보가 없습니다.</p>
 								</c:otherwise>
 							</c:choose>
-
-							<!-- <div class="card-body">
-								<div class="form-group">
-									<input class="form-control" placeholder="이름:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="주소:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="등등:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Subject:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Subject:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Subject:">
-								</div>
-								<div class="form-group">
-									<input class="form-control" placeholder="Subject:">
-								</div>
-
-								<div class="form-group">
-									<div class="btn btn-default btn-file">
-										<i class="fas fa-paperclip"></i> 회원 삭제
-										<input type="file" name="attachment">
-									</div>
-								</div>
-							</div> -->
 
 							<div class="card-footer">
 								<div class="float-left">
@@ -302,18 +260,12 @@ th {
 								</div>
 
 								<div class="float-right">
-									<!-- 수정된 정보를 전송할 폼 -->
-									<form action="updateMember.do" method="post">
-										<input type="hidden" name="memberId" value="${member.mid}">
-										<button type="submit" class="btn btn-primary">정보 수정</button>
-									</form>
 								</div>
 							</div>
 
 						</div>
 
 					</div>
-					<!-- /.row (main row) -->
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">댓글목록</h3>
