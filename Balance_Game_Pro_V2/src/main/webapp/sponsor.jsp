@@ -170,7 +170,20 @@
 
                         // 성공 페이지로 이동하는 함수
                         function redirectToSuccessPage(msg) {
-                            location.href = 'alert.do?msg=' + msg + '&status=success&redirect=main.do';
+                            /* location.href = 'alert.do?msg=' + msg + '&status=success&redirect=main.do'; */
+                        	Swal.fire({
+                        		  title: "감사합니다!",
+                        		  text: "후원해주셔서 감사합니다!",
+                        		  imageUrl: "images/thankyou.gif",
+                        		  imageWidth: 360,
+                        		  imageHeight: 360,
+                        		  imageAlt: "Custom image"
+                        		}).then((result) => {
+                        			  if (result.isConfirmed) {
+                        				    // 확인 버튼이 눌렸을 때 실행할 코드
+                        				 location.href='main.do';
+                        				}
+                        			});
                         }
 
                         // 실패 페이지로 이동하는 함수
