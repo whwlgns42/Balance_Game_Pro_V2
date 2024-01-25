@@ -184,8 +184,14 @@
 										<label for="inputDescription">선택지B</label>
 										<textarea id="inputDescription" class="form-control" rows="2">${qDTO.answer_B}</textarea>
 									</div>
-									<button type="button" class="btn btn-block btn-danger">문제 삭제</button>
-									<button type="button" class="btn btn-block btn-primary">문제 수정</button>
+									<form action="adminTitleDelete.do" method="POST">
+										<input type="hidden" name="qid" value="${qDTO.qId}" />
+										<button type="submit" class="btn btn-block btn-danger">문제 삭제</button>
+									</form>
+									<form action="adminTitleUpdate.do" method="POST">
+										<input type="hidden" name="qid" value="${qDTO.qId}" />
+									<button type="submit" class="btn btn-block btn-primary">문제 수정</button>
+									</form>
 
 								</div>
 							</div>
