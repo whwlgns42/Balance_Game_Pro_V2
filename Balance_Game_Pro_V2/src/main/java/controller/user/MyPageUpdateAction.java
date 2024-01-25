@@ -28,9 +28,7 @@ public class MyPageUpdateAction implements Action {
 		memberDTO.setLoginId((String)session.getAttribute("loginId"));
 		memberDTO.setName(request.getParameter("name"));
 		memberDTO.setEmail(request.getParameter("email"));
-		memberDTO.setAddress(request.getParameter("address"));
-		memberDTO.setAge(Integer.parseInt(request.getParameter("age")));
-		memberDTO.setSearchCondition("회원변경");
+		memberDTO.setSearchCondition("내정보변경");
 		boolean myInfoUpdate = memberDAO.update(memberDTO);
 		if(myInfoUpdate) {
 			// 내정보 변경 성공

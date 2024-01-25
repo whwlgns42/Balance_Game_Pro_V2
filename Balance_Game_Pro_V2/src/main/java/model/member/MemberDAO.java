@@ -202,7 +202,7 @@ public class MemberDAO {
 	}
 
 	public boolean update(MemberDTO mDTO) { // 개인정보 변경 (추후 구현 예정)
-		if (mDTO.getSearchCondition().equals("회원변경")) { // input: loginId // output : 이메일, 이름 변경하기
+		if (mDTO.getSearchCondition().equals("내정보변경")) { // input: loginId // output : 이메일, 이름 변경하기
 			// 모델
 			conn = JDBCUtil.connect();
 			try {
