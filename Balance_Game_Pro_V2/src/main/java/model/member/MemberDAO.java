@@ -224,30 +224,28 @@ public class MemberDAO {
 		return true;
 	}
 
+
+
 	public boolean delete(MemberDTO mDTO) { // 회원탈퇴
-		if (mDTO.getSearchCondition().equals("회원삭제")) {
-			conn = JDBCUtil.connect();
-			try {
-				pstmt = conn.prepareStatement(DELETE);
-				pstmt.setString(1, mDTO.getLoginId());
-				int result = pstmt.executeUpdate();
-
-				// 삭제 결과 확인
-				if (result > 0) {
-					// 삭제 성공
-					return true;
-				} else {
-					// 행이 영향을 받지 않았으므로 삭제 실패
-					return false;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
+	
+		// 손성용
+	
+		conn = JDBCUtil.connect();
+	
+		try {
+			pstmt = conn.prepareStatement(DELETE);
+			pstmt.setString(1, mDTO.getLoginId());
+			int result = pstmt.executeUpdate();
+			if (result <= 0) {
 				return false;
-			} finally {
-				JDBCUtil.disconnect(pstmt, conn);
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
 		}
-		return false;
-
+		return true;
+	
 	}
 }
