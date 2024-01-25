@@ -307,6 +307,7 @@ th {
 												<th>Title</th>
 												<th>Reason</th>
 											</tr>
+											
 										</thead>
 										<tbody>
 											<c:if test="${empty qdatas_t}">
@@ -318,7 +319,7 @@ th {
 											<c:forEach var="data" items="${qdatas_t}">
 												<tr>
 												<td><a
-													href="adminMemberDetailPage.do?qid=${data.qId}">${data.qId}</a></td>
+													href="adminTitleDetailPage.do?qid=${data.qId}">${data.qId}</a></td>
 												<td>${data.writer}</td>
 												<td>${data.title}</td>
 												<td>${data.explanation}</td>

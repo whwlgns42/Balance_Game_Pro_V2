@@ -1,7 +1,8 @@
+/adminTitleDetail.jsp
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList,model.member.MemberDTO, model.question.QuestionDTO"%>
 
 
 <!DOCTYPE html>
@@ -93,15 +94,18 @@
 		</div>
 
 		<!-- Navbar -->
-		
+
 		<nav
 			class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.jpg" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-			<li class="nav-item d-none d-sm-inline-block">관리자 페이지</li>
-			<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
+				<li class="nav-item d-none d-sm-inline-block">관리자 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -146,19 +150,24 @@
 						data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-						<li class="nav-item menu-open"><a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
+						<li class="nav-item menu-open"><a href="#"
+							class="nav-link active"> <i
+								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									관리 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="adminPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -181,70 +190,77 @@
 							<div class="card card-primary">
 								<div class="card-header">
 									<h3 class="card-title">문제</h3>
-									<div class="card-tools">
-										<button type="button" class="btn btn-tool"
-											data-card-widget="collapse" title="Collapse">
-											<i class="fas fa-minus"></i>
-										</button>
-									</div>
-								</div>
-								<div class="card-body">
-									<div class="form-group">
-										<label for="inputName">제목</label> 
-										<input type="text" id="inputName" class="form-control">
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택지A</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택지B</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div>
-									<button type="button" class="btn btn-block btn-danger">문제 삭제</button>
-								<button type="button" class="btn btn-block btn-primary">문제 수정</button>
-									<!-- <div class="form-group"> 이게 메뉴 선택
-										<label for="inputStatus">Status</label> <select
-											id="inputStatus" class="form-control custom-select">
-											<option selected="" disabled="">Select one</option>
-											<option>On Hold</option>
-											<option>Canceled</option>
-											<option>Success</option>
-										</select>
-									</div> -->
-									
+
 								</div>
 
+								<%
+								QuestionDTO qDTO = (QuestionDTO) request.getAttribute("qDTO");
+
+								if (qDTO != null) {
+								%>
+
+
+
+								<form action="adminTitleUpdate.do" method="POST">
+									<div class="card-body">
+										<div class="form-group">
+											<input hidden="" value="<%=qDTO.getqId()%>" name="qid">
+											<label for="inputName">제목</label> <input type="text"
+												id="inputName" class="form-control" name="title"
+												value="<%=qDTO.getTitle()%>">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지A</label><input type="text"
+												id="inputName" class="form-control" name="answer_A"
+												value="<%=qDTO.getAnswer_A()%>">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지B</label><input type="text"
+												id="inputName" class="form-control" name="answer_B"
+												value="<%=qDTO.getAnswer_B()%>">
+										</div>
+										<button type="submit" class="btn btn-block btn-primary"
+											style="border-bottom-width: 1px; margin-bottom: 10px;">문제수정</button>
+								</form>
+								<%
+								} else {
+								%>
+								<p>문제 정보가 없습니다.</p>
+								<%
+								}
+								%>
+								<!-- 삭제 버튼 -->
+								<form action="adminTitleDelete.do" method="post">
+									<input type="hidden" name="qid" value="<%=qDTO.getqId()%>">
+									<button type="submit" class="btn btn-block btn-danger">문제
+										삭제</button>
+								</form>
 							</div>
-
 						</div>
-						
 					</div>
-					<div class="row">
-						
-					
-						
-					</div>
-				</section>
-
-				<!-- /.container-fluid -->
-			</section>
-			<!-- /.content -->
 		</div>
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
-			</strong> All rights reserved.
-			<div class="float-right d-none d-sm-inline-block">
-				<b>Version</b> 3.2.0
-			</div>
-		</footer>
+	</div>
+	<div class="row"></div>
+	</section>
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+	<!-- /.container-fluid -->
+	</section>
+	<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<footer class="main-footer">
+		<strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
+		</strong> All rights reserved.
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b> 3.2.0
+		</div>
+	</footer>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 
