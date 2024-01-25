@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 <!DOCTYPE html>
@@ -188,13 +190,14 @@
 								</div>
 								<div class="card-body">
 									<div class="form-group">
-										<label for="inputName">제목</label> <input type="text"
-											id="inputName" class="form-control">
+										<label for="inputName">제목</label> 
+										<input type="text" id="inputName" class="form-control">
 									</div>
 									<div class="form-group">
 										<label for="inputDescription">선택지A</label>
 										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div><div class="form-group">
+									</div>
+									<div class="form-group">
 										<label for="inputDescription">선택지B</label>
 										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
 									</div>
