@@ -39,10 +39,14 @@ public class QuestionDAO {
 	// TODO SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로
 	// 한개의 문제 정보 가져오기) 찜확인 추가
 	private static final String SELECT_ONE_RANDOM = "SELECT COALESCE(S.SID, 0) AS SAVE_SID,\r\n"
-			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER, Q.EXPLANATION, C.CATEGORY\r\n" + "FROM \r\n"
+			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER, Q.EXPLANATION, C.CATEGORY\r\n"
+			+ "FROM \r\n"
 			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,WRITER,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
-			+ "JOIN \r\n" + "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT JOIN\r\n"
-			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
+			+ "LEFT OUTER JOIN \r\n"
+			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
+			+ "LEFT OUTER JOIN\r\n"
+			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n"
+			+ "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
 	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,\r\n"
 			+ "COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
