@@ -10,12 +10,12 @@ import controller.common.Action;
 import controller.common.ActionForward;
 
 
-
 public class WishAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		return null;
 	}
 

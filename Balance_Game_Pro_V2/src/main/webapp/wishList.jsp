@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -64,13 +65,10 @@
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<h1 class="major">찜목록</h1>
-				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
 				<body>
-					<div class="button-container1">
-						<button>titleCreate</button>
-						<br>
-					</div>
 					<div class="button-container">
+					<c:forEach var="" items="">
+					</c:forEach>
 						<button>title button 1</button>
 						<br>
 						<button>title button 2</button>
