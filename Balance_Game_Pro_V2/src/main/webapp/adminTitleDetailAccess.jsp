@@ -190,14 +190,11 @@
 										<input type="checkbox" class="form-check-input" id="exampleCheck1">
 										<label class="form-check-label" for="exampleCheck1">19 문제</label>
 									</div>
-									<form action="adminTitleDelete.do" method="POST">
+									<form action="adminTitleRefuse.do" method="POST">
 										<input type="hidden" name="qid" value="${qDTO.qId}" />
-										<button type="submit" class="btn btn-block btn-danger">문제 삭제</button>
+										<button type="submit" class="btn btn-block btn-danger">문제 거절</button>
 									</form>
-									<form action="adminTitleUpdate.do" method="POST">
-										<input type="hidden" name="qid" value="${qDTO.qId}" />
-										<button type="submit" class="btn btn-block btn-primary">문제 수정</button>
-									</form>
+									
 									<form action="adminTitleAccess.do" method="POST">
 										<input type="hidden" name="qid" value="${qDTO.qId}" />
 									<button type="submit" class="btn btn-block btn-success">문제 승인</button>

@@ -40,7 +40,7 @@ public class AdminTitleRefuseAction implements Action {
 		forward.setPath("alert.do");
 		forward.setRedirect(false);
 		request.setAttribute("status", "success");
-		request.setAttribute("msg", "성공했습니다");
+		request.setAttribute("msg", "거절했습니다");
 		request.setAttribute("redirect", "adminTitleManagementPage.do");
 		return forward;
 	}
