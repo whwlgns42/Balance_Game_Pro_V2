@@ -2,6 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="java.util.ArrayList,model.member.MemberDTO"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -212,80 +214,54 @@ th {
 								<h3 class="card-title">유저 정보</h3>
 							</div>
 
-							<%-- 							<%
-							MemberDTO member = (MemberDTO) request.getAttribute("member");
+							<c:choose>
+								<c:when test="${not empty member }">
 
-							if (member != null) {
-							%>
-							<table border="1">
-								<tr>
-									<th>ID</th>
-									<td><%=member.getmId()%></td>
-								</tr>
-								<tr>
-									<th>Login ID</th>
-									<td><%=member.getLoginId()%></td>
-								</tr>
-								<!-- 다른 회원 정보도 필요에 따라 추가 -->
-							</table>
-							<%
-							} else {
-							%>
-							<p>회원 정보가 없습니다.</p>
-							<%
-							}
-							%> --%>
-							<%
-							MemberDTO member = (MemberDTO) request.getAttribute("member");
-
-							if (member != null) {
-							%>
-							<form action="updateMember.do" method="post">
-								<table border="1">
-									<tr>
-										<th style="width: 78px;">ID</th>
-										<td><%=member.getmId()%></td>
-									</tr>
-									<tr>
-										<th>Login ID</th>
-										<td><%=member.getLoginId()%></td>
-									</tr>
+									<form action="updateMember.do" method="post">
+										<table border="1">
+											<tr>
+												<th style="width: 78px;">ID</th>
+												<td>${member.mid}</td>
+											</tr>
+											<tr>
+												<th>Login ID</th>
+												<td>${member.loginId}</td>
+											</tr>
 
 
-								</table>
+										</table>
 
-								<div class="card-body">
-									<div class="form-group">
-										<label for="name">이름:</label> <input class="form-control"
-											type="text" name="name" value="<%=member.getName()%>">
-									</div>
-									<div class="form-group">
-										<label for="email">이메일:</label> <input class="form-control"
-											type="text" name="email" value="<%=member.getEmail()%>">
-									</div>
-									<div class="form-group">
-										<label for="address">주소:</label> <input class="form-control"
-											type="text" name="address" value="<%=member.getAddress()%>">
-									</div>
-									<div class="form-group">
-										<label for="age">나이:</label> <input class="form-control"
-											type="text" name="age" value="<%=member.getAge()%>">
-									</div>
-									
+										<div class="card-body">
+											<div class="form-group">
+												<label for="name">이름:</label> <input class="form-control"
+													type="text" name="name" value="${member.name}">
+											</div>
+											<div class="form-group">
+												<label for="email">이메일:</label> <input class="form-control"
+													type="text" name="email" value="${member.email}">
+											</div>
+											<div class="form-group">
+												<label for="address">주소:</label> <input class="form-control"
+													type="text" name="address" value="${member.address}">
+											</div>
+											<div class="form-group">
+												<label for="age">나이:</label> <input class="form-control"
+													type="text" name="age" value="${member.age}">
+											</div>
 
 
-									<!-- 다른 필드에 대한 입력 폼도 필요에 따라 추가 -->
-									<%-- <input type="hidden" name="memberId" value="<%=member.getmId()%>"> --%>
-									<!-- 유저 삭제문 -->
-								</div>
-							</form>
-							<%
-							} else {
-							%>
-							<p>회원 정보가 없습니다.</p>
-							<%
-							}
-							%>
+
+											<!-- 다른 필드에 대한 입력 폼도 필요에 따라 추가 -->
+											<%-- <input type="hidden" name="memberId" value="<%=member.getmId()%>"> --%>
+											<!-- 유저 삭제문 -->
+										</div>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<p>회원 정보가 없습니다.</p>
+								</c:otherwise>
+							</c:choose>
+
 							<!-- <div class="card-body">
 								<div class="form-group">
 									<input class="form-control" placeholder="이름:">
@@ -320,17 +296,15 @@ th {
 							<div class="card-footer">
 								<div class="float-left">
 									<form action="adminMemberDelete.do" method="post">
-										<input type="hidden" name="loginId"
-											value="<%=member.getLoginId()%>">
+										<input type="hidden" name="loginId" value="${member.loginId}">
 										<button type="submit" class="btn btn-block btn-danger">회원삭제</button>
 									</form>
 								</div>
-								
+
 								<div class="float-right">
 									<!-- 수정된 정보를 전송할 폼 -->
 									<form action="updateMember.do" method="post">
-										<input type="hidden" name="memberId"
-											value="<%=member.getmId()%>">
+										<input type="hidden" name="memberId" value="${member.mid}">
 										<button type="submit" class="btn btn-primary">정보 수정</button>
 									</form>
 								</div>
