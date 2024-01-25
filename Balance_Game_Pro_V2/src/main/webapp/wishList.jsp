@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
-<!--
-   Hyperspace by HTML5 UP
-   html5up.net | @ajlkn
-   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
 <style>
@@ -46,11 +42,17 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">찜목록</a>
+		<a href="main.do" class="title">자비스</a>
 		<nav>
 			<ul>
-				<li><a href="index.html">login</a></li>
-				<li><a href="elements.html">joinMembership</a></li>
+				<c:if test="${not empty loginId }">
+					<li><a href="logout.do" class="active">로그아웃</a></li>
+					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+				</c:if>
+				<c:if test="${empty loginId }">
+					<li><a href="loginPage.do" class="active">로그인</a></li>
+					<li><a href="pwCheckPage.do" class="active">회원가입</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</header>
@@ -61,7 +63,7 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">titleList</h1>
+				<h1 class="major">찜목록</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
 				<body>
 					<div class="button-container1">

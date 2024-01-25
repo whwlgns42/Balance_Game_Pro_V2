@@ -100,7 +100,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 								<div class="col-12">
 									<label for="address">주소</label>
-									<input type="text" name="address" id="address" />
+									<input type="text" name="address" id="address" readonly/>
 								</div>
 
 								<div class="col-12">
