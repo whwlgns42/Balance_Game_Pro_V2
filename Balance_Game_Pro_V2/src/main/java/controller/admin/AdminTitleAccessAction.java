@@ -12,7 +12,7 @@ import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
-public class AdminTitleAccessAcion implements Action{
+public class AdminTitleAccessAction implements Action{
 
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

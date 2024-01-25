@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
-public class AdminTitleDeleteAcion implements Action{
+public class AdminTitleDeleteAction implements Action{
 
    @Override
    public ActionForward execute(HttpServletRequest request, HttpServletResponse response)

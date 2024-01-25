@@ -11,7 +11,7 @@ import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
-public class AdminTitleRefuseAcion implements Action {
+public class AdminTitleRefuseAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
