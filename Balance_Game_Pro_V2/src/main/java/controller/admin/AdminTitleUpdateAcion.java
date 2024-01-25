@@ -10,6 +10,7 @@ import controller.common.Action;
 import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
+import oracle.net.aso.q;
 
 public class AdminTitleUpdateAcion implements Action{
 
@@ -21,14 +22,11 @@ public class AdminTitleUpdateAcion implements Action{
       
       QuestionDTO qDTO = new QuestionDTO();
       QuestionDAO qDAO = new QuestionDAO();
-      
       qDTO.setSearchCondition("문제수정");
+      qDTO.setqId(Integer.parseInt(request.getParameter("qid")));
       qDTO.setTitle(request.getParameter("title"));
       qDTO.setAnswer_A(request.getParameter("answer_A"));
       qDTO.setAnswer_B(request.getParameter("answer_B"));
-      qDTO.setExplanation(request.getParameter("explanation"));
-      qDTO.setCategory(Integer.parseInt(request.getParameter("category")));
-      qDTO.setqAccess(request.getParameter("qAccess"));
       boolean flag = qDAO.update(qDTO);
       if(!flag) {
          forward.setPath("alert.do");

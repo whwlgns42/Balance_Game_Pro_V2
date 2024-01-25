@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="java.util.ArrayList,model.member.MemberDTO, model.question.QuestionDTO"%>
 
 
 <!DOCTYPE html>
@@ -185,6 +186,8 @@
 						<div class="col-md-6">
 							<div class="card card-primary">
 								<div class="card-header">
+
+
 									<h3 class="card-title">문제</h3>
 									<div class="card-tools">
 										<button type="button" class="btn btn-tool"
@@ -193,73 +196,91 @@
 										</button>
 									</div>
 								</div>
-								<div class="card-body">
-									<div class="form-group">
-										<label for="inputName">제목</label> <input type="text"
-											id="inputName" class="form-control">
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택지A</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div><div class="form-group">
-										<label for="inputDescription">선택지B</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">출제 이유</label>
-										<textarea id="inputDescription" class="form-control" rows="3"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택 이유</label>
-										<textarea id="inputDescription" class="form-control" rows="3"></textarea>
-									</div>
-									<!-- <div class="form-group"> 이게 메뉴 선택
-										<label for="inputStatus">Status</label> <select
-											id="inputStatus" class="form-control custom-select">
-											<option selected="" disabled="">Select one</option>
-											<option>On Hold</option>
-											<option>Canceled</option>
-											<option>Success</option>
-										</select>
-									</div> -->
-									<div class="form-check">
-<input type="checkbox" class="form-check-input" id="exampleCheck1">
-<label class="form-check-label" for="exampleCheck1">19 문제</label>
-</div>
-								<button type="button" class="btn btn-block btn-danger">문제 삭제</button>
-								<button type="button" class="btn btn-block btn-primary">문제 수정</button>
-								<button type="button" class="btn btn-block btn-success">문제 승인</button>
-								</div>
+
+								<%
+								QuestionDTO qDTO = (QuestionDTO) request.getAttribute("qDTO");
+
+								if (qDTO != null) {
+								%>
+
+								<form action="adminTitleDetaileAccessPage.do" method="POST">
+									<div class="card-body">
+										<div class="form-group">
+											<label for="inputName">제목</label> <input type="text"
+												id="inputName" class="form-control" name="title"
+												value="<%=qDTO.getTitle()%>">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지A</label><input type="text"
+												id="inputName" class="form-control" name="answer_A"
+												value="<%=qDTO.getAnswer_A()%>">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지B</label><input type="text"
+												id="inputName" class="form-control" name="answer_B"
+												value="<%=qDTO.getAnswer_B()%>">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">출제 이유</label><input type="text"
+												id="inputName" class="form-control" name="explanation"
+												value="<%=qDTO.getExplanation()%>">
+										</div>
+										<%-- <div class="form-group">
+											<label for="inputDescription">선택 이유</label><input type="text"
+												id="inputName" class="form-control" name="explanation"
+												value="<%=qDTO.getExplanation()%>">
+										</div> --%>
+
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input"
+												id="exampleCheck1" name="category" value="1"> <label
+												class="form-check-label" for="exampleCheck1">19 문제</label>
+										</div>
+										<input type = "hidden" name = "qid" value=<%=qDTO.getqId() %>>
+										<button type="submit" class="btn btn-block btn-success">문제승인</button>
+								</form>
+								
+								<!-- 삭제 버튼 -->
+								<form action="adminTitleDelete.do" method="post">
+									<input type="hidden" name="qid" value="<%=qDTO.getqId()%>">
+									<button type="submit" class="btn btn-block btn-danger"
+										style="margin-top: 10px;">문제 삭제</button>
+								</form>
+								<%
+								} else {
+								%>
+								<p>문제 정보가 없습니다.</p>
+								<%
+								}
+								%>
 
 							</div>
 
 						</div>
-						
-					</div>
-					<div class="row">
-						
-						
-					</div>
-				</section>
 
-				<!-- /.container-fluid -->
-			</section>
-			<!-- /.content -->
+					</div>
 		</div>
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
-			</strong> All rights reserved.
-			<div class="float-right d-none d-sm-inline-block">
-				<b>Version</b> 3.2.0
-			</div>
-		</footer>
+		<div class="row"></div>
+		</section>
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+		<!-- /.container-fluid -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+	<footer class="main-footer">
+		<strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
+		</strong> All rights reserved.
+		<div class="float-right d-none d-sm-inline-block">
+			<b>Version</b> 3.2.0
+		</div>
+	</footer>
+
+	<!-- Control Sidebar -->
+	<aside class="control-sidebar control-sidebar-dark">
+		<!-- Control sidebar content goes here -->
+	</aside>
+	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
 

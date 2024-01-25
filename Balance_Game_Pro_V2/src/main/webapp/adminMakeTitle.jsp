@@ -91,13 +91,17 @@
 		</div>
 
 		<!-- Navbar -->
-		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+		<nav
+			class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.jpg" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-			<li class="nav-item d-none d-sm-inline-block">문제출제 페이지</li>
-			<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
+				<li class="nav-item d-none d-sm-inline-block">문제출제 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 			<!-- Right navbar links -->
 			<ul class="navbar-nav ml-auto">
@@ -141,19 +145,24 @@
 						data-widget="treeview" role="menu" data-accordion="false">
 						<!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-						<li class="nav-item menu-open"><a href="#" class="nav-link active"> <i class="nav-icon fas fa-tachometer-alt"></i>
+						<li class="nav-item menu-open"><a href="#"
+							class="nav-link active"> <i
+								class="nav-icon fas fa-tachometer-alt"></i>
 								<p>
 									관리 <i class="right fas fa-angle-left"></i>
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="adminPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -171,7 +180,7 @@
 			<!-- Main content -->
 			<section class="content">
 				<section class="content">
-					<div class="row">
+					<div class="row" style="display: flex; justify-content: center">
 						<div class="col-md-6">
 							<div class="card card-primary">
 								<div class="card-header">
@@ -183,27 +192,30 @@
 										</button>
 									</div>
 								</div>
-								<div class="card-body">
-									<div class="form-group">
-										<label for="inputName">제목</label> <input type="text"
-											id="inputName" class="form-control">
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택지A</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div><div class="form-group">
-										<label for="inputDescription">선택지B</label>
-										<textarea id="inputDescription" class="form-control" rows="2"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">출제 이유</label>
-										<textarea id="inputDescription" class="form-control" rows="3"></textarea>
-									</div>
-									<div class="form-group">
-										<label for="inputDescription">선택 이유</label>
-										<textarea id="inputDescription" class="form-control" rows="3"></textarea>
-									</div>
-									<!-- <div class="form-group"> 이게 메뉴 선택
+
+								<form action="adminTitleCreate.do" method="POST">
+									<div class="card-body">
+										<div class="form-group">
+										<%-- <input hidden="" value="<%=()%>" name="writer"> --%>
+											<label for="inputName">제목</label> <input type="text"
+												id="inputName" class="form-control" name="title">
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지A</label>
+											<textarea id="inputDescription" class="form-control"
+												name="answer_A" rows="2"></textarea>
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">선택지B</label>
+											<textarea id="inputDescription" class="form-control"
+												name="answer_B" rows="2"></textarea>
+										</div>
+										<div class="form-group">
+											<label for="inputDescription">출제 이유</label>
+											<textarea id="inputDescription" class="form-control"
+												name="explanation" rows="3"></textarea>
+										</div>
+										<!-- <div class="form-group"> 이게 메뉴 선택
 										<label for="inputStatus">Status</label> <select
 											id="inputStatus" class="form-control custom-select">
 											<option selected="" disabled="">Select one</option>
@@ -212,22 +224,22 @@
 											<option>Success</option>
 										</select>
 									</div> -->
-									<div class="form-check">
-<input type="checkbox" class="form-check-input" id="exampleCheck1">
-<label class="form-check-label" for="exampleCheck1">19 문제</label>
-</div>
-								<button type="button" class="btn btn-block btn-primary">문제 출제</button>
-								</div>
+										<div class="form-check">
+											<input type="checkbox" class="form-check-input"
+												id="exampleCheck1" name="category" value="1"> <label
+												class="form-check-label" for="exampleCheck1">19 문제</label>
+										</div>
+
+										<button type="submit" class="btn btn-block btn-primary">문제출제</button>
+									</div>
+								</form>
 
 							</div>
 
 						</div>
-						
+
 					</div>
-					<div class="row">
-						
-						
-					</div>
+					<div class="row"></div>
 				</section>
 
 				<!-- /.container-fluid -->
