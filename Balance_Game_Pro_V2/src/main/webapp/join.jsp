@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="term"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,52 +15,34 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="is-preload">
-	<script type="text/javascript">
-	var authNumResult;
-	
-	console.log("로그1");
-	
-	console.log(authNumResult);
-	
-	function authCheck(){
-	console.log("로그2");
-		var cellPhone = $("#cellPhone").val();
-		$.ajax({
-			type: "POST",
-			url: "authServlet",
-			data: {'cellPhone' : cellPhone},
-			dataType: "text",
-			success: function(data){
-				authNumResult = data;
-				console.log(authNumResult);
-			},
-			error: function(error){
-				console.log(error);
-				document.getElementById("subBtn").disabled = true;
-			}
-			
-		});
-		
-	}
-	console.log("로그3");
-</script>
-	<script type="text/javascript">
 
-	function authNumCheck(){
-		var authNum = $("#authNum").val();
-		console.log("["+authNumResult+"]");
-		console.log("["+authNum+"]");
-		if(authNumResult == authNum){
-			console.log("로그4");
-			alert('성공');
-		}else{
-			alert('실패');
-		}
-	}
+	<script language="javascript">
+// opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
+//document.domain = "abc.go.kr";
 
+function goPopup(){
+   // 주소검색을 수행할 팝업 페이지를 호출합니다.
+   // 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrLinkUrl.do)를 호출하게 됩니다.
+   var pop = window.open("jusoPopup.jsp","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+   // 모바일 웹인 경우, 호출된 페이지(jusopopup.jsp)에서 실제 주소검색URL(https://business.juso.go.kr/addrlink/addrMobileLinkUrl.do)를 호출하게 됩니다.
+    //var pop = window.open("/popup/jusoPopup.jsp","pop","scrollbars=yes, resizable=yes"); 
+}
+
+
+function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+      // 팝업페이지에서 주소입력한 정보를 받아서, 현 페이지에 정보를 등록합니다.
+      
+      var address = roadAddrPart1 + " " + addrDetail;
+      
+      document.joinForm.address.value = address;
+      
+      /** 2017년 2월 추가제공 **/
+   
+      /** 2017년 3월 추가제공 **/
+      
+}
 
 </script>
-
 	<%-- Sidebar--%>
 	<section id="sidebar">
 		<div class="inner">
@@ -75,19 +59,19 @@
 		<section id="intro" class="wrapper style1 fullscreen fade-up">
 			<!-- 회원가입 폼 -->
 			<div class="inner">
-				<form action="join.do" method="POST" onsubmit="return validateForm()">
+				<form action="join.do" method="POST" name="joinForm" onsubmit="return validateForm()">
 					<div class="split style1">
 
 						<section>
 							<div class="row gtr-uniform">
 								<div class="col-12">
 									<label for="name">이름</label>
-									<input type="text" name="name" id="name" placeholder="Name" />
+									<input type="text" name="name" id="name" placeholder="Name" value="테스트" />
 								</div>
 
 								<div class="col-12-xsmall">
 									<label for="loginId">아이디</label>
-									<input type="text" class="loginId" name="loginId" id="loginIdCheck" placeholder="ID" />
+									<input type="text" class="loginId" name="loginId" id="loginIdCheck" placeholder="ID" value="asdff" />
 									<div>
 										<font id="id_feedback" size="2"></font>
 									</div>
@@ -96,29 +80,31 @@
 
 								<div class="col-12">
 									<label for="mPw">비밀번호</label>
-									<input type="password" name="mPw" id="mPw" placeholder="password" />
+									<input type="password" name="mPw" id="mPw" placeholder="password" value="123qwe123!@#" />
 								</div>
 
 								<div class="col-12">
 									<label for="mpwCh">비밀번호확인</label>
-									<input type="password" name="mpwCh" id="mpwCh" placeholder="PasswordCk" />
-									<!-- <div id="ok"></div> -->
+									<input type="password" name="mpwCh" id="mpwCh" placeholder="PasswordCk" value="123qwe123!@#" />
 								</div>
 
 								<div class="col-12">
 									<label for="age">나이</label>
-									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="validateAge(this)" />
-									<!-- <div id="ok"></div> -->
+									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="validateAge(this)" value="12" />
 								</div>
 
 								<div class="col-12">
 									<label for="email">이메일</label>
-									<input type="email" name="email" id="email" placeholder="Email" />
+									<input type="email" name="email" id="email" placeholder="Email" value="asgsd@naver.com" />
 								</div>
 
 								<div class="col-12">
 									<label for="address">주소</label>
-									<input type="text" name="address" id="address" placeholder="서울시 땡땡구 땡땡동 132-1번지" />
+									<input type="text" name="address" id="address" />
+								</div>
+
+								<div class="col-12">
+									<input type="button" onClick="goPopup();" value="주소찾기" />
 								</div>
 
 								<div class="col-4 col-12-small">
@@ -133,20 +119,20 @@
 
 								<div class="col-12">
 									<label for="cellPhone">핸드폰번호</label>
-									<input type="text" name="cellPhone" id="cellPhone" placeholder="Your PhoneNumber" />
-									<button type="button" onclick="authCheck()">인증번호발송</button>
+									<input type="text" name="cellPhone" id="cellPhone" placeholder="Your PhoneNumber" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+									<button style="margin-top: 22px;" type="button" onclick="sendAuthNum()">인증번호발송</button>
 								</div>
 
 								<div class="col-12">
 									<label for="authCheck">인증번호</label>
-									<input type="text" name="authNum" id="authNum" />
-									<button type="button" onclick="authNumCheck()">확인</button>
+									<input type="text" name="authNum" id="authNum" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
+									<button style="margin-top: 22px;" type="button" onclick="authNumCheck()">확인</button>
 								</div>
 
 								<div class="col-12">
 									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" id="subBtn" /></li>
-										<li><input type="reset" value="Reset" /></li>
+										<li><input type="submit" value="가입하기" /></li>
+										<li><input type="reset" value="리셋" /></li>
 									</ul>
 								</div>
 							</div>
@@ -154,41 +140,8 @@
 						<section>
 							            
 							<ul class="alt">
-
-								<li><textarea name="" class="" style="resize: none;" readonly>여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-   </textarea>
-									<ul class="alt">
-										<li>
-											<div class="col-6 col-12-small">
-												<input type="checkbox" id="agreement" name="agreement">
-												<label for="agreement">이용약관 동의(필수)</label>
-											</div>
-										</li>
-									</ul></li>
-
-								<li><textarea name="" class="" style="resize: none;" readonly>여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-   </textarea>
-									<ul class="alt">
-										<li>
-											<div class="col-6 col-12-small">
-												<input type="checkbox" id="profile" name="profile">
-												<label for="profile">개인정보 수집 및 이용에 대한 안내(필수)</label>
-											</div>
-										</li>
-									</ul></li>
-
-								<li><textarea name="" class="" style="resize: none;" readonly>여러분을 환영합니다.
-네이버 서비스 및 제품(이하 ‘서비스’)을 이용해 주셔서 감사합니다. 본 약관은 다양한 네이버 서비스의 이용과 관련하여 네이버 서비스를 제공하는 네이버 주식회사(이하 ‘네이버’)와 이를 이용하는 네이버 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 네이버 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
-   </textarea>
-									<ul class="alt">
-										<li><div class="col-6 col-12-small">
-												<input type="checkbox" id="demo3" name="demo3">
-												<label for="demo3">위치정보 이용약관 동의(선택)</label>
-											</div></li>
-									</ul></li>
-
+								<!-- 회원가입 이용약관 -->
+								<common:terms></common:terms>
 								<li>
 									<ul class="alt">
 
@@ -197,9 +150,7 @@
 												<label for="demo4">이벤트 등 프로모션 알림 메일 수신(선택)</label>
 											</div></li>
 									</ul>
-
 								</li>
-
 							</ul>
 
 						</section>
@@ -211,184 +162,236 @@
 			<!-- 회원가입 폼 -->
 		</section>
 	</div>
-
 	<!-- Footer -->
-	<footer id="footer" class="wrapper style1-alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; Untitled. All rights reserved.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
+	<common:footer></common:footer>
+
 	<!-- Scripts -->
 
 	<script>
-		
-		function validateForm() {
-			let loginId = $('#loginId').val();
-			let password = $('#mPw').val();
-			let passwordCheck = $('#mpwCh').val();
-			let name = $('#name').val();
-			let email = $('#email').val();
-			let address = $('#address').val();
-			let age = $('#age').val();
-			let genderMale = $('#male').prop('checked');
-			let genderFemale = $('#female').prop('checked');
-			let agreement = document.getElementById("agreement");
-			let profile = document.getElementById("profile");
+	
+	let authStatus = 0; // 인증 성공 여부
+	let useIdCheck = 0;
+    let authNum = 0; // 발급받은 인증번호
+    function validateForm() {
+        let loginId = $('#loginId').val();
+        let password = $('#mPw').val();
+        let passwordCheck = $('#mpwCh').val();
+        let name = $('#name').val();
+        let email = $('#email').val();
+        let address = $('#address').val();
+        let age = $('#age').val();
+        let genderMale = $('#male').prop('checked');
+        let genderFemale = $('#female').prop('checked');
+        let agreement = document.getElementById("agreement");
+        let profile = document.getElementById("profile");
+        let cellPhone = $("#cellPhone").val();
+        let authNumCk = $("#authNum").val();
 
-			// 이름은 한글로 2글자 이상 4글자 이하
-			let namePattern = /^[가-힣]{2,4}$/;
-			if (!namePattern.test(name)) {
-				Swal.fire({
-					title : "이름",
-					text : "한글로 2글자 이상 4글자 이하로 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-			
-			// 아이디는 5글자 이상
-			let loginIdPattern = /^[a-zA-Z0-9]{5,10}$/;
-			if (!loginIdPattern.test(loginId)) {
-				Swal.fire({
-					title : "아이디",
-					text : "영어로 5글자 이상 10글자 이하로 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-			// 비밀번호는 특수문자, 영어 포함
-			let passwordPattern = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{6,15}$/;
-			if (!passwordPattern.test(password)) {
-				Swal.fire({
-					title : "비밀번호",
-					text : "특수문자와 영어를 포함하여 6자 이상 15자이하로 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
+     // 이름은 한글로 2글자 이상 4글자 이하
+        let namePattern = /^[가-힣]{2,4}$/;
+        if (!namePattern.test(name)) {
+            showError("이름", "한글로 2글자 이상 4글자 이하로 입력해주세요.");
+            return false;
+        }
 
-			if (password != passwordCheck) {
-				Swal.fire({
-					title : "비밀번호",
-					text : "비밀번호가 일치하지 않습니다 다시 확인해 주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
+        // 아이디는 5글자 이상
+        let loginIdPattern = /^[a-zA-Z0-9]{5,10}$/;
+        if (!loginIdPattern.test(loginId)) {
+            showError("아이디", "영어로 5글자 이상 10글자 이하로 입력해주세요.");
+            return false;
+        }
 
-			// 나이는 1부터 99까지
-            if (age < 1 || age > 99 && age != null) {
-                Swal.fire({
-                  title: "나이",
-              	  text: "나이는 1부터 99까지의 숫자로 입력해주세요.",
-              	  icon: "warning"
-              	});
+        // 비밀번호는 특수문자, 영어 포함
+        let passwordPattern = /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{6,15}$/;
+        if (!passwordPattern.test(password)) {
+            showError("비밀번호", "특수문자와 영어를 포함하여 6자 이상 15자이하로 입력해주세요.");
+            return false;
+        }
+
+        if (password != passwordCheck) {
+            showError("비밀번호", "비밀번호가 일치하지 않습니다. 다시 확인해 주세요.");
+            return false;
+        }
+
+        // 나이는 1부터 99까지
+        if (age < 1 || age > 99 && age != null) {
+            showError("나이", "나이는 1부터 99까지의 숫자로 입력해주세요.");
+            return false;
+        }
+
+        // 이메일 형식
+        let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+            showError("이메일", "이메일 형식이 맞지 않습니다.");
+            return false;
+        }
+
+       
+        
+        if (!address) {
+            showError("주소", "주소를 입력해주세요.");
+            return false;
+        }
+
+        // 성별 선택 여부 확인
+        if (!genderMale && !genderFemale) {
+            showError("성별", "성별을 선택해주세요.");
+            return false;
+        }
+
+        let phonePattern = /^01[016789]\d{8}$/;
+        if (!phonePattern.test(cellPhone)) {
+            showError("핸드폰번호", "숫자만 입력 가능합니다.");
+            return false;
+        }
+
+        // 약관 동의 체크 여부 확인
+        if (!agreement.checked) {
+            showError("약관 동의", "이용약관에 동의해야 회원가입이 가능합니다.");
+            return false;
+        }
+
+        // 개인정보 수집 동의 체크 여부 확인
+        if (!profile.checked) {
+            showError("개인정보 수집 동의", "개인정보 수집에 동의해야 회원가입이 가능합니다.");
+            return false;
+        }
+
+        if (!cellPhone) {
+            showError("휴대폰 번호", "휴대폰 번호를 입력해주세요");
+            return false;
+        }
+
+        // 모든 조건을 통과하면 회원가입 진행
+        if (!authNumCheck() === 1 || authStatus <= 0) {
+            showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
+            return false;
+        }
+        
+        if(useIdCheck == 0) {
+            showError("중복", "중복된 아이디 입니다");
+            return false;
+        }
+        return true;
+    }
+
+    function showError(title, text) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: "warning"
+        });
+    }
+    
+    function showSuccess(title, text) {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: "success"
+        });
+    }
+
+    // 아이디 입력란에 keyup 이벤트 리스너 등록
+    $('#loginIdCheck').keyup(function () {
+        checkDuplicateId();
+    });
+
+    // 아이디 중복 확인 함수
+    function checkDuplicateId() {
+        let loginId = $('#loginIdCheck').val();
+        if (loginId.length >= 5) {
+            $.ajax({
+                url: "idCheckAsync",
+                type: "POST",
+                data: {
+                    loginId: loginId
+                },
+                dataType: 'json',
+                success: function (result) {
+                    let feedback = $("#id_feedback");
+                    if (result == 1) {
+                    	useIdCheck = 0;
+                        showIdFeedback('이미 사용중인 아이디입니다.', '#dc3545');
+                    } else {
+                    	useIdCheck = 1;
+                        showIdFeedback('사용할 수 있는 아이디입니다.', '#2fb380');
+                    }
+                },
+                error: function (request, status, error) {
+                    showIdFeedback('서버 요청 실패', '#dc3545');
+                }
+            });
+        } else {
+            showIdFeedback('아이디 5글자 이상으로 입력해주세요.', '#dc3545');
+        }
+    }
+
+    function showIdFeedback(message, color) {
+        let feedback = $("#id_feedback");
+        feedback.html(message);
+        feedback.css('color', color);
+        feedback.css('font-size', '20px');
+    }
+    
+    let authAttempts = 0; // 인증 시도 횟수
+    let cooldownTime = 180; // 3분 (초 단위)
+    let cooldownTimer; // 타이머 변수
+
+    function sendAuthNum() {
+        var cellPhone = $("#cellPhone").val();
+        let phonePattern = /^01[016789]\d{8}$/;
+
+        if (!cellPhone || !phonePattern.test($("#cellPhone").val())) {
+            showError("인증확인", "휴대폰번호를 제대로 입력해주세요");
+            return false;
+        } else {
+            // 타이머 동작 중이면 버튼 비활성화
+            if (authAttempts >= 3) {
+                showError("인증확인", "인증번호 발송이 3회 이상 시도되었습니다. 3분 후에 다시 시도해주세요.");
                 return false;
             }
-			
-			 // 이메일 형식
-            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!emailPattern.test(email)) {
-                Swal.fire({
-                  title: "이메일",
-              	  text: "이메일 형식이 맞지 않습니다.",
-              	  icon: "warning"
-              	});
-                return false;
-            }
-            
-            // 주소는 특정 형식을 갖추어야 함 (예: 서울시 동구 방어동 123-1번지 또는 서울시 동구 방어동 내진길 5길)
-            let addressPattern = /^[가-힣\s]+\s?[가-힣\s\d-]+(\s\d+(-\d+)?)?(번지)?(\s[가-힣\s]+(\s[가-힣\s\d-]+(\s\d+(-\d+)?)?(길)?)?)?$/;
-            if (!addressPattern.test(address)) {
-                Swal.fire({
-                	  title: "주소",
-                	  text: "주소 형식을 지켜서 입력해주세요.",
-                	  icon: "warning"
-                	});
-                return false;
-            }
-            
-            // 성별 선택 여부 확인
-            if (!genderMale && !genderFemale) {
-                Swal.fire({
-                	  title: "성별",
-                	  text: "성별을 선택해주세요.",
-                	  icon: "warning"
-                	});
-                return false;
-            }
-            
-             // 약관 동의 체크 여부 확인
-    	    if (!$("#agreement").prop('checked')) {
-    	        Swal.fire({
-    	            title: "약관 동의",
-    	            text: "이용약관에 동의해야 회원가입이 가능합니다.",
-    	            icon: "warning"
-    	        });
-    	        return false;
-    	    }
 
-    	    // 개인정보 수집 동의 체크 여부 확인
-    	    if (!$("#profile").prop('checked')) {
-    	        Swal.fire({
-    	            title: "개인정보 수집 동의",
-    	            text: "개인정보 수집에 동의해야 회원가입이 가능합니다.",
-    	            icon: "warning"
-    	        });
-    	        return false;
-    	    } 
-    	    
-            // 모든 조건을 통과하면 회원가입 진행
-            return true;
-		 }
+            // AJAX로 서버에 인증번호 요청
+            $.ajax({
+                type: "POST",
+                url: "authServlet",
+                data: {'cellPhone': cellPhone},
+                dataType: "text",
+                success: function (data) {
+                	authNum = data
+                    showSuccess("발송완료", "인증번호를 발송했습니다.");
+                    authAttempts++;
+                	console.log(authNum + "발급받은 인증번호")
+                    
+                    // 3분 동안 버튼 비활성화 타이머 설정
+                    cooldownTimer = setInterval(function () {
+                        cooldownTime--;
+                        if (cooldownTime <= 0) {
+                            clearInterval(cooldownTimer);
+                            cooldownTime = 180; // 타이머 초기화
+                            authAttempts = 0; // 시도 횟수 초기화
+                        }
+                    }, 1000);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
 
-		
-		
-		// 아이디 입력란에 keyup 이벤트 리스너 등록
-		$('#loginIdCheck').keyup(function() {
-		    checkDuplicateId();
-		});
-
-		// 아이디 중복 확인 함수
-		function checkDuplicateId() {
-		    let loginId = $('#loginIdCheck').val();
-		    if (loginId.length >= 5) {
-		        $.ajax({
-		            url: "idCheckAsync",
-		            type: "POST",
-		            data: {
-		                loginId: loginId
-		            },
-		            dataType: 'json',
-		            success: function(result) {
-		                if (result == 1) {
-		                    $("#id_feedback").html('이미 사용중인 아이디입니다.');
-		                    $("#id_feedback").css('color', '#dc3545');
-		                } else {
-		                    $("#id_feedback").html('사용할 수 있는 아이디입니다.');
-		                    $("#id_feedback").css('color', '#2fb380');
-		                }
-		            },
-		            error: function(request, status, error) {
-		                console.log(status);
-		                console.log(error);
-		                $("#id_feedback").html('서버 요청 실패');
-		                $("#id_feedback").css('color', '#dc3545');
-		            }
-		        });
-		    } else {
-		        $("#id_feedback").html('아이디 5글자 이상으로 입력해주세요.');
-		        $("#id_feedback").css('color', '#dc3545');
-		    }
-		}
-		 // 나이를 입력할때 숫자만 입력 가능하도록 정규표현식 사용
-		function validateAge(input) {
-	        input.value = input.value.replace(/[^0-9]/g, '');
-	    }
-	</script>
+    function authNumCheck() {
+        var authNumCk = $("#authNum").val();
+        if (authNum == authNumCk) {
+        	showSuccess("인증확인", "성공");
+			authStatus = 1;
+            return 1;
+        } else {
+            showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
+            return 0;
+        }
+    }
+</script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
