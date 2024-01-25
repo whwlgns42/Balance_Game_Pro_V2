@@ -65,32 +65,15 @@
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<h1 class="major">찜목록</h1>
-				<body>
-					<div class="button-container">
-					<c:forEach var="" items="">
+				<div class="button-container">
+					<c:if test="${fn:length(sdatas) <= 0}">
+						찜목록이 없습니다.
+					</c:if>
+					<c:forEach var="data" items="${sdatas}" varStatus="loop">
+						<button>title button ${loop.inedx + 1}</button>
+						<br>
 					</c:forEach>
-						<button>title button 1</button>
-						<br>
-						<button>title button 2</button>
-						<br>
-						<button>title button 3</button>
-						<br>
-						<button>title button 4</button>
-						<br>
-						<button>title button 5</button>
-						<br>
-						<button>title button 6</button>
-						<br>
-						<button>title button 7</button>
-						<br>
-						<button>title button 8</button>
-						<br>
-						<button>title button 9</button>
-						<br>
-						<button>title button 10</button>
-						<br>
-					</div>
-				</body>
+				</div>
 
 			</div>
 		</section>
