@@ -31,6 +31,7 @@ public class JoinAction implements Action {
 		memberDTO.setAddress(request.getParameter("address")); // 주소
 		memberDTO.setGender(request.getParameter("gender"));  // 성별
 		memberDTO.setAge(Integer.parseInt(request.getParameter("age"))); // 나이
+		memberDTO.setCellPhone(request.getParameter("cellPhone")); // 전화번호
 
 		boolean memberJoin = memberDAO.insert(memberDTO);
 		if (memberJoin) {

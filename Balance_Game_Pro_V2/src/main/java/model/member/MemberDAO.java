@@ -12,25 +12,48 @@ public class MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
+	// CELL_PHONE
 	// 회원가입 SQL
-	private static final String INSERT = "INSERT INTO MEMBER (MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE) VALUES((SELECT NVL(MAX(MID),0) + 1 FROM MEMBER),?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO MEMBER (MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, CELL_PHONE) VALUES((SELECT NVL(MAX(MID),0) + 1 FROM MEMBER),?,?,?,?,?,?,?,?)";
+
+	
+	
 	// 아이디 중복 체크 SQL
 	private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
 	// 로그인 SQL
 	private static final String LOGIN = "SELECT MID, LOGIN_ID, MADMIN FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
 	// 비밀번호 2차인증 SQL
 	private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
-	// 마이페이지 SQL
-	private static final String MY_INFO = "SELECT LOGIN_ID, NAME, GENDER, EMAIL, ADDRESS FROM MEMBER WHERE LOGIN_ID = ? ";
+
+	
+	
+	// CELL_PHONE
+	// 마이페이지 SQL 
+	private static final String MY_INFO = "SELECT LOGIN_ID, NAME, AGE, GENDER, EMAIL, ADDRESS, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ? ";
+
+	
 	// 내정보 변경하기 SQL
 	private static final String MY_INFO_UPDATE = "UPDATE MEMBER SET NAME = ?, EMAIL = ? WHERE LOGIN_ID = ? ";
+
+	
+	
+	// CELL_PHONE
 	// 유저 전체 조회
-	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER";
+	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME,EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE FROM MEMBER";
+
+	
+	
+	// CELL_PHONE
 	// 유저 상세 조회
-	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE FROM MEMBER WHERE LOGIN_ID = ?";
+	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ?";
+
+	
+	
 	// 유저 삭제
 	private static final String DELETE = "DELETE FROM MEMBER WHERE LOGIN_ID = ?";
 
+	
+	
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
 		if (mDTO.getSearchCondition().equals("전체조회")) {
@@ -50,6 +73,7 @@ public class MemberDAO {
 					member.setGender(rs.getString("GENDER"));
 					member.setAge(rs.getInt("AGE"));
 					member.setGrade(rs.getString("GRADE"));
+					member.setCellPhone(rs.getString("CELL_PHONE"));
 					datas.add(member);
 				}
 				rs.close();
@@ -88,6 +112,7 @@ public class MemberDAO {
 					data.setGender(rs.getString("GENDER"));
 					data.setAge(rs.getInt("AGE"));
 					data.setGrade(rs.getString("GRADE"));
+					data.setCellPhone(rs.getString("CELL_PHONE"));
 				}
 				rs.close();
 			} catch (SQLException e) {
@@ -147,6 +172,8 @@ public class MemberDAO {
 					data.setGender(rs.getString("GENDER"));
 					data.setEmail(rs.getString("EMAIL"));
 					data.setAddress(rs.getString("ADDRESS"));
+					data.setAge(rs.getInt("AGE"));
+					data.setCellPhone(rs.getString("CELL_PHONE"));
 				}
 				rs.close();
 			} catch (SQLException e) {
@@ -188,6 +215,7 @@ public class MemberDAO {
 			pstmt.setString(5, mDTO.getAddress());
 			pstmt.setString(6, mDTO.getGender());
 			pstmt.setInt(7, mDTO.getAge());
+			pstmt.setString(8, mDTO.getCellPhone());
 			int result = pstmt.executeUpdate();
 			if (result <= 0) {
 				return false;

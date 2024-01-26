@@ -21,11 +21,23 @@ public class MemberDTO {
 
 	private String mAdmin;
 
-	 
+	private String cellPhone;
 
 	//--------java--------
 
 	 
+
+	public String getCellPhone() {
+		return cellPhone;
+	}
+
+
+
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
+	}
+
+
 
 	private String searchCondition;
 
