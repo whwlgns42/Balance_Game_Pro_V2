@@ -39,14 +39,15 @@ public class MemberDAO {
 	
 	// CELL_PHONE
 	// 유저 전체 조회
-	private static final String SELECTALL_USER = "SELECT MID, LOGIN_ID, MPW, NAME,EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE FROM MEMBER";
+	private static final String SELECTALL_USER = "SELECT M.MID, M.LOGIN_ID, M.MPW, M.NAME,EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, SUM(S.AMOUNT) AS TOTAL, RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC) AS RANKING FROM SUPPORT S JOIN MEMBER M ON M.LOGIN_ID = S.LOGIN_ID"
+			+ "GROUP BY M.MID, M.LOGIN_ID, M.MPW, M.NAME,EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
 
 	
 	
 	// CELL_PHONE
 	// 유저 상세 조회
-	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ?";
-
+	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE, ANK() OVER (ORDER BY SUM(AMOUNT) DESC) AS RANKING "
+			+ "FROM MEMBER WHERE LOGIN_ID = ?";
 	
 	
 	// 유저 삭제
@@ -74,6 +75,7 @@ public class MemberDAO {
 					member.setAge(rs.getInt("AGE"));
 					member.setGrade(rs.getString("GRADE"));
 					member.setCellPhone(rs.getString("CELL_PHONE"));
+					member.setRanking(rs.getInt("RANKING"));
 					datas.add(member);
 				}
 				rs.close();

@@ -25,6 +25,8 @@ public class MemberDTO {
 
 	//--------java--------
 
+	private int ranking;
+	private String searchCondition;
 	 
 
 	public String getCellPhone() {
@@ -36,11 +38,6 @@ public class MemberDTO {
 	public void setCellPhone(String cellPhone) {
 		this.cellPhone = cellPhone;
 	}
-
-
-
-	private String searchCondition;
-
 
 
 	public int getmId() {
@@ -173,16 +170,25 @@ public class MemberDTO {
 		this.searchCondition = searchCondition;
 	}
 
+	public int getRanking() {
+		return ranking;
+	}
+
+
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
+
 
 
 	@Override
 	public String toString() {
 		return "MemberDTO [mId=" + mId + ", loginId=" + loginId + ", mPw=" + mPw + ", name=" + name + ", email=" + email
 				+ ", address=" + address + ", gender=" + gender + ", age=" + age + ", grade=" + grade + ", mAdmin="
-				+ mAdmin + ", searchCondition=" + searchCondition + "]";
+				+ mAdmin + ", cellPhone=" + cellPhone + ", isCrown=" + ranking + ", searchCondition=" + searchCondition
+				+ "]";
 	}
-
-	
     
     
 }
