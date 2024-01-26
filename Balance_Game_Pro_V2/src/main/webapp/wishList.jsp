@@ -66,15 +66,30 @@
 			<div class="inner">
 				<h1 class="major">찜목록</h1>
 				<div class="button-container">
+				
 					<c:if test="${empty sdatas}">
 						찜목록이 없습니다.
 					</c:if>
 					<c:forEach var="data" items="${sdatas}">
-						<tr>
-							<td><a href="wishListDetailPage.do?sid=${data.sId}">${data.sId}</a></td>
-							<td>${data.saveTitle}</td>
-							<td>${data.saveWriter}</td>
-						<tr>
+						<table>
+							<thead>
+								<tr>
+									<th>NO</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<a href="wishListDetailPage.do?sid=${data.sId}">${data.sId}</a>
+									</td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<td>${data.saveTitle}</td>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<td>${data.saveWriter}</td>
+								</tr>
+								<br>
+							</tbody>
+						</table>
 					</c:forEach>
 				</div>
 

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.common.Action;
 import controller.common.ActionForward;
+import model.comment.CommentDAO;
+import model.comment.CommentDTO;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
@@ -21,11 +23,20 @@ public class AdminMemberDetailPageAction implements Action{
 		ActionForward forward = new ActionForward();
 		MemberDTO mDTO = new MemberDTO();
 		MemberDAO mDAO = new MemberDAO();
+		CommentDTO cDTO = new CommentDTO();
+		CommentDAO cDAO = new CommentDAO();
+		
 		mDTO.setLoginId(request.getParameter("loginId"));
 		mDTO.setSearchCondition("유저조회");
+		cDTO.setSearchCondition("유저댓글조회");
+		cDTO.setLoginId(request.getParameter("loginId"));
+		
+		ArrayList<CommentDTO> cdatas = cDAO.selectAll(cDTO);
+		if(cdatas == null) {
+			cdatas = null;
+		}
 		
 		MemberDTO member = mDAO.selectOne(mDTO);
-		System.out.println(member + "<<<<<<<111");
 		if (member == null) {
 			forward.setPath("alert.do");
 			request.setAttribute("status", "fail");
@@ -37,6 +48,7 @@ public class AdminMemberDetailPageAction implements Action{
 		forward.setPath("adminMemberDetail.jsp");
 		forward.setRedirect(false);
 		request.setAttribute("member", member);
+		request.setAttribute("cdatas", cdatas);
 	    return forward;
 	}
 	
