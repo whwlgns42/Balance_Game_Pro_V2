@@ -313,9 +313,8 @@ th {
 											</c:if>
 
 											<c:forEach var="data" items="${member}">
-												<tr>
-													<td><a
-														href="adminMemberDetailPage.do?loginId=${data.loginId}">${data.loginId}</a></td>
+												<tr onclick="location.href = 'adminMemberDetailPage.do?loginId=${data.loginId}'">
+													<td>${data.loginId}</td>
 													<td>${data.address}</td>
 													<td>${data.email}</td>
 													<td>${data.age}</td>

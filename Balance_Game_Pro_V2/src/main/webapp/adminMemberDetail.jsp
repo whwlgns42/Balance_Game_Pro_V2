@@ -216,35 +216,35 @@ th {
 
 							<c:choose>
 								<c:when test="${not empty member}">
-										<table border="1">
-											<tr>
-												<th style="width: 78px;">ID</th>
-												<td>${member.mId}</td>
-											</tr>
-											<tr>
-												<th>Login ID</th>
-												<td>${member.loginId}</td>
-											</tr>
-										</table>
+									<table border="1">
+										<tr>
+											<th style="width: 78px;">ID</th>
+											<td>${member.mId}</td>
+										</tr>
+										<tr>
+											<th>Login ID</th>
+											<td>${member.loginId}</td>
+										</tr>
+									</table>
 
-										<div class="card-body">
-											<div class="form-group">
-												<label for="name">이름:</label> <input class="form-control"
-													type="text" name="name" value="${member.name}">
-											</div>
-											<div class="form-group">
-												<label for="email">이메일:</label> <input class="form-control"
-													type="text" name="email" value="${member.email}">
-											</div>
-											<div class="form-group">
-												<label for="address">주소:</label> <input class="form-control"
-													type="text" name="address" value="${member.address}">
-											</div>
-											<div class="form-group">
-												<label for="age">나이:</label> <input class="form-control"
-													type="text" name="age" value="${member.age}">
-											</div>
+									<div class="card-body">
+										<div class="form-group">
+											<label for="name">이름:</label> <input class="form-control"
+												type="text" name="name" value="${member.name}">
 										</div>
+										<div class="form-group">
+											<label for="email">이메일:</label> <input class="form-control"
+												type="text" name="email" value="${member.email}">
+										</div>
+										<div class="form-group">
+											<label for="address">주소:</label> <input class="form-control"
+												type="text" name="address" value="${member.address}">
+										</div>
+										<div class="form-group">
+											<label for="age">나이:</label> <input class="form-control"
+												type="text" name="age" value="${member.age}">
+										</div>
+									</div>
 								</c:when>
 								<c:otherwise>
 									<p>회원 정보가 없습니다.</p>
@@ -259,166 +259,48 @@ th {
 									</form>
 								</div>
 
-								<div class="float-right">
-								</div>
+								<div class="float-right"></div>
 							</div>
-
 						</div>
-
 					</div>
+
+
 					<div class="card">
 						<div class="card-header">
 							<h3 class="card-title">댓글목록</h3>
+							
 						</div>
 
-						<div class="card-body">
-							<div id="jsGrid1" class="jsgrid"
-								style="position: relative; height: 100%; width: 100%;">
-								<div class="jsgrid-grid-header jsgrid-header-scrollbar">
-									<table class="jsgrid-table">
-										<tr class="jsgrid-header-row">
-											<th class="jsgrid-header-cell jsgrid-header-sortable"
-												style="width: 150px;">Name</th>
-											<th
-												class="jsgrid-header-cell jsgrid-align-right jsgrid-header-sortable"
-												style="width: 50px;">Age</th>
-											<th class="jsgrid-header-cell jsgrid-header-sortable"
-												style="width: 200px;">Address</th>
-											<th
-												class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-												style="width: 100px;">Country</th>
-											<th
-												class="jsgrid-header-cell jsgrid-align-center jsgrid-header-sortable"
-												style="width: 100px;">Is Married</th>
+						<div class="card-body table-responsive p-0">
+							<table class="table table-hover text-nowrap">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>아이디</th>
+										<th>댓글내용</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${empty cdatas}">
+										<tr>
+											<td colspan="1">작성된 댓글이 없습니다.</td>
 										</tr>
-										<tr class="jsgrid-filter-row" style="display: none;">
-											<td class="jsgrid-cell" style="width: 150px;"><input
-												type="text"></td>
-											<td class="jsgrid-cell jsgrid-align-right"
-												style="width: 50px;"><input type="number"></td>
-											<td class="jsgrid-cell" style="width: 200px;"><input
-												type="text"></td>
-											<td class="jsgrid-cell jsgrid-align-center"
-												style="width: 100px;"><select>
-													<option value="0"></option>
-													<option value="1">United States</option>
-													<option value="2">Canada</option>
-													<option value="3">United Kingdom</option>
-													<option value="4">France</option>
-													<option value="5">Brazil</option>
-													<option value="6">China</option>
-													<option value="7">Russia</option>
-											</select></td>
-											<td class="jsgrid-cell jsgrid-align-center"
-												style="width: 100px;"><input type="checkbox"
-												readonly=""></td>
-										</tr>
-										<tr class="jsgrid-insert-row" style="display: none;">
-											<td class="jsgrid-cell" style="width: 150px;"><input
-												type="text"></td>
-											<td class="jsgrid-cell jsgrid-align-right"
-												style="width: 50px;"><input type="number"></td>
-											<td class="jsgrid-cell" style="width: 200px;"><input
-												type="text"></td>
-											<td class="jsgrid-cell jsgrid-align-center"
-												style="width: 100px;"><select>
-													<option value="0"></option>
-													<option value="1">United States</option>
-													<option value="2">Canada</option>
-													<option value="3">United Kingdom</option>
-													<option value="4">France</option>
-													<option value="5">Brazil</option>
-													<option value="6">China</option>
-													<option value="7">Russia</option>
-											</select></td>
-											<td class="jsgrid-cell jsgrid-align-center"
-												style="width: 100px;"><input type="checkbox"></td>
-										</tr>
-									</table>
-								</div>
-								<div class="jsgrid-grid-body" style="height: 300px;">
-									<table class="jsgrid-table">
-										<tbody>
-											<tr class="jsgrid-row">
-												<td class="jsgrid-cell" style="width: 150px;">Otto Clay</td>
-												<td class="jsgrid-cell jsgrid-align-right"
-													style="width: 50px;">61</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap
-													#897-1459 Quam Avenue</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;">China</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;"><input type="checkbox"
-													disabled=""></td>
-											</tr>
-											<tr class="jsgrid-alt-row">
-												<td class="jsgrid-cell" style="width: 150px;">Connor
-													Johnston</td>
-												<td class="jsgrid-cell jsgrid-align-right"
-													style="width: 50px;">73</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap
-													#370-4647 Dis Av.</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;">Russia</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;"><input type="checkbox"
-													disabled=""></td>
-											</tr>
-											<tr class="jsgrid-row">
-												<td class="jsgrid-cell" style="width: 150px;">Lacey
-													Hess</td>
-												<td class="jsgrid-cell jsgrid-align-right"
-													style="width: 50px;">29</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap
-													#365-8835 Integer St.</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;">Russia</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;"><input type="checkbox"
-													disabled=""></td>
-											</tr>
-											<tr class="jsgrid-alt-row">
-												<td class="jsgrid-cell" style="width: 150px;">Timothy
-													Henson</td>
-												<td class="jsgrid-cell jsgrid-align-right"
-													style="width: 50px;">78</td>
-												<td class="jsgrid-cell" style="width: 200px;">911-5143
-													Luctus Ave</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;">United States</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;"><input type="checkbox"
-													disabled=""></td>
-											</tr>
-											<tr class="jsgrid-row">
-												<td class="jsgrid-cell" style="width: 150px;">Ramona
-													Benton</td>
-												<td class="jsgrid-cell jsgrid-align-right"
-													style="width: 50px;">43</td>
-												<td class="jsgrid-cell" style="width: 200px;">Ap
-													#614-689 Vehicula Street</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;">Brazil</td>
-												<td class="jsgrid-cell jsgrid-align-center"
-													style="width: 100px;"><input type="checkbox"
-													disabled=""></td>
-											</tr>
+									</c:if>
 
-										</tbody>
-									</table>
-								</div>
-
-							</div>
-							<div class="jsgrid-load-shader"
-								style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div>
-							<div class="jsgrid-load-panel"
-								style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please,
-								wait...</div>
+									<c:forEach var="data" items="${cdatas}" varStatus="loop">
+										<tr>
+											<td>${loop.index + 1}</td>
+											<td>${data.loginId}</td>
+											<td>${data.content}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 						</div>
+
 					</div>
 
 				</div>
-				
 		</div>
 		<!-- /.container-fluid -->
 		</section>

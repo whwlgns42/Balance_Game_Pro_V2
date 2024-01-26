@@ -242,7 +242,8 @@
 
 
 										<input type="hidden" name="qid" value="${qDTO.qId}" />
-										<button type="submit" class="btn btn-block btn-primary">문제수정</button>
+										<button type="submit" class="btn btn-block btn-primary"
+											style="margin-bottom: 10px; margin-top: 10px;">문제수정</button>
 								</form>
 								<form action="adminTitleDelete.do" method="POST">
 									<input type="hidden" name="qid" value="${qDTO.qId}" />

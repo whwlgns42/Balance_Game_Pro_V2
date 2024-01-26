@@ -310,11 +310,11 @@ th {
 											</c:if>
 
 											<c:forEach var="data" items="${qdatas_f}">
-												<tr>
+												<tr
+													onclick="location.href = 'adminTitleDetaileAccessPage.do?qid=${data.qId}'">
 													<td>${data.qId}</td>
 													<td>${data.writer}</td>
-													<td><a
-														href="adminTitleDetaileAccessPage.do?qid=${data.qId}">${data.title}</a></td>
+													<td>${data.title}</td>
 													<td>${data.regdate}</td>
 												</tr>
 											</c:forEach>

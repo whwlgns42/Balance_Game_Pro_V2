@@ -277,6 +277,7 @@ th {
 					<!-- Main row -->
 					<div class="row">
 						<div class="col-12">
+
 							<div class="card">
 								<div class="card-header">
 									<h3 class="card-title">문제목록</h3>
@@ -314,12 +315,11 @@ th {
 													<td colspan="1">출제된 문제가 없습니다.</td>
 												</tr>
 											</c:if>
-
 											<c:forEach var="data" items="${qdatas_t}">
-												<tr>
-													<td>${data.qId}</a></td>
+												<tr onclick="location.href = 'adminTitleDetailPage.do?qid=${data.qId}'">
+													<td>${data.qId}</td>
 													<td>${data.writer}</td>
-													<td><a href="adminTitleDetailPage.do?qid=${data.qId}">${data.title}</a></td>
+													<td>${data.title}</td>
 													<td>${data.explanation}</td>
 												</tr>
 											</c:forEach>
