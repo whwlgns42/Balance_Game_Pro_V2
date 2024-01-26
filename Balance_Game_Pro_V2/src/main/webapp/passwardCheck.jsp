@@ -19,7 +19,7 @@
 
 		<!-- Intro -->
 		<section style="align-content: center;" id="intro" class="wrapper style1 fullscreen fade-up">
-			<a style="text-decoration: none;border: none;margin-top: -150px;" href="main.do"><img style="margin-right: 200px;margin-top: -133px;margin-left: 50px;" src="images/logo.png" height="150" width="150"></a>
+			<a style="text-decoration: none;border: none;margin-top: -150px;" href="main.do"><img style="margin-right: 200px;margin-top: -100px;margin-left: 50px;" src="images/logo.png" height="150" width="150"></a>
 			<div class="inner">
 				<h1>본인 확인</h1>
 				<form action="pwCheck.do" method="POST">

@@ -45,8 +45,8 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </script>
 	<%-- Sidebar--%>
 	<section id="sidebar">
-	<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px; margin-top: -20px;" src="images/logo.png" height="150" width="150"></a>
 		<div class="inner">
+	<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px; margin-top: -20px;" src="images/logo.png" height="150" width="150"></a>
 			<nav>
 				<ul>
 					<li><a href="#intro">회원가입</a></li>

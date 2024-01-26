@@ -14,11 +14,11 @@
 </head>
 <body class="is-preload">
 	<!-- Sidebar -->
-	<section id="sidebar">
-		<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px; margin-top: -20px;" src="images/logo.png" height="150" width="150"></a>
-		<div class="inner">
+	<section id="sidebar" style="margin-top: -120px;">
+		<div class="inner" style="height: 300px; ">
+		<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px;  "  src="images/logo.png" height="150" width="150"></a>
 			<nav>
-				<ul>
+				<ul style="margin-top: 145px;">
 					<c:if test="${empty loginId }">
 						<li><a href="#">문제 목록</a></li>
 						<li><a href="loginPage.do">문제 출제</a></li>
