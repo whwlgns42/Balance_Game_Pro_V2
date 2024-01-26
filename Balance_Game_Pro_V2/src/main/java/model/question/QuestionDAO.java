@@ -12,8 +12,10 @@ public class QuestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL_TRUE = "SELECT\r\n" + "    Q.QID, Q.TITLE, C.CATEGORY,\r\n"
-			+ "    COALESCE(S.SID, 0) AS SAVE_SID \r\n" + "FROM\r\n" + "    QUESTIONS Q\r\n" + "JOIN\r\n"
+	private static final String SELECTALL_TRUE = "SELECT\r\n" 
+			+ "    Q.QID, Q.TITLE, C.CATEGORY,\r\n"
+			+ "    COALESCE(S.SID, 0) AS SAVE_SID \r\n" + "FROM\r\n"
+			+ "    QUESTIONS Q\r\n" + "JOIN\r\n"
 			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT OUTER JOIN\r\n"
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.Q_ACCESS = 'T'";
 	
@@ -60,7 +62,7 @@ public class QuestionDAO {
 
 	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
-			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,EXPLANATION=?,CATEGORY=?,Q_ACCESS=? \r\n" + "WHERE QID=?";
+			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=? \r\n" + "WHERE QID=?";
 
 	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET Q_ACCESS='T' WHERE QID=?";
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
@@ -295,9 +297,8 @@ public class QuestionDAO {
 				pstmt.setString(1, qDTO.getTitle());
 				pstmt.setString(2, qDTO.getAnswer_A());
 				pstmt.setString(3, qDTO.getAnswer_B());
-				pstmt.setString(4, qDTO.getExplanation());
-				pstmt.setInt(5, qDTO.getCategory());
-				pstmt.setString(6, qDTO.getqAccess());
+				pstmt.setInt(4, qDTO.getCategory());
+				pstmt.setInt(5, qDTO.getqId());
 				int rs=pstmt.executeUpdate();
 				if(rs<=0) {
 					return false;

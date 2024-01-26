@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
@@ -14,19 +15,57 @@
 </style>
 <title>후원하기</title>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript"
+	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- 클래식 에디터 -->
+<script
+	src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+<style>
+.ck.ck-editor {
+	max-width: 500px;
+}
+
+.ck-editor__editable {
+	min-height: 300px;
+}
+/* 팝업 창 스타일 */
+#myModal {
+	display: none; /* 처음에는 숨겨진 상태로 설정 */
+	position: fixed; /* 화면에 고정된 위치에 표시 */
+	top: 50px; /* 오른쪽 위로부터의 거리 */
+	right: 50px; /* 오른쪽으로부터의 거리 */
+	background-color: white; /* 배경색을 흰색으로 설정 */
+	padding: 20px;
+	border-radius: 10px;
+	z-index: 1000; /* 다른 요소들보다 위에 표시되도록 설정 */
+}
+
+#myModal .closeButton {
+	position: absolute; /* 위치를 절대 위치로 설정 */
+	top: 10px; /* 위쪽으로부터의 거리 */
+	right: 10px; /* 오른쪽으로부터의 거리 */
+	cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 모양으로 설정 */
+}
+</style>
 </head>
+
 
 <body class="is-preload">
 	<c:if test="${empty loginId}">
-		<c:redirect url="alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do"></c:redirect>
+		<c:redirect
+			url="alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do"></c:redirect>
 	</c:if>
 	<!-- Header -->
 	<header id="header">
@@ -36,6 +75,18 @@
 				<c:if test="${not empty loginId }">
 					<li><a href="loginPage.do" class="active">로그아웃</a></li>
 					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+					<button id="popupButton">팝업 열기</button>
+					<div id="myModal" class="modal"
+						style="display: none; position: fixed; top: 50px; right: 50px; background-color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+						<span class="closeButton"
+							style="position: absolute; top: 10px; right: 10px; cursor: pointer;"
+							onclick="closeModal()">&times;</span>
+						<!-- 모달 닫기 버튼 -->
+						<div id="classic">
+							<p>This is some sample content.</p>
+						</div>
+						<button id="submitButton">전송</button>
+					</div>
 				</c:if>
 			</ul>
 		</nav>
@@ -52,17 +103,19 @@
 				<h2>오늘의 후원 랭킹</h2>
 				<table>
 					<tr>
-						<td>
-							<c:forEach var="data" items="${datas}" varStatus="loop">
+						<td><c:forEach var="data" items="${datas}" varStatus="loop">
 								<c:choose>
 									<c:when test="${loop.index + 1 == 1}">
-										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+										<img alt="${loop.index + 1}위"
+											src="images/${loop.index + 1}위.gif" width="25" height="25">
 									</c:when>
 									<c:when test="${loop.index + 1 == 2}">
-										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+										<img alt="${loop.index + 1}위"
+											src="images/${loop.index + 1}위.gif" width="25" height="25">
 									</c:when>
 									<c:when test="${loop.index + 1 == 3}">
-										<img alt="${loop.index + 1}위" src="images/${loop.index + 1}위.gif" width="25" height="25">
+										<img alt="${loop.index + 1}위"
+											src="images/${loop.index + 1}위.gif" width="25" height="25">
 									</c:when>
 									<c:otherwise>
             							${loop.index + 1}위
@@ -70,8 +123,7 @@
 								</c:choose>
    										 ${data.loginId}님이
     							<fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
-							</c:forEach>
-						</td>
+							</c:forEach></td>
 					</tr>
 				</table>
 				<div class="button-container">
@@ -196,7 +248,39 @@
         });
     });
 </script>
+	<script>
+        var modalOpen = false; // 팝업 상태 변수 초기화
+        var editor = null; // 에디터 객체 변수 초기화
 
-	<!-- 후원하기 카카오페이  -->
+        document.getElementById('popupButton').addEventListener('click', function() {
+            if (!modalOpen) { // 팝업이 열려있지 않은 경우에만 열기
+                document.getElementById('myModal').style.display = 'block'; // 모달 표시
+                if (!editor) { // 에디터 객체가 없는 경우에만 생성
+                    editor = ClassicEditor
+                        .create( document.querySelector( '#classic' ))
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                }
+                modalOpen = true; // 팝업 상태 변경
+            }
+        });
+
+        function closeModal() {
+            document.getElementById('myModal').style.display = 'none'; // 모달 숨김
+            modalOpen = false; // 팝업 상태 변경
+            if (editor) { // 에디터 객체가 있는 경우에만 초기화
+                editor.destroy().then( () => {
+                    editor = null; // 에디터 객체 초기화
+                } );
+            }
+        }
+
+        document.getElementById('submitButton').addEventListener('click', function() {
+            var content = editor.getData(); // 에디터의 내용을 가져옴
+            // content를 서버로 전송하는 코드 작성
+            console.log(content); // 예시로 콘솔에 출력
+        });
+    </script>
 </body>
 </html>

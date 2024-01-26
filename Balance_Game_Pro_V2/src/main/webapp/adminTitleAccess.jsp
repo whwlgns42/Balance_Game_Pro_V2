@@ -116,10 +116,12 @@ th {
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
-					href="#" role="button"> <img src="images/123.jpg" alt="Menu"
-						width="30" height="30">
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
+						alt="Menu" width="30" height="30">
 				</a></li>
-				<li class>문제 승인 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block">문제관리 페이지</li>
+				<li class="nav-item d-none d-sm-inline-block"><a
+					href="logout.do" class="nav-link">로그아웃</a></li>
 			</ul>
 
 			<!-- Right navbar links -->
@@ -145,7 +147,7 @@ th {
 		<!-- Main Sidebar Container -->
 		<aside class="main-sidebar sidebar-dark-primary elevation-4">
 			<!-- Brand Logo -->
-			<a href="index3.html" class="brand-link"> <img
+			<a href="adminPage.do" class="brand-link"> <img
 				src="images/logo.jpg" alt="AdminLTE Logo"
 				class="brand-image img-circle elevation-3" style="opacity: .8">
 				<span class="brand-text font-weight-light">관리자</span>
@@ -172,16 +174,16 @@ th {
 								</p>
 						</a>
 							<ul class="nav nav-treeview">
-								<li class="nav-item"><a href="./index.html"
-									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="index2.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do"
+									class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
-								<li class="nav-item"><a href="index3.html" class="nav-link">
-										<i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminTitleManagementPage.do"
+									class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
 							</ul></li>
@@ -281,8 +283,10 @@ th {
 								<div class="card-header">
 									<h3 class="card-title">문제승인목록</h3>
 									<div class="card-tools">
+
 										<div class="input-group input-group-sm" style="width: 100px;">
-											<button>문제출제</button>
+											<a href="adminCreateTitlePage.do"><button type="button"
+													class="btn btn-block btn-primary">문제출제</button></a>
 											<div class="input-group-append"></div>
 										</div>
 									</div>
@@ -304,14 +308,13 @@ th {
 													<td colspan="1">출제문제가 없습니다</td>
 												</tr>
 											</c:if>
-									
+
 											<c:forEach var="data" items="${qdatas_f}">
 												<tr>
-													<td>
-													<a href="adminTitleDetaileAccessPage.do?qid=${data.qId}">${data.qId}</a>
-													</td>
+													<td>${data.qId}</td>
 													<td>${data.writer}</td>
-													<td>${data.title}</td>
+													<td><a
+														href="adminTitleDetaileAccessPage.do?qid=${data.qId}">${data.title}</a></td>
 													<td>${data.regdate}</td>
 												</tr>
 											</c:forEach>

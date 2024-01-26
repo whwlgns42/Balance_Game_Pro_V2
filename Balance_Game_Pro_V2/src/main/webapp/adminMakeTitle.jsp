@@ -196,7 +196,7 @@
 								<form action="adminTitleCreate.do" method="POST">
 									<div class="card-body">
 										<div class="form-group">
-										<%-- <input hidden="" value="<%=()%>" name="writer"> --%>
+											<%-- <input hidden="" value="<%=()%>" name="writer"> --%>
 											<label for="inputName">제목</label> <input type="text"
 												id="inputName" class="form-control" name="title">
 										</div>
@@ -225,9 +225,11 @@
 										</select>
 									</div> -->
 										<div class="form-check">
+											<input type="hidden" name="category" value="0">
+											<!-- 기본적으로 0을 전송할 hidden input -->
 											<input type="checkbox" class="form-check-input"
-												id="exampleCheck1" name="category" value="1"> <label
-												class="form-check-label" for="exampleCheck1">19 문제</label>
+												id="adultCheck" name="category" value="1"> <label
+												class="form-check-label" for="adultCheck">19 문제</label>
 										</div>
 
 										<button type="submit" class="btn btn-block btn-primary">문제출제</button>

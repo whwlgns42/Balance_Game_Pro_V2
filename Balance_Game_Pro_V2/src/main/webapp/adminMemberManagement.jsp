@@ -314,7 +314,8 @@ th {
 
 											<c:forEach var="data" items="${member}">
 												<tr>
-													<td><a href="adminMemberDetailPage.do?loginId=${data.loginId}">${data.loginId}</a></td>
+													<td><a
+														href="adminMemberDetailPage.do?loginId=${data.loginId}">${data.loginId}</a></td>
 													<td>${data.address}</td>
 													<td>${data.email}</td>
 													<td>${data.age}</td>
@@ -358,7 +359,18 @@ th {
 		<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
-
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var checkbox = document.getElementById('exampleCheck1');
+			checkbox.addEventListener('change', function() {
+				if (this.checked) {
+					this.value = '1'; // 체크되었을 때 1로 변경
+				} else {
+					this.value = '0'; // 체크 해제되었을 때 0으로 변경
+				}
+			});
+		});
+	</script>
 	<!-- jQuery -->
 	<script src="adminLte/plugins/jquery/jquery.min.js"></script>
 	<!-- jQuery UI 1.11.4 -->

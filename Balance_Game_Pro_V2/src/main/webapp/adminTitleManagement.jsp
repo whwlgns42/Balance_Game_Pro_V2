@@ -314,15 +314,14 @@ th {
 													<td colspan="1">출제된 문제가 없습니다.</td>
 												</tr>
 											</c:if>
-											
+
 											<c:forEach var="data" items="${qdatas_t}">
 												<tr>
-												<td><a
-													href="adminTitleDetailPage.do?qid=${data.qId}">${data.qId}</a></td>
-												<td>${data.writer}</td>
-												<td>${data.title}</td>
-												<td>${data.explanation}</td>
-											</tr>
+													<td>${data.qId}</a></td>
+													<td>${data.writer}</td>
+													<td><a href="adminTitleDetailPage.do?qid=${data.qId}">${data.title}</a></td>
+													<td>${data.explanation}</td>
+												</tr>
 											</c:forEach>
 										</tbody>
 									</table>
