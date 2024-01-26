@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%><%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -44,7 +43,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<common:logo></common:logo>
+		<a href="main.do" class="title">자비스</a>
 		<nav>
 			<ul>
 				<c:if test="${not empty loginId }">
@@ -72,7 +71,7 @@
 					</c:if>
 					<c:forEach var="data" items="${sdatas}">
 						<tr>
-							<td><a href="wishListPage.do?qid=${data.qid}">${data.qid}</a></td>
+							<td><a href="wishListDetailPage.do?sid=${data.sId}">${data.sId}</a></td>
 							<td>${data.saveTitle}</td>
 							<td>${data.saveWriter}</td>
 						<tr>
