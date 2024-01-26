@@ -20,13 +20,13 @@
 			<nav>
 				<ul style="margin-top: 145px;">
 					<c:if test="${empty loginId }">
-						<li><a href="#">문제 목록</a></li>
+						<li><a href="titleListPage.do">문제 목록</a></li>
 						<li><a href="loginPage.do">문제 출제</a></li>
 						<li><a href="loginPage.do">찜목록</a></li>
 						<li><a href="loginPage.do">후원 랭킹</a></li>
 					</c:if>
 					<c:if test="${not empty loginId }">
-						<li><a href="#intro">문제 목록</a></li>
+						<li><a href="titleListPage.do">문제 목록</a></li>
 						<li><a href="makeTitlePage.do">문제 출제</a></li>
 						<li><a href="wishListPage.do">찜목록</a></li>
 						<li><a href="sponsorPage.do">후원 랭킹</a></li>

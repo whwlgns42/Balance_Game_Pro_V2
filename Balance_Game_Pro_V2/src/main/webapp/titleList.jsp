@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
+
 <!DOCTYPE HTML>
 <!--
    Hyperspace by HTML5 UP
@@ -65,12 +68,12 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="index.html" class="title">밸런스게임</a>
+		<common:logo></common:logo>
 		<nav>
 			<ul>
 				<c:if test="${not empty loginId }">
-					<li><a href="loginout.do">로그아웃</a></li>
-					<li><a href="">joinMembership</a></li>
+					<li><a href="logout.do" class="active">로그아웃</a></li>
+					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</nav>
@@ -84,54 +87,21 @@
 			<div class="inner">
 				<h1 class="major">문제 목록</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
-				<body>
-					<div class="button-container1">
-						<button>titleCreate</button>
-						<br>
-					</div>
-					<div class="button-container">
-						<button>title button 1</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 2</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 3</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 4</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 5</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 6</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 7</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 8</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 9</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-						<button>title button 10</button>
-						<button class="special-button">game</button>
-						<button class="special-button2">result</button>
-						<br>
-					</div>
-				</body>
+				<div class="button-container1">
+					<button onclick="location.href = 'gamePage.do'">게임하기</button>
+					<br>
+				</div>
+				<div class="button-container">
+					<%-- <c:if test="${fn:length(qDatas) <= 0 }">
+						등록된 문제가 없습니다.
+					</c:if> --%>
+					<c:forEach var="data" items="${qDatas}" varStatus="loop">
+						<div style="margin-bottom: 8px;">
+							${loop.index + 1}. ${data.title}<br>
+						</div>
+					</c:forEach>
+
+				</div>
 
 			</div>
 		</section>
