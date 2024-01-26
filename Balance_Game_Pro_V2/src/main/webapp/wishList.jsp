@@ -66,12 +66,15 @@
 			<div class="inner">
 				<h1 class="major">찜목록</h1>
 				<div class="button-container">
-					<c:if test="${fn:length(sdatas) <= 0}">
+					<c:if test="${empty sdatas}">
 						찜목록이 없습니다.
 					</c:if>
-					<c:forEach var="data" items="${sdatas}" varStatus="loop">
-						<button>title button ${loop.inedx + 1}</button>
-						<br>
+					<c:forEach var="data" items="${sdatas}">
+						<tr>
+							<td><a href="wishListPage.do?qid=${data.qid}">${data.qid}</a></td>
+							<td>${data.saveTitle}</td>
+							<td>${data.saveWriter}</td>
+						<tr>
 					</c:forEach>
 				</div>
 

@@ -36,6 +36,7 @@ public class SaveDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				SaveDTO dto = new SaveDTO();
+				dto.setqId(rs.getInt("QID"));
 				dto.setSaveTitle(rs.getString("TITLE"));
 				dto.setSaveWriter(rs.getString("WRITER"));
 				datas.add(dto);
