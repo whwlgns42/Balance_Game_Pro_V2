@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>에러 페이지</title>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 body {
 	margin: 0;
@@ -24,4 +25,31 @@ img {
 <body>
 	<img src="images/error404.jpg">
 </body>
+<script>
+
+let timerInterval;
+Swal.fire({
+  title: "어???",
+  html: "잠시만 기다려주세요...",
+  timer: 2000,
+  timerProgressBar: true,
+  didOpen: () => {
+    Swal.showLoading();
+    const timer = Swal.getPopup().querySelector("b");
+    timerInterval = setInterval(() => {
+      timer.textContent = `${Swal.getTimerLeft()}`;
+    }, 100);
+  },
+  willClose: () => {
+    clearInterval(timerInterval);
+  }
+}).then((result) => {
+  /* Read more about handling dismissals below */
+  if (result.dismiss === Swal.DismissReason.timer) {
+	  Swal.fire("메인페이지로 이동합니다.!").then((result) => {
+		 location.href= 'main.do';
+		});
+  }
+});
+</script>
 </html>
