@@ -30,7 +30,7 @@
 	</c:if>
 	<!-- Header -->
 	<header id="header">
-		<a href="main.do" class="title">밸런스게임</a>
+		<common:logo></common:logo>
 		<nav>
 			<ul>
 				<c:if test="${not empty loginId }">

@@ -1,9 +1,10 @@
 <%@page import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
 <%@page import="model.question.QuestionDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
+
 <!DOCTYPE HTML>
 <!--
 	Hyperspace by HTML5 UP
@@ -14,8 +15,7 @@
 <head>
 <title>게임 페이지</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -53,7 +53,7 @@
 }
 
 #answer_A, #answer_B {
-/* 	padding-left:20px;
+	/* 	padding-left:20px;
 	padding-right:20px; */
 	border: 50px;
 	border-color: black;
@@ -64,7 +64,7 @@
 	font-size: 30px;
 	font-weight: 100px;
 	/* width: 200px; */
-	min-width :200px;
+	min-width: 200px;
 	height: 200px;
 	letter-spacing: normal;
 	line-height: normal;
@@ -84,20 +84,21 @@
 #answer_B:hover {
 	background-color: #FFB900;
 }
+
 ul.actions #input {
-    width: 70%;
+	width: 70%;
 }
+
 ul.actions {
-    margin: 0 auto;
+	margin: 0 auto;
 }
-#comment{
-	width:60%;
+
+#comment {
+	width: 60%;
 	margin: 0 auto;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -311,17 +312,17 @@ ul.actions {
 	%> --%>
 	<!-- Header -->
 	<header id="header">
-		<a href="main.do" class="title">자비스</a>
+		<common:logo></common:logo>
 		<nav>
 			<c:if test="${loginId ==null}">
 				<ul>
-					<li><a href="loginPage.do">로그인</a></li>
+					<li><a href="loginPage.do" class="active">로그인</a></li>
 					<li><a href="joinPage.do" class="active">회원가입</a></li>
 				</ul>
 			</c:if>
 			<c:if test="${loginId !=null}">
 				<ul>
-					<li><a href="logout.do">로그아웃</a></li>
+					<li><a href="logout.do" class="active">로그아웃</a></li>
 					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 				</ul>
 			</c:if>
@@ -352,10 +353,8 @@ ul.actions {
 
 
 				<div class="inner">
-					<button class="answer" id="answer_A" type="button" value="A">
-						${data.getAnswer_A()}</button>
-					<button class="answer" id="answer_B" type="button" value="B">
-						${data.getAnswer_B()}</button>
+					<button class="answer" id="answer_A" type="button" value="A">${data.getAnswer_A()}</button>
+					<button class="answer" id="answer_B" type="button" value="B">${data.getAnswer_B()}</button>
 
 				</div>
 			</div>
@@ -366,25 +365,25 @@ ul.actions {
 
 	<div id="wrapper">
 		<div class="inner" id="comment">
-		
-<!-- 		<button id="prev">이전</button> -->
 
-		<button id="next">다음</button>
+			<!-- 		<button id="prev">이전</button> -->
 
-		
-		
+			<button id="next">다음</button>
+
+
+
 			<c:if test="${loginId !=null}">
 
-			
+
 				<ul class="actions">
-			<li id="input"><div id='apple'>
-				<input type="text" placeholder="댓글을 입력하세요" id="inputContent">
-			</div></li>
-			<li><button class="button" id="write">작성</button></li>
-		</ul>
+					<li id="input"><div id='apple'>
+							<input type="text" placeholder="댓글을 입력하세요" id="inputContent">
+						</div></li>
+					<li><button class="button" id="write">작성</button></li>
+				</ul>
 
 			</c:if>
-			
+
 			<div class="table-wrapper" id="table">
 				<table>
 					<thead>

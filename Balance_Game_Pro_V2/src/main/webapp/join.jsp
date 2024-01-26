@@ -45,6 +45,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 </script>
 	<%-- Sidebar--%>
 	<section id="sidebar">
+	<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px; margin-top: -20px;" src="images/logo.png" height="150" width="150"></a>
 		<div class="inner">
 			<nav>
 				<ul>
@@ -100,7 +101,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 								<div class="col-12">
 									<label for="address">주소</label>
-									<input type="text" name="address" id="address" readonly/>
+									<input type="text" name="address" id="address" readonly />
 								</div>
 
 								<div class="col-12">
@@ -263,17 +264,19 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         }
 
         // 모든 조건을 통과하면 회원가입 진행
-        if (authStatus <= 0 || authStatus <= 0) { /* authStatus : 인증성공여부  */
+        if (authStatus <= 0 ) { /* authStatus : 인증성공여부  */
             showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
             return false;
         }
         
+        // 인증번호 미 입력시 예외처리
        	if(!authNumCk) {
-            showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
+            showError("인증확인", "인증번호를 입력해주세요");
             return false;
        		
        	}        
        
+        // 아이디 중복체크 확인여부 
         if(useIdCheck == 0) {
             showError("중복", "중복된 아이디 입니다");
             return false;
@@ -281,6 +284,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         return true;
     }
 
+    // 경고 메세지
     function showError(title, text) {
         Swal.fire({
             title: title,
@@ -289,6 +293,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         });
     }
     
+    // 성공 메세지
     function showSuccess(title, text) {
         Swal.fire({
             title: title,

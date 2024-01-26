@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%><%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -43,7 +44,7 @@
 
 	<!-- Header -->
 	<header id="header">
-		<a href="main.do" class="title">자비스</a>
+		<common:logo></common:logo>
 		<nav>
 			<ul>
 				<c:if test="${not empty loginId }">

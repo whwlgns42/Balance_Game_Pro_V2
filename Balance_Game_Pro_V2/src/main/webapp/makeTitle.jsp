@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<style >
+<style>
 input {
-margin: inherit;
+	margin: inherit;
 }
 </style>
 <meta charset="utf-8" />
@@ -22,9 +23,10 @@ margin: inherit;
 
 <body class="is-preload">
 
-	<!-- Header -->
+	<!-- 헤더 -->
 	<header id="header">
-		<a href="main.do" class="title">밸런스게임</a>
+	<!-- 로고 -->
+		<common:logo></common:logo>
 		<nav>
 			<ul>
 				<li><a href="logout.do" class="active">로그아웃</a></li>
