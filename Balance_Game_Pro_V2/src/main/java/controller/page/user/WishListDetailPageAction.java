@@ -23,8 +23,10 @@ public class WishListDetailPageAction implements Action{
 		SaveDTO sDTO = new SaveDTO();
 		SaveDAO sDAO = new SaveDAO();
 		
-		sDTO.setqId(Integer.parseInt(request.getParameter("qid")));
+		sDTO.setsId(Integer.parseInt(request.getParameter("sid")));
+		System.out.println("sid: " + request.getParameter("sid"));
 		sDTO = sDAO.selectOne(sDTO);
+		System.out.println("sDTO: "+sDTO);
 		if(sDTO == null) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);

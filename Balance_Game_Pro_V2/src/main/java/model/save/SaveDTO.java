@@ -131,8 +131,11 @@ public class SaveDTO {
 	@Override
 	public String toString() {
 		return "SaveDTO [sId=" + sId + ", qId=" + qId + ", loginId=" + loginId + ", searchCondition=" + searchCondition
-				+ ", saveTitle=" + saveTitle + "]";
+				+ ", saveTitle=" + saveTitle + ", saveWriter=" + saveWriter + ", saveAnswer_A=" + saveAnswer_A
+				+ ", saveAnswer_B=" + saveAnswer_B + ", saveExplanation=" + saveExplanation + "]";
 	}
+
+
 
     
 }

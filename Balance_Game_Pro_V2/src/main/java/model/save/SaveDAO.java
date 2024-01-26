@@ -14,12 +14,11 @@ public class SaveDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT Q.TITLE, Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
+	private static final String SELECTALL = "SELECT S.SID, Q.TITLE, Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
 
-	private static final String SELECTONE="SELECT WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION FROM QUESTIONS WHERE QID=?";
+	private static final String SELECTONE="SELECT Q.WRITER, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.SID = ?";
 
-	private static final String INSERT = "INSERT INTO SAVE (SID, QID,LOGIN_ID) \r\n"
-			+ "VALUES((SELECT NVL(MAX(SID),0) + 1 FROM SAVE),?,?)";
+	private static final String INSERT = "INSERT INTO SAVE (SID, QID,LOGIN_ID) VALUES((SELECT NVL(MAX(SID),0) + 1 FROM SAVE),?,?)";
 
 	private static final String DELETE_QID_LID = "DELETE FROM SAVE WHERE QID=? AND LOGIN_ID=?";
 
@@ -36,7 +35,7 @@ public class SaveDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				SaveDTO dto = new SaveDTO();
-				dto.setqId(rs.getInt("QID"));
+				dto.setsId(rs.getInt("SID"));
 				dto.setSaveTitle(rs.getString("TITLE"));
 				dto.setSaveWriter(rs.getString("WRITER"));
 				datas.add(dto);
@@ -53,12 +52,12 @@ public class SaveDAO {
 		SaveDTO data=null;
 		try {
 			pstmt = conn.prepareStatement(SELECTONE);
-			pstmt.setInt(2, sDTO.getqId());
+			pstmt.setInt(1, sDTO.getsId());
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new SaveDTO();
-				data.setSaveTitle(rs.getString("TITLE"));
 				data.setSaveWriter(rs.getString("WRITER"));
+				data.setSaveTitle(rs.getString("TITLE"));
 				data.setSaveAnswer_A(rs.getString("ANSWER_A"));
 				data.setSaveAnswer_B(rs.getString("ANSWER_B"));
 				data.setSaveExplanation(rs.getString("EXPLANATION"));

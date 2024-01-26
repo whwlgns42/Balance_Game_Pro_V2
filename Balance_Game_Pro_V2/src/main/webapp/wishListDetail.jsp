@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<style >
+<style>
 input {
-margin: inherit;
+	margin: inherit;
 }
 </style>
 <meta charset="utf-8" />
@@ -39,19 +41,17 @@ margin: inherit;
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">문제 출제</h1>
-				<form action="makeTitle.do" method="POST" onsubmit="return validation()">
-					<label for="title">문제 입력:</label>
-					<input type="text" id="title" name="title" placeholder="문제 주제를 입력해주세요">
-					<label for="answer_A">선택지A 입력:</label>
-					<input type="text" id="answer_A" name="answer_A" placeholder="답변A를 입력해주세요">
-					<label for="answer_B">선택지B 입력:</label>
-					<input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요">
-					<label for="explanation">출제 이유:</label>
-					<input type="text" id="explanation" name="explanation" placeholder="출제 이유를 입력해주세요">
-					<input type="submit" value="문제생성">
-
-				</form>
+				<h1 class="major">${sDTO.saveTitle}</h1>
+				<h3>작성자: ${sDTO.saveWriter}</h3>
+				<table>
+					<tr>
+						<td>답변A: ${sDTO.saveAnswer_A}</td>
+						<td>답변B: ${sDTO.saveAnswer_B}</td>
+					</tr>
+				</table>
+				<ui>
+				<li>설명: ${sDTO.saveExplanation}</li>
+				</ui>
 			</div>
 		</section>
 	</div>
@@ -65,52 +65,6 @@ margin: inherit;
 			</ul>
 		</div>
 	</footer>
-	<script>
-		function validation() {
-
-			let title = $("#title").val();
-			let answer_A = $("#answer_A").val();
-			let answer_B = $("#answer_B").val();
-			let explanation = $("#explanation").val();
-
-			if (!title) {
-				Swal.fire({
-					title : "제목",
-					text : "문제 제목을 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-
-			if (!answer_A) {
-				Swal.fire({
-					title : "답변A",
-					text : "답변A를 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-
-			if (!answer_B) {
-				Swal.fire({
-					title : "답변B",
-					text : "답변B를 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-
-			if (!explanation) {
-				Swal.fire({
-					title : "문제설명",
-					text : "문제에 대한 설명을 입력해주세요.",
-					icon : "warning"
-				});
-				return false;
-			}
-			return true;
-		}
-	</script>
 	<!-- Scripts -->
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>

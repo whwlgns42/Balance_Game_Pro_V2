@@ -41,7 +41,6 @@ import controller.user.PwCheckAcion;
 import controller.user.ResignAction;
 import controller.user.ResultAction;
 import controller.user.SponsorAction;
-import controller.user.WishAction;
 
 public class HandlerMapper {
    // 멤버변수
@@ -59,7 +58,6 @@ public class HandlerMapper {
       mappings.put("/login.do", new LoginAction());
       mappings.put("/logout.do", new LogoutAction());
       mappings.put("/resignAction.do", new ResignAction());
-      mappings.put("/wish.do", new WishAction());
       mappings.put("/wishListPage.do", new WishListPageAction());
       mappings.put("/makeTitle.do", new MakeTitleAction());
       mappings.put("/makeTitlePage.do", new MakeTitlePageAction());
