@@ -17,8 +17,8 @@ body {
 }
 
 img {
-	width: 100%;
-	height: 100%;
+	width: 50%;
+	height: 50%;
 }
 </style>
 </head>
@@ -26,6 +26,9 @@ img {
 	<img src="images/error404.jpg">
 </body>
 <script>
+
+
+
 
 let timerInterval;
 Swal.fire({
@@ -44,12 +47,11 @@ Swal.fire({
     clearInterval(timerInterval);
   }
 }).then((result) => {
-  /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
 	  Swal.fire("메인페이지로 이동합니다.!").then((result) => {
 		 location.href= 'main.do';
 		});
   }
-});
+});  
 </script>
 </html>
