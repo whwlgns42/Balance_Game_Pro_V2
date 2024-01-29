@@ -223,6 +223,9 @@ ul.actions {
 						elem +="</tr>"; 
 						console.log(data.name);
 					});
+					if($("#noComment").length>0){	
+						$("#noComment").text("");
+					}
 					$("table tbody").append(elem);
 					//document.getElementById(".save").src="images/찜o.png";
 				},
