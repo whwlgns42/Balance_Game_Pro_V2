@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="crown"%>
 
 <!DOCTYPE HTML>
 <html>
@@ -15,23 +15,18 @@
 </style>
 <title>후원하기</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-<script type="text/javascript"
-	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <!-- 클래식 에디터 -->
-<script
-	src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/29.1.0/classic/ckeditor.js"></script>
 <style>
 .ck.ck-editor {
 	max-width: 500px;
@@ -64,8 +59,7 @@
 
 <body class="is-preload">
 	<c:if test="${empty loginId}">
-		<c:redirect
-			url="alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do"></c:redirect>
+		<c:redirect url="alert.do?status=fail&msg=로그인후 이용가능합니다.&redirect=loginPage.do"></c:redirect>
 	</c:if>
 	<!-- Header -->
 	<header id="header">
@@ -76,11 +70,8 @@
 					<li><a href="loginPage.do" class="active">로그아웃</a></li>
 					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
 					<button id="popupButton">팝업 열기</button>
-					<div id="myModal" class="modal"
-						style="display: none; position: fixed; top: 50px; right: 50px; background-color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
-						<span class="closeButton"
-							style="position: absolute; top: 10px; right: 10px; cursor: pointer;"
-							onclick="closeModal()">&times;</span>
+					<div id="myModal" class="modal" style="display: none; position: fixed; top: 50px; right: 50px; background-color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
+						<span class="closeButton" style="position: absolute; top: 10px; right: 10px; cursor: pointer;" onclick="closeModal()">&times;</span>
 						<!-- 모달 닫기 버튼 -->
 						<div id="classic">
 							<p>This is some sample content.</p>
@@ -103,27 +94,14 @@
 				<h2>오늘의 후원 랭킹</h2>
 				<table>
 					<tr>
-						<td><c:forEach var="data" items="${datas}" varStatus="loop">
-								<c:choose>
-									<c:when test="${loop.index + 1 == 1}">
-										<img alt="${loop.index + 1}위"
-											src="images/${loop.index + 1}위.gif" width="25" height="25">
-									</c:when>
-									<c:when test="${loop.index + 1 == 2}">
-										<img alt="${loop.index + 1}위"
-											src="images/${loop.index + 1}위.gif" width="25" height="25">
-									</c:when>
-									<c:when test="${loop.index + 1 == 3}">
-										<img alt="${loop.index + 1}위"
-											src="images/${loop.index + 1}위.gif" width="25" height="25">
-									</c:when>
-									<c:otherwise>
+						<td>
+							<c:forEach var="data" items="${datas}" varStatus="loop">
+								<crown:crown ranking="${data.ranking}" />
             							${loop.index + 1}위
-        							</c:otherwise>
-								</c:choose>
    										 ${data.loginId}님이
     							<fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
-							</c:forEach></td>
+							</c:forEach>
+						</td>
 					</tr>
 				</table>
 				<div class="button-container">

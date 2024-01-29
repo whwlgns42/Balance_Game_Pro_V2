@@ -57,7 +57,7 @@ public class CommentWriteAsync extends HttpServlet {
 		mDTO= mDAO.selectOne(mDTO);
 		
 		cDTO.setMemberName(mDTO.getName());
-		
+		cDTO.setGrade(mDTO.getGrade());
 		
 		Gson gson=new Gson();
 		String json =gson.toJson(cDTO);

@@ -16,6 +16,20 @@ public class SupportDAO {
 
 	private static final String SELECTALL = "SELECT S.LOGIN_ID, SUM(S.AMOUNT) \"TOTAL\", M.NAME FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID GROUP BY S.LOGIN_ID, M.NAME ORDER BY total DESC";
 
+	private static final String SELECTALL_RANKING ="SELECT \r\n"
+			+ "    S.LOGIN_ID, \r\n"
+			+ "    SUM(S.AMOUNT) AS \"TOTAL\", \r\n"
+			+ "    M.NAME, \r\n"
+			+ "    RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC) AS \"RANKING\"\r\n"
+			+ "FROM \r\n"
+			+ "    SUPPORT S \r\n"
+			+ "JOIN \r\n"
+			+ "    MEMBER M ON S.LOGIN_ID = M.LOGIN_ID \r\n"
+			+ "GROUP BY \r\n"
+			+ "    S.LOGIN_ID, M.NAME \r\n"
+			+ "ORDER BY \r\n"
+			+ "    \"RANKING\" ";
+	
 	public ArrayList<SupportDTO> selectAll(SupportDTO sDTO) {
 		ArrayList<SupportDTO> datas = new ArrayList<SupportDTO>();
 
@@ -23,7 +37,7 @@ public class SupportDAO {
 		try {
 			if (sDTO.getSearchCondition().equals("후원목록")) {
 				// 모델
-				pstmt = conn.prepareStatement(SELECTALL);
+				pstmt = conn.prepareStatement(SELECTALL_RANKING);
 
 			}
 			ResultSet rs = pstmt.executeQuery();
@@ -33,6 +47,7 @@ public class SupportDAO {
 				data.setTotal(rs.getInt("TOTAL"));
 				data.setLoginId(rs.getString("LOGIN_ID"));
 				data.setName(rs.getString("NAME"));
+				data.setRanking(rs.getInt("RANKING"));
 				datas.add(data);
 			}
 

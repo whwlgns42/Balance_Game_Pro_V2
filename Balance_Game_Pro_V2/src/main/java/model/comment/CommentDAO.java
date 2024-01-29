@@ -11,8 +11,32 @@ import model.util.JDBCUtil;
 public class CommentDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
-	private static final String SELECTALL_Q = "SELECT C.CID,C.QID,M.LOGIN_ID,C.CONTENT,M.NAME\r\n"
-			+ "FROM COMMENTS C\r\n" + "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n" + "WHERE C.QID=?";
+	   private static final String SELECTALL_Q = "WITH UserRanking AS (\r\n"
+	         + "    SELECT\r\n"
+	         + "        M.LOGIN_ID,\r\n"
+	         + "        RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC) AS RANKING\r\n"
+	         + "    FROM\r\n"
+	         + "        MEMBER M\r\n"
+	         + "    LEFT JOIN\r\n"
+	         + "        SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID\r\n"
+	         + "    GROUP BY\r\n"
+	         + "        M.LOGIN_ID\r\n"
+	         + ")\r\n"
+	         + "SELECT\r\n"
+	         + "    C.CID,\r\n"
+	         + "    C.QID,\r\n"
+	         + "    M.LOGIN_ID, M.GRADE, \r\n"
+	         + "    C.CONTENT,\r\n"
+	         + "    M.NAME,\r\n"
+	         + "    UR.RANKING\r\n"
+	         + "FROM\r\n"
+	         + "    COMMENTS C\r\n"
+	         + "LEFT JOIN\r\n"
+	         + "    MEMBER M ON C.LOGIN_ID = M.LOGIN_ID\r\n"
+	         + "LEFT JOIN\r\n"
+	         + "    UserRanking UR ON M.LOGIN_ID = UR.LOGIN_ID\r\n"
+	         + "WHERE\r\n"
+	         + "    C.QID = ?";
 	private static final String SELECTALL_M = "SELECT C.CID,C.QID,C.LOGIN_ID,C.CONTENT,M.NAME\r\n"
 			+ "FROM COMMENTS C\r\n" + "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n" + "WHERE C.LOGIN_ID=?";
 	private static final String INSERT = "INSERT INTO COMMENTS(CID,QID,LOGIN_ID,CONTENT)\r\n"
@@ -44,6 +68,8 @@ public class CommentDAO {
 				data.setLoginId(rs.getString("LOGIN_ID"));
 				data.setContent(rs.getString("CONTENT"));
 				data.setMemberName(rs.getString("NAME"));
+				data.setRanking(rs.getInt("RANKING"));
+				data.setGrade(rs.getString("GRADE"));
 				datas.add(data);
 			}
 

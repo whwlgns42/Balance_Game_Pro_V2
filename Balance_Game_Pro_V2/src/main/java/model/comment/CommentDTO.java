@@ -18,6 +18,27 @@ public class CommentDTO {
 	private String memberName;
 
 	private String memberLoginId;
+	
+	private String grade;
+	
+	private int ranking;
+
+	
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public int getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(int ranking) {
+		this.ranking = ranking;
+	}
 
 	public int getcId() {
 		return cId;
