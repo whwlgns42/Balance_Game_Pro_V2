@@ -204,9 +204,8 @@ ul.actions {
 					
 					var elem = "";
 					$.each(data, function(index,data) {
- 						elem +="<tr>";
-						if(typeof data.loginId  != "undefined"){ 
- 						elem +="<td>";
+ 						elem +="<tr> <td>";
+						if(typeof data.loginId  != "undefined"){
 							if(data.grade == 1){
 								elem +="<img src='images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
 							}else if(data.grade ==2){
@@ -218,7 +217,7 @@ ul.actions {
 							}
  							elem += data.memberName+"( "+data.loginId+" )</td>";
 						}else{
-							elem +="<td>탈퇴한 사용자</td>"
+							elem +="탈퇴한 사용자</td>"
 						}
  						elem +="<td>"+data.content+"</td>";
 						elem +="</tr>"; 
@@ -272,9 +271,8 @@ ul.actions {
 
 					var elem = "";
 					
- 					elem +="<tr>";
+ 					elem +="<tr> <td>";
 					if(data.grade==1){
- 						elem +="<td>";
 						elem += "<img src= 'images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
 					}else if(data.grade==2){
 						elem += "<img src= 'images/silverStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
