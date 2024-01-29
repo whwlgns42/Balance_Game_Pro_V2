@@ -204,8 +204,9 @@ ul.actions {
 					
 					var elem = "";
 					$.each(data, function(index,data) {
- 						elem +="<tr> <td>";
-						if(typeof data.loginId  != "undefined"){
+ 						elem +="<tr>";
+						if(typeof data.loginId  != "undefined"){ 
+ 						elem +="<td>";
 							if(data.grade == 1){
 								elem +="<img src='images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
 							}else if(data.grade ==2){
