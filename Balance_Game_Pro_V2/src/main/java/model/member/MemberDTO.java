@@ -1,194 +1,205 @@
 package model.member;
 
 public class MemberDTO {
-	private int mId;
+   private int mId;
 
-	private String loginId;
+   private String loginId;
 
-	private String mPw;
+   private String mPw;
 
-	private String name;
+   private String name;
 
-	private String email;
+   private String email;
 
-	private String address;
+   private String address;
 
-	private String gender;
+   private String gender;
 
-	private int age;
+   private int age;
 
-	private String grade;
+   private String grade;
 
-	private String mAdmin;
+   private String mAdmin;
 
-	private String cellPhone;
+   private String cellPhone;
 
-	//--------java--------
+   //--------java--------
 
-	private int ranking;
-	private String searchCondition;
-	 
+   private int ranking;
+   private int total;
+   private String searchCondition;
+    
 
-	public String getCellPhone() {
-		return cellPhone;
-	}
+   public String getCellPhone() {
+      return cellPhone;
+   }
 
 
 
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
-	}
+   public void setCellPhone(String cellPhone) {
+      this.cellPhone = cellPhone;
+   }
 
 
-	public int getmId() {
-		return mId;
-	}
+   public int getmId() {
+      return mId;
+   }
 
 
 
-	public void setmId(int mId) {
-		this.mId = mId;
-	}
+   public void setmId(int mId) {
+      this.mId = mId;
+   }
 
 
 
-	public String getLoginId() {
-		return loginId;
-	}
+   public String getLoginId() {
+      return loginId;
+   }
 
 
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
+   public void setLoginId(String loginId) {
+      this.loginId = loginId;
+   }
 
 
 
-	public String getmPw() {
-		return mPw;
-	}
+   public String getmPw() {
+      return mPw;
+   }
 
 
 
-	public void setmPw(String mPw) {
-		this.mPw = mPw;
-	}
+   public void setmPw(String mPw) {
+      this.mPw = mPw;
+   }
 
 
 
-	public String getName() {
-		return name;
-	}
+   public String getName() {
+      return name;
+   }
 
 
 
-	public void setName(String name) {
-		this.name = name;
-	}
+   public void setName(String name) {
+      this.name = name;
+   }
 
 
 
-	public String getEmail() {
-		return email;
-	}
+   public String getEmail() {
+      return email;
+   }
 
 
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+   public void setEmail(String email) {
+      this.email = email;
+   }
 
 
 
-	public String getAddress() {
-		return address;
-	}
+   public String getAddress() {
+      return address;
+   }
 
 
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+   public void setAddress(String address) {
+      this.address = address;
+   }
 
 
 
-	public String getGender() {
-		return gender;
-	}
+   public String getGender() {
+      return gender;
+   }
 
 
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+   public void setGender(String gender) {
+      this.gender = gender;
+   }
 
 
 
-	public int getAge() {
-		return age;
-	}
+   public int getAge() {
+      return age;
+   }
 
 
 
-	public void setAge(int age) {
-		this.age = age;
-	}
+   public void setAge(int age) {
+      this.age = age;
+   }
 
 
 
-	public String getGrade() {
-		return grade;
-	}
+   public String getGrade() {
+      return grade;
+   }
 
 
 
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
+   public void setGrade(String grade) {
+      this.grade = grade;
+   }
 
 
 
-	public String getmAdmin() {
-		return mAdmin;
-	}
+   public String getmAdmin() {
+      return mAdmin;
+   }
 
 
 
-	public void setmAdmin(String mAdmin) {
-		this.mAdmin = mAdmin;
-	}
+   public void setmAdmin(String mAdmin) {
+      this.mAdmin = mAdmin;
+   }
 
 
 
-	public String getSearchCondition() {
-		return searchCondition;
-	}
+   public String getSearchCondition() {
+      return searchCondition;
+   }
 
 
 
-	public void setSearchCondition(String searchCondition) {
-		this.searchCondition = searchCondition;
-	}
+   public void setSearchCondition(String searchCondition) {
+      this.searchCondition = searchCondition;
+   }
 
-	public int getRanking() {
-		return ranking;
-	}
+   public int getRanking() {
+      return ranking;
+   }
 
 
 
-	public void setRanking(int ranking) {
-		this.ranking = ranking;
-	}
+   public void setRanking(int ranking) {
+      this.ranking = ranking;
+   }
 
+   public int getTotal() {
+      return total;
+   }
 
 
-	@Override
-	public String toString() {
-		return "MemberDTO [mId=" + mId + ", loginId=" + loginId + ", mPw=" + mPw + ", name=" + name + ", email=" + email
-				+ ", address=" + address + ", gender=" + gender + ", age=" + age + ", grade=" + grade + ", mAdmin="
-				+ mAdmin + ", cellPhone=" + cellPhone + ", isCrown=" + ranking + ", searchCondition=" + searchCondition
-				+ "]";
-	}
+
+   public void setTotal(int total) {
+      this.total = total;
+   }
+
+
+
+   @Override
+   public String toString() {
+      return "MemberDTO [mId=" + mId + ", loginId=" + loginId + ", mPw=" + mPw + ", name=" + name + ", email=" + email
+            + ", address=" + address + ", gender=" + gender + ", age=" + age + ", grade=" + grade + ", mAdmin="
+            + mAdmin + ", cellPhone=" + cellPhone + ", ranking=" + ranking + ", searchCondition=" + searchCondition
+            + "]";
+   }
     
     
 }
