@@ -37,7 +37,9 @@
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+
 </head>
+
 
 <body class="is-preload">
 
@@ -64,8 +66,36 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">찜목록</h1>
+				<h1 class="major" style="margin-bottom: 20px;">찜목록</h1>
 				<div class="button-container">
+				<div class="card-body table-responsive p-0">
+					<table class="table table-hover text-nowrap">
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>Title</th>
+								<th>Writer</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${fn:length(sdatas) <= 0 }">
+								<tr>
+									<td colspan="1">찜목록이 없습니다.</td>
+								</tr>
+							</c:if>
+							<c:forEach var="data" items="${sdatas}" varStatus="loop">
+								<tr
+									onclick="location.href = 'wishListDetailPage.do?sid=${data.sId}'">
+									<td>${loop.index + 1}</td>
+									<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
+									<td>${data.saveTitle}</td>
+									<td>${data.saveWriter}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+				<%-- 
 				
 					<c:if test="${empty sdatas}">
 						찜목록이 없습니다.
@@ -90,7 +120,7 @@
 								<br>
 							</tbody>
 						</table>
-					</c:forEach>
+					</c:forEach> --%>
 				</div>
 
 			</div>

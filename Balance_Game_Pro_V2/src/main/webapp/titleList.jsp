@@ -126,7 +126,7 @@
 							</c:if>
 							<c:forEach var="data" items="${qDatas}" varStatus="loop">
 								<tr
-									onclick="location.href = 'adminTitleDetailPage.do?qid=${data.qId}'">
+									onclick="location.href = 'gamePage.do?qid=${data.qId}'">
 									<td>${loop.index + 1}</td>
 									<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
 									<td>${data.title}</td>
