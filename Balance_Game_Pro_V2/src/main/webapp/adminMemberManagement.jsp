@@ -3,6 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="crown"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -296,7 +297,7 @@ th {
                                        <td>${data.email}</td>
                                        <td>${data.age}</td>
                                        <td>${data.gender}</td>
-                                       <td>${data.total}</td>
+                                       <td><fmt:formatNumber value="${data.total}" currencyCode="KRW" /></td>
                                        <td>${data.ranking}</td>
                                     </tr>
 
