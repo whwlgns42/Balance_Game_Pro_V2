@@ -19,14 +19,17 @@ public class MemberDAO {
    
    
    // 아이디 중복 체크 SQL
-   //private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
+   private static final String SELECT_LOGIN_ID = "SELECT LOGIN_ID FROM MEMBER WHERE LOGIN_ID = ? ";
    // 로그인 SQL
    private static final String LOGIN = "SELECT MID, LOGIN_ID, MADMIN FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
    // 비밀번호 2차인증 SQL
-   //private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
+   private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
+
+   
+   
    // CELL_PHONE
    // 마이페이지 SQL 
-   //private static final String MY_INFO = "SELECT LOGIN_ID, NAME, AGE, GENDER, EMAIL, ADDRESS, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ? ";
+   private static final String MY_INFO = "SELECT LOGIN_ID, NAME, AGE, GENDER, EMAIL, ADDRESS, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ? ";
 
    
    // 내정보 변경하기 SQL
@@ -94,7 +97,7 @@ public class MemberDAO {
          return null;
       }
       MemberDTO data = null;
-      if (mDTO.getSearchCondition().equals("유저조회")||mDTO.getSearchCondition().equals("내정보")||mDTO.getSearchCondition().equals("중복확인")) {
+      if (mDTO.getSearchCondition().equals("유저조회")) {
          // 박찬우
          conn = JDBCUtil.connect();
          try {
@@ -122,7 +125,7 @@ public class MemberDAO {
             JDBCUtil.disconnect(pstmt, conn);
          }
 
-      } else if (mDTO.getSearchCondition().equals("로그인")|| mDTO.getSearchCondition().equals("2차인증")) {
+      } else if (mDTO.getSearchCondition().equals("로그인")) {
          // 손성용
          conn = JDBCUtil.connect();
          try {
@@ -142,68 +145,65 @@ public class MemberDAO {
          } finally {
             JDBCUtil.disconnect(pstmt, conn);
          }
-      } 
-//      else if (mDTO.getSearchCondition().equals("중복확인")) {
-//         // 조지훈
-//         conn = JDBCUtil.connect();
-//         try {
-//            pstmt = conn.prepareStatement(SELECT_LOGIN_ID);
-//            pstmt.setString(1, mDTO.getLoginId());
-//            ResultSet rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//               data = new MemberDTO();
-//            }
-//            rs.close();
-//         } catch (SQLException e) {
-//            e.printStackTrace();
-//         } finally {
-//            JDBCUtil.disconnect(pstmt, conn);
-//         }
- //     } 
-//      else if (mDTO.getSearchCondition().equals("내정보")) {
-//         // 조지훈
-//         conn = JDBCUtil.connect();
-//         try {
-//            pstmt = conn.prepareStatement(MY_INFO);
-//            pstmt.setString(1, mDTO.getLoginId());
-//            ResultSet rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//               data = new MemberDTO();
-//               data.setLoginId(rs.getString("LOGIN_ID"));
-//               data.setName(rs.getString("NAME"));
-//               data.setGender(rs.getString("GENDER"));
-//               data.setEmail(rs.getString("EMAIL"));
-//               data.setAddress(rs.getString("ADDRESS"));
-//               data.setAge(rs.getInt("AGE"));
-//               data.setCellPhone(rs.getString("CELL_PHONE"));
-//            }
-//            rs.close();
-//         } catch (SQLException e) {
-//            e.printStackTrace();
-//         } finally {
-//            JDBCUtil.disconnect(pstmt, conn);
-//         }
-//      }
-//       else if (mDTO.getSearchCondition().equals("2차인증")) {
-//         // 조지훈
-//         conn = JDBCUtil.connect();
-//         try {
-//            pstmt = conn.prepareStatement(CERTIFICATION);
-//            pstmt.setString(1, mDTO.getLoginId());
-//            pstmt.setString(2, mDTO.getmPw());
-//            ResultSet rs = pstmt.executeQuery();
-//            if (rs.next()) {
-//               data = new MemberDTO();
-//               data.setLoginId(rs.getString("LOGIN_ID"));
-//               data.setmPw(rs.getString("MPW"));
-//            }
-//            rs.close();
-//         } catch (SQLException e) {
-//            e.printStackTrace();
-//         } finally {
-//            JDBCUtil.disconnect(pstmt, conn);
-//         }
-//      }
+      } else if (mDTO.getSearchCondition().equals("중복확인")) {
+         // 조지훈
+         conn = JDBCUtil.connect();
+         try {
+            pstmt = conn.prepareStatement(SELECT_LOGIN_ID);
+            pstmt.setString(1, mDTO.getLoginId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+               data = new MemberDTO();
+            }
+            rs.close();
+         } catch (SQLException e) {
+            e.printStackTrace();
+         } finally {
+            JDBCUtil.disconnect(pstmt, conn);
+         }
+      } else if (mDTO.getSearchCondition().equals("내정보")) {
+         // 조지훈
+         conn = JDBCUtil.connect();
+         try {
+            pstmt = conn.prepareStatement(MY_INFO);
+            pstmt.setString(1, mDTO.getLoginId());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+               data = new MemberDTO();
+               data.setLoginId(rs.getString("LOGIN_ID"));
+               data.setName(rs.getString("NAME"));
+               data.setGender(rs.getString("GENDER"));
+               data.setEmail(rs.getString("EMAIL"));
+               data.setAddress(rs.getString("ADDRESS"));
+               data.setAge(rs.getInt("AGE"));
+               data.setCellPhone(rs.getString("CELL_PHONE"));
+            }
+            rs.close();
+         } catch (SQLException e) {
+            e.printStackTrace();
+         } finally {
+            JDBCUtil.disconnect(pstmt, conn);
+         }
+      } else if (mDTO.getSearchCondition().equals("2차인증")) {
+         // 조지훈
+         conn = JDBCUtil.connect();
+         try {
+            pstmt = conn.prepareStatement(CERTIFICATION);
+            pstmt.setString(1, mDTO.getLoginId());
+            pstmt.setString(2, mDTO.getmPw());
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+               data = new MemberDTO();
+               data.setLoginId(rs.getString("LOGIN_ID"));
+               data.setmPw(rs.getString("MPW"));
+            }
+            rs.close();
+         } catch (SQLException e) {
+            e.printStackTrace();
+         } finally {
+            JDBCUtil.disconnect(pstmt, conn);
+         }
+      }
       return data;
    }
 
