@@ -24,6 +24,9 @@ public class SaveDAO {
 
 	private static final String DELETE_SID = "DELETE FROM SAVE WHERE SID=?";
 
+	// 회원탈퇴시 'SAVE'를 null 값으로 변경
+	private static final String SV_UPDATE = "UPDATE SAVE SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
+	
 	public ArrayList<SaveDTO> selectAll(SaveDTO sDTO) {
 
 		// 전은주
@@ -88,7 +91,26 @@ public class SaveDAO {
 	}
 
 	public boolean update(SaveDTO sDTO) {
-		return false;
+
+		conn = JDBCUtil.connect();
+
+		try {
+			// 손성용
+			if (sDTO.getSearchCondition().equals("save_null")) {
+				pstmt = conn.prepareStatement(SV_UPDATE);
+				pstmt.setString(1, sDTO.getLoginId());
+				int result = pstmt.executeUpdate();
+				if (result <= 0) {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
 	}
 
 	public boolean delete(SaveDTO sDTO) {

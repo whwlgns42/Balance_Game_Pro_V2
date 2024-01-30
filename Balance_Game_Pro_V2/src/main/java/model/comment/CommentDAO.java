@@ -42,6 +42,9 @@ public class CommentDAO {
 	private static final String INSERT = "INSERT INTO COMMENTS(CID,QID,LOGIN_ID,CONTENT)\r\n"
 			+ "VALUES ((SELECT NVL(MAX(CID),0) + 1 FROM COMMENTS),?,?,?)";
 
+	// 회원탈퇴시 'Comment'를 null 값으로 변경
+	private static final String CM_UPDATE = "UPDATE COMMENTS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
+	
 	// 댓글 전체 출력하기
 	public ArrayList<CommentDTO> selectAll(CommentDTO cDTO) {
 
@@ -115,13 +118,27 @@ public class CommentDAO {
 	}
 
 	public boolean update(CommentDTO cDTO) {
-		if (cDTO.getSearchCondition().equals("댓글수정")) {
-			// 모델
-		} else if (cDTO.getSearchCondition().equals("회원탈퇴")) {
-			// 모델
-		}
 
-		return false;
+		conn = JDBCUtil.connect();
+
+		try {
+			if (cDTO.getSearchCondition().equals("댓글수정")) {
+				// 손성용
+			} else if (cDTO.getSearchCondition().equals("comment_null")) {
+				pstmt = conn.prepareStatement(CM_UPDATE);
+				pstmt.setString(1, cDTO.getLoginId());
+				int rs = pstmt.executeUpdate();
+				if (rs <= 0) {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
 	}
 
 	public boolean delete(CommentDTO cDTO) {

@@ -9,8 +9,19 @@ import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
+import model.answer.AnswerDAO;
+import model.answer.AnswerDTO;
+import model.comment.CommentDAO;
+import model.comment.CommentDTO;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
+import model.question.QuestionDAO;
+import model.question.QuestionDTO;
+import model.save.SaveDAO;
+import model.save.SaveDTO;
+import model.support.SupportDAO;
+import model.support.SupportDTO;
+import oracle.net.aso.u;
 
 public class ResignAction implements Action { // 회원탈퇴 기능
 
@@ -23,50 +34,60 @@ public class ResignAction implements Action { // 회원탈퇴 기능
 		request.setCharacterEncoding("UTF-8");
 
 		ActionForward forward = new ActionForward();
-		
-		// 전달된 정보 저장
+
 		MemberDTO memberDTO = new MemberDTO();
-		String memberLoginId = request.getParameter("loginId");
-		
-		// 회원탈퇴 클릭시 로그 찍기
-		// System.out.println(memberLoginId + "회원탈퇴 버튼 눌렀을대 넘어오는 아이디값");
-		
-		// 오브젝트 => String 으로 강제 형 변환
-		// 공식 : String 지정변수 = (String)session.getAttribute("LoginId") => (LoginId 를 세션에서
-		// 가져 온다)
-
-		// 세션 아이디 들고옴.
-		// 엠디티오에 세션 아이디값을 넣어준다
-		memberDTO.setLoginId(memberLoginId);
-
-		// DB 연결해서 삭제
 		MemberDAO memberDAO = new MemberDAO();
-		System.out.println("mDTO : " + memberDTO);
-		boolean result = memberDAO.delete(memberDTO); // MemberDAO == DELETE 연결
-		
-		// 회원탈퇴 여부 로그 찍기
-		// System.out.println(result + "회원탈퇴 성공 여부");
+		QuestionDTO questionDTO = new QuestionDTO();
+		QuestionDAO questionDAO = new QuestionDAO();
+		AnswerDTO answerDTO = new AnswerDTO();
+		AnswerDAO answerDAO = new AnswerDAO();
+		CommentDTO commentDTO = new CommentDTO();
+		CommentDAO commentDAO = new CommentDAO();
+		SaveDTO saveDTO = new SaveDTO();
+		SaveDAO saveDAO = new SaveDAO();
+		SupportDTO supportDTO = new SupportDTO();
+		SupportDAO supportDAO = new SupportDAO();
 
-		if (result) {
-			// 탈퇴가 완료되면 세션 초기화 및 메인으로 이동
+		String memberLoginId = request.getParameter("loginId");
+
+		// SearchCondition
+		memberDTO.setLoginId(memberLoginId);
+		questionDTO.setWriter(memberLoginId);
+		questionDTO.setSearchCondition("question_null");
+		answerDTO.setLoginId(memberLoginId);
+		answerDTO.setSearchCondition("answer_null");
+		commentDTO.setLoginId(memberLoginId);
+		commentDTO.setSearchCondition("comment_null");
+		saveDTO.setLoginId(memberLoginId);
+		saveDTO.setSearchCondition("save_null");
+		supportDTO.setLoginId(memberLoginId);
+		supportDTO.setSearchCondition("support_null");
+
+		System.out.println("mDTO : " + memberDTO);
+		
+		
+		// DLETE
+		if (memberDAO.delete(memberDTO)) {
 			
-			// 삭제 여부 확인 로그 찍기
-			// System.out.println("삭제됨"); 
+			// UPDATE => NULL
+			questionDAO.update(questionDTO);
+			answerDAO.update(answerDTO);
+			commentDAO.update(commentDTO);
+			saveDAO.update(saveDTO);
+			supportDAO.update(supportDTO);
 			
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "success");
-			request.setAttribute("msg", "회원탈퇴가 완료되었습니다");
+			request.setAttribute("msg", "밸런스를 이용해주셔서 감사합니다");
 			request.setAttribute("redirect", "main.do");
-			session.invalidate();
-
+			session.invalidate();			
 		} else {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "fail");
 			request.setAttribute("msg", "회원탈퇴가 취소되었습니다");
 			request.setAttribute("redirect", "main.do");
-
 		}
 
 		return forward;

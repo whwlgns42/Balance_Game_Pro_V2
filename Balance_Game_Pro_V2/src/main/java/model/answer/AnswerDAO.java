@@ -18,6 +18,10 @@ public class AnswerDAO {
 	private final String SELECTALL_MYLIST = "SELECT Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER FROM QUESTIONS Q JOIN ANSWERS A ON Q.QID=A.QID JOIN MEMBER M ON A.LOGIN_ID = ?";
 
 	private static final String INSERT="INSERT INTO ANSWERS (AID,QID,LOGIN_ID,ANSWER) VALUES ((SELECT NVL(MAX(AID),0) + 1 FROM ANSWERS),?,?,?)";
+
+	// 회원탈퇴시 'Answers'을 null 값으로 변경
+	private static final String AS_UPDATE = "UPDATE ANSWERS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
+
 	public ArrayList<AnswerDTO> selectAll(AnswerDTO aDTO) { // TODO 이용자가 풀었던 문제에대한 답변 정보 전체 조회
 		// 전은주
 		// 한글코딩
@@ -79,8 +83,27 @@ public class AnswerDAO {
 		return false;
 	}
 
-	public boolean update(AnswerDTO aDTO) {
-		return false;
+	public boolean update(AnswerDTO aDTO) { // 업데이트 (이용자가 풀었던 문제값 null로 변환)
+		
+		conn = JDBCUtil.connect();
+		
+		try {			
+			// 손성용
+			if(aDTO.getSearchCondition().equals("answer_null")) {
+				pstmt=conn.prepareStatement(AS_UPDATE);
+				pstmt.setString(1, aDTO.getLoginId());
+				int result = pstmt.executeUpdate();
+				if (result <= 0) {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
 	}
 
 	// 댓글 삭제하기 TODO 추후 구현 예정

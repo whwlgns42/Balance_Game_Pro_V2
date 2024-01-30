@@ -65,6 +65,11 @@ public class QuestionDAO {
 			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=? \r\n" + "WHERE QID=?";
 
 	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET Q_ACCESS='T' WHERE QID=?";
+	   
+
+		// 회원탈퇴시 'Question'을 null 값으로 변경
+		private static final String QS_UPDATE = "UPDATE QUESTIONS SET WRITER = NULL WHERE WRITER = ?";
+	   
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
@@ -311,8 +316,15 @@ public class QuestionDAO {
 	            if(rs <=0) {
 	               return false;
 	            }
-	         }
-
+			} else if (qDTO.getSearchCondition().equals("question_null")) {
+				// 손성용
+				pstmt = conn.prepareStatement(QS_UPDATE);
+				pstmt.setString(1, qDTO.getWriter());
+				int rs = pstmt.executeUpdate();
+				if (rs <= 0) {
+					return false;
+				}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

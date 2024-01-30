@@ -30,6 +30,10 @@ public class SupportDAO {
 			+ "ORDER BY \r\n"
 			+ "    \"RANKING\" ";
 	
+
+	// 회원탈퇴시 'Support'을 null 값으로 변경
+	private static final String SP_UPDATE = "UPDATE SUPPORT SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
+	
 	public ArrayList<SupportDTO> selectAll(SupportDTO sDTO) {
 		ArrayList<SupportDTO> datas = new ArrayList<SupportDTO>();
 
@@ -90,7 +94,26 @@ public class SupportDAO {
 	}
 
 	public boolean update(SupportDTO sDTO) {
-		return false;
+
+		conn = JDBCUtil.connect();
+
+		try {
+			// 손성용
+			if (sDTO.getSearchCondition().equals("support_null")) {
+				pstmt = conn.prepareStatement(SP_UPDATE);
+				pstmt.setString(1, sDTO.getLoginId());
+				int result = pstmt.executeUpdate();
+				if (result <= 0) {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
 	}
 
 	public boolean delete(SupportDTO sDTO) {
