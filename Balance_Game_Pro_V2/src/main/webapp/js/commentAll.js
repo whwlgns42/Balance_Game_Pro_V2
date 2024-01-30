@@ -1,0 +1,103 @@
+/**
+ * 
+ */
+
+
+$("#comment").hide();
+
+		
+$(".answer").on("click", function() {
+	
+		var qId = document.getElementById('qId').value;
+		var loginId = document.getElementById('loginId').value;
+	console.log($(this).prop("value"));
+	console.log(loginId);
+	console.log(qId);
+	$.ajax({
+		type: "POST",
+		url: "answerAsync.do",
+		data: {
+			'qId': qId,
+			'loginId': loginId,
+			'answer': $(this).prop('value')
+		},
+		dataType: 'json',
+		success: function(data) {
+			console.log(data.answerCntA);
+			console.log(data.answerCntB);
+			var total = data.answerCntA + data.answerCntB;
+			console.log(total);
+			$("#answer_A").text(Math.round(((data.answerCntA * 1.0) / total) * 100) + "%");
+			$("#answer_B").text(Math.round(((data.answerCntB * 1.0) / total) * 100) + "%");
+		},
+		error: function(error) {
+
+			console.log('에러발생');
+			console.log('에러의 종류:' + error);
+		}
+
+	});
+
+
+	$(".answer").css("height", "100px");
+	$(".answer").css("line-height", "100px");
+	$(".answer").css("font-size", "30px");
+	$(".answer").css("transition", "1000ms");
+	$(".answer").attr("disabled", true);
+
+	$("#title h1").css("font-size", "30px");
+	$("#title h1").css("transition", "1000ms");
+
+	$(".save").css("width", "30px");
+	$(".save").css("height", "30px");
+	$(".save").css("transition", "1000ms");
+
+
+
+	$.ajax({
+		type: "POST",
+		url: "commentAsync.do",
+		data: {
+			'qId': qId
+		},
+		dataType: 'json',
+		success: function(data) {
+
+			var elem = "";
+			$.each(data, function(index, data) {
+				elem += "<tr> <td>";
+				if (typeof data.loginId != "undefined") {
+					if (data.grade == 1) {
+						elem += "<img src='images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
+					} else if (data.grade == 2) {
+						elem += "<img src='images/silverStone.png' alt='등급2에 주는 실버스톤' width='25' height ='25' />";
+					} else if (data.grade == 3) {
+						elem += "<img src='images/goldStone.png' alt='등급3에 주는 골드스톤' width='25' height ='25' />";
+					} else if (data.grade == 4) {
+						elem += "<img src='images/blueStone.png' alt='등급4에 주는 플래티넘스톤' width='25' height ='25' />";
+					}
+					elem += data.memberName + "( " + data.loginId + " )</td>";
+				} else {
+					elem += "탈퇴한 사용자</td>"
+				}
+				elem += "<td>" + data.content + "</td>";
+				elem += "</tr>";
+				console.log(data.name);
+			});
+			if ($("#noComment").length > 0) {
+				$("#noComment").text("");
+			}
+			$("table tbody").append(elem);
+			//document.getElementById(".save").src="images/찜o.png";
+		},
+		error: function(error) {
+
+			console.log('에러발생');
+			console.log('에러의 종류:' + error);
+		}
+
+	});
+
+
+	$("#comment").show();
+});

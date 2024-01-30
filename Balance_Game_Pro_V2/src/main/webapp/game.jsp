@@ -98,234 +98,28 @@ ul.actions {
 	margin: 0 auto;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-<script type="text/javascript">
+
+
+<!-- <script type="text/javascript">
 	$(document).ready(function() {
-		$("#comment").hide();
+		
 		//if(${data.qId}=)
 		//질문 pk없을시 메인으로
-		var qId = ${data.qId};
-		var loginId = "${loginId}";
+
+
+
 		
-		
-		$(".save").on("click", function() {
-			console.log("[성공]");
-			
-			
-			console.log(loginId);
-			if (loginId == "") {
-				console.log("[로그]로그인 x");
-				alert('로그인이 필요합니다');
-				//location.href='loginPage.do';
-			} else {
+		//console.log(${list});
 
-				console.log("[로그] 로그인 o");
-				//요소 값 가져오기
-				//https://luahius.tistory.com/158
-				$.ajax({
-					type : "POST",
-					url : "saveAsync.do",
-					data : {
-						'loginId' : loginId,
-						'qId' : qId
-					},
-					dataType : 'text',
-					success : function(data) {
-						console.log(data);
-						if (data == "실패") {
-							console.log("실패");
-						} else {
-							$(".save").attr("src", "images/" + data);
-						}
-
-						//document.getElementById(".save").src="images/찜o.png";
-					},
-					error : function(error) {
-						console.log('에러발생');
-						console.log('에러의 종류:' + error);
-					}
-
-				});
-			}
-		});
-
-		$(".answer").on("click", function() {
-			console.log($(this).prop("value"));
-			$.ajax({
-				type : "POST",
-				url : "answerAsync.do",
-				data : {
-					'qId' : qId,
-					'loginId' : loginId,
-					'answer' : $(this).prop('value')
-				},
-				dataType : 'json',
-				success : function(data) {
-					console.log(data.answerCntA);
-					console.log(data.answerCntB);
-					var total=data.answerCntA+data.answerCntB;
-					console.log(total);
-					$("#answer_A").text(Math.round(((data.answerCntA*1.0)/total)*100)+"%");									
-					$("#answer_B").text(Math.round(((data.answerCntB*1.0)/total)*100)+"%");									
-				},
-				error : function(error) {
-					
-					console.log('에러발생');
-					console.log('에러의 종류:' + error);
-				}
-
-			});
-
-			
-			$(".answer").css("height", "100px");
-			$(".answer").css("line-height", "100px");
-			$(".answer").css("font-size", "30px");
-			$(".answer").css("transition", "1000ms");
-			$(".answer").attr("disabled",true);
-			
-			$("#title h1").css("font-size", "30px");
-			$("#title h1").css("transition", "1000ms");
-
-			$(".save").css("width", "30px");
-			$(".save").css("height", "30px");
-			$(".save").css("transition", "1000ms");
-
-			
-			
-			$.ajax({
-				type : "POST",
-				url : "commentAsync.do",
-				data : {
-					'qId' : qId
-				},
-				dataType : 'json',
-				success : function(data) {
-					
-					var elem = "";
-					$.each(data, function(index,data) {
- 						elem +="<tr> <td>";
-						if(typeof data.loginId  != "undefined"){
-							if(data.grade == 1){
-								elem +="<img src='images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
-							}else if(data.grade ==2){
-								elem +="<img src='images/silverStone.png' alt='등급2에 주는 실버스톤' width='25' height ='25' />";
-							}else if(data.grade == 3){
-								elem +="<img src='images/goldStone.png' alt='등급3에 주는 골드스톤' width='25' height ='25' />";
-							}else if(data.grade ==4){
-								elem +="<img src='images/blueStone.png' alt='등급4에 주는 플래티넘스톤' width='25' height ='25' />";
-							}
- 							elem += data.memberName+"( "+data.loginId+" )</td>";
-						}else{
-							elem +="탈퇴한 사용자</td>"
-						}
- 						elem +="<td>"+data.content+"</td>";
-						elem +="</tr>"; 
-						console.log(data.name);
-					});
-					if($("#noComment").length>0){	
-						$("#noComment").text("");
-					}
-					$("table tbody").append(elem);
-					//document.getElementById(".save").src="images/찜o.png";
-				},
-				error : function(error) {
-					
-					console.log('에러발생');
-					console.log('에러의 종류:' + error);
-				}
-
-			});
-			
-			
-			$("#comment").show();
-		});
-		var isRun = false;
-		$("#write").on("click", function() {
-			console.log("댓글 입력");
-			var content= $('#inputContent').val();
-			//$('#inputContent').val('');
-			 if(isRun == true) {
-			        return;
-			    }
-			 isRun = true;
-			
-		
-			
-			
-			$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">'); ////
-		
-			console.log('확인1: '+content);
-			if(content){
-			$.ajax({
-				type : "POST",
-				url : "commentWriteAsync.do",
-				data : {
-					'qId' : qId,
-					'loginId' : loginId,
-					'comment' : content
-					
-				},
-				dataType : 'json',
-				success : function(data) {								
-
-					var elem = "";
-					
- 					elem +="<tr> <td>";
-					if(data.grade==1){
-						elem += "<img src= 'images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
-					}else if(data.grade==2){
-						elem += "<img src= 'images/silverStone.png' alt='등급1에 주는 블랙스톤' width='25' height ='25' />";
-					}else if(data.grade == 3){
-						elem +="<img src='images/goldStone.png' alt='등급3에 주는 골드스톤' width='25' height ='25' />";
-					}else if(data.grade ==4){
-						elem +="<img src='images/blueStone.png' alt='등급4에 주는 플래티넘스톤' width='25' height ='25' />";
-					}
- 					elem += data.memberName+"( "+data.loginId+" )</td>";
-						
- 					elem +="<td>"+data.content+"</td>";
-					elem +="</tr>"; 
-					console.log('확인2: '+data.name);
-					if($("#noComment").length>0){	
-						$("#noComment").text("");
-					}
-					$("table tbody").append(elem);
-					
-					 isRun  = false;
-					//document.getElementById(".save").src="images/찜o.png";
-				},
-				error : function(error) {
-
-					console.log('에러발생');
-					console.log('에러의 종류:' + error);
-				}
-
-			});
-			
-			}
-			
-		});
-		
-		$("#inputContent").on("keydown", function(e) {
-			console.log(e.code);
-			if(e.code=='Enter' || e.code=='NumpadEnter'){
-				console.log("엔터침"+e.code);
-				$("#write").click();
-			}
-		});
-		
-		console.log(${list});
-		$("#next").on("click", function() {
-			
-			//localStorage.setItem("list",${list});
-			location.href='gamePage.do';
-			
-		});
 		
 	});
-</script>
+</script> -->
+
 </head>
 <body class="is-preload">
+	<input id="qId" type="hidden" value="${data.qId}">
+	<input id="loginId" type="hidden" value="${loginId}">
 	<%-- 	<%
 	String loginData = (String) session.getAttribute("loginId");
 	QuestionDTO qDTO = (QuestionDTO) request.getAttribute("data");
@@ -433,6 +227,11 @@ ul.actions {
 	</footer>
 
 	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="js/commentAll.js"></script>
+	<script src="js/commentInsert.js"></script>
+	<script src="js/save.js"></script>
+	<script src="js/nextGamePage.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
