@@ -1,8 +1,6 @@
-<%@page
-	import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
+<%@page import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
 <%@page import="model.question.QuestionDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
@@ -17,8 +15,7 @@
 <head>
 <title>게임 페이지</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -101,9 +98,7 @@ ul.actions {
 	margin: 0 auto;
 }
 </style>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="js/gameSet.js"></script>
 </head>
 <body class="is-preload">
@@ -142,10 +137,10 @@ ul.actions {
 					<h1>${data.title}</h1>
 
 					<c:if test="${data.save <= 0}">
-						<img class="save" src="images/찜x.png" alt="찜이 안되어 있습니다">
+						<img class="save" id="${data.qId}" src="images/찜x.png" alt="찜이 안되어 있습니다">
 					</c:if>
 					<c:if test="${data.save > 0}">
-						<img class="save" src="images/찜o.png" alt="찜이 되어 있습니다">
+						<img class="save" id="${data.qId}" src="images/찜o.png" alt="찜이 되어 있습니다">
 					</c:if>
 					<!-- <img id="save" src="images/찜x.png" alt="찜이 되어 있습니다"> -->
 				</div>

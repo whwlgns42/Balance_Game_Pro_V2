@@ -9,25 +9,34 @@ import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
-import model.save.SaveDAO;
-import model.save.SaveDTO;
+import model.question.QuestionDAO;
+import model.question.QuestionDTO;
 
-public class WishListDetailPageAction implements Action{
+public class WishListDetailPageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		ActionForward forward = new ActionForward();
+
+		HttpSession session = request.getSession();
+		String loginId = (String)session.getAttribute("loginId");
 		
-		SaveDTO sDTO = new SaveDTO();
-		SaveDAO sDAO = new SaveDAO();
+		QuestionDTO qDTO = new QuestionDTO();
+		QuestionDAO qDAO = new QuestionDAO();
+
+		int qId = Integer.parseInt(request.getParameter("qId"));
 		
-		sDTO.setsId(Integer.parseInt(request.getParameter("sid")));
-		System.out.println("sid: " + request.getParameter("sid"));
-		sDTO = sDAO.selectOne(sDTO);
-		System.out.println("sDTO: "+sDTO);
-		if(sDTO == null) {
+		
+		qDTO.setqId(qId);
+		qDTO.setLoginId(loginId);
+		qDTO.setSearchCondition("문제상세조회");
+		System.out.println("qId: " + qId);
+		System.out.println("loginId" + loginId);
+		qDTO = qDAO.selectOne(qDTO);
+		System.out.println("qDTO: " + qDTO);
+		if (qDTO == null) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "fail");
@@ -37,7 +46,7 @@ public class WishListDetailPageAction implements Action{
 		}
 		forward.setPath("wishListDetail.jsp");
 		forward.setRedirect(false);
-		request.setAttribute("sDTO", sDTO);
+		request.setAttribute("qDTO", qDTO);
 		return forward;
 	}
 

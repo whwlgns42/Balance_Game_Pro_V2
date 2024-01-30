@@ -41,16 +41,16 @@ input {
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major">${sDTO.saveTitle}</h1>
-				<h3>작성자: ${sDTO.saveWriter}</h3>
+				<h1 class="major">${qDTO.title}</h1>
+				<h3>작성자: ${qDTO.loginId}</h3>
 				<table>
 					<tr>
-						<td>답변A: ${sDTO.saveAnswer_A}</td>
-						<td>답변B: ${sDTO.saveAnswer_B}</td>
+						<td>답변A: ${qDTO.answer_A}</td>
+						<td>답변B: ${qDTO.answer_B}</td>
 					</tr>
 				</table>
 				<ui>
-				<li>설명: ${sDTO.saveExplanation}</li>
+				<li>설명: ${qDTO.explanation}</li>
 				</ui>
 			</div>
 		</section>

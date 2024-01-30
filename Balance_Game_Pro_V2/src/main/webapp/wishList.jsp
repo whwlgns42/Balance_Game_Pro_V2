@@ -97,17 +97,17 @@
 								</c:if>
 								<c:forEach var="data" items="${sdatas}" varStatus="loop">
 									<tr>
-										<td><div>${loop.index + 1}</div></td>
+										<td><a href="wishListDetailPage.do?qId=${data.qId}">${loop.index + 1}</a></td>
 										<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
-										<td>${data.saveTitle}</td>
+										<td><a href="wishListDetailPage.do?qId=${data.qId}">${data.saveTitle}</a></td>
 										<td>${data.saveWriter}</td>
 										<td>
 											<input id="qId" type="hidden" value="${data.qId}" />
-											<c:if test="${data.sId>0}">
-												<img class="save" id="'save'+${data.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
+											<c:if test="${data.sId > 0}">
+												<img class="save" id="${data.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
 											</c:if>
-											<c:if test="${data.sId <=0}">
-												<img class="save" id="'save'+${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
+											<c:if test="${data.sId <= 0}">
+												<img class="save" id="${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
 											</c:if>
 										</td>
 									</tr>

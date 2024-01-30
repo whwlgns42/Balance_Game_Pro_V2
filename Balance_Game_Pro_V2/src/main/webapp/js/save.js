@@ -1,10 +1,8 @@
-
-
 $(".save").on("click", function() {
 	console.log("[성공]");
 	var loginId = document.getElementById('loginId').value;
 	var qId = document.getElementById('qId').value;
-
+	var saveId = $(this).attr('id');
 	console.log(loginId);
 	if (loginId == "") {
 		console.log("[로그]로그인 x");
@@ -28,7 +26,8 @@ $(".save").on("click", function() {
 				if (data == "실패") {
 					console.log("실패");
 				} else {
-					$(".save").attr("src", "images/" + data);
+					console.log($("#"+saveId).attr("src", "images/" + data) + "<<<<<")
+					$("#"+saveId).attr("src", "images/" + data);
 				}
 
 				//document.getElementById(".save").src="images/찜o.png";
