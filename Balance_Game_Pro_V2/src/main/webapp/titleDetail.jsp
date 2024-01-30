@@ -132,6 +132,30 @@
 
 						</tbody>
 					</table>
+					<table class="table table-hover text-nowrap">
+								<thead>
+									<tr>
+										<th>번호</th>
+										<th>아이디</th>
+										<th>댓글내용</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:if test="${empty cDatas}">
+										<tr>
+											<td colspan="1">작성된 댓글이 없습니다.</td>
+										</tr>
+									</c:if>
+
+									<c:forEach var="data" items="${cDatas}" varStatus="loop">
+										<tr>
+											<td>${loop.index + 1}</td>
+											<td>${data.loginId}</td>
+											<td>${data.content}</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
 				</div>
 
 			</div>
