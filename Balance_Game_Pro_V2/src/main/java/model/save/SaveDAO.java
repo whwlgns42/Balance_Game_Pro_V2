@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.question.QuestionDTO;
+
 import model.util.JDBCUtil;
 
 public class SaveDAO {
@@ -16,7 +16,7 @@ public class SaveDAO {
 
 	private static final String SELECTALL = "SELECT S.SID, Q.TITLE, Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
 
-	private static final String SELECTONE="SELECT Q.WRITER, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.SID = ?";
+	private static final String SELECTONE="SELECT 1 FROM SAVE WHERE LOGIN_ID=? AND QID=?";
 
 	private static final String INSERT = "INSERT INTO SAVE (SID, QID,LOGIN_ID) VALUES((SELECT NVL(MAX(SID),0) + 1 FROM SAVE),?,?)";
 
@@ -52,15 +52,12 @@ public class SaveDAO {
 		SaveDTO data=null;
 		try {
 			pstmt = conn.prepareStatement(SELECTONE);
-			pstmt.setInt(1, sDTO.getsId());
+			pstmt.setString(1, sDTO.getLoginId());
+			pstmt.setInt(2, sDTO.getqId());
 			ResultSet rs = pstmt.executeQuery();
 			if(rs.next()) {
 				data = new SaveDTO();
-				data.setSaveWriter(rs.getString("WRITER"));
-				data.setSaveTitle(rs.getString("TITLE"));
-				data.setSaveAnswer_A(rs.getString("ANSWER_A"));
-				data.setSaveAnswer_B(rs.getString("ANSWER_B"));
-				data.setSaveExplanation(rs.getString("EXPLANATION"));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

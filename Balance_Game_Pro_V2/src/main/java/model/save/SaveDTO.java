@@ -1,6 +1,5 @@
 package model.save;
 
-import java.util.Date;
 
 public class SaveDTO {
 	private int sId;
