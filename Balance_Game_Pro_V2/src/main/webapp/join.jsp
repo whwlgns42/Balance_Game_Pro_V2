@@ -91,7 +91,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 
 								<div class="col-12">
 									<label for="age">나이</label>
-									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="validateAge(this)" value="12" />
+									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="this.value=this.value.replace(/[^0-9]/g,'');" value="12" />
 								</div>
 
 								<div class="col-12">
