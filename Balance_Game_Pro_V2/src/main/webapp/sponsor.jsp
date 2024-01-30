@@ -97,7 +97,7 @@
 						<td>
 							<c:forEach var="data" items="${datas}" varStatus="loop">
 								<crown:crown ranking="${data.ranking}" />
-            							${loop.index + 1}위
+            							[${loop.index + 1}위]
    										 ${data.loginId}님이
     							<fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
 							</c:forEach>

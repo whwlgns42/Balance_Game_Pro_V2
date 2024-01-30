@@ -337,6 +337,8 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         }
     }
 
+    
+    // 아이디 중복 체크 알림 메세지
     function showIdFeedback(message, color) {
         let feedback = $("#id_feedback");
         feedback.html(message);
@@ -347,7 +349,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
     let authAttempts = 0; // 인증 시도 횟수
     let cooldownTime = 180; // 3분 (초 단위)
     let cooldownTimer; // 타이머 변수
-
     function sendAuthNum() {
         var cellPhone = $("#cellPhone").val();
         let phonePattern = /^01[016789]\d{8}$/;
@@ -361,7 +362,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
                 showError("인증확인", "인증번호 발송이 3회 이상 시도되었습니다. 3분 후에 다시 시도해주세요.");
                 return false;
             }
-
             // AJAX로 서버에 인증번호 요청
             $.ajax({
                 type: "POST",
@@ -371,7 +371,7 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
                 success: function (data) {
                 	authNum = data
                     showSuccess("발송완료", "인증번호를 발송했습니다.");
-                    authAttempts++;
+                    authAttempts++; // 인증문자 발송 횟수
                 	console.log(authNum + "발급받은 인증번호")
                     
                     // 3분 동안 버튼 비활성화 타이머 설정
@@ -391,15 +391,14 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
         }
     }
 
+    // 인증번호확인
     function authNumCheck() {
         var authNumCk = $("#authNum").val();
         if (authNum == authNumCk) {
-        	showSuccess("인증확인", "성공");
-			authStatus = 1;
-            return 1;
+        	showSuccess("인증확인", "인증번호가 확인되었습니다.");
+			authStatus = 1; // 인증번호 확인성공이면 회원가입을 가능한 상태값 부여
         } else {
             showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
-            return 0;
         }
     }
 </script>
