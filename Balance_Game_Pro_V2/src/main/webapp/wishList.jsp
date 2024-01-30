@@ -38,15 +38,7 @@
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script>
-	$(document).ready(function() {
-		$(".wishDetail").on("click", function() {
-			var qId = $(this).data("qId");
-			console.log("qId" + qId);
-			window.location.href = 'wishListDetailPage.do?qId=' + qId;
-		});
-	});
-</script>
+
 
 
 </head>
