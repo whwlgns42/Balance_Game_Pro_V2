@@ -27,7 +27,9 @@ public class WishListPageAction implements Action {
 		String loginId = (String)session.getAttribute("loginId");
 		sDTO.setLoginId(loginId);
 		ArrayList<SaveDTO> datas = sDAO.selectAll(sDTO);
+		sDTO = sDAO.selectOne(sDTO);
 		System.out.println("SLECTALL datas: " + datas);
+		System.out.println("sDTO" + sDTO);
 		if(datas == null) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);

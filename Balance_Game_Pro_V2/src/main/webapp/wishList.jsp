@@ -37,11 +37,23 @@
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script>
+	$(document).ready(function() {
+		$(".wishDetail").on("click", function() {
+			var qId = $(this).data("qId");
+			console.log("qId" + qId);
+			window.location.href = 'wishListDetailPage.do?qId=' + qId;
+		});
+	});
+</script>
+
 
 </head>
 
 
 <body class="is-preload">
+	<input id="loginId" type="hidden" value="${loginId}">
 
 	<!-- Header -->
 	<header id="header">
@@ -68,34 +80,42 @@
 			<div class="inner">
 				<h1 class="major" style="margin-bottom: 20px;">찜목록</h1>
 				<div class="button-container">
-				<div class="card-body table-responsive p-0">
-					<table class="table table-hover text-nowrap">
-						<thead>
-							<tr>
-								<th>NO</th>
-								<th>Title</th>
-								<th>Writer</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:if test="${fn:length(sdatas) <= 0 }">
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover text-nowrap">
+							<thead>
 								<tr>
-									<td colspan="1">찜목록이 없습니다.</td>
+									<th>NO</th>
+									<th>Title</th>
+									<th>Writer</th>
 								</tr>
-							</c:if>
-							<c:forEach var="data" items="${sdatas}" varStatus="loop">
-								<tr
-									onclick="location.href = 'wishListDetailPage.do?sid=${data.sId}'">
-									<td>${loop.index + 1}</td>
-									<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
-									<td>${data.saveTitle}</td>
-									<td>${data.saveWriter}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
-				<%-- 
+							</thead>
+							<tbody>
+								<c:if test="${fn:length(sdatas) <= 0 }">
+									<tr>
+										<td colspan="1">찜목록이 없습니다.</td>
+									</tr>
+								</c:if>
+								<c:forEach var="data" items="${sdatas}" varStatus="loop">
+									<tr>
+										<td><div>${loop.index + 1}</div></td>
+										<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
+										<td>${data.saveTitle}</td>
+										<td>${data.saveWriter}</td>
+										<td>
+											<input id="qId" type="hidden" value="${data.qId}" />
+											<c:if test="${data.sId>0}">
+												<img class="save" id="'save'+${data.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
+											</c:if>
+											<c:if test="${data.sId <=0}">
+												<img class="save" id="'save'+${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
+											</c:if>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+					<%-- 
 				
 					<c:if test="${empty sdatas}">
 						찜목록이 없습니다.
@@ -146,6 +166,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="js/save.js"></script>
 
 </body>
 </html>
