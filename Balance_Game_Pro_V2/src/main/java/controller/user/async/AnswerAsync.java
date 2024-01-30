@@ -58,7 +58,7 @@ public class AnswerAsync extends HttpServlet {
 		QuestionDTO qDTO=new QuestionDTO();
 		qDTO.setSearchCondition("문제상세조회");
 		qDTO.setqId(Integer.parseInt(request.getParameter("qId")));
-		qDTO.setWriter(request.getParameter("loginId"));
+		qDTO.setLoginId(request.getParameter("loginId"));
 		
 		Gson gson=new Gson();
 		out.print(gson.toJson(qDAO.selectOne(qDTO)));

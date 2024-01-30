@@ -26,7 +26,7 @@ public class TitleDetailPageAction implements Action{
 		CommentDAO commentDAO = new CommentDAO();
 
 		questionDTO.setSearchCondition("문제상세조회");
-		questionDTO.setWriter(request.getParameter("writer")); // 파라미터 : 작성자x, 로그인ID [조지훈]
+		questionDTO.setLoginId(request.getParameter("writer")); // 파라미터 : 작성자x, 로그인ID [조지훈]
 		questionDTO.setqId(Integer.parseInt(request.getParameter("qid")));
 		QuestionDTO questionData =  questionDAO.selectOne(questionDTO);
 		commentDTO.setSearchCondition("질문댓글조회");

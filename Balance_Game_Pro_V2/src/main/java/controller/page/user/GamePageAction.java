@@ -33,7 +33,7 @@ public class GamePageAction implements Action {
 		QuestionDAO qDao = new QuestionDAO();
 		String loginId = (String) session.getAttribute("loginId");
 		
-		qDto.setWriter(loginId!=null?loginId:"");
+		qDto.setLoginId(loginId!=null?loginId:"");
 		qDto.setSearchCondition("문제전체조회");
 		System.out.println("그래"+qDao.selectAll(qDto));
 		if(qDao.selectAll(qDto).size()>list.size()) {
@@ -42,7 +42,7 @@ public class GamePageAction implements Action {
 			qDto.setSearchCondition("질문랜덤생성");
 			
 			// System.out.println(loginId);
-			qDto.setWriter(loginId);
+			qDto.setLoginId(loginId);
 			qDto = qDao.selectOne(qDto);
 			for (i=0; i < list.size(); i++) {
 				if (list.get(i) == qDto.getqId()) {

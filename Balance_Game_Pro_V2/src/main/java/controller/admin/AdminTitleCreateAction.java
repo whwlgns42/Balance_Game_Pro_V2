@@ -29,11 +29,11 @@ public class AdminTitleCreateAction implements Action{
       HttpSession session = request.getSession();
       
       qDTO.setSearchCondition("관리자문제생성");
-      qDTO.setWriter(request.getParameter("writer"));
+      qDTO.setLoginId(request.getParameter("writer"));
       qDTO.setTitle(request.getParameter("title"));
       qDTO.setAnswer_A(request.getParameter("answer_A"));
       qDTO.setAnswer_B(request.getParameter("answer_B"));
-      qDTO.setWriter((String)session.getAttribute("member"));
+      qDTO.setLoginId((String)session.getAttribute("member"));
       qDTO.setExplanation(request.getParameter("explanation"));
       qDTO.setCategory(Integer.parseInt(request.getParameter("category")));
       boolean flag = qDAO.insert(qDTO);

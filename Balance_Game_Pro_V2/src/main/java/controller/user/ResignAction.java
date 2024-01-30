@@ -52,7 +52,7 @@ public class ResignAction implements Action { // 회원탈퇴 기능
 
 		// SearchCondition
 		memberDTO.setLoginId(memberLoginId);
-		questionDTO.setWriter(memberLoginId);
+		questionDTO.setLoginId(memberLoginId);
 		questionDTO.setSearchCondition("question_null");
 		answerDTO.setLoginId(memberLoginId);
 		answerDTO.setSearchCondition("answer_null");
