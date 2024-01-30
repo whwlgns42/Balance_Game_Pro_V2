@@ -146,7 +146,6 @@ ul.actions {
 
 	<!-- Wrapper -->
 	<div id="wrapper">
-		<h3 class="major">밸런스 게임</h3>
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">

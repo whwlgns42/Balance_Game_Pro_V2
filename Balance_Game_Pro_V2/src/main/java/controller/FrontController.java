@@ -42,11 +42,11 @@ public class FrontController extends HttpServlet {
       String uri = request.getRequestURI();
       String cp = request.getContextPath();
       String commend = uri.substring(cp.length());
-      System.out.println(commend + "<<<" );
       Action action = handler.getAction(commend);
       ActionForward forward = action.execute(request, response);
       if (forward == null) { // TODO 구현하기
          // 에러 상황
+    	  System.out.println("에러페이지 요청");
       }
 
       if (forward.isRedirect()) {

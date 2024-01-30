@@ -113,7 +113,7 @@
 	</div>
 	<common:footer></common:footer>
 	<!-- Scripts -->
-	<script src="assets/js/wpd"></script>
+	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
 	<script src="assets/js/browser.min.js"></script>
