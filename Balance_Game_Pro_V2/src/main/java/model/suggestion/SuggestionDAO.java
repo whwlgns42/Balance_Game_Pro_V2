@@ -16,7 +16,7 @@ public class SuggestionDAO {
 	private static final String SELECTALL = "SELECT SUGID, LOGIN_ID, SUGGESTION FROM SUGGESTION";
 
 
-	private static final String INSERT = "INSERT INTO SAVE (SUGID, LOGIN_ID,SUGGESTION) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?)";
+	private static final String INSERT = "INSERT INTO SAVE (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
 
 
 
@@ -30,6 +30,7 @@ public class SuggestionDAO {
 			while (rs.next()) {
 				SuggestionDTO dto = new SuggestionDTO();
 				dto.setSugId(rs.getInt("SUGID"));
+				dto.setTitle(rs.getString("TITLE"));
 				dto.setLoginId(rs.getString("LOGIN_ID"));
 				dto.setSuggestion(rs.getString("SUGGESTION"));
 				datas.add(dto);
@@ -51,6 +52,7 @@ public class SuggestionDAO {
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1, sDTO.getLoginId());
 			pstmt.setString(2, sDTO.getSuggestion());
+			pstmt.setString(3,sDTO.getTitle());
 			int rs = pstmt.executeUpdate();
 			if (rs <= 0) {
 				return false;

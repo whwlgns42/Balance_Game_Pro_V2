@@ -4,6 +4,13 @@ public class SuggestionDTO {
 	private int sugId;
 	private String loginId;
 	private String suggestion;
+	private String title;
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getSugId() {
 		return sugId;
 	}
