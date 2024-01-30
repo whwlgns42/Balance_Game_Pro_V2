@@ -51,11 +51,11 @@
 					<br> 이름
 					<input type="text" name="name" value="${myPageData.name}">
 					<br> 나이	
-					<input type="text" name="age" value="${myPageData.age}">
+					<input readonly type="text" name="age" value="${myPageData.age}">
 					<br> 성별
-					<input type="text" value="${myPageData.gender}">
+					<input readonly type="text" value="${myPageData.gender}">
 					<br> 전화번호
-					<input type="text" name="cellPhone" value="${myPageData.cellPhone}">
+					<input readonly type="text" name="cellPhone" value="${myPageData.cellPhone}">
 					<br> 이메일
 					<input type="email" name="email" value="${myPageData.email}">
 					<br> 주소

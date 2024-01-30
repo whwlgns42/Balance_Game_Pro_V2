@@ -201,7 +201,8 @@
 									<div class="card-body">
 										<div class="form-group">
 											<input hidden="" value="${qDTO.qId}" name="qId"> <label
-												for="inputName">제목</label> <input type="text" id="inputName"
+												for="inputName">제목</label> 
+												<input type="text" id="inputName"
 												class="form-control" name="title" value="${qDTO.title}">
 										</div>
 										<div class="form-group">
@@ -214,23 +215,6 @@
 												id="inputName" class="form-control" name="answer_B"
 												value="${qDTO.answer_B}">
 										</div>
-
-
-
-										<%-- <div class="form-group">
-										
-											<label for="inputName">제목</label> <input type="text"
-												id="inputName" class="form-control" value="${qDTO.title}">
-										</div>
-										<div class="form-group">
-											<label for="inputDescription">선택지A</label>
-											<textarea id="inputDescription" class="form-control" rows="2">${qDTO.answer_A}</textarea>
-										</div>
-										<div class="form-group">
-											<label for="inputDescription">선택지B</label>
-											<textarea id="inputDescription" class="form-control" rows="2">${qDTO.answer_B}</textarea>
-										</div> --%>
-
 
 										<div class="form-check">
 											<input type="hidden" name="category" value="0">
