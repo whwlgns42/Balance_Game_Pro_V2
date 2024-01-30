@@ -229,8 +229,10 @@ ul.actions {
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 	<script src="js/commentAll.js"></script>
 	<script src="js/commentInsert.js"></script>
+	<script src="js/gameButtonClick.js"></script>
 	<script src="js/save.js"></script>
-	<script src="js/nextGamePage.js"></script>
+	<script src="js/answer.js"></script>
+	<script src="js/gameSet.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
