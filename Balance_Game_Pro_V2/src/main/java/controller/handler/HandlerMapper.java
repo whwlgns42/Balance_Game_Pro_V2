@@ -30,6 +30,8 @@ import controller.page.user.ResultPageAction;
 import controller.page.user.SponsorPageAction;
 import controller.page.user.TitleDetailPageAction;
 import controller.page.user.TitleListPageAction;
+import controller.page.user.UserSuggestionAction;
+import controller.page.user.UserSuggestionPageAction;
 import controller.page.user.WishListDetailPageAction;
 import controller.page.user.WishListPageAction;
 import controller.user.GameAction;
@@ -75,6 +77,9 @@ public class HandlerMapper {
 		mappings.put("/sponsorPage.do", new SponsorPageAction());
 		mappings.put("/sponsor.do", new SponsorAction());
 		mappings.put("/wishListDetailPage.do", new WishListDetailPageAction());
+		mappings.put("/UserSuggestionAction.do", new UserSuggestionAction());
+		mappings.put("/UserSuggestionPageAction.do", new UserSuggestionPageAction());
+		
 		// 관리자
 		mappings.put("/adminPage.do", new AdminPageAction());
 		mappings.put("/adminTitleManagementPage.do", new AdminTitleManagementPageAction());
