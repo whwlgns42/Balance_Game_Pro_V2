@@ -1,7 +1,6 @@
 package controller.page.user;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,30 +11,29 @@ import controller.common.ActionForward;
 import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
-public class TitleListPageAction implements Action {
+public class TitleDetailPageAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		ActionForward forward = new ActionForward();
-		
 		QuestionDTO questionDTO = new QuestionDTO();
 		QuestionDAO questionDAO = new QuestionDAO();
-		questionDTO.setSearchCondition("문제전체조회");
-		ArrayList<QuestionDTO> datas = questionDAO.selectAll(questionDTO);
-		System.out.println(datas);
-		if(datas != null) {
-			forward.setPath("titleList.jsp");
+
+		questionDTO.setSearchCondition("문제상세조회");
+		questionDTO.setWriter(request.getParameter("writer")); // 파라미터 : 작성자x, 로그인ID [조지훈]
+		questionDTO.setqId(Integer.parseInt(request.getParameter("qid")));
+		QuestionDTO questionData =  questionDAO.selectOne(questionDTO);
+		if(questionData != null) {
+			forward.setPath("titleDetail.jsp");
 			forward.setRedirect(false);
-			request.setAttribute("qDatas", datas);
+			request.setAttribute("qData", questionData);
 		}else {
-			forward.setPath("alert.do");
+			forward.setPath("titleDetail.jsp");
 			forward.setRedirect(false);
-			request.setAttribute("status", "success");
-			request.setAttribute("msg", "등록된 문제가 없습니다.");
-			request.setAttribute("redirect", "main.do");
+			request.setAttribute("qData", questionData);
 		}
-		return forward;
+		return forward ;
 	}
 
 }

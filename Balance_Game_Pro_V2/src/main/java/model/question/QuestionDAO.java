@@ -176,7 +176,7 @@ public class QuestionDAO {
 			if (qDTO.getSearchCondition().equals("문제상세조회")) {
 				// 박현구
 				pstmt = conn.prepareStatement(SELECT_ONE_DETAIL);
-				pstmt.setString(1, qDTO.getWriter());
+				pstmt.setString(1, qDTO.getWriter()); // 작성자x , 로그인ID o 
 				pstmt.setInt(2, qDTO.getqId());
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
