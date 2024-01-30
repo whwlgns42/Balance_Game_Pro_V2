@@ -84,7 +84,7 @@ public class QuestionDAO {
 				// 승인된 문제
 
 				pstmt = conn.prepareStatement(SELECTALL_TRUE);
-				pstmt.setString(1, qDTO.getWriter());
+				pstmt.setString(1, qDTO.getLoginId());
 
 				ResultSet rs = pstmt.executeQuery();
 
@@ -126,7 +126,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setWriter(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("WRITER"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               datas.add(data);
 	            }
@@ -140,7 +140,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setWriter(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("WRITER"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               
 	               datas.add(data);
@@ -155,7 +155,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setWriter(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("WRITER"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               datas.add(data);
 	            }
@@ -181,7 +181,7 @@ public class QuestionDAO {
 			if (qDTO.getSearchCondition().equals("문제상세조회")) {
 				// 박현구
 				pstmt = conn.prepareStatement(SELECT_ONE_DETAIL);
-				pstmt.setString(1, qDTO.getWriter()); // 작성자x , 로그인ID o 
+				pstmt.setString(1, qDTO.getLoginId()); // 작성자x , 로그인ID o 
 				pstmt.setInt(2, qDTO.getqId());
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
@@ -208,12 +208,12 @@ public class QuestionDAO {
 				// 박현구
 
 				pstmt = conn.prepareStatement(SELECT_ONE_RANDOM);
-				pstmt.setString(1, qDTO.getWriter());
+				pstmt.setString(1, qDTO.getLoginId());
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
 					data = new QuestionDTO();
 					data.setqId(rs.getInt("QID"));
-					data.setWriter(rs.getString("WRITER"));
+					data.setLoginId(rs.getString("WRITER"));
 					data.setTitle(rs.getString("TITLE"));
 
 					data.setAnswer_A(rs.getString("ANSWER_A"));
@@ -232,7 +232,7 @@ public class QuestionDAO {
 	            if (rs.next()) {
 	               data = new QuestionDTO();
 	               data.setqId(rs.getInt("QID"));
-	               data.setWriter(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("WRITER"));
 	               data.setTitle(rs.getString("TITLE"));
 	               data.setAnswer_A(rs.getString("ANSWER_A"));
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
@@ -258,7 +258,7 @@ public class QuestionDAO {
 			if (qDTO.getSearchCondition().equals("문제생성")) {
 
 				pstmt = conn.prepareStatement(INSERT);
-				pstmt.setString(1, qDTO.getWriter()); // 작성자 == loginId
+				pstmt.setString(1, qDTO.getLoginId()); // 작성자 == loginId
 				pstmt.setString(2, qDTO.getTitle()); // 문제제목
 				pstmt.setString(3, qDTO.getAnswer_A()); // 답변A
 				pstmt.setString(4, qDTO.getAnswer_B()); // 답변B
@@ -271,7 +271,7 @@ public class QuestionDAO {
 			} else if (qDTO.getSearchCondition().equals("관리자문제생성")) {
 				// 모델
 				pstmt = conn.prepareStatement(INSERT_ADMIN);
-				pstmt.setString(1, qDTO.getWriter()); // 작성자 == loginId
+				pstmt.setString(1, qDTO.getLoginId()); // 작성자 == loginId
 				pstmt.setString(2, qDTO.getTitle()); // 문제제목
 				pstmt.setString(3, qDTO.getAnswer_A()); // 답변A
 				pstmt.setString(4, qDTO.getAnswer_B()); // 답변B
@@ -319,7 +319,7 @@ public class QuestionDAO {
 			} else if (qDTO.getSearchCondition().equals("question_null")) {
 				// 손성용
 				pstmt = conn.prepareStatement(QS_UPDATE);
-				pstmt.setString(1, qDTO.getWriter());
+				pstmt.setString(1, qDTO.getLoginId());
 				int rs = pstmt.executeUpdate();
 				if (rs <= 0) {
 					return false;

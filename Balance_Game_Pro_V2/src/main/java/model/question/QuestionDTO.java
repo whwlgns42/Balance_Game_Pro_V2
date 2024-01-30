@@ -5,7 +5,7 @@ package model.question;
 public class QuestionDTO {
 	private int qId;
 
-	private String writer; // 이 경우, 작성자는 User 테이블의 idx 컬럼을 참조할 수 있습니다.
+	private String loginId; // 이 경우, 작성자는 User 테이블의 idx 컬럼을 참조할 수 있습니다.
 
 	private String title;
 
@@ -33,6 +33,18 @@ public class QuestionDTO {
 	private int answerCntB;
 	private String s_category;
 	
+
+
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
 
 
 
@@ -101,15 +113,6 @@ public class QuestionDTO {
 
 
 
-	public String getWriter() {
-		return writer;
-	}
-
-
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
 
 
 
@@ -211,7 +214,7 @@ public class QuestionDTO {
 
 	@Override
 	public String toString() {
-		return "QuestionDTO [qId=" + qId + ", 작성자 =" + writer + ", 제목 =" + title + ", 답변A =" + answer_A
+		return "QuestionDTO [qId=" + qId + ", 작성자 =" + loginId + ", 제목 =" + title + ", 답변A =" + answer_A
 				+ ", 답변B =" + answer_B + ", 문제 설명 =" + explanation + ", 카테고리 =" + category
 				+ ", 상태값 =" + searchCondition + "]";
 	}
