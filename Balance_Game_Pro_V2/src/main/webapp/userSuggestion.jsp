@@ -104,35 +104,28 @@
 								</div>
 
 								<div class="card-body">
-									<div class="form-group">
-										<input class="form-control" placeholder="작성자:">
-									</div>
-									<div class="form-group">
-										<input class="form-control" placeholder="제목:">
-									</div>
-									<div class="form-group"></div>
-									<!-- <div class="form-group">
-										<div class="btn btn-default btn-file">
-											<i class="fas fa-paperclip"></i> Attachment <input
-												type="file" name="attachment">
+									<form action="process.jsp" method="post">
+										<!-- process.jsp는 입력된 내용을 처리하는 JSP 파일을 가정하였습니다. -->
+										<div class="form-group">
+											<input type="text" class="form-control" name="author"
+												placeholder="작성자">
 										</div>
-										<p class="help-block">Max. 32MB</p>
-									</div> -->
-									<!-- <h1>CKEditor</h1> -->
-									<form action="" method="POST">
-										<textarea name="text" id="editor">내용</textarea>
-										<p>
-											<!-- <input type="submit" value="전송"> -->
-										</p>
+										<div class="form-group">
+											<input type="text" class="form-control" name="title"
+												placeholder="제목">
+										</div>
+										<div class="form-group">
+											<textarea name="content" id="editor">내용</textarea>
+											<!-- CKEditor를 사용하여 내용을 입력 -->
+										</div>
+										<div class="card-footer">
+											<div class="float-right">
+												<button type="submit" class="btn btn-primary">
+													<i class="far fa-envelope"></i> Send
+												</button>
+											</div>
+										</div>
 									</form>
-								</div>
-
-								<div class="card-footer">
-									<div class="float-right">
-										<button type="submit" class="btn btn-primary">
-											<i class="far fa-envelope"></i> Send
-										</button>
-									</div>
 								</div>
 
 							</div>
@@ -205,6 +198,6 @@
 		ClassicEditor.create(document.querySelector('#editor'), {
 			language : "ko"
 		});
-	</script>
+	</script>x
 </body>
 </html>

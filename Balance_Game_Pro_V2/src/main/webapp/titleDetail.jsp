@@ -24,6 +24,15 @@
 }
 </style>
 <style>
+.button-container {
+	text-align: left;
+	margin-top: 10px;
+}
+
+.button-container button {
+	margin-left: 5px;
+}
+
 .button-container1 {
 	text-align: right;
 	margin-top: 10px;
@@ -50,6 +59,135 @@
 .special-button2 button {
 	margin-left: 5px;
 }
+
+.stats_graph_box {
+	position: relative;
+	padding-bottom: 20px;
+}
+
+.stats_graph_box .graph {
+	position: relative;
+	height: 46px;
+	background: #f0f0f0;
+	border-radius: 4px;
+	font-size: 0;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.stats_graph_box .graph:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+.stats_graph_box .graph .bar {
+	position: relative;
+	display: inline-block;
+	height: 46px;
+	background: #ddd;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.stats_graph_box .graph .bar+.bar {
+	margin-left: -5px;
+	padding-right: 5px;
+	box-sizing: content-box;
+	border-radius: 0 4px 4px 0;
+}
+
+.stats_graph_box .graph .bar.green {
+	z-index: 1;
+	background: #14d57e;
+}
+
+.stats_graph_box .graph .bar.pink {
+	background: #e750b0;
+}
+
+.stats_graph_box .graph .bar.clear {
+	background: transparent;
+}
+
+.stats_graph_box .graph .desc {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: 0;
+	text-align: center;
+	font-size: 12px;
+	line-height: 16px;
+	color: #fff;
+	transform: translate(-50%, -50%);
+}
+
+.stats_graph_box .graph .desc em {
+	font-style: normal;
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.stats_graph_box .graph .desc dd {
+	margin: 0;
+}
+
+.stats_graph_box .fixed_data {
+	position: absolute;
+	top: 52px;
+	width: 120px;
+	margin: 0;
+	text-align: center;
+	font-size: 10px;
+	color: #000;
+}
+
+.stats_graph_box .fixed_data:before {
+	content: '';
+	position: absolute;
+	top: -53px;
+	left: 50%;
+	width: 1px;
+	height: 50px;
+	border-left: 1px dashed #bababa;
+}
+
+.stats_graph_box .fixed_data .item {
+	float: left;
+}
+
+.stats_graph_box .fixed_data .item+.item dt {
+	padding-left: 8px;
+}
+
+.stats_graph_box .fixed_data .item dt:before {
+	content: '/';
+	position: absolute;
+	top: 0;
+	left: 2px;
+}
+
+.stats_graph_box .fixed_data .item dd:before {
+	content: '/';
+	position: absolute;
+	top: 2px;
+	left: -1px;
+}
+
+.stats_graph_box .fixed_data dt {
+	position: relative;
+}
+
+.stats_graph_box .fixed_data dd {
+	margin: 0;
+	position: relative;
+}
+
+.stats_graph_box .fixed_data em {
+	font-style: normal;
+	font-size: 13px;
+	font-weight: 700;
+}
 </style>
 <title>문제 상세 페이지</title>
 <meta charset="utf-8" />
@@ -65,7 +203,7 @@
 
 	<!-- Header -->
 	<header id="header">
-	<common:logo></common:logo>
+		<common:logo></common:logo>
 		<nav>
 			<ul>
 				<c:if test="${not empty loginId }">
@@ -112,6 +250,26 @@
 
 						</tbody>
 					</table>
+					<div class="stats_graph_box">
+						<div class="graph">
+							<div id="barA" class="bar green">
+								<dl class="desc">
+									<dt>Answer_A</dt>
+									<dd>
+										<em id="percentA">0%</em>
+									</dd>
+								</dl>
+							</div>
+							<div id="barB" class="bar pink">
+								<dl class="desc">
+									<dt>Answer_B</dt>
+									<dd>
+										<em id="percentB">0%</em>
+									</dd>
+								</dl>
+							</div>
+						</div>
+					</div>
 					<table class="table table-hover text-nowrap">
 						<thead>
 							<tr>
@@ -120,42 +278,92 @@
 							</tr>
 						</thead>
 						<tbody>
-							
-								
-								
-									<tr>
-										<td>${qData.answerCntA}</td>
-										<td>${qData.answerCntB}</td>
-									</tr>
-								
-							
+
+
+
+							<tr>
+								<td>${qData.answerCntA}</td>
+								<td>${qData.answerCntB}</td>
+							</tr>
+
+
 
 						</tbody>
 					</table>
 					<table class="table table-hover text-nowrap">
-								<thead>
-									<tr>
-										<th>번호</th>
-										<th>아이디</th>
-										<th>댓글내용</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:if test="${empty cDatas}">
-										<tr>
-											<td colspan="1">작성된 댓글이 없습니다.</td>
-										</tr>
-									</c:if>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>아이디</th>
+								<th>댓글내용</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty cDatas}">
+								<tr>
+									<td colspan="1">작성된 댓글이 없습니다.</td>
+								</tr>
+							</c:if>
 
-									<c:forEach var="data" items="${cDatas}" varStatus="loop">
-										<tr>
-											<td>${loop.index + 1}</td>
-											<td>${data.loginId}</td>
-											<td>${data.content}</td>
-										</tr>
-									</c:forEach>
-								</tbody>
-							</table>
+							<c:forEach var="data" items="${cDatas}" varStatus="loop">
+								<tr>
+									<td>${loop.index + 1}</td>
+									<td>${data.loginId}</td>
+									<td>${data.content}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<!-- <div class="stats_graph_box">
+						<div class="graph">
+							비율에 따라 width 값 조정
+							<div class="bar green" style="width: 40%;">
+								<dl class="desc">
+									<dt>Data 1</dt>
+									<dd>
+										<em>50</em>개
+									</dd>
+								</dl>
+							</div>
+							<div class="bar pink" style="width: 10%">
+								<dl class="desc">
+									<dt>Data 2</dt>
+									<dd>
+										<em>8</em>개
+									</dd>
+								</dl>
+							</div>
+							<div class="bar clear" style="width: 30%">
+								<dl class="desc">
+									<dt>Data etc.</dt>
+									<dd>
+										<em>72</em>개
+									</dd>
+								</dl>
+							</div>
+						</div>
+						위치시킬 값에 따라 left 값 조정
+						<dl class="fixed_data" style="left: 75%;">
+							<div class="item">
+								<dt>data data</dt>
+								<dd>
+									<em>21</em>개
+								</dd>
+							</div>
+							<div class="item">
+								<dt>data data data</dt>
+								<dd>
+									<em>190</em>개
+								</dd>
+							</div>
+						</dl>
+					</div> -->
+
+
+
+
+					<div class="stats_graph_box"></div>
+
 				</div>
 
 			</div>
@@ -184,6 +392,26 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script>
+		// Assume qData.answerCntA and qData.answerCntB are available from the server
+		const countA = parseInt("${qData.answerCntA}");
+		const countB = parseInt("${qData.answerCntB}");
+
+		// Calculate percentages
+		const total = countA + countB;
+		const percentA = (countA / total) * 100;
+		const percentB = (countB / total) * 100;
+
+		// Set widths based on percentages
+		document.getElementById('barA').style.width = percentA + '%';
+		document.getElementById('barB').style.width = percentB + '%';
+
+		// Update percentages
+		document.getElementById('percentA').innerText = percentA.toFixed(2)
+				+ '%';
+		document.getElementById('percentB').innerText = percentB.toFixed(2)
+				+ '%';
+	</script>
 
 </body>
 </html>

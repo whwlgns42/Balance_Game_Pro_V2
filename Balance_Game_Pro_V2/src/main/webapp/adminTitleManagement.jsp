@@ -318,7 +318,7 @@ th {
 											<c:forEach var="data" items="${qdatas_t}">
 												<tr onclick="location.href = 'adminTitleDetailPage.do?qid=${data.qId}'">
 													<td>${data.qId}</td>
-													<td>${data.writer}</td>
+													<td>${data.loginId}</td>
 													<td>${data.title}</td>
 													<td>${data.explanation}</td>
 												</tr>
