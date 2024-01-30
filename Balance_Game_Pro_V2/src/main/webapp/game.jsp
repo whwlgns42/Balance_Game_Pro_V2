@@ -1,6 +1,8 @@
-<%@page import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
+<%@page
+	import="kotlin.reflect.jvm.internal.impl.types.model.TypeSystemOptimizationContext"%>
 <%@page import="model.question.QuestionDTO"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
@@ -15,7 +17,8 @@
 <head>
 <title>게임 페이지</title>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -98,24 +101,10 @@ ul.actions {
 	margin: 0 auto;
 }
 </style>
-
-
-
-<!-- <script type="text/javascript">
-	$(document).ready(function() {
-		
-		//if(${data.qId}=)
-		//질문 pk없을시 메인으로
-
-
-
-		
-		//console.log(${list});
-
-		
-	});
-</script> -->
-
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous"></script>
+<script src="js/gameSet.js"></script>
 </head>
 <body class="is-preload">
 	<input id="qId" type="hidden" value="${data.qId}">
@@ -226,13 +215,12 @@ ul.actions {
 	</footer>
 
 	<!-- Scripts -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
 	<script src="js/commentAll.js"></script>
 	<script src="js/commentInsert.js"></script>
 	<script src="js/gameButtonClick.js"></script>
 	<script src="js/save.js"></script>
 	<script src="js/answer.js"></script>
-	<script src="js/gameSet.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>
