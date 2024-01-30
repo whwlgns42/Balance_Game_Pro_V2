@@ -42,7 +42,7 @@ public class IdCheckAsync extends HttpServlet {
 			System.out.println("사용 가능한 아이디");
 			response.getWriter().print(idDoubleCheckRes != null ? 1 : 0);
 		} else {
-			System.out.println("중복된 아이디임");
+			System.out.println(idDoubleCheckRes.getLoginId() + " 는 중복된 아이디 ");
 			response.getWriter().print(idDoubleCheckRes != null ? 1 : 0);
 		}
 	}

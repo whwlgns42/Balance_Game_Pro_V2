@@ -154,6 +154,7 @@ public class MemberDAO {
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
                data = new MemberDTO();
+               data.setLoginId(rs.getString("LOGIN_ID"));
             }
             rs.close();
          } catch (SQLException e) {
