@@ -46,7 +46,8 @@
 
 <body class="is-preload">
 	<input id="loginId" type="hidden" value="${loginId}">
-
+	<input id="page" type="hidden" value="wishPage">
+	
 	<!-- Header -->
 	<header id="header">
 		<a href="main.do" class="title">자비스</a>
@@ -99,8 +100,9 @@
 												<img class="save" id="${data.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
 											</c:if>
 											<c:if test="${data.sId <= 0}">
-												<img class="save" id="${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
+												<img onclick="reload()" class="save" id="${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
 											</c:if>
+											
 										</td>
 									</tr>
 								</c:forEach>

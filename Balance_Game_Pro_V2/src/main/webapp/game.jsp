@@ -104,6 +104,7 @@ ul.actions {
 <body class="is-preload">
 	<input id="qId" type="hidden" value="${data.qId}">
 	<input id="loginId" type="hidden" value="${loginId}">
+	<input id="page" type="hidden" value="gamePage"/>
 	<%-- 	<%
 	String loginData = (String) session.getAttribute("loginId");
 	QuestionDTO qDTO = (QuestionDTO) request.getAttribute("data");

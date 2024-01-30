@@ -3,6 +3,7 @@ $(".save").on("click", function() {
 	var loginId = document.getElementById('loginId').value;
 	var qId = document.getElementById('qId').value;
 	var saveId = $(this).attr('id');
+	var page = document.getElementById('page').value;
 	console.log(loginId);
 	if (loginId == "") {
 		console.log("[로그]로그인 x");
@@ -28,6 +29,9 @@ $(".save").on("click", function() {
 				} else {
 					console.log($("#"+saveId).attr("src", "images/" + data) + "<<<<<")
 					$("#"+saveId).attr("src", "images/" + data);
+					if(data == "찜x.png" && page == "wishPage"){
+						location.reload();
+					}
 				}
 
 				//document.getElementById(".save").src="images/찜o.png";
