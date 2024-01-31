@@ -222,12 +222,11 @@
 			<div class="inner">
 				<h1 class="major" style="margin-bottom: 20px;">문제 상세 페이지</h1>
 				<div class="card-body table-responsive p-0">
-					<table class="table table-hover text-nowrap">
+					<table class="table table-hover text-nowrap"
+						style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Title</th>
-								<th>Answer_A</th>
-								<th>Answer_B</th>
 								<th>Reason</th>
 							</tr>
 						</thead>
@@ -241,8 +240,6 @@
 								<c:otherwise>
 									<tr>
 										<td>${qData.title}</td>
-										<td>${qData.answer_A}</td>
-										<td>${qData.answer_B}</td>
 										<td>${qData.explanation}</td>
 									</tr>
 								</c:otherwise>
@@ -250,6 +247,55 @@
 
 						</tbody>
 					</table>
+					<table class="table table-hover text-nowrap"
+						style="margin-bottom: 10px;">
+						<thead>
+							<tr>
+								<th>Answer_A</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${empty qData}">
+									<tr>
+										<td colspan="4">출제된 문제가 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td>${qData.answer_A}</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+
+						</tbody>
+					</table>
+
+					<table class="table table-hover text-nowrap"
+						style="margin-bottom: 10px;">
+						<thead>
+							<tr>
+								<th>Answer_B</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<c:choose>
+								<c:when test="${empty qData}">
+									<tr>
+										<td colspan="4">출제된 문제가 없습니다.</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<tr>
+										<td>${qData.answer_B}</td>
+									</tr>
+								</c:otherwise>
+							</c:choose>
+
+						</tbody>
+					</table>
+
 					<div class="stats_graph_box">
 						<div class="graph">
 							<div id="barA" class="bar green">
@@ -270,7 +316,8 @@
 							</div>
 						</div>
 					</div>
-					<table class="table table-hover text-nowrap">
+					<table class="table table-hover text-nowrap"
+						style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Answer_A</th>
@@ -314,54 +361,6 @@
 							</c:forEach>
 						</tbody>
 					</table>
-					<!-- <div class="stats_graph_box">
-						<div class="graph">
-							비율에 따라 width 값 조정
-							<div class="bar green" style="width: 40%;">
-								<dl class="desc">
-									<dt>Data 1</dt>
-									<dd>
-										<em>50</em>개
-									</dd>
-								</dl>
-							</div>
-							<div class="bar pink" style="width: 10%">
-								<dl class="desc">
-									<dt>Data 2</dt>
-									<dd>
-										<em>8</em>개
-									</dd>
-								</dl>
-							</div>
-							<div class="bar clear" style="width: 30%">
-								<dl class="desc">
-									<dt>Data etc.</dt>
-									<dd>
-										<em>72</em>개
-									</dd>
-								</dl>
-							</div>
-						</div>
-						위치시킬 값에 따라 left 값 조정
-						<dl class="fixed_data" style="left: 75%;">
-							<div class="item">
-								<dt>data data</dt>
-								<dd>
-									<em>21</em>개
-								</dd>
-							</div>
-							<div class="item">
-								<dt>data data data</dt>
-								<dd>
-									<em>190</em>개
-								</dd>
-							</div>
-						</dl>
-					</div> -->
-
-
-
-
 					<div class="stats_graph_box"></div>
 
 				</div>

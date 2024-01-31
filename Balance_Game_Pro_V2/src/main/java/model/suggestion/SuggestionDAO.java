@@ -13,7 +13,7 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT LOGIN_ID, SUGGESTION, TITLE FROM SUGGESTION";
+	private static final String SELECTALL = "SELECT LOGIN_ID, SUGGESTION, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
 
 
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";

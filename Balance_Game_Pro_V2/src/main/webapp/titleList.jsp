@@ -88,27 +88,6 @@
 		<section id="main" class="wrapper">
 			<div class="inner">
 				<h1 class="major" style="margin-bottom: 20px;">문제 목록</h1>
-				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
-				<!-- <div class="button-container1">
-					<button onclick="location.href = 'gamePage.do'">게임하기</button>
-					<br>
-				</div> -->
-				<%-- <div class="button-container">
-
-					<c:if test="${fn:length(qDatas) <= 0 }">
-						등록된 문제가 없습니다.
-					</c:if>
-					<c:forEach var="data" items="${qDatas}" varStatus="loop">
-						<div style="margin-bottom: 8px;">
-							${loop.index + 1}. ${data.title}<br>
-						</div>
-					</c:forEach>
-					<div class="card"> --%>
-				<!-- <div class="card-header">
-					<h3 class="card-title">문제목록</h3>
-
-				</div> -->
-
 				<div class="card-body table-responsive p-0">
 					<table class="table table-hover text-nowrap">
 						<thead>
@@ -132,6 +111,7 @@
 									<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
 									<td>${data.title}</td>
 									<!-- <td>${data.explanation}</td> -->
+									
 								</tr>
 							</c:forEach>
 						</tbody>

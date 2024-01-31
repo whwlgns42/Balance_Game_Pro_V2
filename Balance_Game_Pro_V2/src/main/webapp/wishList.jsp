@@ -29,6 +29,12 @@
 .button-container1 button {
 	margin-left: 5px;
 }
+.table img {
+  max-width: 30px; /* 이미지의 최대 너비 */
+  max-height: 30px; /* 이미지의 최대 높이 */
+  width: auto; /* 너비를 자동으로 조정하여 비율을 유지합니다. */
+  height: auto; /* 높이를 자동으로 조정하여 비율을 유지합니다. */
+}
 </style>
 <title>찜목록</title>
 <meta charset="utf-8" />
