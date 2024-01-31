@@ -226,39 +226,5 @@
         });
     });
 </script>
-	<script>
-        var modalOpen = false; // 팝업 상태 변수 초기화
-        var editor = null; // 에디터 객체 변수 초기화
-
-        document.getElementById('popupButton').addEventListener('click', function() {
-            if (!modalOpen) { // 팝업이 열려있지 않은 경우에만 열기
-                document.getElementById('myModal').style.display = 'block'; // 모달 표시
-                if (!editor) { // 에디터 객체가 없는 경우에만 생성
-                    editor = ClassicEditor
-                        .create( document.querySelector( '#classic' ))
-                        .catch( error => {
-                            console.error( error );
-                        } );
-                }
-                modalOpen = true; // 팝업 상태 변경
-            }
-        });
-
-        function closeModal() {
-            document.getElementById('myModal').style.display = 'none'; // 모달 숨김
-            modalOpen = false; // 팝업 상태 변경
-            if (editor) { // 에디터 객체가 있는 경우에만 초기화
-                editor.destroy().then( () => {
-                    editor = null; // 에디터 객체 초기화
-                } );
-            }
-        }
-
-        document.getElementById('submitButton').addEventListener('click', function() {
-            var content = editor.getData(); // 에디터의 내용을 가져옴
-            // content를 서버로 전송하는 코드 작성
-            console.log(content); // 예시로 콘솔에 출력
-        });
-    </script>
 </body>
 </html>
