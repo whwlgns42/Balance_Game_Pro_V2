@@ -27,6 +27,7 @@ public class UserSuggestionAction implements Action{
 		
 		sugDTO.setLoginId(loginId);
 		sugDTO.setSuggestion(request.getParameter("suggestion"));
+		sugDTO.setTitle(request.getParameter("title"));
 		
 		boolean flag = sugDAO.insert(sugDTO);
 		
