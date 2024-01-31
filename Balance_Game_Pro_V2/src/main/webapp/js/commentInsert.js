@@ -12,7 +12,7 @@ $("#write").on("click", function() {
 	var content = $('#inputContent').val().trim();
 	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//$('#inputContent').val('');
-	if (isRun == true ||!content) {
+	if (isRun == true ||`${content.length}`<=0||!content||typeof content === "undefined"||content === null) {
 		console.log('댓글 공백');
 		return;
 	}
