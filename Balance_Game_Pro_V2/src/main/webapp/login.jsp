@@ -22,8 +22,8 @@
 			<a style="text-decoration: none; border: none; margin-top: -150px;" href="main.do"><img style="margin-right: 200px; margin-top: -100px; margin-left: 50px;" src="images/logo.png" height="150" width="150"></a>
 			<div style="margin-top: 100px;">
 				<h1 style="text-align: center;">로그인</h1>
-				<div class="inner" style="display: flex; justify-content: center; align-items: center; width: 2133px;">
-
+				
+				<div style="display: flex; justify-content: center;">
 					<form id="loginForm" action="login.do" method="POST">
 						<div>
 							<label for="loginId">아이디</label>
