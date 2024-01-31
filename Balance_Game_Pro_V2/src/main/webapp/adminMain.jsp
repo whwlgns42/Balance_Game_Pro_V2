@@ -99,7 +99,7 @@
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" data-widget="pushmenu"
-					href="adminPage.do" role="button"> <img src="images/logo.png"
+					href="adminPage.do" role="button"> <img src="images/123.jpg"
 						alt="Menu" width="30" height="30">
 				</a></li>
 				<li class="nav-item d-none d-sm-inline-block">관리자 페이지</li>
