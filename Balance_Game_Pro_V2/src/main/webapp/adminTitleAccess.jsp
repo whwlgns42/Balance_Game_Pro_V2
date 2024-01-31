@@ -313,7 +313,7 @@ th {
 												<tr
 													onclick="location.href = 'adminTitleDetaileAccessPage.do?qid=${data.qId}'">
 													<td>${data.qId}</td>
-													<td>${data.writer}</td>
+													<td>${data.loginId}</td>
 													<td>${data.title}</td>
 													<td>${data.regdate}</td>
 												</tr>
