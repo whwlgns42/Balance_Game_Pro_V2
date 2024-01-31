@@ -8,17 +8,15 @@ $("#write").on("click", function() {
 	var qId = document.getElementById('qId').value;
 	var loginId = document.getElementById('loginId').value;
 	console.log("댓글 입력");
-	var content = $('#inputContent').val();
+	var content = $('#inputContent').val().trim();
+	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//$('#inputContent').val('');
-	if (isRun == true) {
+	if (isRun == true ||`${content.length}`<=0) {
+		console.log('댓글 공백');
 		return;
 	}
 	isRun = true;
-
-
-
-
-	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">'); ////
+	
 
 	console.log('확인1: ' + content);
 	if (content) {
