@@ -7,11 +7,12 @@ var isRun = false;
 $("#write").on("click", function() {
 	var qId = document.getElementById('qId').value;
 	var loginId = document.getElementById('loginId').value;
+	console.log('[로그] 질문 pk'+`${qId}`);
 	console.log("댓글 입력");
 	var content = $('#inputContent').val().trim();
 	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//$('#inputContent').val('');
-	if (isRun == true ||`${content.length}`<=0) {
+	if (isRun == true ||!content) {
 		console.log('댓글 공백');
 		return;
 	}
