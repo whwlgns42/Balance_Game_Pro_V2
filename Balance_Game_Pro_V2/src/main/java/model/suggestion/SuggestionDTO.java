@@ -5,6 +5,11 @@ public class SuggestionDTO {
 	private String loginId;
 	private String suggestion;
 	private String title;
+	@Override
+	public String toString() {
+		return "SuggestionDTO [sugId=" + sugId + ", loginId=" + loginId + ", suggestion=" + suggestion + ", title="
+				+ title + "]";
+	}
 	public String getTitle() {
 		return title;
 	}

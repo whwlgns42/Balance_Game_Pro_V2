@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
-
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.ArrayList,model.member.MemberDTO"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="crown"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,17 +257,62 @@
 						</div>
 						<!-- ./col -->
 					</div>
-					<div id="chat-container">
-						<div id="chat-messages"></div>
-						<div id="user-input">
-							<input type="text" placeholder="메시지를 입력하세요..." />
-							<button>전송</button>
-						</div>
-					</div>
+					
 					<!-- /.row -->
 					<!-- Main row -->
 
 					<div class="row">
+					<div class="card-body table-responsive p-0">
+                           
+                        <div class="card">
+                        <div class="card-header">
+                           <h3 class="card-title">건의사항</h3>
+                           <div class="card-tools">
+                              <div class="input-group input-group-sm" style="width: 150px;">
+                                 <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                                 <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                       <i class="fas fa-search"></i>
+                                    </button>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div class="card-body table-responsive p-0">
+                           <table class="table table-hover text-nowrap">
+                              <thead>
+                                 <tr>
+                                    <th>ID</th>
+                                    <th>제목</th>
+                                    <th>내용</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <c:if test="${empty sugDatas}">
+                                    <tr>
+                                       <td colspan="1">건의사항이 없습니다.</td>
+                                    </tr>
+
+                                 </c:if>
+
+
+                                 <c:forEach var="data" items="${sugDatas}">
+                                    <tr>
+                                       <td>${data.loginId}</td>
+                                       <td>${data.title}</td>
+                                       <td>${data.suggestion}</td>
+                                    </tr>
+
+                                 </c:forEach>
+                              </tbody>
+                           </table>
+                        </div>
+
+                     </div>
+                           
+                           
+                        </div>
 
 						<!-- right col (We are only adding the ID to make the widgets sortable)-->
 

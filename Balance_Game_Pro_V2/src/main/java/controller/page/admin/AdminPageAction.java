@@ -23,10 +23,13 @@ public class AdminPageAction implements Action {
 		SuggestionDAO sugDAO = new SuggestionDAO();
 		
 		ArrayList<SuggestionDTO> sugDatas = sugDAO.selectAll(sugDTO);
+		System.out.println(sugDatas+ "sugDatas <<<<<<<<");
 		
 		if(sugDatas.isEmpty()) {
 			sugDatas = null;
+			System.out.println("건의사항 널 뜬다");
 		}
+		System.out.println("건의사항 데이터는 있음");
 		forward.setPath("adminMain.jsp");
 		forward.setRedirect(false);
 		request.setAttribute("sugDatas", sugDatas);
