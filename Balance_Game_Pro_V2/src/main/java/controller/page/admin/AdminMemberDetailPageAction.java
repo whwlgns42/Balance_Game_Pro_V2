@@ -32,9 +32,6 @@ public class AdminMemberDetailPageAction implements Action{
 		cDTO.setLoginId(request.getParameter("loginId"));
 		
 		ArrayList<CommentDTO> cdatas = cDAO.selectAll(cDTO);
-		if(cdatas == null) {
-			cdatas = null;
-		}
 		
 		MemberDTO member = mDAO.selectOne(mDTO);
 		if (member == null) {
@@ -49,6 +46,8 @@ public class AdminMemberDetailPageAction implements Action{
 		forward.setRedirect(false);
 		request.setAttribute("member", member);
 		request.setAttribute("cdatas", cdatas);
+		System.out.println("로그 cdatas[" + cdatas+"]");
+		System.out.println("로그 member[" + member+"]");
 	    return forward;
 	}
 	
