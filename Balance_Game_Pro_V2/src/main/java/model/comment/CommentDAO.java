@@ -26,6 +26,8 @@ public class CommentDAO {
 
 	// 회원탈퇴시 'Comment'를 null 값으로 변경
 	private static final String CM_UPDATE = "UPDATE COMMENTS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
+	
+	private static final String DELETE = "DELETE FROM COMMENTS WHERE CID = ?";
 
 	// 댓글 전체 출력하기
 	public ArrayList<CommentDTO> selectAll(CommentDTO cDTO) {
@@ -138,7 +140,20 @@ public class CommentDAO {
 
 	public boolean delete(CommentDTO cDTO) {
 		// 댓글 삭제
+		conn = JDBCUtil.connect();
+		
+		try {
+			pstmt = conn.prepareStatement(DELETE);
+			pstmt.setInt(1, cDTO.getcId());
+			int result = pstmt.executeUpdate();
+			if(result <=0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
 		return false;
 	}
-
 }

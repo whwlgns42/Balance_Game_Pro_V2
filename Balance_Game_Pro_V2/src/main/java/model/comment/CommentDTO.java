@@ -96,6 +96,11 @@ public class CommentDTO {
 		this.memberLoginId = memberLoginId;
 	}
 
+	@Override
+	public String toString() {
+		return "CommentDTO [cId=" + cId + ", qId=" + qId + ", loginId=" + loginId + ", content=" + content
+				+ ", searchCondition=" + searchCondition + ", memberName=" + memberName + ", memberLoginId="
+				+ memberLoginId + ", grade=" + grade + ", ranking=" + ranking + "]";
+	}
 
-  
 }
