@@ -154,6 +154,6 @@ public class CommentDAO {
 		}finally {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
-		return false;
+		return true;
 	}
 }

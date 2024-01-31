@@ -37,9 +37,9 @@ public class DeleteCommentAsync extends HttpServlet {
 		
 		if(!flag) {
 			out.print(0);
-			return;
+		}else {
+			out.print(1);
 		}
-		out.print(1);
 		System.out.println("로그 flag[" +flag+"]");
 	}
 
