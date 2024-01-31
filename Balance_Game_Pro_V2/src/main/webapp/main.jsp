@@ -30,14 +30,12 @@
 						<li><a href="loginPage.do">문제 출제</a></li>
 						<li><a href="loginPage.do">찜목록</a></li>
 						<li><a href="loginPage.do">후원 랭킹</a></li>
-						<li><a href="loginPage.do">건의하기</a></li>
 					</c:if>
 					<c:if test="${not empty loginId }">
 						<li><a href="titleListPage.do">문제 목록</a></li>
 						<li><a href="makeTitlePage.do">문제 출제</a></li>
 						<li><a href="wishListPage.do">찜목록</a></li>
 						<li><a href="sponsorPage.do">후원 랭킹</a></li>
-						<li><a href="UserSuggestionPageAction.do">건의하기</a></li>
 					</c:if>
 				</ul>
 			</nav>
@@ -63,6 +61,10 @@
 					<ul class="actions">
 						<li><a href="joinPage.do" class="button scrolly">회원가입</a></li>
 					</ul>
+					<ul class="actions">
+						<li><a href="loginPage.do" class="button scrolly">건의하기</a></li>
+					</ul>
+
 				</c:if>
 				<c:if test="${not empty loginId }">
 					<ul class="actions">
@@ -74,8 +76,11 @@
 					<ul class="actions">
 						<li><a href="pwCheckPage.do" class="button scrolly">마이페이지</a></li>
 					</ul>
+					<ul class="actions">
+						<li><button onclick=popup()>건의하기</button></li>
+					</ul>
+					
 				</c:if>
-<button onclick=popup()>건의하기</button>
 			</div>
 		</section>
 

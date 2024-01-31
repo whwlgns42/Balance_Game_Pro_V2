@@ -104,18 +104,18 @@
 								</div>
 
 								<div class="card-body">
-									<form action="process.jsp" method="post">
+									<form action="UserSuggestionAction.do" method="post">
 										<!-- process.jsp는 입력된 내용을 처리하는 JSP 파일을 가정하였습니다. -->
 										<div class="form-group">
-											<input type="text" class="form-control" name="author"
-												placeholder="작성자">
+											<input type="text" class="form-control" name="loginId"
+												value="${loginId}" readonly>
 										</div>
 										<div class="form-group">
 											<input type="text" class="form-control" name="title"
 												placeholder="제목">
 										</div>
 										<div class="form-group">
-											<textarea name="content" id="editor">내용</textarea>
+											<textarea name="suggestion" id="editor">내용</textarea>
 											<!-- CKEditor를 사용하여 내용을 입력 -->
 										</div>
 										<div class="card-footer">
@@ -198,6 +198,13 @@
 		ClassicEditor.create(document.querySelector('#editor'), {
 			language : "ko"
 		});
-	</script>x
+	</script>
+	<script>
+		function submitForm() {
+			var editorData = CKEditor.instances.editor.getData();
+			document.getElementById('editor').value = editorData; // CKEditor에서의 데이터를 textarea에 설정
+			document.getElementById('myForm').submit(); // 폼 전송
+		}
+	</script>
 </body>
 </html>
