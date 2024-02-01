@@ -1,7 +1,9 @@
+# BalanceGame 프로젝트
+<div style="text-align: center;">
+  <img src="https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b" alt="이미지 설명" width="300" height="300">
+</div>
 
-<img src="https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b" alt="이미지 설명" width="300" height="300">
 
-# Flutter 프로젝트
 [ 🍔 맥도날드 프로젝트 ]
 - Flutter 위젯 기능을 이용하여 맥도날드 어플리케이션 UI 구성하기
 
