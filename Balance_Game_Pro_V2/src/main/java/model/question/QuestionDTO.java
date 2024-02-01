@@ -32,7 +32,19 @@ public class QuestionDTO {
 	private int answerCntA;
 	private int answerCntB;
 	private String s_category;
-	
+	private int cnt;
+
+
+
+	public int getCnt() {
+		return cnt;
+	}
+
+
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 
 
 
