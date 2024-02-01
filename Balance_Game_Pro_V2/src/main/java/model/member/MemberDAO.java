@@ -40,8 +40,16 @@ public class MemberDAO {
    
    // CELL_PHONE
    // 유저 전체 조회
-   private static final String SELECTALL_USER = "SELECT M.MID, M.LOGIN_ID, M.MPW, M.NAME,EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, SUM(S.AMOUNT) AS TOTAL, RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC) AS RANKING FROM SUPPORT S JOIN MEMBER M ON M.LOGIN_ID = S.LOGIN_ID "
-         + " GROUP BY M.MID, M.LOGIN_ID, M.MPW, M.NAME,EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
+   private static final String SELECTALL_USER = "SELECT \r\n"
+   		+ "    M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
+   		+ "    COALESCE(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
+   		+ "    RANK() OVER (ORDER BY COALESCE(SUM(S.AMOUNT), 0) DESC) AS RANKING \r\n"
+   		+ "FROM \r\n"
+   		+ "    MEMBER M\r\n"
+   		+ "LEFT JOIN \r\n"
+   		+ "    SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID\r\n"
+   		+ "GROUP BY \r\n"
+   		+ "    M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
 
    
    
