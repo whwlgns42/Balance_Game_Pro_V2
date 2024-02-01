@@ -71,6 +71,10 @@ public class QuestionDAO {
 		private static final String QS_UPDATE = "UPDATE QUESTIONS SET WRITER = NULL WHERE WRITER = ?";
 	   
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
+	
+	//문제 개수
+	private static final String SELECT_CNT="SELECT COUNT(1) FROM QUESTIONS WHERE Q_ACCESS=?";
+	
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
 
@@ -240,6 +244,22 @@ public class QuestionDAO {
 	               data.setCategory(rs.getInt("CATEGORY"));
 	               data.setqAccess(rs.getString("Q_ACCESS"));
 	            }
+	         }else if(qDTO.getSearchCondition().equals("문제승인갯수")) {
+	        	 pstmt = conn.prepareStatement(SELECT_CNT);
+	        	 pstmt.setString(1, qDTO.getqAccess());
+	        	 ResultSet rs = pstmt.executeQuery();
+	        	 if (rs.next()) {
+		               data = new QuestionDTO();
+		               data.setCnt(rs.getInt("CNT"));
+		            }
+	         }else if(qDTO.getSearchCondition().equals("총문제수")) {
+	        	 pstmt = conn.prepareStatement(SELECT_CNT);
+	        	 pstmt.setString(1, qDTO.getqAccess());
+	        	 ResultSet rs = pstmt.executeQuery();
+	        	 if (rs.next()) {
+		               data = new QuestionDTO();
+		               data.setCnt(rs.getInt("CNT"));
+		            }
 	         }
 
 
