@@ -10,12 +10,20 @@ $("#write").on("click", function() {
 	console.log('[로그] 질문 pk'+`${qId}`);
 	console.log("댓글 입력");
 	var content = $('#inputContent').val().trim();
-	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//$('#inputContent').val('');
-	if (isRun == true ||`${content.length}`<=0||!content||typeof content === "undefined"||content === null) {
+	//공백 확인
+	
+	if(!blankSpace()){
 		console.log('댓글 공백');
 		return;
 	}
+	
+	//태그 초기화 - 다른 곳에선 다르게 처리하기~
+	//$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
+	if (isRun == true) {
+		return;
+	}
+
 	isRun = true;
 	
 
