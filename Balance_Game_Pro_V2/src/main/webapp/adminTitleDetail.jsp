@@ -198,7 +198,7 @@
 									</div>
 								</div>
 
-								<form action="adminTitleUpdate.do" method="POST">
+								<form action="adminTitleUpdate.do" method="POST" id="insertForm">
 									<div class="card-body">
 										<div class="form-group">
 											<input hidden="" value="${qDTO.qId}" name="qId"> <label
@@ -267,7 +267,9 @@
 	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
-
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="js/blankSpace.js"></script>
+	<script src="js/submitBlankCheack.js"></script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var checkbox = document.getElementById('exampleCheck1');
