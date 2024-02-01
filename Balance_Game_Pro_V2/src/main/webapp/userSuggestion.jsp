@@ -115,7 +115,7 @@
 												placeholder="제목">
 										</div>
 										<div class="form-group">
-											<textarea name="suggestion" id="editor">내용</textarea>
+											<textarea name="suggestion" id="editor"></textarea>
 											<!-- CKEditor를 사용하여 내용을 입력 -->
 										</div>
 										<div class="card-footer">

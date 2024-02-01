@@ -80,7 +80,7 @@ public class SupportDAO {
 			JDBCUtil.disconnect(pstmt, conn);
 		}
 
-		return null;
+		return data;
 	}
 
 	public boolean insert(SupportDTO sDTO) {
