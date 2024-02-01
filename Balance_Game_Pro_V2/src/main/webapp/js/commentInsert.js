@@ -11,6 +11,8 @@ $("#write").on("click", function() {
 	console.log("댓글 입력");
 	var content = $('#inputContent').val().trim();
 	//$('#inputContent').val('');
+	
+	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//공백 확인
 	
 	if(!blankSpace()){
@@ -19,7 +21,7 @@ $("#write").on("click", function() {
 	}
 	
 	//태그 초기화 - 다른 곳에선 다르게 처리하기~
-	//$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
+	
 	if (isRun == true) {
 		return;
 	}
