@@ -35,9 +35,11 @@ public class AdminPageAction implements Action {
 		SupportDAO sDAO = new SupportDAO();
 		
 		qDTO.setSearchCondition("문제승인갯수");
+		qDTO.setqAccess("F");
 		QuestionDTO qDTOApproveCnt = qDAO.selectOne(qDTO);
 		
 		qDTO.setSearchCondition("총문제수");
+		qDTO.setqAccess("T");
 		QuestionDTO qDTOTotalCnt = qDAO.selectOne(qDTO);
 
 		mDTO.setSearchCondition("회원인원수");
