@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
@@ -21,7 +22,9 @@ public class TitleListPageAction implements Action {
 		
 		QuestionDTO questionDTO = new QuestionDTO();
 		QuestionDAO questionDAO = new QuestionDAO();
+		HttpSession session = request.getSession();
 		questionDTO.setSearchCondition("문제전체조회");
+		questionDTO.setLoginId((String)session.getAttribute("loginId"));
 		ArrayList<QuestionDTO> datas = questionDAO.selectAll(questionDTO);
 		System.out.println(datas);
 		if(datas != null) {
