@@ -111,10 +111,10 @@
        </c:if>
        <c:forEach var="data" items="${qDatas}" varStatus="loop">
 
-        <tr>
-         <td><a href="titleDetailPage.do?qid=${data.qId}&writer=${loginId}">${loop.index + 1}</a></td>
+        <tr >
+         <td onClick="location.href='titleDetailPage.do?qid=${data.qId}&writer=${loginId}'">${loop.index + 1}</td>
          <!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
-         <td><a href="titleDetailPage.do?qid=${data.qId}&writer=${loginId}">${data.title}</a></td>
+         <td onClick="location.href='titleDetailPage.do?qid=${data.qId}&writer=${loginId}'">${data.title}</td>
          <td><input id="qId" type="hidden" value="${data.qId}" /> <c:if test="${data.save > 0}">
            <img class="save" id="${data.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
           </c:if> <c:if test="${data.save <= 0}">
@@ -127,12 +127,9 @@
     </div>
 
    </div>
+    </section>
  </div>
 
- </div>
- </section>
-
- </div>
 
  <!-- Footer -->
  <footer id="footer" class="wrapper alt">
