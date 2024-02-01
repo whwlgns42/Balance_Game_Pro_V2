@@ -69,15 +69,6 @@
 				<c:if test="${not empty loginId }">
 					<li><a href="loginPage.do" class="active">로그아웃</a></li>
 					<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
-					<button id="popupButton">팝업 열기</button>
-					<div id="myModal" class="modal" style="display: none; position: fixed; top: 50px; right: 50px; background-color: white; padding: 20px; border-radius: 10px; z-index: 1000;">
-						<span class="closeButton" style="position: absolute; top: 10px; right: 10px; cursor: pointer;" onclick="closeModal()">&times;</span>
-						<!-- 모달 닫기 버튼 -->
-						<div id="classic">
-							<p>This is some sample content.</p>
-						</div>
-						<button id="submitButton">전송</button>
-					</div>
 				</c:if>
 			</ul>
 		</nav>
