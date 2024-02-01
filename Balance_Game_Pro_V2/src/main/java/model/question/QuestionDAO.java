@@ -73,7 +73,7 @@ public class QuestionDAO {
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
 	
 	//문제 개수
-	private static final String SELECT_CNT="SELECT COUNT(1) FROM QUESTIONS WHERE Q_ACCESS=?";
+	private static final String SELECT_CNT="SELECT COUNT(1) AS CNT FROM QUESTIONS WHERE Q_ACCESS=?";
 	
 	// 문제의 테이블의 정보를 모두 조회
 	public ArrayList<QuestionDTO> selectAll(QuestionDTO qDTO) {
