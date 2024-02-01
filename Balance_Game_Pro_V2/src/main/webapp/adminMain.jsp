@@ -163,6 +163,8 @@
    <!-- Main content -->
    <section class="content">
     <div class="container-fluid">
+
+
      <!-- Small boxes (Stat box) -->
      <div class="row">
       <div class="col-lg-3 col-6">
@@ -234,7 +236,7 @@
      <div class="row">
       <div class="card-body table-responsive p-0">
 
-       <div class="card">
+       <div class="card" style="margin-top: 20px;">
         <div class="card-header">
          <h3 class="card-title">건의사항</h3>
          <div class="card-tools">
