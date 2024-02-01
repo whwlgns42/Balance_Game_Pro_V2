@@ -93,46 +93,42 @@
 
 			<!-- Main content -->
 			<section class="content">
-				<section class="content">
-					<div class="row">
-						<div class="col-md-9">
-							<div class="card card-primary card-outline">
-								<div class="card-header">
-									<h3 class="card-title">건의하기</h3>
-								</div>
+				<div class="row">
+					<div class="col-md-9">
+						<div class="card card-primary card-outline">
+							<div class="card-header">
+								<h3 class="card-title">건의하기</h3>
+							</div>
 
-								<div class="card-body">
-									<form action="UserSuggestionAction.do" method="post">
-										<!-- process.jsp는 입력된 내용을 처리하는 JSP 파일을 가정하였습니다. -->
-										<div class="form-group">
-											<input type="text" class="form-control" name="loginId"
-												value="${loginId}" readonly>
+							<div class="card-body">
+								<form action="userSuggestionAction.do" method="POST">
+									<!-- process.jsp는 입력된 내용을 처리하는 JSP 파일을 가정하였습니다. -->
+									<div class="form-group">
+										<input type="text" class="form-control" name="loginId" value="${loginId}" readonly>
+									</div>
+									<div class="form-group">
+										<input type="text" class="form-control" name="title" placeholder="제목">
+									</div>
+									<div class="form-group">
+										<textarea name="suggestion" id="editor"></textarea>
+										<!-- CKEditor를 사용하여 내용을 입력 -->
+									</div>
+									<div class="card-footer">
+										<div class="float-right">
+											<button type="submit" class="btn btn-primary">
+												<i class="far fa-envelope"></i> Send
+											</button>
 										</div>
-										<div class="form-group">
-											<input type="text" class="form-control" name="title"
-												placeholder="제목">
-										</div>
-										<div class="form-group">
-											<textarea name="suggestion" id="editor"></textarea>
-											<!-- CKEditor를 사용하여 내용을 입력 -->
-										</div>
-										<div class="card-footer">
-											<div class="float-right">
-												<button type="submit" class="btn btn-primary">
-													<i class="far fa-envelope"></i> Send
-												</button>
-											</div>
-										</div>
-									</form>
-								</div>
-
+									</div>
+								</form>
 							</div>
 
 						</div>
+
 					</div>
+				</div>
 		</div>
 	</div>
-	</section>
 
 	<!-- /.container-fluid -->
 	</section>

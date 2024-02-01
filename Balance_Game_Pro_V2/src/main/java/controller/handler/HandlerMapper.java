@@ -77,8 +77,8 @@ public class HandlerMapper {
 		mappings.put("/sponsorPage.do", new SponsorPageAction());
 		mappings.put("/sponsor.do", new SponsorAction());
 		mappings.put("/wishListDetailPage.do", new WishListDetailPageAction());
-		mappings.put("/UserSuggestionAction.do", new UserSuggestionAction());
-		mappings.put("/UserSuggestionPageAction.do", new UserSuggestionPageAction());
+		mappings.put("/userSuggestionAction.do", new UserSuggestionAction());
+		mappings.put("/userSuggestionPageAction.do", new UserSuggestionPageAction());
 		
 		// 관리자
 		mappings.put("/adminPage.do", new AdminPageAction());

@@ -23,6 +23,13 @@
 		  }).then(() => { // 메인 페이지로 이동
 		    location.href = "${redirect}";
 		  });
+	}else {
+		Swal.fire({
+		    text: "${msg}",
+		    icon: "success", // 성공버튼 누르면
+		  }).then(() => { // 메인 페이지로 이동
+			window.close();
+		  });
 	}
 	</script>
 
