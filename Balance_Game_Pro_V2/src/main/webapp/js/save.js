@@ -2,9 +2,10 @@ $(".save").on("click", function() {
 	console.log("[성공]");
 	var loginId = document.getElementById('loginId').value;
 	var qId = document.getElementById('qId').value;
-	var saveId = $(this).attr('id');
+	var saveId = $(this).prop('id');
 	var page = document.getElementById('page').value;
 	console.log(loginId);
+	console.log(saveId);
 	if (loginId == "") {
 		console.log("[로그]로그인 x");
 		alert('로그인이 필요합니다');
@@ -19,7 +20,7 @@ $(".save").on("click", function() {
 			url: "saveAsync.do",
 			data: {
 				'loginId': loginId,
-				'qId': qId
+				'qId': saveId
 			},
 			dataType: 'text',
 			success: function(data) {
