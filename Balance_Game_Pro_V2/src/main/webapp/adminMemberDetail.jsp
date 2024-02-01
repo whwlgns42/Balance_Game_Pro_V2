@@ -103,8 +103,7 @@ th {
 		<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 			<!-- Left navbar links -->
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> 
-				<img src="images/123.png" alt="Menu" width="30" height="30">
+				<li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.png" alt="Menu" width="30" height="30">
 				</a></li>
 				<li class="nav-item d-none d-sm-inline-block nav-link">유저상세 페이지</li>
 				<li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
@@ -207,19 +206,19 @@ th {
 									<div class="card-body">
 										<div class="form-group">
 											<label for="name">이름:</label>
-											<input class="form-control" type="text" name="name" value="${member.name}">
+											<input class="form-control" type="text" name="name" value="${member.name}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="email">이메일:</label>
-											<input class="form-control" type="text" name="email" value="${member.email}">
+											<input class="form-control" type="text" name="email" value="${member.email}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="address">주소:</label>
-											<input class="form-control" type="text" name="address" value="${member.address}">
+											<input class="form-control" type="text" name="address" value="${member.address}" readonly>
 										</div>
 										<div class="form-group">
 											<label for="age">나이:</label>
-											<input class="form-control" type="text" name="age" value="${member.age}">
+											<input class="form-control" type="text" name="age" value="${member.age}" readonly>
 										</div>
 									</div>
 								</c:when>
@@ -253,6 +252,7 @@ th {
 										<th>번호</th>
 										<th>아이디</th>
 										<th>댓글내용</th>
+										<th>상태</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -270,7 +270,6 @@ th {
 
 											<td>
 												<input id="cId" type="hidden" value="${data.cId}" />
-												console.log("${data.cId}")
 												<button type="button" id="commentDelete">삭제</button>
 
 											</td>
