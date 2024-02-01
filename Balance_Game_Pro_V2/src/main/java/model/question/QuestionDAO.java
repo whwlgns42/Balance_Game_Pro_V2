@@ -12,12 +12,11 @@ public class QuestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL_TRUE = "SELECT\r\n" 
-			+ "    Q.QID, Q.TITLE, C.CATEGORY,\r\n"
-			+ "    COALESCE(S.SID, 0) AS SAVE_SID \r\n" + "FROM\r\n"
-			+ "    QUESTIONS Q\r\n" + "JOIN\r\n"
-			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT OUTER JOIN\r\n"
-			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.Q_ACCESS = 'T'";
+	private static final String SELECTALL_TRUE = "SELECT Q.QID, Q.TITLE, C.CATEGORY, NVL(S.SID, 0) AS SAVE_SID \r\n"
+			+ "FROM QUESTIONS Q \r\n"
+			+ "JOIN CATEGORY C ON Q.CATEGORY = C.CGID \r\n"
+			+ "LEFT OUTER JOIN SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = 'user'\r\n"
+			+ "WHERE Q.Q_ACCESS = 'T' ORDER BY REG_DATE DESC";
 	
 	private static final String SELECTALL_FALSE = "SELECT Q.QID,Q.TITLE,C.CATEGORY \r\n" + "FROM QUESTIONS Q\r\n"
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
