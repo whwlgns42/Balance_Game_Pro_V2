@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.question.QuestionDTO;
 import model.util.JDBCUtil;
 
 public class MemberDAO {
@@ -53,7 +54,8 @@ public class MemberDAO {
    // 유저 삭제
    private static final String DELETE = "DELETE FROM MEMBER WHERE LOGIN_ID = ?";
 
-   
+   // 회원 수
+   private static final String SELECT_CNT="SELECT COUNT(1) AS CNT FROM MEMBER";
    
    public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
       ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
@@ -204,6 +206,24 @@ public class MemberDAO {
          } finally {
             JDBCUtil.disconnect(pstmt, conn);
          }
+      }else if(mDTO.getSearchCondition().equals("회원인원수")) {
+    	  conn = JDBCUtil.connect();
+    	  
+    	  try {
+    	    	 pstmt = conn.prepareStatement(SELECT_CNT);
+
+              ResultSet rs = pstmt.executeQuery();
+              if (rs.next()) {
+                 data = new MemberDTO();
+                 data = new MemberDTO();
+	               data.setCnt(rs.getInt("CNT"));
+              }
+              rs.close();
+           } catch (SQLException e) {
+              e.printStackTrace();
+           } finally {
+              JDBCUtil.disconnect(pstmt, conn);
+           }
       }
       return data;
    }
