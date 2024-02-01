@@ -11,8 +11,8 @@ $("#write").on("click", function() {
 	console.log("댓글 입력");
 	var content = $('#inputContent').val().trim();
 	//$('#inputContent').val('');
+	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//공백 확인
-	
 	if(!blankSpace()){
 		console.log('댓글 공백');
 		return;

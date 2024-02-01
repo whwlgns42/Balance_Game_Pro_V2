@@ -217,6 +217,7 @@ ul.actions {
 	<script src="js/gameButtonClick.js"></script>
 	<script src="js/save.js"></script>
 	<script src="js/answer.js"></script>
+	<script src="js/blankSpace.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>

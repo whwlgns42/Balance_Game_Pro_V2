@@ -197,7 +197,7 @@
 									</div>
 								</div>
 
-								<form action="adminTitleUpdate.do" method="POST">
+								<form action="adminTitleUpdate.do" method="POST" id="insertForm">
 									<div class="card-body">
 										<div class="form-group">
 											<input hidden="" value="${qDTO.qId}" name="qId"> <label
@@ -266,7 +266,21 @@
 	<!-- /.control-sidebar -->
 	</div>
 	<!-- ./wrapper -->
-
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="js/blankSpace.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	console.log('성공');
+        $('#insertForm').submit(function(event) {
+            // 입력 필드의 값이 공백인지 확인합니다.
+            if (!blankSpace()) {
+                event.preventDefault(); // 폼 제출을 막습니다.
+                alert('입력 필드에 값을 입력하세요.'); // 사용자에게 알립니다.
+            }
+        });
+    
+});
+</script>
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var checkbox = document.getElementById('exampleCheck1');
