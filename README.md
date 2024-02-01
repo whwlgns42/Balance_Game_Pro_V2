@@ -1,4 +1,4 @@
-![무제-2-09](https://user-images.githubusercontent.com/113653130/213922521-78371936-c05f-47d3-9c0f-0bf997f71d55.png)
+![무제-2-09](![logo](https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b)
 
 
 # Flutter 프로젝트
