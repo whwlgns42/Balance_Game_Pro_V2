@@ -1,7 +1,5 @@
 
-(![logo](https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b)
-
-<img src="https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b" alt="이미지 설명" width="300" height="200">
+<img src="https://github.com/whwlgns42/Balance_Game_Pro_V2/assets/105491518/9512b82c-b556-4418-a17f-7a6566ea854b" alt="이미지 설명" width="300" height="300">
 
 # Flutter 프로젝트
 [ 🍔 맥도날드 프로젝트 ]
