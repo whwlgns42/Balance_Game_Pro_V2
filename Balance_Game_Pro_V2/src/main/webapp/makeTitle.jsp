@@ -2,7 +2,6 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <style>
 input {
@@ -10,6 +9,7 @@ input {
 }
 </style>
 <meta charset="utf-8" />
+<link rel="icon" href="images/favicon.png">
 <title>문제 출제 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -25,7 +25,7 @@ input {
 
 	<!-- 헤더 -->
 	<header id="header">
-	<!-- 로고 -->
+		<!-- 로고 -->
 		<common:logo></common:logo>
 		<nav>
 			<ul>

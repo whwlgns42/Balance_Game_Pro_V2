@@ -8,6 +8,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="images/favicon.png">
 <title>관리자 문제 승인 상세 페이지</title>
 
 <!-- Google Font: Source Sans Pro -->

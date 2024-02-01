@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
@@ -8,8 +7,7 @@
 <head>
 <title>밸런스게임</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="icon" href="images/favicon.png">
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
@@ -20,9 +18,7 @@
 	<!-- Sidebar -->
 	<section id="sidebar" style="margin-top: -120px;">
 		<div class="inner" style="height: 300px;">
-			<a style="text-decoration: none; border: none;" href="main.do"><img
-				style="margin-right: 200px;" src="images/logo.png" height="150"
-				width="150"></a>
+			<a style="text-decoration: none; border: none;" href="main.do"><img style="margin-right: 200px;" src="images/logo.png" height="150" width="150"></a>
 			<nav>
 				<ul style="margin-top: 145px;">
 					<c:if test="${empty loginId }">
@@ -79,7 +75,7 @@
 					<ul class="actions">
 						<li><button onclick=popup()>건의하기</button></li>
 					</ul>
-					
+
 				</c:if>
 			</div>
 		</section>

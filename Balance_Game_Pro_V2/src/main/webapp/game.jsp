@@ -16,6 +16,7 @@
 <title>게임 페이지</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="icon" href="images/favicon.png">
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -217,7 +218,6 @@ ul.actions {
 	<script src="js/gameButtonClick.js"></script>
 	<script src="js/save.js"></script>
 	<script src="js/answer.js"></script>
-	<script src="js/blankSpace.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery.scrollex.min.js"></script>
 	<script src="assets/js/jquery.scrolly.min.js"></script>

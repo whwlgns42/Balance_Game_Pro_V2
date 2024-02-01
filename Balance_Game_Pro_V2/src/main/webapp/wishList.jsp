@@ -29,16 +29,18 @@
 .button-container1 button {
 	margin-left: 5px;
 }
+
 .table img {
-  max-width: 30px; /* 이미지의 최대 너비 */
-  max-height: 30px; /* 이미지의 최대 높이 */
-  width: auto; /* 너비를 자동으로 조정하여 비율을 유지합니다. */
-  height: auto; /* 높이를 자동으로 조정하여 비율을 유지합니다. */
+	max-width: 30px; /* 이미지의 최대 너비 */
+	max-height: 30px; /* 이미지의 최대 높이 */
+	width: auto; /* 너비를 자동으로 조정하여 비율을 유지합니다. */
+	height: auto; /* 높이를 자동으로 조정하여 비율을 유지합니다. */
 }
 </style>
 <title>찜목록</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="icon" href="images/favicon.png">
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -53,7 +55,7 @@
 <body class="is-preload">
 	<input id="loginId" type="hidden" value="${loginId}">
 	<input id="page" type="hidden" value="wishPage">
-	
+
 	<!-- Header -->
 	<header id="header">
 		<a href="main.do" class="title">자비스</a>
@@ -96,9 +98,13 @@
 								</c:if>
 								<c:forEach var="data" items="${sdatas}" varStatus="loop">
 									<tr>
-										<td><a href="wishListDetailPage.do?qId=${data.qId}">${loop.index + 1}</a></td>
+										<td>
+											<a href="wishListDetailPage.do?qId=${data.qId}">${loop.index + 1}</a>
+										</td>
 										<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
-										<td><a href="wishListDetailPage.do?qId=${data.qId}">${data.saveTitle}</a></td>
+										<td>
+											<a href="wishListDetailPage.do?qId=${data.qId}">${data.saveTitle}</a>
+										</td>
 										<td>${data.saveWriter}</td>
 										<td>
 											<input id="qId" type="hidden" value="${data.qId}" />
@@ -108,7 +114,7 @@
 											<c:if test="${data.sId <= 0}">
 												<img onclick="reload()" class="save" id="${data.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
 											</c:if>
-											
+
 										</td>
 									</tr>
 								</c:forEach>

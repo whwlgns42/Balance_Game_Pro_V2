@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="common"%>
@@ -191,8 +190,8 @@
 </style>
 <title>문제 상세 페이지</title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="icon" href="images/favicon.png">
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
@@ -222,8 +221,7 @@
 			<div class="inner">
 				<h1 class="major" style="margin-bottom: 20px;">문제 상세 페이지</h1>
 				<div class="card-body table-responsive p-0">
-					<table class="table table-hover text-nowrap"
-						style="margin-bottom: 10px;">
+					<table class="table table-hover text-nowrap" style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Title</th>
@@ -247,8 +245,7 @@
 
 						</tbody>
 					</table>
-					<table class="table table-hover text-nowrap"
-						style="margin-bottom: 10px;">
+					<table class="table table-hover text-nowrap" style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Answer_A</th>
@@ -271,8 +268,7 @@
 						</tbody>
 					</table>
 
-					<table class="table table-hover text-nowrap"
-						style="margin-bottom: 10px;">
+					<table class="table table-hover text-nowrap" style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Answer_B</th>
@@ -316,8 +312,7 @@
 							</div>
 						</div>
 					</div>
-					<table class="table table-hover text-nowrap"
-						style="margin-bottom: 10px;">
+					<table class="table table-hover text-nowrap" style="margin-bottom: 10px;">
 						<thead>
 							<tr>
 								<th>Answer_A</th>
