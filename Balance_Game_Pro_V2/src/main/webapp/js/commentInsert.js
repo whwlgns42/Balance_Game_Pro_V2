@@ -16,11 +16,11 @@ $("#write").on("click", function() {
 	
 	if(!blankSpace()){
 		console.log('댓글 공백');
-		$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
+		//$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 		return;
 	}
 	
-	$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
+	//$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
 	//태그 초기화 - 다른 곳에선 다르게 처리하기~
 	
 	if (isRun == true) {
@@ -67,6 +67,7 @@ $("#write").on("click", function() {
 				$("table tbody").append(elem);
 
 				isRun = false;
+				$('#inputContent').val('');
 				//document.getElementById(".save").src="images/찜o.png";
 			},
 			error: function(error) {
