@@ -17,6 +17,7 @@ $("#write").on("click", function() {
 	if(!blankSpace()){
 		console.log('댓글 공백');
 		//$('#apple').html('<input type="text" placeholder="댓글을 입력하세요" id="inputContent">');
+		 alert('입력 필드에 값을 입력하세요 또는 기호 입력은 불가합니다'); // 사용자에게 알립니다.
 		return;
 	}
 	
