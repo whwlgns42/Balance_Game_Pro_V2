@@ -117,6 +117,7 @@ input {
  <!-- 공백을 막아주는 js -->
  <script src="js/submitBlankCheck.js"></script>
  <!-- 공백 폼 제출을 막아주는 js -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
 
 

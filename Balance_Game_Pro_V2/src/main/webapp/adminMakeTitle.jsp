@@ -173,6 +173,7 @@
          <div class="card-body">
           <div class="form-group">
            <%-- <input hidden="" value="<%=()%>" name="writer"> --%>
+           <input hidden = "" value = > 
            <label for="inputName">제목</label> <input type="text" id="inputName" class="form-control" name="title">
           </div>
           <div class="form-group">
@@ -267,7 +268,6 @@
  <script src="adminLte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
  <!-- AdminLTE App -->
  <script src="adminLte/dist/js/adminlte.js"></script>
-
  <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
  <script src="adminLte/dist/js/pages/dashboard.js"></script>
  <!-- 인공지능 -->
