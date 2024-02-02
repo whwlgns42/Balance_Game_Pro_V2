@@ -36,7 +36,7 @@ public class AdminSuggestionDeleteAction implements Action {
 		forward.setRedirect(false);
 		request.setAttribute("status", "success");
 		request.setAttribute("msg", "삭제했습니다");
-		request.setAttribute("redirect", "adminMain.do");
+		request.setAttribute("redirect", "adminPage.do");
 		return forward;
 	}
 
