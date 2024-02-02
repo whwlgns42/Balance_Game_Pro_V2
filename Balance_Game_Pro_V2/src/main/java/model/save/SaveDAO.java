@@ -14,7 +14,7 @@ public class SaveDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT Q.QID, S.SID, Q.TITLE, Q.WRITER FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
+	private static final String SELECTALL = "SELECT Q.QID, S.SID, Q.TITLE, Q.LOGIN_ID FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
 
 	private static final String SELECTONE="SELECT 1 FROM SAVE WHERE LOGIN_ID=? AND QID=?";
 
@@ -41,7 +41,7 @@ public class SaveDAO {
 				dto.setqId(rs.getInt("QID"));
 				dto.setsId(rs.getInt("SID"));
 				dto.setSaveTitle(rs.getString("TITLE"));
-				dto.setSaveWriter(rs.getString("WRITER"));
+				dto.setSaveWriter(rs.getString("LOGIN_ID"));
 				datas.add(dto);
 			}
 		} catch (SQLException e) {

@@ -22,27 +22,27 @@ public class QuestionDAO {
 			+ "JOIN CATEGORY C ON Q.CATEGORY =C.CGID\r\n" + "WHERE Q_ACCESS='F'";
 
 	
-	  private static final String SELECTALL_CRAWLLING = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B , EXPLANATION FROM QUESTIONS Q";
+	  private static final String SELECTALL_CRAWLLING = "SELECT Q.QID, Q.TITLE, Q.LOGIN_ID, Q.ANSWER_A, Q.ANSWER_B , EXPLANATION FROM QUESTIONS Q";
 	   
-	   private static final String SELECTALL_ADMIN_TRUE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'T' ";
+	   private static final String SELECTALL_ADMIN_TRUE = "SELECT Q.QID, Q.TITLE, Q.LOGIN_ID, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'T' ";
 	   
-	   private static final String SELECTALL_ADMIN_FALSE = "SELECT Q.QID, Q.TITLE, Q.WRITER, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'F' ";
+	   private static final String SELECTALL_ADMIN_FALSE = "SELECT Q.QID, Q.TITLE, Q.LOGIN_ID, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'F' ";
 
 
 	
 	
 	// 질문생성 SQL
-	private static final String INSERT = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
-	private static final String INSERT_ADMIN = "INSERT INTO QUESTIONS (QID, WRITER, TITLE, ANSWER_A, ANSWER_B, EXPLANATION,CATEGORY,Q_ACCESS) \r\n"
+	private static final String INSERT_ADMIN = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION,CATEGORY,Q_ACCESS) \r\n"
 			+ "VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?,?,'T')";
 
 	// TODO SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로
 	// 한개의 문제 정보 가져오기) 찜확인 추가
 	private static final String SELECT_ONE_RANDOM = "SELECT COALESCE(S.SID, 0) AS SAVE_SID,\r\n"
-			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.WRITER, Q.EXPLANATION, C.CATEGORY\r\n"
+			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.LOGIN_ID, Q.EXPLANATION, C.CATEGORY\r\n"
 			+ "FROM \r\n"
-			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,WRITER,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
+			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,LOGIN_ID,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
 			+ "LEFT OUTER JOIN \r\n"
 			+ "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
 			+ "LEFT OUTER JOIN\r\n"
@@ -57,7 +57,7 @@ public class QuestionDAO {
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.QID=?\r\n"
 			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID,Q.CATEGORY";
 
-	 private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, WRITER, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
+	 private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, LOGIN_ID, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
 
 	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
@@ -67,7 +67,7 @@ public class QuestionDAO {
 	   
 
 		// 회원탈퇴시 'Question'을 null 값으로 변경
-		private static final String QS_UPDATE = "UPDATE QUESTIONS SET WRITER = NULL WHERE WRITER = ?";
+		private static final String QS_UPDATE = "UPDATE QUESTIONS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 	   
 	private static final String DELETE="DELETE FROM QUESTIONS WHERE QID=?";
 	
@@ -129,7 +129,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setLoginId(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("LOGIN_ID"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               datas.add(data);
 	            }
@@ -143,7 +143,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setLoginId(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("LOGIN_ID"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               
 	               datas.add(data);
@@ -158,7 +158,7 @@ public class QuestionDAO {
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
 	               data.setqId(rs.getInt("QID"));
 	               data.setTitle(rs.getString("TITLE"));
-	               data.setLoginId(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("LOGIN_ID"));
 	               data.setExplanation(rs.getString("EXPLANATION"));
 	               datas.add(data);
 	            }
@@ -192,7 +192,7 @@ public class QuestionDAO {
 					data.setqId(rs.getInt("QID"));
 					data.setTitle(rs.getString("TITLE"));
 
-					// data.setWriter(rs.getString("WRITER"));
+					// data.setLOGIN_ID(rs.getString("LOGIN_ID"));
 
 					data.setAnswer_A(rs.getString("ANSWER_A"));
 					data.setAnswer_B(rs.getString("ANSWER_B"));
@@ -217,7 +217,7 @@ public class QuestionDAO {
 				if (rs.next()) {
 					data = new QuestionDTO();
 					data.setqId(rs.getInt("QID"));
-					data.setLoginId(rs.getString("WRITER"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
 					data.setTitle(rs.getString("TITLE"));
 
 					data.setAnswer_A(rs.getString("ANSWER_A"));
@@ -236,7 +236,7 @@ public class QuestionDAO {
 	            if (rs.next()) {
 	               data = new QuestionDTO();
 	               data.setqId(rs.getInt("QID"));
-	               data.setLoginId(rs.getString("WRITER"));
+	               data.setLoginId(rs.getString("LOGIN_ID"));
 	               data.setTitle(rs.getString("TITLE"));
 	               data.setAnswer_A(rs.getString("ANSWER_A"));
 	               data.setAnswer_B(rs.getString("ANSWER_B"));
