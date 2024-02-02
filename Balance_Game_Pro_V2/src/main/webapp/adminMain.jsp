@@ -218,8 +218,7 @@
        <!-- small box -->
        <div class="small-box bg-danger">
         <div class="inner">
-         <h3>${sDTO.total}</h3>
-
+         <h3><fmt:formatNumber value="${sDTO.total}" currencyCode="KRW" /></h3>
          <p>후원금액</p>
         </div>
         <div class="icon">

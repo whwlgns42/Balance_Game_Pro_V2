@@ -23,7 +23,7 @@ public class AdminTitleCreateAction implements Action{
       //뷰에서 문제를 작성하면 parameter값으로 받아옴 
       //해당 DTO에 set함 
       //작성한 것을 모델의 insert함
-      
+      System.out.println("[로그]생성하러 들어옴"+request.getParameter("category"));
       QuestionDTO qDTO = new QuestionDTO();
       QuestionDAO qDAO = new QuestionDAO();
       HttpSession session = request.getSession();
