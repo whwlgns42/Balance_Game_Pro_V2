@@ -51,6 +51,7 @@ public class SuggestionDAO {
 		SuggestionDTO data=null;
 		try {
 			pstmt = conn.prepareStatement(SELECTONE);
+			pstmt.setInt(1, sDTO.getSugId());
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
 				data = new SuggestionDTO();
