@@ -268,8 +268,12 @@
 	</div>
 	<!-- ./wrapper -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-	<script src="js/blankSpace.js"></script>
-	<script src="js/submitBlankCheack.js"></script>
+	
+    <script src="js/blankSpace.js"></script> <!-- 공백을 막아주는 js -->
+	<script src="js/submitBlankCheack.js"></script> <!-- 공백 폼 제출을 막아주는 js -->
+ 
+ 
+ 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			var checkbox = document.getElementById('exampleCheck1');
@@ -282,6 +286,9 @@
 			});
 		});
 	</script>
+ 
+ 
+ 
 	<!-- jQuery -->
 
 	<script src="adminLte/plugins/jquery/jquery.min.js"></script>

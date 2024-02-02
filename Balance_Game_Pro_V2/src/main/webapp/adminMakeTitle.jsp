@@ -304,5 +304,7 @@
 	<script src="adminLte/dist/js/pages/dashboard.js"></script>
 	<!-- 인공지능 -->
 	<script src="adminLte/dist/js/ai.js"></script>
+    <script src="js/blankSpace.js"></script> <!-- 공백을 막아주는 js -->
+    <script src="js/submitBlankCheack.js"></script> <!-- 공백 폼 제출을 막아주는 js -->
 </body>
 </html>

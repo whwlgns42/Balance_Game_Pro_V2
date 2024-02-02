@@ -193,17 +193,6 @@
 			language : "ko"
 		});
 	</script>
-	<script>
-	function submitForm() {
-	    var editorData = CKEditor.instances.editor.getData();
-	    document.getElementById('editor').value = editorData; // CKEditor에서의 데이터를 textarea에 설정
 
-	    // 폼 제출
-	    document.getElementById('myForm').submit();
-
-	    // 폼 제출 후 창 닫기
-	    window.close();
-	}
-	</script>
 </body>
 </html>

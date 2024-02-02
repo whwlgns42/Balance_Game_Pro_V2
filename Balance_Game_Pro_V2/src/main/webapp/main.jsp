@@ -93,9 +93,8 @@
 	<script>
 		function popup() {
 			let options = "toolbar=no,scrollbars=no,resizable=yes,status=no,menubar=no,width=650,height=500,top=0,left=0";
-			window
-					.open(
-							"http://localhost:8085/Balance_Game_Pro_V2/userSuggestion.jsp",
+			window.open(
+							"http://localhost:8088/Balance_Game_Pro_V2/userSuggestion.jsp",
 							"_blank", options);
 		}
 	</script>

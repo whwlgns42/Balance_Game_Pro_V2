@@ -16,58 +16,52 @@ input {
 
 <link rel="stylesheet" href="assets/css/main.css" />
 <noscript>
-	<link rel="stylesheet" href="assets/css/noscript.css" />
+ <link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="is-preload">
 
-	<!-- 헤더 -->
-	<header id="header">
-		<!-- 로고 -->
-		<common:logo></common:logo>
-		<nav>
-			<ul>
-				<li><a href="logout.do" class="active">로그아웃</a></li>
-				<li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
-			</ul>
-		</nav>
-	</header>
+ <!-- 헤더 -->
+ <header id="header">
+  <!-- 로고 -->
+  <common:logo></common:logo>
+  <nav>
+   <ul>
+    <li><a href="logout.do" class="active">로그아웃</a></li>
+    <li><a href="pwCheckPage.do" class="active">마이페이지</a></li>
+   </ul>
+  </nav>
+ </header>
 
-	<!-- Wrapper -->
-	<div id="wrapper">
+ <!-- Wrapper -->
+ <div id="wrapper">
 
-		<!-- Main -->
-		<section id="main" class="wrapper">
-			<div class="inner">
-				<h1 class="major">문제 출제</h1>
-				<form action="makeTitle.do" method="POST" onsubmit="return validation()">
-					<label for="title">문제 입력:</label>
-					<input type="text" id="title" name="title" placeholder="문제 주제를 입력해주세요">
-					<label for="answer_A">선택지A 입력:</label>
-					<input type="text" id="answer_A" name="answer_A" placeholder="답변A를 입력해주세요">
-					<label for="answer_B">선택지B 입력:</label>
-					<input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요">
-					<label for="explanation">출제 이유:</label>
-					<input type="text" id="explanation" name="explanation" placeholder="출제 이유를 입력해주세요">
-					<input type="submit" value="문제생성">
+  <!-- Main -->
+  <section id="main" class="wrapper">
+   <div class="inner">
+    <h1 class="major">문제 출제</h1>
+    <form action="makeTitle.do" method="POST" onsubmit="return validation()">
+     <label for="title">문제 입력:</label> <input type="text" id="title" name="title" placeholder="문제 주제를 입력해주세요"> <label for="answer_A">선택지A 입력:</label> <input type="text" id="answer_A" name="answer_A" placeholder="답변A를 입력해주세요"> <label for="answer_B">선택지B 입력:</label> <input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요"> <label for="explanation">출제 이유:</label> <input type="text" id="explanation" name="explanation" placeholder="출제 이유를 입력해주세요"> <input type="submit" value="문제생성">
 
-				</form>
-			</div>
-		</section>
-	</div>
+    </form>
+   </div>
+  </section>
+ </div>
 
-	<!-- Footer -->
-	<footer id="footer" class="wrapper alt">
-		<div class="inner">
-			<ul class="menu">
-				<li>&copy; Untitled. All rights reserved.</li>
-				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-			</ul>
-		</div>
-	</footer>
-	<script>
+ <!-- Footer -->
+ <footer id="footer" class="wrapper alt">
+  <div class="inner">
+   <ul class="menu">
+    <li>&copy; Untitled. All rights reserved.</li>
+    <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+   </ul>
+  </div>
+ </footer>
+ 
+ 
+ <script>
 		function validation() {
 
 			let title = $("#title").val();
@@ -76,11 +70,7 @@ input {
 			let explanation = $("#explanation").val();
 
 			if (!title) {
-				Swal.fire({
-					title : "제목",
-					text : "문제 제목을 입력해주세요.",
-					icon : "warning"
-				});
+				message("제목", "문제 제목을 입력", "warning");
 				return false;
 			}
 
@@ -113,15 +103,20 @@ input {
 			return true;
 		}
 	</script>
-	<!-- Scripts -->
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery.scrollex.min.js"></script>
-	<script src="assets/js/jquery.scrolly.min.js"></script>
-	<script src="assets/js/browser.min.js"></script>
-	<script src="assets/js/breakpoints.min.js"></script>
-	<script src="assets/js/util.js"></script>
-	<script src="assets/js/main.js"></script>
-
+ <!-- Scripts -->
+ 
+ <script src="js/printMsg.js"></script>
+ <script src="assets/js/jquery.min.js"></script>
+ <script src="assets/js/jquery.scrollex.min.js"></script>
+ <script src="assets/js/jquery.scrolly.min.js"></script>
+ <script src="assets/js/browser.min.js"></script>
+ <script src="assets/js/breakpoints.min.js"></script>
+ <script src="assets/js/util.js"></script>
+ <script src="assets/js/main.js"></script>
+ <script src="js/blankSpace.js"></script>
+ <!-- 공백을 막아주는 js -->
+ <script src="js/submitBlankCheack.js"></script>
+ <!-- 공백 폼 제출을 막아주는 js -->
 </body>
 
 
