@@ -115,7 +115,7 @@ input {
  <script src="assets/js/main.js"></script>
  <script src="js/blankSpace.js"></script>
  <!-- 공백을 막아주는 js -->
- <script src="js/submitBlankCheack.js"></script>
+ <script src="js/submitBlankCheck.js"></script>
  <!-- 공백 폼 제출을 막아주는 js -->
 </body>
 
