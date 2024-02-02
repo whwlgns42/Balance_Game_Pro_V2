@@ -7,6 +7,14 @@ function blankSpace() {
     $('input[type="text"]').each(function() {
         var content = $(this).val().trim(); // trim() 함수를 호출합니다.
         //console.log("Input Value: " + content);
+        
+        var regExp = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi;	
+		if( regExp.test(content) ){
+			flag = false;
+			
+		}
+        
+        
         $(this).val(content);
         if (content === '') { // 입력 값이 공백이면
             flag = false;
