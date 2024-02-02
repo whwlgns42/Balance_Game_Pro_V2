@@ -10,7 +10,7 @@ function blankSpace() {
         $(this).val(content);
         if (content === '') { // 입력 값이 공백이면
             flag = false;
-            return false; // 반복문을 종료합니다.
+            //return false; // 반복문을 종료합니다.
         }
         
     });
