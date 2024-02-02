@@ -1,4 +1,4 @@
-package controller.page.admin;
+package controller.admin;
 
 import java.io.IOException;
 
@@ -11,31 +11,32 @@ import controller.common.ActionForward;
 import model.suggestion.SuggestionDAO;
 import model.suggestion.SuggestionDTO;
 
-public class AdminSuggestionDetailPageAction implements Action{
+public class AdminSuggestionDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		ActionForward forward = new ActionForward();
-		
+
 		SuggestionDTO sugDTO = new SuggestionDTO();
 		SuggestionDAO sugDAO = new SuggestionDAO();
-		
+
 		sugDTO.setSugId(Integer.parseInt(request.getParameter("sugId")));
-		sugDTO = sugDAO.selectOne(sugDTO);
-		
-		if(sugDTO == null) {
+		boolean flag = sugDAO.delete(sugDTO);
+		if(!flag) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "fail");
-			request.setAttribute("msg", "해당 데이터가 없습니다");
-			request.setAttribute("redirect", "adminSuggestionDetail.jsp");
+			request.setAttribute("msg", "실패했습니다");
+			request.setAttribute("redirect", "adminSuggestionDetailPageAction.do");
 			return forward;
 		}
-		forward.setPath("adminSuggestionDetail.jsp");
+		forward.setPath("alert.do");
 		forward.setRedirect(false);
-		request.setAttribute("sugDTO", sugDTO);
+		request.setAttribute("status", "success");
+		request.setAttribute("msg", "삭제했습니다");
+		request.setAttribute("redirect", "adminSuggestionDetailPageAction.do");
 		return forward;
 	}
 
