@@ -15,8 +15,12 @@ public class SuggestionDAO {
 
 	private static final String SELECTALL = "SELECT SUGID, LOGIN_ID, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
 
+	private static final String SELECTONE = "SELECT SUGID, LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
+
 
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
+	
+	private static final String DELETE = "DELETE FROM SUGGESTION WHERE SUGID=?";
 
 
 
@@ -28,11 +32,11 @@ public class SuggestionDAO {
 			pstmt = conn.prepareStatement(SELECTALL);
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				SuggestionDTO dto = new SuggestionDTO();
-				dto.setSugId(rs.getInt("SUGID"));
-				dto.setTitle(rs.getString("TITLE"));
-				dto.setLoginId(rs.getString("LOGIN_ID"));
-				datas.add(dto);
+				SuggestionDTO data = new SuggestionDTO();
+				data.setSugId(rs.getInt("SUGID"));
+				data.setTitle(rs.getString("TITLE"));
+				data.setLoginId(rs.getString("LOGIN_ID"));
+				datas.add(data);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,7 +46,25 @@ public class SuggestionDAO {
 	}
 
 	public SuggestionDTO selectOne(SuggestionDTO sDTO) {
-		return null;
+		
+		conn = JDBCUtil.connect();
+		SuggestionDTO data=null;
+		try {
+			pstmt = conn.prepareStatement(SELECTONE);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				data = new SuggestionDTO();
+				data.setSugId(rs.getInt("SUGID"));
+				data.setTitle(rs.getString("TITLE"));
+				data.setLoginId(rs.getString("LOGIN_ID"));
+				data.setSuggestion(rs.getString("SUGGESTION"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return data;
 	}
 
 	public boolean insert(SuggestionDTO sDTO) {
@@ -72,7 +94,21 @@ public class SuggestionDAO {
 
 	public boolean delete(SuggestionDTO sDTO) {
 		
-		return false;
+		conn = JDBCUtil.connect();
+		try {
+			pstmt = conn.prepareStatement(DELETE);
+			pstmt.setInt(1, sDTO.getSugId());
+			int rs = pstmt.executeUpdate();
+			if (rs <= 0) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+		return true;
 	}
 
 }
