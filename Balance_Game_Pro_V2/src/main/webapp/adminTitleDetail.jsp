@@ -242,10 +242,7 @@
 
  <script src="js/blankSpace.js"></script>
  <!-- 공백을 막아주는 js -->
- <script src="js/submitBlankCheack.js"></script>
- <!-- 공백 폼 제출을 막아주는 js -->
-
-
+ <script src="js/submitBlankCheck.js"></script>
 
 <script src = "js/categoryCheck.js"></script>
 

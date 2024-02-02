@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	console.log('성공');
 	 $('input[type="text"]').attr('maxlength', 50);
+	$('textarea').attr('maxlength', 50);
         $('#insertForm').submit(function(event) {
 			
 			

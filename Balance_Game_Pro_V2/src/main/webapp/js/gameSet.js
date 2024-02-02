@@ -12,7 +12,7 @@ $(document).ready(function() {
 		location.href = 'main.do';
 	}
 
-
+	$('input[type="text"]').attr('maxlength', 50);
 	$("#comment").hide();
 
 	$("#next").on("click", function() {
