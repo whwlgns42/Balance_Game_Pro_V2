@@ -42,7 +42,7 @@ input {
   <section id="main" class="wrapper">
    <div class="inner">
     <h1 class="major">문제 출제</h1>
-    <form action="makeTitle.do" method="POST" onsubmit="return validation()">
+    <form action="makeTitle.do" method="POST" id="insertForm" onsubmit="return validation()">
      <label for="title">문제 입력:</label> <input type="text" id="title" name="title" placeholder="문제 주제를 입력해주세요"> <label for="answer_A">선택지A 입력:</label> <input type="text" id="answer_A" name="answer_A" placeholder="답변A를 입력해주세요"> <label for="answer_B">선택지B 입력:</label> <input type="text" id="answer_B" name="answer_B" placeholder="답변B를 입력해주세요"> <label for="explanation">출제 이유:</label> <input type="text" id="explanation" name="explanation" placeholder="출제 이유를 입력해주세요"> <input type="submit" value="문제생성">
 
     </form>

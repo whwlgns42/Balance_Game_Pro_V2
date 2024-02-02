@@ -217,7 +217,7 @@
 											id="exampleCheck1"> <label class="form-check-label"
 											for="exampleCheck1">19 문제</label>
 									</div>
-									<form action="adminTitleAccess.do" method="POST">
+									<form action="adminTitleAccess.do" method="POST" id="insertForm">
 										<input type="hidden" name="qid" value="${qDTO.qId}" />
 										<button type="submit" class="btn btn-block btn-success"
 											style="margin-bottom: 10px; margin-top: 10px;">문제 승인</button>

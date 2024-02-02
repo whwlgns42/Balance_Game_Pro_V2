@@ -194,7 +194,7 @@
 									</div>
 								</div>
 
-								<form action="adminTitleCreate.do" method="POST">
+								<form action="adminTitleCreate.do" method="POST" id="insertForm">
 									<div class="card-body">
 										<div class="form-group">
 											<%-- <input hidden="" value="<%=()%>" name="writer"> --%>
