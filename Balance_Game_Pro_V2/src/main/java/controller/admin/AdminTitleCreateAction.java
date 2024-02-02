@@ -27,13 +27,13 @@ public class AdminTitleCreateAction implements Action{
       QuestionDTO qDTO = new QuestionDTO();
       QuestionDAO qDAO = new QuestionDAO();
       HttpSession session = request.getSession();
-      
+      System.out.println("관리자 문제 생성 로그"+request.getParameter("writer"));
       qDTO.setSearchCondition("관리자문제생성");
       qDTO.setLoginId(request.getParameter("writer"));
       qDTO.setTitle(request.getParameter("title"));
       qDTO.setAnswer_A(request.getParameter("answer_A"));
       qDTO.setAnswer_B(request.getParameter("answer_B"));
-      qDTO.setLoginId((String)session.getAttribute("member"));
+      //qDTO.setLoginId((String)session.getAttribute("member"));
       qDTO.setExplanation(request.getParameter("explanation"));
       qDTO.setCategory(Integer.parseInt(request.getParameter("category")));
       boolean flag = qDAO.insert(qDTO);

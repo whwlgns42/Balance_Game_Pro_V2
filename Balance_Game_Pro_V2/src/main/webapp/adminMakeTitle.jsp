@@ -172,8 +172,9 @@
         <form action="adminTitleCreate.do" method="POST" id="insertForm">
          <div class="card-body">
           <div class="form-group">
-           <%-- <input hidden="" value="<%=()%>" name="writer"> --%>
-           <input hidden = "" value = > 
+          
+           <input type ="hidden" name = "writer" value ="관리자">
+           
            <label for="inputName">제목</label> <input type="text" id="inputName" class="form-control" name="title">
           </div>
           <div class="form-group">
