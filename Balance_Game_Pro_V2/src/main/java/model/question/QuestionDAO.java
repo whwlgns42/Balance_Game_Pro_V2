@@ -49,7 +49,7 @@ public class QuestionDAO {
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n"
 			+ "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
-	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,\r\n"
+	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,Q.CATEGORY AS CATEGORY_PK,\r\n"
 			+ "COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
 			+ "COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B,\r\n" + "NVL(S.SID, 0) AS SAVE_SID\r\n"
 			+ "FROM QUESTIONS Q\r\n" + "JOIN ANSWERS A ON A.QID=Q.QID\r\n"
@@ -199,6 +199,7 @@ public class QuestionDAO {
 
 					data.setExplanation(rs.getString("EXPLANATION"));
 					data.setS_category(rs.getString("CATEGORY"));
+					data.setCategory(rs.getInt("CATEGORY_PK"));
 
 					data.setAnswerCntA(rs.getInt("COUNT_A"));
 					data.setAnswerCntB(rs.getInt("COUNT_B"));
