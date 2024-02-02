@@ -1,21 +1,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" import="java.util.ArrayList,model.member.MemberDTO"%>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="crown"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="images/favicon.png">
-<title>관리자 메인 페이지</title>
+<title>건의사항 상세 페이지</title>
 
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="adminLte/plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Tempusdominus Bootstrap 4 -->
@@ -75,6 +72,25 @@
 	cursor: pointer;
 }
 </style>
+<style>
+/* 스타일링을 위한 CSS */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid #ddd;
+	padding: 8px;
+	text-align: left;
+}
+
+th {
+	background-color: #f2f2f2;
+}
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
  <div class="wrapper">
@@ -90,9 +106,10 @@
    <ul class="navbar-nav">
     <li class="nav-item"><a class="nav-link" data-widget="pushmenu" href="adminPage.do" role="button"> <img src="images/123.png" alt="Menu" width="30" height="30">
     </a></li>
-    <li class="nav-item d-none d-sm-inline-block nav-link">메인 페이지</li>
+    <li class="nav-item d-none d-sm-inline-block nav-link">건의사항 상세 페이지</li>
     <li class="nav-item d-none d-sm-inline-block"><a href="logout.do" class="nav-link">로그아웃</a></li>
    </ul>
+
    <!-- Right navbar links -->
    <ul class="navbar-nav ml-auto">
 
@@ -136,10 +153,10 @@
         </p>
       </a>
        <ul class="nav nav-treeview">
-        <li class="nav-item"><a href="adminPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+        <li class="nav-item"><a href="adminPage.do" class="nav-link "> <i class="far fa-circle nav-icon"></i>
           <p>메인</p>
         </a></li>
-        <li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+        <li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
           <p>유저관리</p>
         </a></li>
         <li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
@@ -166,149 +183,70 @@
     <div class="container-fluid">
 
 
-     <!-- Small boxes (Stat box) -->
-     <div class="row">
-      <div class="col-lg-3 col-6">
-       <!-- small box -->
-       <div class="small-box bg-info">
-        <div class="inner">
-         <h3>${qDTOTotalCnt.cnt}</h3>
-
-         <p>총 문제수</p>
-        </div>
-        <div class="icon">
-         <i class="ion ion-bag"></i>
-        </div>
-        <a href="adminTitleManagementPage.do" class="small-box-footer">문제관리페이지 <i class="fas fa-arrow-circle-right"></i></a>
-       </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-       <!-- small box -->
-       <div class="small-box bg-success">
-        <div class="inner">
-         <h3>${qDTOApproveCnt.cnt}</h3>
-
-         <p>문제 승인</p>
-        </div>
-        <div class="icon">
-         <i class="ion ion-stats-bars"></i>
-        </div>
-        <a href="adminTitleAccessPage.do" class="small-box-footer">문제승인페이지 <i class="fas fa-arrow-circle-right"></i></a>
-       </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-
-       <!-- small box -->
-       <div class="small-box bg-warning">
-        <div class="inner">
-         <h3>${mDTO.cnt}</h3>
-
-         <p>회원수</p>
-        </div>
-        <div class="icon">
-         <i class="ion ion-person-add"></i>
-        </div>
-        <a href="adminMemberManagementPage.do" class="small-box-footer">유저목록페이지 <i class="fas fa-arrow-circle-right"></i></a>
-       </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-       <!-- small box -->
-       <div class="small-box bg-danger">
-        <div class="inner">
-         <h3>${sDTO.total}</h3>
-
-         <p>후원금액</p>
-        </div>
-        <div class="icon">
-         <i class="ion ion-pie-graph"></i>
-        </div>
-        <a href="sponsorPage.do" class="small-box-footer">후원페이지 <i class="fas fa-arrow-circle-right"></i></a>
-       </div>
-      </div>
-      <!-- ./col -->
-     </div>
-
      <!-- /.row -->
      <!-- Main row -->
-
-     <div class="row">
-      <div class="card-body table-responsive p-0">
-
-       <div class="card" style="margin-top: 20px;">
-        <div class="card-header">
-         <h3 class="card-title">건의사항</h3>
-         <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 150px;">
-           <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-           <div class="input-group-append">
-            <button type="submit" class="btn btn-default">
-             <i class="fas fa-search"></i>
-            </button>
-           </div>
-          </div>
-         </div>
-        </div>
-
-        <div class="card-body table-responsive p-0">
-         <table class="table table-hover text-nowrap">
-          <thead>
-           <tr>
-            <th>ID</th>
-            <th>제목</th>
-           </tr>
-          </thead>
-          <tbody>
-           <c:if test="${empty sugDatas}">
-            <tr>
-             <td colspan="1">건의사항이 없습니다.</td>
-            </tr>
-
-           </c:if>
-
-
-           <c:forEach var="data" items="${sugDatas}">
-            <tr onclick="location.href = 'adminSuggestionDetailPageAction.do?sugId=${data.sugId}'">
-             <td>${data.loginId}</td>
-             <td>${data.title}</td>
-            </tr>
-
-           </c:forEach>
-          </tbody>
-         </table>
-        </div>
-
+     <div class="col-md-9">
+      <div class="card card-primary card-outline">
+       <div class="card-header">
+        <h3 class="card-title">건의사항</h3>
        </div>
 
+       <c:choose>
+        <c:when test="${not empty sugDTO}">
+         <table border="1">
+          <tr>
+           <th style="width: 78px;">ID</th>
+           <td>${sugDTO.loginId}</td>
+          </tr>
+          <tr>
+           <th>제목</th>
+           <td>${sugDTO.title}</td>
+          </tr>
+          <tr>
+           <th>건의내용</th>
+           <td>${sugDTO.suggestion}</td>
+          </tr>
+         </table>
+        </c:when>
+        <c:otherwise>
+         <p>건의내용이 없습니다.</p>
+        </c:otherwise>
+       </c:choose>
 
+       <div class="card-footer">
+        <div class="float-left">
+         <form action="adminSuggestionDeleteAction.do" method="post">
+          <input type="hidden" name="sugId" value="${sugDTO.sugId}">
+          <button type="submit" class="btn btn-block btn-danger">건의내용삭제</button>
+         </form>
+        </div>
+       </div>
       </div>
-
-      <!-- right col (We are only adding the ID to make the widgets sortable)-->
-
-      <!-- right col -->
      </div>
-     <!-- /.row (main row) -->
-    </div>
-    <!-- /.container-fluid -->
-   </section>
-   <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-   <strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
-   </strong> All rights reserved.
-   <div class="float-right d-none d-sm-inline-block">
-    <b>Version</b> 3.2.0
-   </div>
-  </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-   <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+
+
+
+    </div>
+  </div>
+  <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+ </div>
+ <!-- /.content-wrapper -->
+ <footer class="main-footer">
+  <strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
+  </strong> All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+   <b>Version</b> 3.2.0
+  </div>
+ </footer>
+
+ <!-- Control Sidebar -->
+ <aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+ </aside>
+ <!-- /.control-sidebar -->
  </div>
  <!-- ./wrapper -->
 
@@ -348,5 +286,6 @@
  <script src="adminLte/dist/js/pages/dashboard.js"></script>
  <!-- 인공지능 -->
  <script src="adminLte/dist/js/ai.js"></script>
+ <script src="js/commentDelete.js"></script>
 </body>
 </html>
