@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
@@ -32,6 +33,8 @@ public class TitleDetailPageAction implements Action{
 		commentDTO.setSearchCondition("질문댓글조회");
 		commentDTO.setqId(Integer.parseInt(request.getParameter("qid")));
 		ArrayList<CommentDTO> commentDatas =  commentDAO.selectAll(commentDTO);
+		
+		// 찜 여부 데이터
 		if(questionData != null) {
 			forward.setPath("titleDetail.jsp");
 			forward.setRedirect(false);

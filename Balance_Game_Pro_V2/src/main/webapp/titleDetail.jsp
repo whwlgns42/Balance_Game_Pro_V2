@@ -187,19 +187,32 @@
 	font-size: 13px;
 	font-weight: 700;
 }
+/* 찜 이미지 */
+.major img {
+	max-width: 50px; /* 이미지의 최대 너비 */
+	max-height: 50px; /* 이미지의 최대 높이 */
+	margin-left: 10px; /* 오른쪽 이동 */
+	margin-top: 10px; /* 밑으로 이동 */
+	width: auto;
+	/* 너비를 자동으로 조정하여 비율을 유지합니다. */
+	height: auto;
+	width: auto; /* 높이를 자동으로 조정하여 비율을 유지합니다. */
+}
 </style>
 <title>문제 상세 페이지</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="icon" href="images/favicon.png">
 <link rel="stylesheet" href="assets/css/main.css" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <noscript>
 	<link rel="stylesheet" href="assets/css/noscript.css" />
 </noscript>
 </head>
 
 <body class="is-preload">
-
+	<input type="hidden" id=loginId value="${loginId}" />
+	<input type="hidden" id=page value="titlePage" />
 	<!-- Header -->
 	<header id="header">
 		<common:logo></common:logo>
@@ -219,7 +232,16 @@
 		<!-- Main -->
 		<section id="main" class="wrapper">
 			<div class="inner">
-				<h1 class="major" style="margin-bottom: 20px;">문제 상세 페이지</h1>
+				<h1 class="major" style="margin-bottom: 20px;">
+					문제 상세 페이지
+					<input id="qId" type="hidden" value="${qData.qId}" />
+					<c:if test="${qData.save > 0}">
+						<img class="save" id="${qData.qId}" alt="찜이 되어있습니다 " src="images/찜o.png">
+					</c:if>
+					<c:if test="${qData.save <= 0}">
+						<img class="save" id="${qData.qId}" alt="찜이 안되어있습니다 " src="images/찜x.png">
+					</c:if>
+				</h1>
 				<div class="card-body table-responsive p-0">
 					<table class="table table-hover text-nowrap" style="margin-bottom: 10px;">
 						<thead>
@@ -386,6 +408,7 @@
 	<script src="assets/js/breakpoints.min.js"></script>
 	<script src="assets/js/util.js"></script>
 	<script src="assets/js/main.js"></script>
+	<script src="js/save.js"></script>
 	<script>
 		// Assume qData.answerCntA and qData.answerCntB are available from the server
 		const countA = parseInt("${qData.answerCntA}");
