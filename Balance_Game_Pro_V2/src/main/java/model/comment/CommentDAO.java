@@ -19,6 +19,20 @@ public class CommentDAO {
 			+ "    UR.RANKING\r\n" + "FROM\r\n" + "    COMMENTS C\r\n" + "LEFT JOIN\r\n"
 			+ "    MEMBER M ON C.LOGIN_ID = M.LOGIN_ID\r\n" + "LEFT JOIN\r\n"
 			+ "    UserRanking UR ON M.LOGIN_ID = UR.LOGIN_ID\r\n" + "WHERE\r\n" + "    C.QID = ?";
+	
+	private static final String SELECTALL_Q2="SELECT C.CID,C.QID,C.LOGIN_ID,M.GRADE,C.CONTENT, NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.RANKING\r\n"
+			+ "FROM COMMENTS C\r\n"
+			+ "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n"
+			+ "LEFT OUTER JOIN (\r\n"
+			+ "SELECT  LOGIN_ID,  RANK() OVER (ORDER BY TOTAL_AMOUNT DESC) AS RANKING \r\n"
+			+ "FROM ( SELECT M.LOGIN_ID, NVL(SUM(AMOUNT), 0)  AS TOTAL_AMOUNT \r\n"
+			+ "FROM  MEMBER M \r\n"
+			+ "LEFT OUTER JOIN SUPPORT S \r\n"
+			+ "ON S.LOGIN_ID =M.LOGIN_ID \r\n"
+			+ "GROUP BY M.LOGIN_ID) ) S ON S.LOGIN_ID=M.LOGIN_ID\r\n"
+			+ "WHERE C.QID=?";
+	
+	
 	private static final String SELECTALL_M = "SELECT C.CID,C.QID,C.LOGIN_ID,C.CONTENT,M.NAME\r\n"
 			+ "FROM COMMENTS C\r\n" + "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n" + "WHERE C.LOGIN_ID=?";
 	private static final String INSERT = "INSERT INTO COMMENTS(CID,QID,LOGIN_ID,CONTENT)\r\n"
@@ -38,7 +52,7 @@ public class CommentDAO {
 		try {
 			if (cDTO.getSearchCondition().equals("질문댓글조회")) {// 질문에 대한
 				// 모델
-				pstmt = conn.prepareStatement(SELECTALL_Q);
+				pstmt = conn.prepareStatement(SELECTALL_Q2);
 				pstmt.setInt(1, cDTO.getqId());
 				ResultSet rs = pstmt.executeQuery();
 

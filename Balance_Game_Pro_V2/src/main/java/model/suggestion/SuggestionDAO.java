@@ -13,7 +13,7 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT LOGIN_ID, SUGGESTION, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
+	private static final String SELECTALL = "SELECT SUGID, LOGIN_ID, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
 
 
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
@@ -29,9 +29,9 @@ public class SuggestionDAO {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
 				SuggestionDTO dto = new SuggestionDTO();
+				dto.setSugId(rs.getInt("SUGID"));
 				dto.setTitle(rs.getString("TITLE"));
 				dto.setLoginId(rs.getString("LOGIN_ID"));
-				dto.setSuggestion(rs.getString("SUGGESTION"));
 				datas.add(dto);
 			}
 		} catch (SQLException e) {
