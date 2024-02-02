@@ -8,10 +8,12 @@ $(".save").on("click", function() {
 	console.log(saveId);
 	if (loginId == "") {
 		console.log("[로그]로그인 x");
-		alert('로그인이 필요합니다');
-		//location.href='loginPage.do';
+		Swal.fire({
+			title: "로그인 필요",
+			text: "로그인 후 사용가능합니다.",
+			icon: "info"
+		});
 	} else {
-
 		console.log("[로그] 로그인 o");
 		//요소 값 가져오기
 		//https://luahius.tistory.com/158
@@ -28,9 +30,9 @@ $(".save").on("click", function() {
 				if (data == "실패") {
 					console.log("실패");
 				} else {
-					console.log($("#"+saveId).attr("src", "images/" + data) + "<<<<<")
-					$("#"+saveId).attr("src", "images/" + data);
-					if(data == "찜x.png" && page == "wishPage"){
+					console.log($("#" + saveId).attr("src", "images/" + data) + "<<<<<")
+					$("#" + saveId).attr("src", "images/" + data);
+					if (data == "찜x.png" && page == "wishPage") {
 						location.reload();
 					}
 				}

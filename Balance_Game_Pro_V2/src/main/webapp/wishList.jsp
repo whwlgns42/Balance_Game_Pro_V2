@@ -36,6 +36,9 @@
 	width: auto; /* 너비를 자동으로 조정하여 비율을 유지합니다. */
 	height: auto; /* 높이를 자동으로 조정하여 비율을 유지합니다. */
 }
+.qTitle, .save { 
+cursor : pointer;
+}
 </style>
 <title>찜목록</title>
 <meta charset="utf-8" />
@@ -98,13 +101,9 @@
 								</c:if>
 								<c:forEach var="data" items="${sdatas}" varStatus="loop">
 									<tr>
-										<td>
-											<a href="wishListDetailPage.do?qId=${data.qId}">${loop.index + 1}</a>
-										</td>
+										<td onclick="location.href = 'titleDetailPage.do?qid=${data.qId}&writer=${loginId}'">${loop.index + 1}</td>
 										<!-- loop.index는 0부터 시작하므로 +1을 해서 순번을 출력합니다. -->
-										<td>
-											<a href="wishListDetailPage.do?qId=${data.qId}">${data.saveTitle}</a>
-										</td>
+										<td class="qTitle" onclick="location.href = 'titleDetailPage.do?qid=${data.qId}&writer=${loginId}'">${data.saveTitle}</td>
 										<td>${data.saveWriter}</td>
 										<td>
 											<input id="qId" type="hidden" value="${data.qId}" />
