@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import controller.admin.AdminMemberDeleteAction;
+import controller.admin.AdminSuggestionDeleteAction;
 import controller.admin.AdminTitleAccessAction;
 import controller.admin.AdminTitleCreateAction;
 import controller.admin.AdminTitleDeleteAction;
@@ -98,6 +99,7 @@ public class HandlerMapper {
 		mappings.put("/alert.do", new AlertPageAction());
 		mappings.put("/adminCreateTitlePage.do", new AdminCreateTitlePageAction());
 		mappings.put("/adminSuggestionDetailPageAction.do", new AdminSuggestionDetailPageAction());
+		mappings.put("/adminSuggestionDeleteAction.do", new AdminSuggestionDeleteAction());
 	}
 
 	public Action getAction(String commend) {
