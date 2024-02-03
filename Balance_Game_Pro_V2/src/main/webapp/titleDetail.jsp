@@ -358,7 +358,7 @@
 						<thead>
 							<tr>
 								<th>번호</th>
-								<th>아이디</th>
+								<th>닉네임</th>
 								<th>댓글내용</th>
 							</tr>
 						</thead>
@@ -372,7 +372,7 @@
 							<c:forEach var="data" items="${cDatas}" varStatus="loop">
 								<tr>
 									<td>${loop.index + 1}</td>
-									<td>${data.loginId}</td>
+									<td>${data.memberName}</td>
 									<td>${data.content}</td>
 								</tr>
 							</c:forEach>
@@ -383,12 +383,10 @@
 				</div>
 
 			</div>
+			</section>
 	</div>
 
-	</div>
-	</section>
 
-	</div>
 
 	<!-- Footer -->
 	<footer id="footer" class="wrapper alt">
