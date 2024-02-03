@@ -70,11 +70,11 @@ public class ResignAction implements Action { // 회원탈퇴 기능
 		if (memberDAO.delete(memberDTO)) {
 			
 			// UPDATE => NULL
-			questionDAO.update(questionDTO);
-			answerDAO.update(answerDTO);
-			commentDAO.update(commentDTO);
-			saveDAO.update(saveDTO);
-			supportDAO.update(supportDTO);
+//			questionDAO.update(questionDTO);
+//			answerDAO.update(answerDTO);
+//			commentDAO.update(commentDTO);
+//			saveDAO.update(saveDTO);
+//			supportDAO.update(supportDTO);
 			
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
