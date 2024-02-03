@@ -57,6 +57,7 @@ public class CommentDAO {
 				ResultSet rs = pstmt.executeQuery();
 
 				while (rs.next()) {
+					//System.out.println("[로그] 질문 댓글조회");
 					CommentDTO data = new CommentDTO();
 					data.setcId(rs.getInt("CID"));
 					data.setqId(rs.getInt("QID"));
@@ -73,21 +74,21 @@ public class CommentDAO {
 				// 모델
 				pstmt = conn.prepareStatement(SELECTALL_M);
 				pstmt.setString(1, cDTO.getLoginId());
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					CommentDTO data = new CommentDTO();
+					data.setcId(rs.getInt("CID"));
+					data.setqId(rs.getInt("QID"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setContent(rs.getString("CONTENT"));
+					data.setMemberName(rs.getString("NAME"));
+					datas.add(data);
+				}
+
+				rs.close();
 			}
 
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				CommentDTO data = new CommentDTO();
-				data.setcId(rs.getInt("CID"));
-				data.setqId(rs.getInt("QID"));
-				data.setLoginId(rs.getString("LOGIN_ID"));
-				data.setContent(rs.getString("CONTENT"));
-				data.setMemberName(rs.getString("NAME"));
-				datas.add(data);
-			}
-
-			rs.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
