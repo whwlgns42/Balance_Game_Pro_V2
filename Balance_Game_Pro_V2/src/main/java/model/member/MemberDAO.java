@@ -42,7 +42,7 @@ public class MemberDAO {
    // 유저 전체 조회
    private static final String SELECTALL_USER = "SELECT \r\n"
    		+ "    M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
-   		+ "    COALESCE(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
+   		+ "    NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
    		+ "    RANK() OVER (ORDER BY COALESCE(SUM(S.AMOUNT), 0) DESC) AS RANKING \r\n"
    		+ "FROM \r\n"
    		+ "    MEMBER M\r\n"
