@@ -46,7 +46,8 @@ public class GamePageAction implements Action {
 			qDto = qDao.selectOne(qDto);
 			for (i=0; i < list.size(); i++) {
 				if (list.get(i) == qDto.getqId()) {
-					System.out.println("중복");
+					
+					System.out.println("중복 아이디 : "+qDto.getqId());
 					break;
 				}
 			}
