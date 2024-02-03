@@ -13,9 +13,9 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT SUGID, LOGIN_ID, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
+	private static final String SELECTALL = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
 
-	private static final String SELECTONE = "SELECT SUGID, LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
+	private static final String SELECTONE = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
 
 
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
