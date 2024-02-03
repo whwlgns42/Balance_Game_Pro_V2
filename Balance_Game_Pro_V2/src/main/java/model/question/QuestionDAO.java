@@ -39,7 +39,7 @@ public class QuestionDAO {
 
 	// TODO SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로
 	// 한개의 문제 정보 가져오기) 찜확인 추가
-	private static final String SELECT_ONE_RANDOM = "SELECT COALESCE(S.SID, 0) AS SAVE_SID,\r\n"
+	private static final String SELECT_ONE_RANDOM = "SELECT NVL(S.SID, 0) AS SAVE_SID,\r\n"
 			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.LOGIN_ID, Q.EXPLANATION, C.CATEGORY\r\n"
 			+ "FROM \r\n"
 			+ "    (SELECT QID,TITLE,ANSWER_A,ANSWER_B,LOGIN_ID,EXPLANATION,CATEGORY,Q_ACCESS FROM QUESTIONS ORDER BY DBMS_RANDOM.VALUE) Q\r\n"
