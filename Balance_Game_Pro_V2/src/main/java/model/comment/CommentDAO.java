@@ -20,7 +20,7 @@ public class CommentDAO {
 			+ "    MEMBER M ON C.LOGIN_ID = M.LOGIN_ID\r\n" + "LEFT JOIN\r\n"
 			+ "    UserRanking UR ON M.LOGIN_ID = UR.LOGIN_ID\r\n" + "WHERE\r\n" + "    C.QID = ?";
 	
-	private static final String SELECTALL_Q2="SELECT C.CID,C.QID,C.LOGIN_ID,M.GRADE,C.CONTENT, NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.RANKING\r\n"
+	private static final String SELECTALL_Q2="SELECT C.CID,C.QID,NVL(C.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID,M.GRADE,C.CONTENT, NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.RANKING\r\n"
 			+ "FROM COMMENTS C\r\n"
 			+ "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n"
 			+ "LEFT OUTER JOIN (\r\n"
