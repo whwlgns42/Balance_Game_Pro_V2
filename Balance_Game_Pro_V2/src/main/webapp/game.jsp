@@ -185,7 +185,7 @@ ul.actions {
 				<table>
 					<thead>
 						<tr>
-							<th>Name(LoginId)</th>
+							<th>Name</th>
 							<th>CONTENT</th>
 						</tr>
 					</thead>
