@@ -30,7 +30,7 @@ public class CommentDAO {
 			+ "LEFT OUTER JOIN SUPPORT S \r\n"
 			+ "ON S.LOGIN_ID =M.LOGIN_ID \r\n"
 			+ "GROUP BY M.LOGIN_ID) ) S ON S.LOGIN_ID=M.LOGIN_ID\r\n"
-			+ "WHERE C.QID=?";
+			+ "WHERE C.QID=? ORDER BY C.CID ASC";
 	
 	
 	private static final String SELECTALL_M = "SELECT C.CID,C.QID,C.LOGIN_ID,C.CONTENT,M.NAME\r\n"
