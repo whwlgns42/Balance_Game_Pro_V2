@@ -25,7 +25,7 @@ public class MemberDTO {
 
 	// --------java--------
 
-	private int ranking;
+	private String ranking;
 	private int total;
 	private String searchCondition;
 	private int cnt;
@@ -134,11 +134,11 @@ public class MemberDTO {
 		this.searchCondition = searchCondition;
 	}
 
-	public int getRanking() {
+	public String getRanking() {
 		return ranking;
 	}
 
-	public void setRanking(int ranking) {
+	public void setRanking(String ranking) {
 		this.ranking = ranking;
 	}
 

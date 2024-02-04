@@ -34,11 +34,15 @@ public class MemberDAO {
 	// CELL_PHONE
 	// 유저 전체 조회
 	private static final String SELECTALL_USER = "SELECT \r\n"
-			+ "    M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
-			+ "    NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
-			+ "    RANK() OVER (ORDER BY COALESCE(SUM(S.AMOUNT), 0) DESC) AS RANKING \r\n" + "FROM \r\n"
-			+ "    MEMBER M\r\n" + "LEFT JOIN \r\n" + "    SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID\r\n" + "GROUP BY \r\n"
-			+ "    M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
+			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
+			+ "			  NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
+			+ "			CASE\r\n"
+			+ "        		WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "       			ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
+			+ "    		END AS RANKING  \r\n"
+			+ "    		FROM \r\n"
+			+ "			 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID GROUP BY \r\n"
+			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
 
 	// CELL_PHONE
 	// 유저 상세 조회
@@ -75,7 +79,7 @@ public class MemberDAO {
                member.setGrade(rs.getString("GRADE"));
                member.setCellPhone(rs.getString("CELL_PHONE"));
                member.setTotal(rs.getInt("TOTAL"));
-               member.setRanking(rs.getInt("RANKING"));
+               member.setRanking(rs.getString("RANKING"));
                datas.add(member);
             }
             rs.close();
