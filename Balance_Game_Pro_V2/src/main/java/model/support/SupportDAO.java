@@ -17,12 +17,17 @@ public class SupportDAO {
 
 	private static final String SELECTALL = "SELECT S.LOGIN_ID, SUM(S.AMOUNT) \"TOTAL\", M.NAME FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID GROUP BY S.LOGIN_ID, M.NAME ORDER BY total DESC";
 
-	private static final String SELECTALL_RANKING = "SELECT  NVL( S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID,\r\n"
-			+ "			SUM(S.AMOUNT) AS TOTAL, NVL( M.NAME,'탈퇴한 사용자')AS NAME,\r\n"
-			+ "			RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC) AS RANKING \r\n"
-			+ "			FROM SUPPORT S \r\n"
-			+ "			LEFT OUTER JOIN  MEMBER M ON S.LOGIN_ID = M.LOGIN_ID \r\n"
-			+ "			GROUP BY S.LOGIN_ID, M.NAME";
+	private static final String SELECTALL_RANKING = "SELECT \r\n"
+			+ "    NVL(S.LOGIN_ID, '탈퇴한 사용자') AS LOGIN_ID,\r\n"
+			+ "    SUM(S.AMOUNT) AS TOTAL,\r\n"
+			+ "    NVL(M.NAME, '탈퇴한 사용자') AS NAME,\r\n"
+			+ "    RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC, MIN(S.REG_DATE)) AS RANKING \r\n"
+			+ "FROM \r\n"
+			+ "    SUPPORT S \r\n"
+			+ "LEFT OUTER JOIN \r\n"
+			+ "    MEMBER M ON S.LOGIN_ID = M.LOGIN_ID \r\n"
+			+ "GROUP BY \r\n"
+			+ "    S.LOGIN_ID, M.NAME";
 
 	// 회원탈퇴시 'Support'을 null 값으로 변경
 	private static final String SP_UPDATE = "UPDATE SUPPORT SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
