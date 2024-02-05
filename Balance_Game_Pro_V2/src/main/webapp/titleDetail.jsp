@@ -372,7 +372,25 @@
 							<c:forEach var="data" items="${cDatas}" varStatus="loop">
 								<tr>
 									<td>${loop.index + 1}</td>
-									<td>${data.memberName}</td>
+
+									<td>
+										<c:if test="${data.grade == 1 }">
+											<img src='images/blackStone.png' alt='등급1에 주는 블랙스톤' width='25' height='25' />${data.memberName}
+									</c:if>
+										<c:if test="${data.grade == 2 }">
+											<img src='images/silverStone.png' alt='등급2에 주는 실버스톤' width='25' height='25' />${data.memberName}
+									</c:if>
+										<c:if test="${data.grade == 3 }">
+											<img src='images/goldStone.png' alt='등급3에 주는 골드스톤' width='25' height='25' />${data.memberName}
+									</c:if>
+										<c:if test="${data.grade == 4 }">
+											<img src='images/blueStone.png' alt='등급4에 주는 플래티넘스톤' width='25' height='25' />${data.memberName}
+									</c:if>
+									<c:if test="${data.grade > 4 || data.grade == null}">
+									탈퇴한 회원입니다.
+									</c:if>
+									
+									</td>
 									<td>${data.content}</td>
 								</tr>
 							</c:forEach>
@@ -383,7 +401,7 @@
 				</div>
 
 			</div>
-			</section>
+		</section>
 	</div>
 
 
@@ -427,6 +445,6 @@
 		document.getElementById('percentB').innerText = percentB.toFixed(2)
 				+ '%';
 	</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
 </html>
