@@ -24,6 +24,12 @@ public class AdminTitleAccessAction implements Action{
       QuestionDAO qDAO = new QuestionDAO();
       qDTO.setSearchCondition("승인");
       qDTO.setqId(Integer.parseInt(request.getParameter("qid")));
+      qDTO.setTitle(request.getParameter("title"));
+      qDTO.setAnswer_A(request.getParameter("answer_A"));
+      qDTO.setAnswer_B(request.getParameter("answer_B"));
+      qDTO.setCategory(Integer.parseInt(request.getParameter("category")));
+      qDTO.setExplanation(request.getParameter("Explanation"));
+      
       boolean flag = qDAO.update(qDTO);
       if(!flag) {
          forward.setPath("alert.do");

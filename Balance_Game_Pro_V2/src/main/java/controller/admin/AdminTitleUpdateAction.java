@@ -28,6 +28,7 @@ public class AdminTitleUpdateAction implements Action{
       qDTO.setAnswer_A(request.getParameter("answer_A"));
       qDTO.setAnswer_B(request.getParameter("answer_B"));
       qDTO.setCategory(Integer.parseInt(request.getParameter("category")));
+      qDTO.setExplanation(request.getParameter("explanation"));
       System.out.println(request.getParameter("category")+"<<<<<<<<<<<<<<<<<<<");
       boolean flag = qDAO.update(qDTO);
       if(!flag) {
