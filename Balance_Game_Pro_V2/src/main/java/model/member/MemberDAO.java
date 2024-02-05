@@ -35,15 +35,34 @@ public class MemberDAO {
 	// 유저 전체 조회
 	private static final String SELECTALL_USER = "SELECT \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
-			+ "			  NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n"
-			+ "			CASE\r\n"
+			+ "			  NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n" + "			CASE\r\n"
 			+ "        		WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
 			+ "       			ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
-			+ "    		END AS RANKING  \r\n"
-			+ "    		FROM \r\n"
+			+ "    		END AS RANKING  \r\n" + "    		FROM \r\n"
 			+ "			 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID GROUP BY \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
-
+	private static final String SELECTALL_USER_NAME="SELECT \r\n"
+			+ "			M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE,\r\n"
+			+ "				  NVL(SUM(S.AMOUNT), 0) AS TOTAL,	CASE\r\n"
+			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "				ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
+			+ "			END AS RANKING 		FROM\r\n"
+			+ "				 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID \r\n"
+			+ "			WHERE M.NAME LIKE '%'||?||'%'\r\n"
+			+ "		GROUP BY \r\n"
+			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE"
+			+ "";
+	private static final String SELECTALL_USER_LOGIN_ID="SELECT \r\n"
+			+ "			M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE,\r\n"
+			+ "				  NVL(SUM(S.AMOUNT), 0) AS TOTAL,	CASE\r\n"
+			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "				ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
+			+ "			END AS RANKING 		FROM\r\n"
+			+ "				 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID \r\n"
+			+ "			WHERE M.LOGIN_ID LIKE '%'||?||'%'\r\n"
+			+ "		GROUP BY \r\n"
+			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
+	
 	// CELL_PHONE
 	// 유저 상세 조회
 	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE "
@@ -55,45 +74,53 @@ public class MemberDAO {
 	// 회원 수
 	private static final String SELECT_CNT = "SELECT COUNT(1) AS CNT FROM MEMBER";
 
-	//어드민 확인
-	private static final String SELECT_ADMIN="SELECT MADMIN FROM MEMBER WHERE LOGIN_ID = ?";
-	
+	// 어드민 확인
+	private static final String SELECT_ADMIN = "SELECT MADMIN FROM MEMBER WHERE LOGIN_ID = ?";
+
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
-      ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
-      if (mDTO.getSearchCondition().equals("전체조회")) {
-         // 박찬우
-         conn = JDBCUtil.connect();
-         try {
-            pstmt = conn.prepareStatement(SELECTALL_USER);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-               MemberDTO member = new MemberDTO();
-               member.setmId(rs.getInt("MID"));
-               member.setLoginId(rs.getString("LOGIN_ID"));
-               member.setmPw(rs.getString("MPW"));
-               member.setName(rs.getString("NAME"));
-               member.setEmail(rs.getString("EMAIL"));
-               member.setAddress(rs.getString("ADDRESS"));
-               member.setGender(rs.getString("GENDER"));
-               member.setAge(rs.getInt("AGE"));
-               member.setGrade(rs.getString("GRADE"));
-               member.setCellPhone(rs.getString("CELL_PHONE"));
-               member.setTotal(rs.getInt("TOTAL"));
-               member.setRanking(rs.getString("RANKING"));
-               datas.add(member);
-            }
-            rs.close();
- 		} catch (SQLException e) {
- 			e.printStackTrace();
- 			return null;
- 		} finally {
- 			JDBCUtil.disconnect(pstmt, conn);
- 		}
+		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
 
-      }
-      return datas;
+		// 박찬우
+		conn = JDBCUtil.connect();
+		try {
+			if (mDTO.getSearchCondition().equals("전체조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_USER);
+				
+			}else if(mDTO.getSearchCondition().equals("이름조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_USER_NAME);
 
-   }
+				
+				
+			}else if(mDTO.getSearchCondition().equals("아이디조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_USER_LOGIN_ID);
+
+			}
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				MemberDTO member = new MemberDTO();
+				member.setmId(rs.getInt("MID"));
+				member.setLoginId(rs.getString("LOGIN_ID"));
+				member.setName(rs.getString("NAME"));
+				member.setEmail(rs.getString("EMAIL"));
+				member.setAddress(rs.getString("ADDRESS"));
+				member.setGender(rs.getString("GENDER"));
+				member.setAge(rs.getInt("AGE"));
+				member.setTotal(rs.getInt("TOTAL"));
+				member.setRanking(rs.getString("RANKING"));
+
+				datas.add(member);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			JDBCUtil.disconnect(pstmt, conn);
+		}
+
+		return datas;
+
+	}
 
 	public MemberDTO selectOne(MemberDTO mDTO) { // 단일 검색
 		MemberDTO data = null;
@@ -184,7 +211,7 @@ public class MemberDAO {
 					data.setCnt(rs.getInt("CNT"));
 				}
 
-			}else if(mDTO.getSearchCondition().equals("관리자")) {
+			} else if (mDTO.getSearchCondition().equals("관리자")) {
 				pstmt = conn.prepareStatement(SELECT_ADMIN);
 				pstmt.setString(1, mDTO.getLoginId());
 				rs = pstmt.executeQuery();
