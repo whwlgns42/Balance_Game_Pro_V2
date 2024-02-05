@@ -211,7 +211,7 @@ ul.actions {
 	</footer>
 
 	<!-- Scripts -->
-
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="js/commentAll.js"></script>
 	<script src="js/commentInsert.js"></script>
 	<script src="js/gameButtonClick.js"></script>
