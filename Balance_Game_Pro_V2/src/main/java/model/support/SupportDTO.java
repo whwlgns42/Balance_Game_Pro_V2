@@ -10,7 +10,7 @@ public class SupportDTO {
 
 	private int amount;
 
-	 
+	private Date date;
 
 	 
 
@@ -28,6 +28,14 @@ public class SupportDTO {
 
 
 	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	public int getRanking() {
 		return ranking;

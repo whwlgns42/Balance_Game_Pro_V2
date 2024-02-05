@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.question.QuestionDTO;
+
 import model.util.JDBCUtil;
 
 public class SupportDAO {
@@ -31,6 +31,23 @@ public class SupportDAO {
 			+ "GROUP BY  \r\n"
 			+ "    S.LOGIN_ID, M.NAME";
 
+	
+	private static final String SELECTALL_RANKING_ADMIN="SELECT \r\n"
+			+ "			 S.LOGIN_ID,\r\n"
+			+ "			SUM(S.AMOUNT) AS TOTAL,\r\n"
+			+ "			M.NAME,\r\n"
+			+ "			RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC, MIN(S.REG_DATE)) AS RANKING,\r\n"
+			+ "			MAX(S.REG_DATE) AS LAST_SUPPORT_DATE \r\n"
+			+ "			FROM \r\n"
+			+ "			 SUPPORT S \r\n"
+			+ "			LEFT OUTER JOIN\r\n"
+			+ "			  MEMBER M ON S.LOGIN_ID = M.LOGIN_ID \r\n"
+			+ "			WHERE \r\n"
+			+ "			S.LOGIN_ID IS NOT NULL\r\n"
+			+ "			GROUP BY  \r\n"
+			+ "			 S.LOGIN_ID, M.NAME";
+	private static final String SELECTALL_DATE_ORDER_ADMIN="SELECT S.LOGIN_ID,S.AMOUNT, M.NAME,S.REG_DATE FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID ORDER BY S.REG_DATE ASC";
+	
 	// 회원탈퇴시 'Support'을 null 값으로 변경
 	private static final String SP_UPDATE = "UPDATE SUPPORT SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 	
@@ -57,6 +74,33 @@ public class SupportDAO {
 					datas.add(data);
 				}
 
+				rs.close();
+			}else if(sDTO.getSearchCondition().equals("후원순")) {
+				pstmt = conn.prepareStatement(SELECTALL_RANKING_ADMIN);
+
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					SupportDTO data = new SupportDTO();
+					data.setTotal(rs.getInt("TOTAL"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setName(rs.getString("NAME"));
+					data.setRanking(rs.getInt("RANKING"));
+					data.setDate(rs.getDate("LAST_SUPPORT_DATE"));
+					datas.add(data);
+				}
+				rs.close();
+			}else if(sDTO.getSearchCondition().equals("최신순")) {
+				pstmt = conn.prepareStatement(SELECTALL_DATE_ORDER_ADMIN);
+
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					SupportDTO data = new SupportDTO();
+					data.setAmount(rs.getInt("AMOUNT"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					data.setName(rs.getString("NAME"));
+					data.setDate(rs.getDate("REG_DATE"));
+					datas.add(data);
+				}
 				rs.close();
 			}
 
