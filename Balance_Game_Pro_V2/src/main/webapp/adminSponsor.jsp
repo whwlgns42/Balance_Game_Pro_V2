@@ -209,31 +209,11 @@ th {
             <th>이름</th>
             <th>후원금액</th>
            </tr>
-           
-           
-           
-           
-           
-           
-           
-           <%-- <tr>
-      <td>
-       <c:forEach var="data" items="${datas}" varStatus="loop">
-        <crown:crown ranking="${data.ranking}" />
-                   [${loop.index + 1}위]
-              ${data.loginId}님이
-           <fmt:formatNumber value="${data.total}" currencyCode="KRW" /> 원 후원하셨습니다.<br>
-       </c:forEach>
-      </td>
-     </tr> --%>
-           
-           
-           
-           
-           
           </thead>
+          
+          
           <tbody>
-           <c:if test="${empty member}">
+           <c:if test="${empty sdatas}">
             <tr>
              <td colspan="1">회원 정보가 없습니다.</td>
             </tr>
@@ -241,7 +221,7 @@ th {
            </c:if>
 
 
-           <c:forEach var="data" items="${후원자}" varStatus="loop">
+           <c:forEach var="data" items="${sdatas}" varStatus="loop">
             <tr onclick="location.href = 'adminMemberDetailPage.do?loginId=${data.loginId}'">
             <td>${loop.index + 1}</td>
              <td><crown:crown ranking="${data.ranking}" /> ${data.loginId}</td>
