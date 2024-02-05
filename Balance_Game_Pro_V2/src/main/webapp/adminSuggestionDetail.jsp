@@ -203,7 +203,7 @@ th {
            <td>${sugDTO.title}</td>
           </tr>
           <tr>
-           <th>건의내용</th>
+           <th style="width: 100px;">건의내용</th>
            <td>${sugDTO.suggestion}</td>
           </tr>
          </table>

@@ -224,7 +224,7 @@
         <div class="icon">
          <i class="ion ion-pie-graph"></i>
         </div>
-        <a href="sponsorPage.do" class="small-box-footer">후원페이지 <i class="fas fa-arrow-circle-right"></i></a>
+        <a href="adminSponsor.do" class="small-box-footer">후원페이지 <i class="fas fa-arrow-circle-right"></i></a>
        </div>
       </div>
       <!-- ./col -->

@@ -83,7 +83,7 @@
 			<div class="inner">
 				<h1 class="major">후원하기</h1>
 				<!-- <span class="image fit"><img src="images/pic04.jpg" alt="" /></span> -->
-				<h2>오늘의 후원 랭킹</h2>
+				<h2>후원 랭킹</h2>
 				<table>
 					<tr>
 						<td>

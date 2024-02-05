@@ -220,9 +220,9 @@ th {
              <td colspan="1">출제된 문제가 없습니다.</td>
             </tr>
            </c:if>
-           <c:forEach var="data" items="${qdatas_t}">
+           <c:forEach var="data" items="${qdatas_t}" varStatus="loop">
             <tr onclick="location.href = 'adminTitleDetailPage.do?qid=${data.qId}'">
-             <td>${data.qId}</td>
+            <td>${loop.index + 1}</td>
              <td>${data.loginId}</td>
              <td>${data.title}</td>
              <td>${data.explanation}</td>
