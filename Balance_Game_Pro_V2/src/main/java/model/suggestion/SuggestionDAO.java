@@ -17,26 +17,26 @@ public class SuggestionDAO {
 
 	private static final String SELECTONE = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
 
-
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
-	
+
 	private static final String DELETE = "DELETE FROM SUGGESTION WHERE SUGID=?";
-
-
 
 	public ArrayList<SuggestionDTO> selectAll(SuggestionDTO sDTO) {
 
 		conn = JDBCUtil.connect();
 		ArrayList<SuggestionDTO> datas = new ArrayList<SuggestionDTO>();
 		try {
-			pstmt = conn.prepareStatement(SELECTALL);
-			ResultSet rs = pstmt.executeQuery();
-			while (rs.next()) {
-				SuggestionDTO data = new SuggestionDTO();
-				data.setSugId(rs.getInt("SUGID"));
-				data.setTitle(rs.getString("TITLE"));
-				data.setLoginId(rs.getString("LOGIN_ID"));
-				datas.add(data);
+
+			if (sDTO.getSearchCondition().equals("전체조회")) {
+				pstmt = conn.prepareStatement(SELECTALL);
+				ResultSet rs = pstmt.executeQuery();
+				while (rs.next()) {
+					SuggestionDTO data = new SuggestionDTO();
+					data.setSugId(rs.getInt("SUGID"));
+					data.setTitle(rs.getString("TITLE"));
+					data.setLoginId(rs.getString("LOGIN_ID"));
+					datas.add(data);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -46,9 +46,9 @@ public class SuggestionDAO {
 	}
 
 	public SuggestionDTO selectOne(SuggestionDTO sDTO) {
-		
+
 		conn = JDBCUtil.connect();
-		SuggestionDTO data=null;
+		SuggestionDTO data = null;
 		try {
 			pstmt = conn.prepareStatement(SELECTONE);
 			pstmt.setInt(1, sDTO.getSugId());
@@ -63,8 +63,7 @@ public class SuggestionDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 		return data;
 	}
 
@@ -74,7 +73,7 @@ public class SuggestionDAO {
 			pstmt = conn.prepareStatement(INSERT);
 			pstmt.setString(1, sDTO.getLoginId());
 			pstmt.setString(2, sDTO.getSuggestion());
-			pstmt.setString(3,sDTO.getTitle());
+			pstmt.setString(3, sDTO.getTitle());
 			int rs = pstmt.executeUpdate();
 			if (rs <= 0) {
 				return false;
@@ -94,7 +93,7 @@ public class SuggestionDAO {
 	}
 
 	public boolean delete(SuggestionDTO sDTO) {
-		
+
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(DELETE);
