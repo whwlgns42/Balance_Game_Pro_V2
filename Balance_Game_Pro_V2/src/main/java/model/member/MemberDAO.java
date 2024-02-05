@@ -88,12 +88,12 @@ public class MemberDAO {
 				
 			}else if(mDTO.getSearchCondition().equals("이름조회")) {
 				pstmt = conn.prepareStatement(SELECTALL_USER_NAME);
-
+				pstmt.setString(1, mDTO.getName());
 				
 				
 			}else if(mDTO.getSearchCondition().equals("아이디조회")) {
 				pstmt = conn.prepareStatement(SELECTALL_USER_LOGIN_ID);
-
+				pstmt.setString(1, mDTO.getLoginId());
 			}
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
