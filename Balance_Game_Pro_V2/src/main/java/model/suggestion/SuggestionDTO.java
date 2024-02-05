@@ -5,6 +5,25 @@ public class SuggestionDTO {
 	private String loginId;
 	private String suggestion;
 	private String title;
+	
+	//------java-------
+	private String searchCondition;
+	private String name;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSearchCondition() {
+		return searchCondition;
+	}
+	public void setSearchCondition(String searchCondition) {
+		this.searchCondition = searchCondition;
+	}
 	@Override
 	public String toString() {
 		return "SuggestionDTO [sugId=" + sugId + ", loginId=" + loginId + ", suggestion=" + suggestion + ", title="
