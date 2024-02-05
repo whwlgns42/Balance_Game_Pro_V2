@@ -50,18 +50,19 @@ public class QuestionDAO {
 			+ "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
 	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,Q.CATEGORY AS CATEGORY_PK,\r\n"
-			+ "COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
-			+ "COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B,\r\n" + "NVL(S.SID, 0) AS SAVE_SID\r\n"
-			+ "FROM QUESTIONS Q\r\n" + "JOIN ANSWERS A ON A.QID=Q.QID\r\n"
-			+ "JOIN CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT JOIN\r\n"
-			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE Q.QID=?\r\n"
-			+ "GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID,Q.CATEGORY";
+			+ "			COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
+			+ "			COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B,\r\n"
+			+ "			NVL(S.SID, 0) AS SAVE_SID\r\n"
+			+ "			FROM QUESTIONS Q LEFT OUTER JOIN ANSWERS A ON A.QID=Q.QID\r\n"
+			+ "			JOIN CATEGORY C ON Q.CATEGORY = C.CGID\r\n"
+			+ "			LEFT OUTER JOIN SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ? WHERE Q.QID=?\r\n"
+			+ "			GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID,Q.CATEGORY";
 
 	 private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, LOGIN_ID, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
 
 	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
-			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?, EXPLANATION=?\r\n" + "WHERE QID=?";
+			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?\r\n" + "WHERE QID=?";
 
 	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?,EXPLANATION=?, Q_ACCESS='T' WHERE QID=?";
 	   
@@ -323,8 +324,8 @@ public class QuestionDAO {
 				pstmt.setString(2, qDTO.getAnswer_A());
 				pstmt.setString(3, qDTO.getAnswer_B());
 				pstmt.setInt(4, qDTO.getCategory());
-				pstmt.setString(5, qDTO.getExplanation());
-				pstmt.setInt(6, qDTO.getqId());
+				//pstmt.setString(5, qDTO.getExplanation());
+				pstmt.setInt(5, qDTO.getqId());
 				int rs=pstmt.executeUpdate();
 				if(rs<=0) {
 					return false;
