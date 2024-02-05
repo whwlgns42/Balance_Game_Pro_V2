@@ -399,6 +399,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
         	showSuccess("인증확인", "인증번호가 확인되었습니다.");
 			authStatus = 1; // 인증번호 확인성공이면 회원가입을 가능한 상태값 부여
         } else {
+        	authStatus = 0;
             showError("인증확인", "인증번호가 일치하지 않습니다. 다시 확인해주세요");
         }
     }

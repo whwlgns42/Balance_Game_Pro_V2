@@ -24,10 +24,11 @@ public class SuggestionDTO {
 	public void setSearchCondition(String searchCondition) {
 		this.searchCondition = searchCondition;
 	}
+
 	@Override
 	public String toString() {
 		return "SuggestionDTO [sugId=" + sugId + ", loginId=" + loginId + ", suggestion=" + suggestion + ", title="
-				+ title + "]";
+				+ title + ", searchCondition=" + searchCondition + ", name=" + name + "]";
 	}
 	public String getTitle() {
 		return title;
