@@ -1,6 +1,6 @@
-$("#commentDelete").on("click", function() {
+$(".commentDelete").on("click", function() {
     console.log("[댓글삭제성공]");
-    var cId = document.getElementById('cId').value;
+    var cId = $(this).closest("tr").find(".cId").val();
     $.ajax({
         type: "POST",
         url: "DeleteCommentAsync.do",

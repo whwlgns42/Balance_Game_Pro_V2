@@ -285,9 +285,8 @@ th {
            <td>${data.loginId}</td>
            <td>${data.content}</td>
 
-           <td><input id="cId" type="hidden" value="${data.cId}" />
-
-            <button type="button" id="commentDelete">삭제</button></td>
+           <td><input class="cId" type="hidden" value="${data.cId}" />
+            <button type="button" class="commentDelete">삭제</button></td>
           </tr>
          </c:forEach>
         </tbody>
