@@ -13,8 +13,23 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE FROM SUGGESTION ORDER BY REG_DATE DESC";
+	private static final String SELECTALL = "SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+			+ "			FROM SUGGESTION S\r\n"
+			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
+			+ "			ORDER BY S.REG_DATE DESC";
 
+	private static final String SELECTALL_USER_NAME="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+			+ "			FROM SUGGESTION S\r\n"
+			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
+			+ "			WHERE S.LOGIN_ID LIKE '%'||?||'%'\r\n"
+			+ "			ORDER BY S.REG_DATE DESC";
+	
+	private static final String SELECTALL_USER_LOGIN_ID="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+			+ "			FROM SUGGESTION S\r\n"
+			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
+			+ "			WHERE M.NAME LIKE '%'||?||'%'\r\n"
+			+ "			ORDER BY S.REG_DATE DESC";
+	
 	private static final String SELECTONE = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
 
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
@@ -29,14 +44,24 @@ public class SuggestionDAO {
 
 			if (sDTO.getSearchCondition().equals("전체조회")) {
 				pstmt = conn.prepareStatement(SELECTALL);
-				ResultSet rs = pstmt.executeQuery();
-				while (rs.next()) {
-					SuggestionDTO data = new SuggestionDTO();
-					data.setSugId(rs.getInt("SUGID"));
-					data.setTitle(rs.getString("TITLE"));
-					data.setLoginId(rs.getString("LOGIN_ID"));
-					datas.add(data);
-				}
+				
+			}else if(sDTO.getSearchCondition().equals("이름조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_USER_NAME);
+				pstmt.setString(1, sDTO.getName());
+				
+				
+			}else if(sDTO.getSearchCondition().equals("아이디조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_USER_LOGIN_ID);
+				pstmt.setString(1, sDTO.getLoginId());
+			}
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				SuggestionDTO data = new SuggestionDTO();
+				data.setSugId(rs.getInt("SUGID"));
+				data.setTitle(rs.getString("TITLE"));
+				data.setLoginId(rs.getString("LOGIN_ID"));
+				data.setName(rs.getString("NAME"));
+				datas.add(data);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
