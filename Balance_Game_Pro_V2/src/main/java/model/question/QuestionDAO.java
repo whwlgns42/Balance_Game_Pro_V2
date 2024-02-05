@@ -61,9 +61,9 @@ public class QuestionDAO {
 
 	
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n"
-			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?, EXPLANATION=?\r\n" + "WHERE QID=?";
+			+ "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=? \r\n" + "WHERE QID=?";
 
-	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?,EXPLANATION=?, Q_ACCESS='T' WHERE QID=?";
+	   private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?, Q_ACCESS='T' WHERE QID=?";
 	   
 
 		// 회원탈퇴시 'Question'을 null 값으로 변경
@@ -323,8 +323,7 @@ public class QuestionDAO {
 				pstmt.setString(2, qDTO.getAnswer_A());
 				pstmt.setString(3, qDTO.getAnswer_B());
 				pstmt.setInt(4, qDTO.getCategory());
-				pstmt.setString(5, qDTO.getExplanation());
-				pstmt.setInt(6, qDTO.getqId());
+				pstmt.setInt(5, qDTO.getqId());
 				int rs=pstmt.executeUpdate();
 				if(rs<=0) {
 					return false;
@@ -336,8 +335,7 @@ public class QuestionDAO {
 				pstmt.setString(2, qDTO.getAnswer_A());
 				pstmt.setString(3, qDTO.getAnswer_B());
 				pstmt.setInt(4, qDTO.getCategory());
-				pstmt.setString(5, qDTO.getExplanation());
-				pstmt.setInt(6, qDTO.getqId());
+				pstmt.setInt(5, qDTO.getqId());
 	            int rs = pstmt.executeUpdate();
 	            if(rs <=0) {
 	               return false;
