@@ -180,7 +180,7 @@ th {
 
 			<!-- Main content -->
 			<section class="content">
-				<div class="container-fluid">
+				<div class="container-fluid" style="padding-bottom: 1px;">
 
 
 					<!-- /.row -->
