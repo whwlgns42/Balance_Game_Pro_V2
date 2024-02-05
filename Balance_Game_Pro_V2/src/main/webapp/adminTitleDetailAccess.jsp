@@ -173,22 +173,20 @@
         <form action="adminTitleAccess.do" method="POST" id="insertForm">
         <div class="card-body">
          <div class="form-group">
-          <label for="inputName">제목</label> <input type="text" id="inputName" class="form-control" value="${qDTO.title}">
+          <label for="inputName">제목</label> <input type="text" id="inputName" class="form-control" value="${qDTO.title}" name="title">
          </div>
          <div class="form-group">
           <label for="inputDescription">선택지A</label>
-          <textarea id="inputDescription" class="form-control" rows="2">${qDTO.answer_A}</textarea>
+          <textarea id="inputDescription" class="form-control" rows="2" name="answer_A">${qDTO.answer_A}</textarea>
          </div>
          <div class="form-group">
           <label for="inputDescription">선택지B</label>
-          <textarea id="inputDescription" class="form-control" rows="2">${qDTO.answer_B }</textarea>
+          <textarea id="inputDescription" class="form-control" rows="2" name="answer_B">${qDTO.answer_B }</textarea>
          </div>
          <div class="form-group">
           <label for="inputDescription">출제 이유</label>
-          <textarea id="inputDescription" class="form-control" rows="3">${qDTO.explanation }</textarea>
+          <textarea id="inputDescription" class="form-control" rows="3" name="Explanation">${qDTO.explanation }</textarea>
          </div>
-         
-         
          <div class="form-check">
            <input type="hidden" name="category" id="YN" value="1">
             <input type="checkbox" class="form-check-input" id="adultCheck">
