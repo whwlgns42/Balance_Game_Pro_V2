@@ -39,7 +39,7 @@ public class AdminSupportPageAction implements Action{
 		}
 		request.setAttribute("sdatas", sdatas);
 		request.setAttribute("totalAmount", totalAmount);
-		forward.setPath("adminSupport");
+		forward.setPath("adminSponsor.jsp");
 		forward.setRedirect(false);
 		return forward;
 	}

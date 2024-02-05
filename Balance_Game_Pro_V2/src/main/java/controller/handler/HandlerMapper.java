@@ -17,6 +17,7 @@ import controller.page.admin.AdminMemberDetailPageAction;
 import controller.page.admin.AdminMemberManagementPageAction;
 import controller.page.admin.AdminPageAction;
 import controller.page.admin.AdminSuggestionDetailPageAction;
+import controller.page.admin.AdminSupportPageAction;
 import controller.page.admin.AdminTitleAccessPageAction;
 import controller.page.admin.AdminTitleDetailPageAction;
 import controller.page.admin.AdminTitleDetaileAccessPageAction;
@@ -100,6 +101,7 @@ public class HandlerMapper {
 		mappings.put("/adminCreateTitlePage.do", new AdminCreateTitlePageAction());
 		mappings.put("/adminSuggestionDetailPageAction.do", new AdminSuggestionDetailPageAction());
 		mappings.put("/adminSuggestionDeleteAction.do", new AdminSuggestionDeleteAction());
+		mappings.put("/adminSponsor.do", new AdminSupportPageAction());
 	}
 
 	public Action getAction(String commend) {
