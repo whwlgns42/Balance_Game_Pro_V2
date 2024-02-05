@@ -48,6 +48,7 @@ public class AdminPageAction implements Action {
 		sDTO.setSearchCondition("총후원금액");
 		sDTO = sDAO.selectOne(sDTO);
 		
+		sugDTO.setSearchCondition("전체조회");
 		ArrayList<SuggestionDTO> sugDatas = sugDAO.selectAll(sugDTO);
 		System.out.println(sugDatas + "sugDatas <<<<<<<<");
 
