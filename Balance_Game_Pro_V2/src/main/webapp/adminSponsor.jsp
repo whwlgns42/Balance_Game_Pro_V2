@@ -197,8 +197,8 @@ th {
 							<div class="card" style="margin-top: 20px;">
 								<div class="card-header">
 									<h3 class="card-title">후원목록</h3>
-									<button type="button" class="btn btn-block btn-outline-success" style="width: 100px">최신순</button>
-									<button type="button" class="btn btn-block btn-outline-success" style="width: 100px">후원순</button>
+									<button type="button" class="btn btn-block btn-outline-success" id="btnDate" style="width: 100px">최신순</button>
+									<button type="button" class="btn btn-block btn-outline-success" id="btnRank" style="width: 100px">후원순</button>
 									<div class="card-tools">
 										<div class="input-group input-group-sm" style="width: 450px;">
 											<div class="card-body">
@@ -217,9 +217,9 @@ th {
 											<thead>
 												<tr>
 													<th>번호</th>
-													<th>ID</th>
-													<th>이름</th>
+													<th>ID(닉네임)</th>
 													<th>후원금액</th>
+													<th>날짜</th>
 												</tr>
 											</thead>
 
@@ -325,6 +325,8 @@ th {
 	<script src="adminLte/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
 	<script src="adminLte/dist/js/demo.js"></script>
 	<script src="js/rangeSlider.js"></script>
+	<script src="js/sponsorListDate.js"></script>
+	<script src="js/sponsorListRank.js"></script>
 	<script>
 		$(function() {
 			/* BOOTSTRAP SLIDER */

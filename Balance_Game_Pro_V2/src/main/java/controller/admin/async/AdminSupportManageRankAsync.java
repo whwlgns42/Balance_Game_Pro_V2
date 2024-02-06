@@ -25,6 +25,9 @@ public class AdminSupportManageRankAsync extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
@@ -42,9 +45,6 @@ public class AdminSupportManageRankAsync extends HttpServlet {
 		}
 		out.print(gson.toJson(sRankDatas));
 		System.out.println(gson.toJson(sRankDatas));
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

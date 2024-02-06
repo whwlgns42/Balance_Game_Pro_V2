@@ -93,8 +93,11 @@ public class SupportDTO {
 		this.searchCondition = searchCondition;
 	}
 
-
-
-	
+	@Override
+	public String toString() {
+		return "SupportDTO [suId=" + suId + ", loginId=" + loginId + ", amount=" + amount + ", date=" + date
+				+ ", searchCondition=" + searchCondition + ", name=" + name + ", total=" + total + ", ranking="
+				+ ranking + "]";
+	}
 
 }

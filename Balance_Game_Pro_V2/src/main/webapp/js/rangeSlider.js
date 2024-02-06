@@ -3,18 +3,18 @@ function filterByAmount(minAmount, maxAmount, supportList) {
     return supportList.filter(supporter => supporter.total >= minAmount && supporter.total <= maxAmount);
     console.log("filter 로그: "+supportList.filter(supporter => supporter.total >= minAmount && supporter.total <= maxAmount));
 }
-
+console.log("[로그] rangeSlider.js");
 $(document).ready(function () {
 
     $("#btn").click(function () {
 
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: 'AdminSupportManageRankAsync.do',
             dataType: 'json',
             success: function (datas) {
                 if (datas == "실패") {
-                    // ...
+                    console.log("실패");
                 } else {
                     // datas가 이미 JSON 형태로 전송된 것으로 가정
                     const supportList = datas;
@@ -34,9 +34,9 @@ $(document).ready(function () {
                     let elem = "<tr>";
                     filteredData.forEach(supporter => {
                         elem += "<td>" + i + "</td>";
-                        elem += "<td>" + supporter.loginId + "</td>";
-                        elem += "<td>" + supporter.name + "</td>";
+                        elem += "<td>" + supporter.loginId+"("+supporter.name+")" + "</td>";
                         elem += "<td>" + supporter.total + "</td>";
+                        elem += "<td>" + supporter.date + "</td>";
                         elem += "</tr>";
                     });
 

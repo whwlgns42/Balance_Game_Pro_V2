@@ -28,6 +28,7 @@ public class AdminSupportManageDateAsync extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
 		
@@ -36,11 +37,13 @@ public class AdminSupportManageDateAsync extends HttpServlet {
 	
 		sDTO.setSearchCondition("최신순");
 		ArrayList<SupportDTO> sDateDatas = sDAO.selectAll(sDTO);
+		System.out.println("[로그: 최신순 ]"+sDateDatas);
 		
 		if(sDateDatas == null) {
 			out.print("실패");
 			return;
 		}
 		out.print(gson.toJson(sDateDatas));
+		System.out.println("[로그: 최신순]"+gson.toJson(sDateDatas));
 	}
 }
