@@ -34,10 +34,6 @@
 <link rel="stylesheet" href="adminLte/plugins/daterangepicker/daterangepicker.css">
 <!-- summernote -->
 <link rel="stylesheet" href="adminLte/plugins/summernote/summernote-bs4.min.css">
-<!-- sliderBar -->
-<link rel="stylesheet" href="adminLte/plugins/ion-rangeslider/css/ion.rangeSlider.min.css">
-<link rel="stylesheet" href="adminLte/plugins/bootstrap-slider/css/bootstrap-slider.min.css">
-<link rel="stylesheet" href="adminLte/dist/css/adminlte.min.css?v=3.2.0">
 <style>
 .message {
 	border-top: 1px solid #ccc;
@@ -162,13 +158,13 @@ th {
 								<li class="nav-item"><a href="adminPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>메인</p>
 								</a></li>
-								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>유저관리</p>
 								</a></li>
 								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
-								<li class="nav-item"><a href="adminSponsor.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+								<li class="nav-item"><a href="adminSponsor.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
 										<p>후원관리</p>
 								</a></li>
 							</ul></li>

@@ -12,7 +12,7 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="adminLte/plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Tempusdominus Bootstrap 4 -->
@@ -153,16 +153,19 @@ th {
         </p>
       </a>
        <ul class="nav nav-treeview">
-        <li class="nav-item"><a href="adminPage.do" class="nav-link "> <i class="far fa-circle nav-icon"></i>
-          <p>메인</p>
-        </a></li>
-        <li class="nav-item"><a href="adminMemberManagementPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
-          <p>유저관리</p>
-        </a></li>
-        <li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
-          <p>문제관리</p>
-        </a></li>
-       </ul></li>
+								<li class="nav-item"><a href="adminPage.do" class="nav-link active"> <i class="far fa-circle nav-icon"></i>
+										<p>메인</p>
+								</a></li>
+								<li class="nav-item"><a href="adminMemberManagementPage.do active" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>유저관리</p>
+								</a></li>
+								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>문제관리</p>
+								</a></li>
+								<li class="nav-item"><a href="adminSponsor.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>후원관리</p>
+								</a></li>
+							</ul></li>
 
 
 
