@@ -25,6 +25,8 @@ public class AdminSupportManageRankAsync extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		response.setCharacterEncoding("UTF-8");
+		
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
 		

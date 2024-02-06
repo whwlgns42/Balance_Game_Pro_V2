@@ -145,7 +145,14 @@
 								<li class="nav-item"><a href="adminTitleManagementPage.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
 										<p>문제관리</p>
 								</a></li>
+								<li class="nav-item"><a href="adminSponsor.do" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+										<p>후원관리</p>
+								</a></li>
 							</ul></li>
+
+
+
+
 					</ul>
 				</nav>
 				<!-- /.sidebar-menu -->
@@ -296,7 +303,7 @@
 		</div>
 		<!-- /.content-wrapper -->
 		<footer class="main-footer">
-			<strong>자비스(주) &copy; 1234-5678
+			<strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
 			</strong> All rights reserved.
 			<div class="float-right d-none d-sm-inline-block">
 				<b>Version</b> 3.2.0
