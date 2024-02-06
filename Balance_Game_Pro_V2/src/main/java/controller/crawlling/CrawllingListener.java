@@ -30,9 +30,9 @@ public class CrawllingListener implements ServletContextListener {
 		
 		QuestionDTO qDTO = new QuestionDTO();
 		QuestionDAO qDAO = new QuestionDAO();
-		qDTO.setSearchCondition("크롤링");
-		
-		if(!qDAO.selectAll(qDTO).isEmpty()) {
+		qDTO.setSearchCondition("총문제수");
+		qDTO.setqAccess("T");
+		if(qDAO.selectOne(qDTO).getCnt()>0) {
 			System.out.println("로그: "+ qDAO.selectAll(qDTO));
 			return;
 		}
