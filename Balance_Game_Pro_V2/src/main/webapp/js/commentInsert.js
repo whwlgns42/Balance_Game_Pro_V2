@@ -57,7 +57,7 @@ $("#write").on("click", function() {
 				} else if (data.grade == 4) {
 					elem += "<img src='images/blueStone.png' alt='등급4에 주는 플래티넘스톤' width='25' height ='25' />";
 				}
-				elem += data.memberName + "( " + data.loginId + " )</td>";
+				elem += data.memberName + "</td>";
 
 				elem += "<td>" + data.content + "</td>";
 				elem += "</tr>";
