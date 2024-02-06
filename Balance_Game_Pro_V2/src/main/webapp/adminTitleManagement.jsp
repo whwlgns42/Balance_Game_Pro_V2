@@ -250,7 +250,7 @@ th {
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-   <strong>자비스(주) &copy; 1234-5678 <a href="index.html">페이지1이동</a>.
+   <strong>자비스(주) &copy; 1234-5678
    </strong> All rights reserved.
    <div class="float-right d-none d-sm-inline-block">
     <b>Version</b> 3.2.0
