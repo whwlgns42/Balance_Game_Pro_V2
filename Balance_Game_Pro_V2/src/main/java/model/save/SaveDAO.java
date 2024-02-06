@@ -14,29 +14,21 @@ public class SaveDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	//유저의 찜목록 SQL 
 	private static final String SELECTALL = "SELECT Q.QID, S.SID, Q.TITLE, Q.LOGIN_ID FROM SAVE S JOIN QUESTIONS Q ON S.QID = Q.QID WHERE S.LOGIN_ID = ?";
-	//찜유무를 판단 SQL
-	//쿼리문 실행시 NULL이라면 찜이 안되었있는것
-	//1 이라면 찜이되었는 것을 뜻한다
-	//찜에 대한 유무만을 판단하는 것이기 때문에
-	//가독성을 위해 1로 설정했다
+
 	private static final String SELECTONE="SELECT 1 FROM SAVE WHERE LOGIN_ID=? AND QID=?";
 
-	//찜 생성 SQL
 	private static final String INSERT = "INSERT INTO SAVE (SID, QID,LOGIN_ID) VALUES((SELECT NVL(MAX(SID),0) + 1 FROM SAVE),?,?)";
-	
-	//찜 삭제 (질문PK, 로그인아이디) SQL
+
 	private static final String DELETE_QID_LID = "DELETE FROM SAVE WHERE QID=? AND LOGIN_ID=?";
 
-	//찜 삭제 (찜 PK) SQL
 	private static final String DELETE_SID = "DELETE FROM SAVE WHERE SID=?";
 
 	// 회원탈퇴시 'SAVE'를 null 값으로 변경
 	private static final String SV_UPDATE = "UPDATE SAVE SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 	
 	public ArrayList<SaveDTO> selectAll(SaveDTO sDTO) {
-		//유저의 찜 전체 조회
+
 		// 전은주
 		conn = JDBCUtil.connect();
 		ArrayList<SaveDTO> datas = new ArrayList<SaveDTO>();
@@ -60,7 +52,6 @@ public class SaveDAO {
 	}
 
 	public SaveDTO selectOne(SaveDTO sDTO) {
-		//찜 유무 판단
 		conn = JDBCUtil.connect();
 		SaveDTO data=null;
 		try {
@@ -101,8 +92,9 @@ public class SaveDAO {
 	}
 
 	public boolean update(SaveDTO sDTO) {
-		//유저 탈퇴시 찜의 로그인 아이디 NULL로 변경
+
 		conn = JDBCUtil.connect();
+
 		try {
 			// 손성용
 			if (sDTO.getSearchCondition().equals("save_null")) {
@@ -125,7 +117,7 @@ public class SaveDAO {
 	public boolean delete(SaveDTO sDTO) {
 		conn = JDBCUtil.connect();
 		try {
-			if (sDTO.getSearchCondition().equals("qm찜삭제")) {//질문 PK와, 로그인 아이디로 찜 삭제
+			if (sDTO.getSearchCondition().equals("qm찜삭제")) {
 				// 박현구
 				System.out.println(sDTO.getqId());
 				System.out.println(sDTO.getLoginId());
@@ -139,7 +131,7 @@ public class SaveDAO {
 					return false;
 				}
 				
-			} else if (sDTO.getSearchCondition().equals("s찜삭제")) {//찜 PK로 찜 삭제 
+			} else if (sDTO.getSearchCondition().equals("s찜삭제")) {
 				// 박현구
 				pstmt=conn.prepareStatement(DELETE_SID);
 				pstmt.setInt(1, sDTO.getsId());

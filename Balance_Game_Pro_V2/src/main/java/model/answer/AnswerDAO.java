@@ -12,10 +12,9 @@ public class AnswerDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 	
-	//답변 저장시 질문 pk ,로그인ID ,답변 저장하는 SQL
 	private static final String INSERT="INSERT INTO ANSWERS (AID,QID,LOGIN_ID,ANSWER) VALUES ((SELECT NVL(MAX(AID),0) + 1 FROM ANSWERS),?,?,?)";
 
-	// 회원탈퇴시 'Answers'을 null 값으로 변경하는 SQL
+	// 회원탈퇴시 'Answers'을 null 값으로 변경
 	private static final String AS_UPDATE = "UPDATE ANSWERS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 
 	public ArrayList<AnswerDTO> selectAll(AnswerDTO aDTO) { 

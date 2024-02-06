@@ -43,9 +43,6 @@ public class FrontController extends HttpServlet {
       String cp = request.getContextPath();
       String commend = uri.substring(cp.length());
       Action action = handler.getAction(commend);
-      if(action==null) {
-    	  action = handler.getAction("/main.do");
-      }
       ActionForward forward = action.execute(request, response);
       if (forward == null) { // TODO 구현하기
          // 에러 상황

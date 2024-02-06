@@ -13,38 +13,27 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	//모든 건의사항 SQL
-	//건의 사항 최신순으로 정렬 하여 보내준다
-	//건의 사항 중 탈되한 사용자가 있을경우 NULL이 나오기 때문에
-	//NULL인 경우 탈퇴한 사용자를 붙여 가져온다
 	private static final String SELECTALL = "SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			ORDER BY S.REG_DATE DESC";
 
-	//모든 건의사항 SQL + 이름으로 검색
-	//LIKE문으로 입력된 문자열을 포함하는 이름을 찾아 가져온다
 	private static final String SELECTALL_USER_NAME="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			WHERE M.NAME LIKE '%'||?||'%'\r\n"
 			+ "			ORDER BY S.REG_DATE DESC";
 	
-	//모든 건의사항 SQL + 아이디로 검색
-	//LIKE문으로 입력된 문자열을 포함하는 이름을 찾아 가져온다
 	private static final String SELECTALL_USER_LOGIN_ID="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			WHERE S.LOGIN_ID LIKE '%'||?||'%'\r\n"
 			+ "			ORDER BY S.REG_DATE DESC";
 	
-	//건의 사항 상세 보기 SQL
 	private static final String SELECTONE = "SELECT SUGID, NVL(LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, TITLE,SUGGESTION FROM SUGGESTION WHERE SUGID=?";
-	
-	//건의사항 추가 SQL
+
 	private static final String INSERT = "INSERT INTO SUGGESTION (SUGID, LOGIN_ID,SUGGESTION,TITLE) VALUES((SELECT NVL(MAX(SUGID),0) + 1 FROM SUGGESTION),?,?,?)";
-	
-	//건의사항 제거 SQL
+
 	private static final String DELETE = "DELETE FROM SUGGESTION WHERE SUGID=?";
 
 	public ArrayList<SuggestionDTO> selectAll(SuggestionDTO sDTO) {
@@ -52,7 +41,7 @@ public class SuggestionDAO {
 		conn = JDBCUtil.connect();
 		ArrayList<SuggestionDTO> datas = new ArrayList<SuggestionDTO>();
 		try {
-			//조회하여 가져오는 데이터는 모두 같기 때문에 하나의 while으로 사용
+
 			if (sDTO.getSearchCondition().equals("전체조회")) {
 				pstmt = conn.prepareStatement(SELECTALL);
 				
@@ -82,7 +71,7 @@ public class SuggestionDAO {
 	}
 
 	public SuggestionDTO selectOne(SuggestionDTO sDTO) {
-		//건의사항 상세보기
+
 		conn = JDBCUtil.connect();
 		SuggestionDTO data = null;
 		try {
@@ -104,7 +93,6 @@ public class SuggestionDAO {
 	}
 
 	public boolean insert(SuggestionDTO sDTO) {
-		//건의 사항 추가
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
@@ -130,7 +118,7 @@ public class SuggestionDAO {
 	}
 
 	public boolean delete(SuggestionDTO sDTO) {
-		//건의사항 삭제
+
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(DELETE);

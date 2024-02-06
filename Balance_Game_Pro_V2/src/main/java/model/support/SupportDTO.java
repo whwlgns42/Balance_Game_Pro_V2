@@ -4,13 +4,13 @@ import java.util.Date;
 
 public class SupportDTO {
 
-	private int suId;//후원 PK
+	private int suId;
 
-	private String loginId;//로그인 아이디 -> MEMBER 테이블의 LOGIN_ID를 참조
+	private String loginId;
 
-	private int amount;//후원 금액
+	private int amount;
 
-	private Date date;//후원 날짜
+	private Date date;
 
 	 
 
@@ -18,13 +18,13 @@ public class SupportDTO {
 
 	 
 
-	private String searchCondition;//찾는 방법
+	private String searchCondition;
 
-	private String name;//후원자 이름
+	private String name;
 	
-	private int total;//총액
+	private int total;
 	
-	private int ranking;//등수
+	private int ranking;
 
 
 	

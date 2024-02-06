@@ -25,7 +25,7 @@ public class MypageAction implements Action {
 		MemberDTO memberDTO = new MemberDTO();
 		MemberDAO memberDAO = new MemberDAO();
 		memberDTO.setLoginId((String)session.getAttribute("loginId"));
-		memberDTO.setSearchCondition("유저조회");
+		memberDTO.setSearchCondition("내정보");
 		MemberDTO myPageData =  memberDAO.selectOne(memberDTO);
 		System.out.println(myPageData.getLoginId());
 		request.setAttribute("myPageData", myPageData);

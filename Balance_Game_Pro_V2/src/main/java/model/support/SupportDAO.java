@@ -13,14 +13,10 @@ public class SupportDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	//후원 등록 SQL
-	private static final String SUPPPORT_INSERT = "INSERT INTO SUPPORT(SUID, LOGIN_ID, AMOUNT) VALUES((SELECT NVL(MAX(SUID),0) + 1 FROM SUPPORT), ?, ?) ";
+	private static final String SUPPPORT_AMOUNT = "INSERT INTO SUPPORT(SUID, LOGIN_ID, AMOUNT) VALUES((SELECT NVL(MAX(SUID),0) + 1 FROM SUPPORT), ?, ?) ";
 
-	//유저 페이지 후원 랭킹 SQL
-	//각각의 유저가 후원한 금액의 총금액으로 순위를 매겨 가져온다
-	
-	//(1)
-	//RANK() 함수를 이용해 총 가격을 큰순으로 정렬하고 같은가격이면 날짜순으로 정렬하여 가져온다
+	private static final String SELECTALL = "SELECT S.LOGIN_ID, SUM(S.AMOUNT) \"TOTAL\", M.NAME FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID GROUP BY S.LOGIN_ID, M.NAME ORDER BY total DESC";
+
 	private static final String SELECTALL_RANKING = "SELECT \r\n"
 			+ "    S.LOGIN_ID,\r\n"
 			+ "    SUM(S.AMOUNT) AS TOTAL,\r\n"
@@ -34,11 +30,8 @@ public class SupportDAO {
 			+ "    S.LOGIN_ID IS NOT NULL\r\n"
 			+ "GROUP BY  \r\n"
 			+ "    S.LOGIN_ID, M.NAME";
+
 	
-	//어드민 페이지 후원 랭킹 SQL
-	//(1) + 가장 최신 후원일자
-	//(2)
-	//MAX()함수를 이용하여 가장 최신 후원 날짜를 가져온다 
 	private static final String SELECTALL_RANKING_ADMIN="SELECT \r\n"
 			+ "			 S.LOGIN_ID,\r\n"
 			+ "			SUM(S.AMOUNT) AS TOTAL,\r\n"
@@ -53,15 +46,13 @@ public class SupportDAO {
 			+ "			S.LOGIN_ID IS NOT NULL\r\n"
 			+ "			GROUP BY  \r\n"
 			+ "			 S.LOGIN_ID, M.NAME";
+	private static final String SELECTALL_DATE_ORDER_ADMIN="SELECT S.LOGIN_ID,S.AMOUNT, M.NAME,S.REG_DATE FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID ORDER BY S.REG_DATE ASC";
 	
-	//최근 후원 순으로 정렬 SQL
-	private static final String SELECTALL_DATE_ORDER_ADMIN="SELECT S.LOGIN_ID,S.AMOUNT, M.NAME,S.REG_DATE FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID ORDER BY S.REG_DATE DESC";
-	
-	// 회원탈퇴시 'Support'을 null 값으로 변경 SQL
+	// 회원탈퇴시 'Support'을 null 값으로 변경
 	private static final String SP_UPDATE = "UPDATE SUPPORT SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 	
-	//총 후원 금액 SQL
-	private static final String SELECT_CNT="SELECT SUM(AMOUNT) AS TOTAL FROM SUPPORT";
+	//총 후원 금액
+		private static final String SELECT_CNT="SELECT SUM(AMOUNT) AS TOTAL FROM SUPPORT";
 
 	public ArrayList<SupportDTO> selectAll(SupportDTO sDTO) {
 		ArrayList<SupportDTO> datas = new ArrayList<SupportDTO>();
@@ -146,12 +137,12 @@ public class SupportDAO {
 
 	public boolean insert(SupportDTO sDTO) {
 
-		//System.out.println("후원dao도착");
+		System.out.println("후원dao도착");
 		// 모델
 		conn = JDBCUtil.connect();
 		try {
 			if (sDTO.getSearchCondition().equals("후원")) {
-				pstmt = conn.prepareStatement(SUPPPORT_INSERT);
+				pstmt = conn.prepareStatement(SUPPPORT_AMOUNT);
 				pstmt.setString(1, sDTO.getLoginId());
 				pstmt.setInt(2, sDTO.getAmount());
 				int result = pstmt.executeUpdate();
