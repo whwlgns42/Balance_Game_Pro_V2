@@ -22,7 +22,7 @@ public class AdminTitleManagementPageAction implements Action {
 		QuestionDTO qDTO = new QuestionDTO();
 		QuestionDAO qDAO = new QuestionDAO();
 		qDTO.setSearchCondition("관리자문제조회");
-		qDTO.setqAccess("F");
+		qDTO.setqAccess("T");
 		ArrayList<QuestionDTO> qdatas_t = qDAO.selectAll(qDTO);
 		System.out.println("qdatas_t" + qdatas_t);
 		if(qdatas_t == null) {
