@@ -11,9 +11,11 @@ import model.util.JDBCUtil;
 public class CategoryDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
+	
+	//카테고리 전부 가져오는 SQL
 	private static final String SELECTALL="SELECT CGID,CATEGORY FROM CATEGORY";
 
-	public ArrayList<CategoryDTO> selectAll(CategoryDTO sDTO) {
+	public ArrayList<CategoryDTO> selectAll(CategoryDTO sDTO) { // TODO SELECTALL :모든 카테고리 가져오기 
 		ArrayList<CategoryDTO> datas=new ArrayList<CategoryDTO>();
 
 		conn=JDBCUtil.connect();

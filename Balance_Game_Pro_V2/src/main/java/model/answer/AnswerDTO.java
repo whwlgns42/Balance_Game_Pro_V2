@@ -1,24 +1,22 @@
 package model.answer;
 
 public class AnswerDTO {
-	private int aId;
-
-	private String loginId;
-
-	private int qId;
-
-	private String answer;
+	
+	private int aId;//답변 pk
+	
+	private String loginId;//로그인 아이디 -> MEMBER 테이블의 LOGIN_ID를 참조
+	
+	private int qId; //질문 pk -> QUESTIONS 테이블의 QID를 참조
+	
+	private String answer;//답변
 
 	 
 
 	//------------java-------
+	
+	private String searchCondition;//찾는 방식
 
-	private String searchCondition;
 
-	private String ansTitle;
-	private int answerCntA;
-
-	private int answerCntB;
 
 	public int getaId() {
 		return aId;
@@ -60,35 +58,11 @@ public class AnswerDTO {
 		this.searchCondition = searchCondition;
 	}
 
-	public int getAnswerCntA() {
-		return answerCntA;
-	}
-
-	public void setAnswerCntA(int answerCntA) {
-		this.answerCntA = answerCntA;
-	}
-
-	public int getAnswerCntB() {
-		return answerCntB;
-	}
-
-	public void setAnswerCntB(int answerCntB) {
-		this.answerCntB = answerCntB;
-	}
-
-	public String getAnsTitle() {
-		return ansTitle;
-	}
-
-	public void setAnsTitle(String ansTitle) {
-		this.ansTitle = ansTitle;
-	}
 
 	@Override
 	public String toString() {
 		return "AnswerDTO [aId=" + aId + ", loginId=" + loginId + ", qId=" + qId + ", answer=" + answer
-				+ ", searchCondition=" + searchCondition + ", ansTitle=" + ansTitle + ", answerCntA=" + answerCntA
-				+ ", answerCntB=" + answerCntB + "]";
+				+ ", searchCondition=" + searchCondition + "]";
 	}
 
 	

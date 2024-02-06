@@ -1,27 +1,26 @@
 package model.comment;
 
 public class CommentDTO {
-	private int cId;
-
-	private int qId; // questions 테이블의 idx를 참조
-
-	private String loginId; // users 테이블의 idx를 참조
-
-	private String content;
+	
+	private int cId;//댓글 PK
+	
+	private int qId; //질문 PK ->QUESTIONS 테이블의 QID를 참조
+	
+	private String loginId; //로그인 아이디 -> MEMBER 테이블의 LOGIN_ID를 참조
+	
+	private String content;//댓글 내용
 
 	 
 
 	//---------java----------
-
-	private String searchCondition;
-
-	private String memberName;
-
-	private String memberLoginId;
 	
-	private String grade;
+	private String searchCondition;//찾는 방법
 	
-	private int ranking;
+	private String memberName;//유저 이름
+	
+	private String grade;//유저 후원 등급
+	
+
 
 	
 	public String getGrade() {
@@ -30,14 +29,6 @@ public class CommentDTO {
 
 	public void setGrade(String grade) {
 		this.grade = grade;
-	}
-
-	public int getRanking() {
-		return ranking;
-	}
-
-	public void setRanking(int ranking) {
-		this.ranking = ranking;
 	}
 
 	public int getcId() {
@@ -88,19 +79,12 @@ public class CommentDTO {
 		this.memberName = memberName;
 	}
 
-	public String getMemberLoginId() {
-		return memberLoginId;
-	}
 
-	public void setMemberLoginId(String memberLoginId) {
-		this.memberLoginId = memberLoginId;
-	}
 
 	@Override
 	public String toString() {
 		return "CommentDTO [cId=" + cId + ", qId=" + qId + ", loginId=" + loginId + ", content=" + content
-				+ ", searchCondition=" + searchCondition + ", memberName=" + memberName + ", memberLoginId="
-				+ memberLoginId + ", grade=" + grade + ", ranking=" + ranking + "]";
+				+ ", searchCondition=" + searchCondition + ", memberName=" + memberName + ", grade=" + grade + "]";
 	}
 
 }

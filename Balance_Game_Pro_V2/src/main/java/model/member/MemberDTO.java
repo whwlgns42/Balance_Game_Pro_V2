@@ -1,34 +1,35 @@
 package model.member;
 
 public class MemberDTO {
-	private int mId;
+	
+	private int mId;//유저 pk
+	
+	private String loginId;//로그인 아이디
+	
+	private String mPw;//비밀번호
+	
+	private String name;//이름
+	
+	private String email;//이메일
 
-	private String loginId;
+	private String address;//주소
 
-	private String mPw;
+	private String gender;//성별
 
-	private String name;
+	private int age;//나이
 
-	private String email;
+	private String grade;//후원 등급
 
-	private String address;
+	private String mAdmin;//어드민 유무
 
-	private String gender;
-
-	private int age;
-
-	private String grade;
-
-	private String mAdmin;
-
-	private String cellPhone;
+	private String cellPhone;//전화번호
 
 	// --------java--------
 
-	private String ranking;
-	private int total;
-	private String searchCondition;
-	private int cnt;
+	private String ranking; //후원 등수
+	private int total; //후원 금액
+	private String searchCondition;//찾는 방법
+	private int cnt;//회원수 
 
 	public int getCnt() {
 		return cnt;
