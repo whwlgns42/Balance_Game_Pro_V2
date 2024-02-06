@@ -196,14 +196,6 @@ public class QuestionDAO {
 					data.setCategory(rs.getInt("CATEGORY"));
 					data.setqAccess(rs.getString("Q_ACCESS"));
 				}
-			} else if (qDTO.getSearchCondition().equals("문제승인갯수")) {
-				pstmt = conn.prepareStatement(SELECT_CNT);
-				pstmt.setString(1, qDTO.getqAccess());
-				ResultSet rs = pstmt.executeQuery();
-				if (rs.next()) {
-					data = new QuestionDTO();
-					data.setCnt(rs.getInt("CNT"));
-				}
 			} else if (qDTO.getSearchCondition().equals("총문제수")) {
 				pstmt = conn.prepareStatement(SELECT_CNT);
 				pstmt.setString(1, qDTO.getqAccess());
