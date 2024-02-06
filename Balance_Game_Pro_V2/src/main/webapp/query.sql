@@ -73,15 +73,53 @@ CREATE TABLE SUGGESTION(--건의
 --트리거 삽입
 
 --후원 트리거
+--트리거 명세 (Trigger Specification):
+--트리거의 이름은 SUM_SUPPORT_TRIGGER입니다.
+--이 트리거는 TEEMO.SUPPORT 테이블에 삽입 작업이 발생하기 전에 실행됩니다.
+
+--FOR EACH ROW:
+--FOR EACH ROW 구문은 트리거가 각 삽입되는 행마다 실행되도록 지정합니다. 따라서 여러 행이 동시에 삽입되는 경우에도 각 행에 대해 트리거가 작동합니다.
+
+--DECLARE 섹션:
+--TOTAL이라는 NUMBER 타입의 변수를 선언합니다. 이 변수는 사용자의 총 후원금액을 저장하는 데 사용됩니다.
+
+--BEGIN-END 블록:
+--트리거의 본문은 BEGIN과 END 사이에 위치합니다. 이 부분은 트리거의 실제 동작을 정의합니다.
+
+--IF INSERTING THEN:
+--이 구문은 삽입 작업이 발생했을 때 실행됩니다.
+
+--총 후원금액 계산:
+--:NEW.LOGIN_ID와 관련된 사용자의 총 후원금액을 계산하기 위해 TEEMO.SUPPORT 테이블에서 SUM(AMOUNT)를 사용합니다. 이후 새로운 삽입된 AMOUNT를 더합니다.
+
+--사용자 등급 조정:
+--사용자의 총 후원금액에 따라 등급을 조정합니다. 일정 금액 이상의 후원금액을 가진 사용자는 더 높은 등급을 받습니다.
+
+--후원금액 출력:
+--사용자의 총 후원금액을 DBMS_OUTPUT.PUT_LINE을 사용하여 출력합니다.
+
+--예외 처리:
+--WHEN OTHERS THEN 구문은 예외가 발생했을 때 처리됩니다.
+--예외가 발생하면 SQLERRM 함수를 사용하여 예외 메시지를 출력하고 롤백을 수행합니다.
+
+
+--이 트리거는 특정 사용자의 후원금액이 변경될 때마다 해당 사용자의 등급을 새로 계산하고 출력합니다.
+
 CREATE OR REPLACE TRIGGER SUM_SUPPORT_TRIGGER
-BEFORE INSERT ON TEEMO.SUPPORT
-FOR EACH ROW
+-- 트리거 이름: SUM_SUPPORT_TRIGGER
+BEFORE INSERT ON TEEMO.SUPPORT 
+-- TEEMO.SUPPORT 테이블에 삽입되기 전에 트리거가 작동합니다.
+FOR EACH ROW 
+-- 각 행마다 작동하도록 설정합니다.
 DECLARE
     TOTAL NUMBER;
+    -- 사용자의 총 후원금액을 저장할 변수를 선언합니다.
 BEGIN
     IF INSERTING THEN
+    -- 만약 삽입 작업이 수행된다면
 -- 사용자의 총 후원금액 계산
 SELECT NVL(SUM(AMOUNT), 0) + :NEW.AMOUNT INTO TOTAL FROM TEEMO.SUPPORT WHERE LOGIN_ID = :NEW.LOGIN_ID;
+-- 새로운 후원금액을 해당 사용자의 이전 후원금액에 더하여 총 후원금액을 계산합니다.
 
 -- 사용자 등급 조정
         UPDATE TEEMO.MEMBER
@@ -92,36 +130,50 @@ SELECT NVL(SUM(AMOUNT), 0) + :NEW.AMOUNT INTO TOTAL FROM TEEMO.SUPPORT WHERE LOG
                         ELSE GRADE
                     END
         WHERE LOGIN_ID = :NEW.LOGIN_ID;
+-- 총 후원금액에 따라 사용자의 등급을 조정합니다.
 
 -- 후원금액 출력
         DBMS_OUTPUT.PUT_LINE('AMOUNT: ' || TOTAL);
+-- 총 후원금액을 출력합니다.
     END IF;
 
 EXCEPTION
     WHEN OTHERS THEN
--- 예외 처리
+-- 다른 모든 예외에 대해
         DBMS_OUTPUT.PUT_LINE('Exception: ' || SQLERRM);
--- 롤백을 수행할 수 있음
+-- 예외 메시지를 출력합니다.
 	ROLLBACK;
+-- 롤백을 수행합니다.
 END SUM_SUPPORT_TRIGGER;
 
 
 --유저 삭제
+--이 코드는 TEEMO.MEMBER 테이블에서 특정 회원이 삭제될 때, 다른 테이블에서 해당 회원의 LOGIN_ID를 NULL로 업데이트하는 트리거입니다. 
+
 CREATE OR REPLACE TRIGGER USER_DELETE_TRIGGER
-BEFORE DELETE ON TEEMO.MEMBER--삭제가 발생하면
+-- 트리거 이름: USER_DELETE_TRIGGER
+BEFORE DELETE ON TEEMO.MEMBER
+-- TEEMO.MEMBER 테이블에서 삭제가 발생하기 전에 트리거가 작동합니다.
 FOR EACH ROW
-BEGIN--다른 테이블 LOGIN_ID를 null로 UPDATE
+-- 각 행마다 작동하도록 설정합니다.
+BEGIN
+-- 시작
+
+   -- 다른 테이블에서 해당 회원의 LOGIN_ID를 NULL로 업데이트합니다.
    UPDATE TEEMO.QUESTIONS  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
    UPDATE TEEMO.ANSWERS  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
    UPDATE TEEMO.COMMENTS  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
    UPDATE TEEMO.SAVE  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
    UPDATE TEEMO.SUPPORT  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
    UPDATE TEEMO.SUGGESTION  SET LOGIN_ID = NULL WHERE LOGIN_ID = :OLD.LOGIN_ID;
+
 EXCEPTION
     WHEN OTHERS THEN
--- 예외 처리
+-- 다른 모든 예외에 대해
         DBMS_OUTPUT.PUT_LINE('Exception: ' || SQLERRM);
--- 롤백을 수행할 수 있음ROLLBACK;
+-- 예외 메시지를 출력합니다.
+	ROLLBACK;
+-- 롤백을 수행합니다.
 END USER_DELETE_TRIGGER;
 
 -- 샘플 데이터 삽입
