@@ -11,16 +11,9 @@ import model.util.JDBCUtil;
 public class CommentDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
-	private static final String SELECTALL_Q = "WITH UserRanking AS (\r\n" + "    SELECT\r\n" + "        M.LOGIN_ID,\r\n"
-			+ "        RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC) AS RANKING\r\n" + "    FROM\r\n"
-			+ "        MEMBER M\r\n" + "    LEFT JOIN\r\n" + "        SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID\r\n"
-			+ "    GROUP BY\r\n" + "        M.LOGIN_ID\r\n" + ")\r\n" + "SELECT\r\n" + "    C.CID,\r\n"
-			+ "    C.QID,\r\n" + "    M.LOGIN_ID, M.GRADE, \r\n" + "    C.CONTENT,\r\n" + "    M.NAME,\r\n"
-			+ "    UR.RANKING\r\n" + "FROM\r\n" + "    COMMENTS C\r\n" + "LEFT JOIN\r\n"
-			+ "    MEMBER M ON C.LOGIN_ID = M.LOGIN_ID\r\n" + "LEFT JOIN\r\n"
-			+ "    UserRanking UR ON M.LOGIN_ID = UR.LOGIN_ID\r\n" + "WHERE\r\n" + "    C.QID = ?";
+
 	
-	private static final String SELECTALL_Q2="SELECT C.CID,C.QID,NVL(C.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID,M.GRADE,C.CONTENT, NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.RANKING\r\n"
+	private static final String SELECTALL_Q="SELECT C.CID,C.QID,NVL(C.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID,M.GRADE,C.CONTENT, NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.RANKING\r\n"
 			+ "FROM COMMENTS C\r\n"
 			+ "LEFT OUTER JOIN MEMBER M ON C.LOGIN_ID =M.LOGIN_ID\r\n"
 			+ "LEFT OUTER JOIN (\r\n"
@@ -52,7 +45,7 @@ public class CommentDAO {
 		try {
 			if (cDTO.getSearchCondition().equals("질문댓글조회")) {// 질문에 대한
 				// 모델
-				pstmt = conn.prepareStatement(SELECTALL_Q2);
+				pstmt = conn.prepareStatement(SELECTALL_Q);
 				pstmt.setInt(1, cDTO.getqId());
 				ResultSet rs = pstmt.executeQuery();
 
