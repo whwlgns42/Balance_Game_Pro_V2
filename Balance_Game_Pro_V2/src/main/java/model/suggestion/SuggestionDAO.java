@@ -13,18 +13,18 @@ public class SuggestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	private static final String SELECTALL = "SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+	private static final String SELECTALL = "SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			ORDER BY S.REG_DATE DESC";
 
-	private static final String SELECTALL_USER_NAME="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+	private static final String SELECTALL_USER_NAME="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			WHERE M.NAME LIKE '%'||?||'%'\r\n"
 			+ "			ORDER BY S.REG_DATE DESC";
 	
-	private static final String SELECTALL_USER_LOGIN_ID="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,M.NAME\r\n"
+	private static final String SELECTALL_USER_LOGIN_ID="SELECT S.SUGID, NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, S.TITLE ,NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			FROM SUGGESTION S\r\n"
 			+ "			LEFT OUTER JOIN MEMBER M ON M.LOGIN_ID =S.LOGIN_ID\r\n"
 			+ "			WHERE S.LOGIN_ID LIKE '%'||?||'%'\r\n"
