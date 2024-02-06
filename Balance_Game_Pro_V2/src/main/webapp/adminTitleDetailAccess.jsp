@@ -241,6 +241,10 @@
 	</script>
  <!-- Bootstrap 4 -->
  <script src="adminLte/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
+  <script src="js/blankSpace.js"></script>
+ <!-- 공백을 막아주는 js -->
+ <script src="js/submitBlankCheck.js"></script>
 <script src = "js/categoryCheck.js"></script>
  <!-- ChartJS -->
  <script src="adminLte/plugins/chart.js/Chart.min.js"></script>
