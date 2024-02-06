@@ -12,17 +12,24 @@ public class QuestionDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
+	//승인된 질문 목록 SQL
+	//질문을 가져올때 유저가 해당 질문의 찜 유무 필요
+	//찜이 되어있으면 찜 PK를 안 되어 있어 NULL이 나오면 0으로 가져오고
+	//질문 생성 순으로 가져온다
 	private static final String SELECTALL_TRUE = "SELECT Q.QID, Q.TITLE, C.CATEGORY, NVL(S.SID, 0) AS SAVE_SID \r\n"
 			+ "FROM QUESTIONS Q \r\n" + "JOIN CATEGORY C ON Q.CATEGORY = C.CGID \r\n"
 			+ "LEFT OUTER JOIN SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n"
 			+ "WHERE Q.Q_ACCESS = 'T' ORDER BY Q.QID ASC";
 
+	
+	//어드민 페이지에서 승인질문, 비승인질문 목록 SQL
 	private static final String SELECTALL_ADMIN_TF = "SELECT Q.QID, Q.TITLE, NVL(Q.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID, Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = ? ORDER BY Q.QID ASC";
 
 
-	// 질문생성 SQL
+	//유저 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
 
+	//어드민 질문생성 SQL
 	private static final String INSERT_ADMIN = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION,CATEGORY,Q_ACCESS) \r\n"
 			+ "VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?,?,'T')";
 
@@ -34,6 +41,14 @@ public class QuestionDAO {
 			+ "LEFT OUTER JOIN \r\n" + "    CATEGORY C ON Q.CATEGORY = C.CGID\r\n" + "LEFT OUTER JOIN\r\n"
 			+ "    SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n" + "WHERE ROWNUM = 1 AND  Q.Q_ACCESS = 'T'";
 
+	
+	//질문 상세보기 SQL
+	//상세 보기시 질문에 답변 개수를 받아오고
+	//찜여부를 추가로 가져온다
+	//(1)
+	//답변 테이블을 조인하여 질문에 대한 답변들을 가져온다
+	//가져온 답변에 값이 만약 A라면 COUNT_A가 1 증가하고
+	//B라면 COUNT_B 가 1 증가하는 걸 이용해 개수를 샐수 있다 
 	private static final String SELECT_ONE_DETAIL = "SELECT Q.QID,Q.TITLE,Q.ANSWER_A,Q.ANSWER_B,Q.EXPLANATION,C.CATEGORY,Q.CATEGORY AS CATEGORY_PK,\r\n"
 			+ "			COUNT(CASE WHEN A.ANSWER = 'A' THEN 1 END) AS COUNT_A, \r\n"
 			+ "			COUNT(CASE WHEN A.ANSWER = 'B' THEN 1 END) AS COUNT_B,\r\n"
@@ -43,16 +58,20 @@ public class QuestionDAO {
 			+ "			LEFT OUTER JOIN SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ? WHERE Q.QID=?\r\n"
 			+ "			GROUP BY Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.EXPLANATION, C.CATEGORY,S.SID,Q.CATEGORY";
 
+	//어드민 페이지 상세보기 SQL
 	private static final String SELECT_ONE_ADMIN = "SELECT QID, TITLE, LOGIN_ID, ANSWER_A, ANSWER_B, EXPLANATION, CATEGORY, REG_DATE, Q_ACCESS FROM QUESTIONS Q WHERE Qid = ? ";
 
+	//질문 변경 SQL
 	private static final String UPDATE = "UPDATE QUESTIONS \r\n" + "SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?\r\n"
 			+ "WHERE QID=?";
-
+	
+	//질문 변경 및 승인 SQL
 	private static final String UPDATE_ACCESS = "UPDATE QUESTIONS SET TITLE=?,ANSWER_A=?,ANSWER_B=?,CATEGORY=?,EXPLANATION=?, Q_ACCESS='T' WHERE QID=?";
 
 	// 회원탈퇴시 'Question'을 null 값으로 변경
 	private static final String QS_UPDATE = "UPDATE QUESTIONS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 
+	//질문 삭제 SQL
 	private static final String DELETE = "DELETE FROM QUESTIONS WHERE QID=?";
 
 	// 문제 개수
@@ -87,6 +106,7 @@ public class QuestionDAO {
 				rs.close();
 
 			} else if (qDTO.getSearchCondition().equals("관리자문제조회")) {
+				//승인 유무로 문제조회
 				pstmt = conn.prepareStatement(SELECTALL_ADMIN_TF);
 				pstmt.setString(1,qDTO.getqAccess());
 				ResultSet rs = pstmt.executeQuery();
@@ -114,15 +134,16 @@ public class QuestionDAO {
 
 	}
 
-	// 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회
+
 	public QuestionDTO selectOne(QuestionDTO qDTO) {
 		QuestionDTO data = null;
 		conn = JDBCUtil.connect();
 		try {
 			if (qDTO.getSearchCondition().equals("문제상세조회")) {
 				// 박현구
+				//문제 결과 조회
 				pstmt = conn.prepareStatement(SELECT_ONE_DETAIL);
-				pstmt.setString(1, qDTO.getLoginId()); // 작성자x , 로그인ID o
+				pstmt.setString(1, qDTO.getLoginId());
 				pstmt.setInt(2, qDTO.getqId());
 				ResultSet rs = pstmt.executeQuery();
 				if (rs.next()) {
@@ -148,7 +169,7 @@ public class QuestionDAO {
 
 			} else if (qDTO.getSearchCondition().equals("질문랜덤생성")) {
 				// 박현구
-
+				// 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회
 				pstmt = conn.prepareStatement(SELECT_ONE_RANDOM);
 				pstmt.setString(1, qDTO.getLoginId());
 				ResultSet rs = pstmt.executeQuery();

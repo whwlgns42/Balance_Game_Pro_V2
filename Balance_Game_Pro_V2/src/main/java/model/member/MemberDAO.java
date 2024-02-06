@@ -13,7 +13,6 @@ public class MemberDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
 
-	// CELL_PHONE
 	// 회원가입 SQL
 	private static final String INSERT = "INSERT INTO MEMBER (MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, CELL_PHONE) VALUES((SELECT NVL(MAX(MID),0) + 1 FROM MEMBER),?,?,?,?,?,?,?,?)";
 
@@ -23,28 +22,41 @@ public class MemberDAO {
 	private static final String LOGIN = "SELECT MID, LOGIN_ID, MADMIN FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
 	// 비밀번호 2차인증 SQL
 	private static final String CERTIFICATION = "SELECT LOGIN_ID, MPW FROM MEMBER WHERE LOGIN_ID = ? AND MPW = ? ";
-
-	// CELL_PHONE
-	// 마이페이지 SQL
-	private static final String MY_INFO = "SELECT LOGIN_ID, NAME, AGE, GENDER, EMAIL, ADDRESS, CELL_PHONE FROM MEMBER WHERE LOGIN_ID = ? ";
-
+	
 	// 내정보 변경하기 SQL
 	private static final String MY_INFO_UPDATE = "UPDATE MEMBER SET NAME = ?, EMAIL = ? WHERE LOGIN_ID = ? ";
 
-	// CELL_PHONE
-	// 유저 전체 조회
+
+
+	//유저 전체 조회 SQL
+	//유저들을 가져올때
+	//후원 랭킹,후원 총 금액를 가져옴
+	//후원 랭킹을 가져올때 랭킹순으로 정렬
+	//후원 총 금액을를 가져올때 총 금액이 0원이라면 - 으로 해야함
+	
+	//(1)
+	//TOTAL로 RANK() 함수를 이용해서 큰 순으로 정렬하고 TOTAL이 같은 값이면 먼저 후원한 순으로 정렬한다
+	
+	//(2)
+	//만약 TOTAL이 0이라면 - 을 넣는다
+	//하지만 - 는 문자형이기 때문에 RANK()로 나온 값을 TO_CHAR를 형변환하여 가져온다
 	private static final String SELECTALL_USER = "SELECT \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE, \r\n"
 			+ "			  NVL(SUM(S.AMOUNT), 0) AS TOTAL, \r\n" + "			CASE\r\n"
-			+ "        		WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "        		WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-'\r\n"
 			+ "       			ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
 			+ "    		END AS RANKING  \r\n" + "    		FROM \r\n"
 			+ "			 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID GROUP BY \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
+	
+	
+	//유저 전체 조회 SQL + 이름으로 검색
+	//(3)
+	//LIKE문으로 입력된 문자열을 포함하는 이름을 찾아 가져온다
 	private static final String SELECTALL_USER_NAME="SELECT \r\n"
 			+ "			M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE,\r\n"
 			+ "				  NVL(SUM(S.AMOUNT), 0) AS TOTAL,	CASE\r\n"
-			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-'\r\n"
 			+ "				ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
 			+ "			END AS RANKING 		FROM\r\n"
 			+ "				 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID \r\n"
@@ -52,10 +64,13 @@ public class MemberDAO {
 			+ "		GROUP BY \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE"
 			+ "";
+	//유저 전체 조회 SQL + 아이디로 검색
+	//(3)
+	//LIKE문으로 입력된 문자열을 포함하는 로그인아이디를 찾아 가져온다
 	private static final String SELECTALL_USER_LOGIN_ID="SELECT \r\n"
 			+ "			M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE,\r\n"
 			+ "				  NVL(SUM(S.AMOUNT), 0) AS TOTAL,	CASE\r\n"
-			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-' -- TOTAL이 0이면 '-'을 할당\r\n"
+			+ "				WHEN NVL(SUM(S.AMOUNT), 0) = 0 THEN '-'\r\n"
 			+ "				ELSE TO_CHAR(RANK() OVER (ORDER BY NVL(SUM(S.AMOUNT), 0) DESC, MIN(S.REG_DATE)))\r\n"
 			+ "			END AS RANKING 		FROM\r\n"
 			+ "				 MEMBER M LEFT JOIN     SUPPORT S ON M.LOGIN_ID = S.LOGIN_ID \r\n"
@@ -63,26 +78,28 @@ public class MemberDAO {
 			+ "		GROUP BY \r\n"
 			+ "			 M.MID, M.LOGIN_ID, M.MPW, M.NAME, M.EMAIL, M.ADDRESS, M.GENDER, M.AGE, M.GRADE, M.CELL_PHONE";
 	
-	// CELL_PHONE
-	// 유저 상세 조회
-	private static final String SELECTONE_USER = "SELECT MID, LOGIN_ID, MPW, NAME, EMAIL, ADDRESS, GENDER, AGE, GRADE, CELL_PHONE "
+
+	// 유저 상세 조회 SQL
+	private static final String SELECTONE_USER = "SELECT LOGIN_ID, NAME, EMAIL, ADDRESS, GENDER, AGE, CELL_PHONE "
 			+ "FROM MEMBER WHERE LOGIN_ID = ?";
 
-	// 유저 삭제
+	// 유저 삭제 SQL
 	private static final String DELETE = "DELETE FROM MEMBER WHERE LOGIN_ID = ?";
 
-	// 회원 수
+	// 회원 수 SQL
+	// 1로 한 이유
+	//성능면에서는 차이가 거의 없다
+	//하지만 데이터를 받아오면 코드를 읽는 사람들이 해당 열이 사용된다고 오해를 할 수 있다
+	//따라서 이를 방지하기 위해 1로 지정하여 가독성을 높였습니다  
 	private static final String SELECT_CNT = "SELECT COUNT(1) AS CNT FROM MEMBER";
 
-	// 어드민 확인
-	private static final String SELECT_ADMIN = "SELECT MADMIN FROM MEMBER WHERE LOGIN_ID = ?";
+
 
 	public ArrayList<MemberDTO> selectAll(MemberDTO mDTO) { // 전체 검색
 		ArrayList<MemberDTO> datas = new ArrayList<MemberDTO>();
-
-		// 박찬우
 		conn = JDBCUtil.connect();
 		try {
+			//조회하여 가져오는 데이터는 모두 같기 때문에 하나의 while으로 사용
 			if (mDTO.getSearchCondition().equals("전체조회")) {
 				pstmt = conn.prepareStatement(SELECTALL_USER);
 				
@@ -127,27 +144,23 @@ public class MemberDAO {
 		ResultSet rs = null;
 		conn = JDBCUtil.connect();
 		try {
-			if (mDTO.getSearchCondition().equals("유저조회")) {
+			if (mDTO.getSearchCondition().equals("유저조회")) {//유저 상세 조회
 				// 박찬우
 				pstmt = conn.prepareStatement(SELECTONE_USER);
 				pstmt.setString(1, mDTO.getLoginId());
 				rs = pstmt.executeQuery();
 				if (rs.next()) {
 					data = new MemberDTO();
-					data.setmId(rs.getInt("MID"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
-					data.setmPw(rs.getString("MPW"));
 					data.setName(rs.getString("NAME"));
 					data.setEmail(rs.getString("EMAIL"));
 					data.setAddress(rs.getString("ADDRESS"));
 					data.setGender(rs.getString("GENDER"));
 					data.setAge(rs.getInt("AGE"));
-					data.setGrade(rs.getString("GRADE"));
 					data.setCellPhone(rs.getString("CELL_PHONE"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("로그인")) {
-				// 손성용
+			} else if (mDTO.getSearchCondition().equals("로그인")) {//로그인 조회
 
 				pstmt = conn.prepareStatement(LOGIN);
 				pstmt.setString(1, mDTO.getLoginId());
@@ -160,7 +173,7 @@ public class MemberDAO {
 					data.setmAdmin(rs.getString("MADMIN"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("중복확인")) {
+			} else if (mDTO.getSearchCondition().equals("중복확인")) {//회원가입시 아이디 중복확인
 				// 조지훈
 
 				pstmt = conn.prepareStatement(SELECT_LOGIN_ID);
@@ -171,24 +184,7 @@ public class MemberDAO {
 					data.setLoginId(rs.getString("LOGIN_ID"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("내정보")) {
-				// 조지훈
-
-				pstmt = conn.prepareStatement(MY_INFO);
-				pstmt.setString(1, mDTO.getLoginId());
-				rs = pstmt.executeQuery();
-				if (rs.next()) {
-					data = new MemberDTO();
-					data.setLoginId(rs.getString("LOGIN_ID"));
-					data.setName(rs.getString("NAME"));
-					data.setGender(rs.getString("GENDER"));
-					data.setEmail(rs.getString("EMAIL"));
-					data.setAddress(rs.getString("ADDRESS"));
-					data.setAge(rs.getInt("AGE"));
-					data.setCellPhone(rs.getString("CELL_PHONE"));
-				}
-
-			} else if (mDTO.getSearchCondition().equals("2차인증")) {
+			}  else if (mDTO.getSearchCondition().equals("2차인증")) {//마이페이지 접근시 비밀번호 확인
 				// 조지훈
 
 				pstmt = conn.prepareStatement(CERTIFICATION);
@@ -201,7 +197,7 @@ public class MemberDAO {
 					data.setmPw(rs.getString("MPW"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("회원인원수")) {
+			} else if (mDTO.getSearchCondition().equals("회원인원수")) {//회원수
 
 				pstmt = conn.prepareStatement(SELECT_CNT);
 
@@ -211,15 +207,7 @@ public class MemberDAO {
 					data.setCnt(rs.getInt("CNT"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("관리자")) {
-				pstmt = conn.prepareStatement(SELECT_ADMIN);
-				pstmt.setString(1, mDTO.getLoginId());
-				rs = pstmt.executeQuery();
-				if (rs.next()) {
-					data = new MemberDTO();
-					data.setmAdmin(rs.getString("MADMIN"));
-				}
-			}
+			} 
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -255,8 +243,8 @@ public class MemberDAO {
 		return true;
 	}
 
-	public boolean update(MemberDTO mDTO) { // 개인정보 변경 (추후 구현 예정)
-		if (mDTO.getSearchCondition().equals("내정보변경")) { // input: loginId // output : 이메일, 이름 변경하기
+	public boolean update(MemberDTO mDTO) { // 개인정보 변경 
+		if (mDTO.getSearchCondition().equals("내정보변경")) { 
 			// 모델
 			conn = JDBCUtil.connect();
 			try {

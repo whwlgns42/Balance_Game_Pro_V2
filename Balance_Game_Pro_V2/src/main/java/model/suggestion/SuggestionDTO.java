@@ -1,14 +1,14 @@
 package model.suggestion;
 
 public class SuggestionDTO {
-	private int sugId;
-	private String loginId;
-	private String suggestion;
-	private String title;
+	private int sugId;//건의사항 PK
+	private String loginId;//로그인 아이디 -> MEMBER 테이블의 LOGIN_ID를 참조
+	private String suggestion;//건의사항 내용
+	private String title;//제목
 	
 	//------java-------
-	private String searchCondition;
-	private String name;
+	private String searchCondition;//찾는 방식
+	private String name;//건의한 유저 이름
 	
 	
 	
