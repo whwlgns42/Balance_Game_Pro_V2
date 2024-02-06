@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import model.support.SupportDAO;
 import model.support.SupportDTO;
 
-@WebServlet("/AdminSupportManageRankAsync")
+@WebServlet("/AdminSupportManageRankAsync.do")
 public class AdminSupportManageRankAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -24,10 +24,6 @@ public class AdminSupportManageRankAsync extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
 		Gson gson = new Gson();
@@ -43,6 +39,10 @@ public class AdminSupportManageRankAsync extends HttpServlet {
 			return;
 		}
 		out.print(gson.toJson(sRankDatas));
+		System.out.println(gson.toJson(sRankDatas));
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	}
 
 }

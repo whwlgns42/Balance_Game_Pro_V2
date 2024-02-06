@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import model.support.SupportDAO;
 import model.support.SupportDTO;
 
-@WebServlet("/AdminSupportManageDateAsync")
+@WebServlet("/AdminSupportManageDateAsync.do")
 public class AdminSupportManageDateAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
