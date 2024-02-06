@@ -17,9 +17,8 @@ public class QuestionDAO {
 			+ "LEFT OUTER JOIN SAVE S ON S.QID = Q.QID AND S.LOGIN_ID = ?\r\n"
 			+ "WHERE Q.Q_ACCESS = 'T' ORDER BY Q.QID ASC";
 
-	private static final String SELECTALL_ADMIN_TRUE = "SELECT Q.QID, Q.TITLE, NVL(Q.LOGIN_ID,'탈퇴한 사용자'), Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'T' ORDER BY Q.QID ASC";
+	private static final String SELECTALL_ADMIN_TF = "SELECT Q.QID, Q.TITLE, NVL(Q.LOGIN_ID,'탈퇴한 사용자'), Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = ? ORDER BY Q.QID ASC";
 
-	private static final String SELECTALL_ADMIN_FALSE = "SELECT Q.QID, Q.TITLE, NVL(Q.LOGIN_ID,'탈퇴한 사용자'), Q.ANSWER_A, Q.ANSWER_B, EXPLANATION, REG_DATE FROM QUESTIONS Q WHERE Q_ACCESS = 'F' ORDER BY Q.QID ASC";
 
 	// 질문생성 SQL
 	private static final String INSERT = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION) VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?)";
@@ -87,8 +86,9 @@ public class QuestionDAO {
 
 				rs.close();
 
-			} else if (qDTO.getSearchCondition().equals("관리자문제전체조회")) {
-				pstmt = conn.prepareStatement(SELECTALL_ADMIN_TRUE);
+			} else if (qDTO.getSearchCondition().equals("관리자문제조회")) {
+				pstmt = conn.prepareStatement(SELECTALL_ADMIN_TF);
+				pstmt.setString(1,qDTO.getqAccess());
 				ResultSet rs = pstmt.executeQuery();
 				while (rs.next()) {
 					QuestionDTO data = new QuestionDTO();
@@ -102,21 +102,7 @@ public class QuestionDAO {
 					datas.add(data);
 				}
 				rs.close();
-			} else if (qDTO.getSearchCondition().equals("관리자승인문제조회")) {
-				pstmt = conn.prepareStatement(SELECTALL_ADMIN_FALSE);
-				ResultSet rs = pstmt.executeQuery();
-				while (rs.next()) {
-					QuestionDTO data = new QuestionDTO();
-					data.setAnswer_A(rs.getString("ANSWER_A"));
-					data.setAnswer_B(rs.getString("ANSWER_B"));
-					data.setqId(rs.getInt("QID"));
-					data.setTitle(rs.getString("TITLE"));
-					data.setLoginId(rs.getString("LOGIN_ID"));
-					data.setExplanation(rs.getString("EXPLANATION"));
-					datas.add(data);
-				}
-				rs.close();
-			}
+			} 
 
 		} catch (SQLException e) {
 			e.printStackTrace();
