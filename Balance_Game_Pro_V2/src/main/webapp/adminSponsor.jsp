@@ -197,59 +197,70 @@ th {
       <div class="col-12">
        <div class="card" style="margin-top: 20px;">
         <div class="card-header">
-         <h3 class="card-title">후원목록</h3>
-         <button type="button" class="btn btn-block btn-outline-success" id="btnDate" style="width: 100px">최신순</button>
-         <button type="button" class="btn btn-block btn-outline-success" id="btnRank" style="width: 100px">후원순</button>
-
-
-         <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 450px;">
-           <div class="card-body">
-            <div class="row margin">
-             <div class="col-sm-6">
-              <input id="range_1" type="hidden" name="range_1" value="" class="irs-hidden-input" tabindex="-1" readonly="">
-              <button type="button" class="btn btn-block btn-outline-primary btn-sm" id="btn" style="width: 50px">검색</button>
-             </div>
-            </div>
+         <div class="row">
+          <div class="col-md-6">
+           <h3 class="card-title">후원목록</h3>
+          </div>
+          <div class="col-md-6">
+           <div class="btn-group float-right" role="group" aria-label="후원순">
+            <button type="button" class="btn btn-outline-success" id="btnDate">최신순</button>
+            <button type="button" class="btn btn-outline-success" id="btnRank">후원순</button>
            </div>
           </div>
+
          </div>
-
-         <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap">
-           <thead>
-            <tr>
-             <th>번호</th>
-             <th>ID(닉네임)</th>
-             <th>후원금액</th>
-             <th>날짜</th>
-            </tr>
-           </thead>
-
-
-           <tbody>
-            <c:if test="${empty sdatas}">
-             <tr>
-              <td colspan="1">회원 정보가 없습니다.</td>
-             </tr>
-
-            </c:if>
-
-
-            <c:forEach var="data" items="${sdatas}" varStatus="loop">
-             <tr onclick="location.href = 'adminMemberDetailPage.do?loginId=${data.loginId}'">
-              <td>${loop.index + 1}</td>
-              <td><crown:crown ranking="${data.ranking}" /> ${data.loginId}</td>
-              <td>${data.name}</td>
-              <td><fmt:formatNumber value="${data.total}" currencyCode="KRW" /></td>
-             </tr>
-
-            </c:forEach>
-           </tbody>
-          </table>
-         </div>
-
         </div>
+
+
+        <div class="row">
+         <div class="col-sm-6">
+          <!-- 해당 구역 왼쪽 내용 -->
+         </div>
+         <div class="col-sm-6">
+          <!-- 검색 버튼 -->
+          <div class="text-right" style="padding-right: 10px;">
+           <input id="range_1" type="hidden" name="range_1" value="" class="irs-hidden-input" tabindex="-1" readonly="">
+           <button type="button" class="btn btn-outline-primary btn-sm" id="btn" style="width: 50px">검색</button>
+          </div>
+         </div>
+        </div>
+
+
+        <div class="card-body table-responsive p-0">
+         <table class="table table-hover text-nowrap">
+          <thead>
+           <tr>
+            <th>번호</th>
+            <th>ID(닉네임)</th>
+            <th>후원금액</th>
+            <th>날짜</th>
+           </tr>
+          </thead>
+
+
+          <tbody>
+           <c:if test="${empty sdatas}">
+            <tr>
+             <td colspan="1">회원 정보가 없습니다.</td>
+            </tr>
+
+           </c:if>
+
+
+           <c:forEach var="data" items="${sdatas}" varStatus="loop">
+            <tr onclick="location.href = 'adminMemberDetailPage.do?loginId=${data.loginId}'">
+             <td>${loop.index + 1}</td>
+             <td><crown:crown ranking="${data.ranking}" /> ${data.loginId}</td>
+             <td>${data.name}</td>
+             <td><fmt:formatNumber value="${data.total}" currencyCode="KRW" /></td>
+            </tr>
+
+           </c:forEach>
+          </tbody>
+         </table>
+        </div>
+
+
 
 
 
