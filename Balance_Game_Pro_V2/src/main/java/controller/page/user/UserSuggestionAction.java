@@ -34,9 +34,9 @@ public class UserSuggestionAction implements Action {
 		if (!flag) {
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
-			request.setAttribute("status", "fail");
+			request.setAttribute("status", "failClose");
 			request.setAttribute("msg", "전송에 실패했습니다");
-			request.setAttribute("redirect", "main.do");
+			//request.setAttribute("redirect", "main.do");
 			return forward;
 		}
 		forward.setPath("alert.do");

@@ -104,10 +104,12 @@
 								<form action="userSuggestionAction.do" method="POST">
 									<!-- process.jsp는 입력된 내용을 처리하는 JSP 파일을 가정하였습니다. -->
 									<div class="form-group">
-										<input type="text" class="form-control" name="loginId" value="${loginId}" readonly>
+										<input type="text" class="form-control" name="loginId"
+											value="${loginId}" readonly>
 									</div>
 									<div class="form-group">
-										<input type="text" class="form-control" name="title" placeholder="제목">
+										<input type="text" class="form-control" name="title"
+											placeholder="제목">
 									</div>
 									<div class="form-group">
 										<textarea name="suggestion" id="editor"></textarea>
@@ -127,13 +129,14 @@
 
 					</div>
 				</div>
+			</section>
 		</div>
 	</div>
 
 	<!-- /.container-fluid -->
-	</section>
+
 	<!-- /.content -->
-	</div>
+
 	<!-- /.content-wrapper -->
 
 
@@ -142,7 +145,6 @@
 		<!-- Control sidebar content goes here -->
 	</aside>
 	<!-- /.control-sidebar -->
-	</div>
 	<!-- ./wrapper -->
 
 	<!-- jQuery -->
@@ -193,6 +195,8 @@
 			language : "ko"
 		});
 	</script>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+		crossorigin="anonymous"></script>
 </body>
 </html>
