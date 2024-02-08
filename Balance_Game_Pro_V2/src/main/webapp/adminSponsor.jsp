@@ -332,7 +332,6 @@ th {
  <script src="adminLte/dist/js/adminlte.min.js?v=3.2.0"></script>
  <script src="adminLte/plugins/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
  <script src="adminLte/plugins/bootstrap-slider/bootstrap-slider.min.js"></script>
- <script src="adminLte/dist/js/demo.js"></script>
  <script src="js/rangeSlider.js"></script>
  <script src="js/sponsorListDate.js"></script>
  <script src="js/sponsorListRank.js"></script>
