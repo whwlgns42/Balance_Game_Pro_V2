@@ -23,7 +23,7 @@ public class AdminSupportPageAction implements Action{
 		SupportDAO sDAO = new SupportDAO();
 		SupportDTO sDTO = new SupportDTO();
 		
-		sDTO.setSearchCondition("후원목록");
+		sDTO.setSearchCondition("후원순");
 		ArrayList<SupportDTO> sdatas = sDAO.selectAll(sDTO);
 		
 		sDTO.setSearchCondition("총후원금액");

@@ -250,9 +250,9 @@ th {
            <c:forEach var="data" items="${sdatas}" varStatus="loop">
             <tr onclick="location.href = 'adminMemberDetailPage.do?loginId=${data.loginId}'">
              <td>${loop.index + 1}</td>
-             <td><crown:crown ranking="${data.ranking}" /> ${data.loginId}</td>
-             <td>${data.name}</td>
+             <td><crown:crown ranking="${data.ranking}" />${data.name}(${data.loginId})</td>
              <td><fmt:formatNumber value="${data.total}" currencyCode="KRW" /></td>
+             <td>${data.date}</td>
             </tr>
 
            </c:forEach>
