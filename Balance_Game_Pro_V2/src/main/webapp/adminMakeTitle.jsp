@@ -276,6 +276,7 @@
  <script src="adminLte/dist/js/pages/dashboard.js"></script>
  <!-- 인공지능 -->
  <script src="adminLte/dist/js/ai.js"></script>
+ 
  <script src="js/blankSpace.js"></script>
  <!-- 공백을 막아주는 js -->
  <script src="js/submitBlankCheck.js"></script>

@@ -20,29 +20,22 @@ import model.member.MemberDTO;
 @WebServlet("/commentWriteAsync.do")
 public class CommentWriteAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
+    
     public CommentWriteAsync() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		CommentDAO cDAO = new CommentDAO();
 		CommentDTO cDTO = new CommentDTO();
 		
-		
-		
+				
 		
 		cDTO.setqId(Integer.parseInt(request.getParameter("qId")));
 		cDTO.setLoginId(request.getParameter("loginId"));
@@ -64,7 +57,6 @@ public class CommentWriteAsync extends HttpServlet {
 		System.out.println(json);
 		
 		out.print(json);
-		
 		
 	}
 

@@ -13,7 +13,7 @@ import model.member.MemberDAO;
 import model.member.MemberDTO;
 
 public class AdminMemberManagementPageAction implements Action {
-//
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

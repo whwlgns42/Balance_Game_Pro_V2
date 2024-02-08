@@ -9,8 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
-import model.suggestion.SuggestionDAO;
-import model.suggestion.SuggestionDTO;
 
 public class UserSuggestionPageAction implements Action{
 
@@ -21,9 +19,7 @@ public class UserSuggestionPageAction implements Action{
 		ActionForward forward = new ActionForward();
 		HttpSession session = request.getSession();
 		String loginId = (String)session.getAttribute("loginId");
-		
-		SuggestionDTO sugDTO = new SuggestionDTO();
-		
+				
 		request.setAttribute("loginId", loginId);
 		
 		forward.setPath("userSuggestion.jsp");

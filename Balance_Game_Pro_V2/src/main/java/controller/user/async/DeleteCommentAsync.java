@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.comment.CommentDAO;
 import model.comment.CommentDTO;
 
-@WebServlet("/DeleteCommentAsync.do")
+@WebServlet("/deleteCommentAsync.do")
 public class DeleteCommentAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -21,7 +21,7 @@ public class DeleteCommentAsync extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,6 +41,7 @@ public class DeleteCommentAsync extends HttpServlet {
 			out.print(1);
 		}
 		System.out.println("로그 flag[" +flag+"]");
+		
 	}
 
 }

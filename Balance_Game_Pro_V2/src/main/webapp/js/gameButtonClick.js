@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 
  $(".answer").on("click", function() {
 	

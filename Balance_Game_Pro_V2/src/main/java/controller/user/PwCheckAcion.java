@@ -43,10 +43,6 @@ public class PwCheckAcion implements Action {
 			request.setAttribute("msg", loginData.getLoginId() + "님 인증 성공하였습니다.");
 			request.setAttribute("redirect", "myPage.do");
 			
-			
-			
-			
-
 		}
 		return forward;
 	}

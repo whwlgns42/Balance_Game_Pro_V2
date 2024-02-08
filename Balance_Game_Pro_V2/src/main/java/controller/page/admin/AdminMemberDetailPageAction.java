@@ -50,11 +50,5 @@ public class AdminMemberDetailPageAction implements Action{
 		System.out.println("로그 member[" + member+"]");
 	    return forward;
 	}
-	
-	
-	
-	
-	
-	
 
 }

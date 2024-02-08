@@ -31,8 +31,7 @@ public class MyPageUpdateAction implements Action {
 		memberDTO.setSearchCondition("내정보변경");
 		boolean myInfoUpdate = memberDAO.update(memberDTO);
 		if(myInfoUpdate) {
-			// 내정보 변경 성공
-			System.out.println("ffff");
+			System.out.println("내정보 변경 성공");
 
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
@@ -41,7 +40,8 @@ public class MyPageUpdateAction implements Action {
 			request.setAttribute("redirect", "main.do");
 			
 		}else  {
-			// 내정보 변경 실패
+			System.out.println("내정보 변경 실패");
+			
 			forward.setPath("alert.do");
 			forward.setRedirect(false);
 			request.setAttribute("status", "fail");

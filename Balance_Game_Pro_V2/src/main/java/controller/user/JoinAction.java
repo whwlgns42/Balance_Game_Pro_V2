@@ -6,8 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.ant.jmx.JMXAccessorQueryTask;
-
 import controller.common.Action;
 import controller.common.ActionForward;
 import model.member.MemberDAO;
@@ -40,7 +38,8 @@ public class JoinAction implements Action {
 			request.setAttribute("msg", memberDTO.getName() + "님 환영합니다.");
 			request.setAttribute("redirect", "main.do");
 			forward.setRedirect(false);
-		} else {
+		}
+		else {
 			forward.setPath("alert.do");
 			request.setAttribute("status", "fail");
 			request.setAttribute("msg", "오류가 발생하였습니다.");

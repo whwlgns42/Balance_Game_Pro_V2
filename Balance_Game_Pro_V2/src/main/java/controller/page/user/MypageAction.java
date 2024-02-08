@@ -30,7 +30,7 @@ public class MypageAction implements Action {
 		System.out.println(myPageData.getLoginId());
 		request.setAttribute("myPageData", myPageData);
 		
-
+//      찜 기능 비동기처리 완료(아마)
 //		SaveDTO saveDTO = new SaveDTO();
 //		SaveDAO saveDAO = new SaveDAO();
 //		saveDTO.setLoginId(myPageData.getLoginId());

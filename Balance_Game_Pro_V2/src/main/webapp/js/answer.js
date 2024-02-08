@@ -1,6 +1,3 @@
-/**
- * 
- */
 
 function totalAnswer(qId, loginId, answerValue) {
     $.ajax({

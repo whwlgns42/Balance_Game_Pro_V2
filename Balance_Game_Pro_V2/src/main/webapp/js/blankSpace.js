@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 function blankSpace() {
     var flag = true;
     // 모든 input 요소의 value 확인하기

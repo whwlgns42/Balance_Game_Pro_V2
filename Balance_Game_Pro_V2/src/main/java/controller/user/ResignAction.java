@@ -9,19 +9,8 @@ import javax.servlet.http.HttpSession;
 
 import controller.common.Action;
 import controller.common.ActionForward;
-import model.answer.AnswerDAO;
-import model.answer.AnswerDTO;
-import model.comment.CommentDAO;
-import model.comment.CommentDTO;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
-import model.question.QuestionDAO;
-import model.question.QuestionDTO;
-import model.save.SaveDAO;
-import model.save.SaveDTO;
-import model.support.SupportDAO;
-import model.support.SupportDTO;
-import oracle.net.aso.u;
 
 public class ResignAction implements Action { // 회원탈퇴 기능
 
@@ -37,38 +26,16 @@ public class ResignAction implements Action { // 회원탈퇴 기능
 
 		MemberDTO memberDTO = new MemberDTO();
 		MemberDAO memberDAO = new MemberDAO();
-		QuestionDTO questionDTO = new QuestionDTO();
-		QuestionDAO questionDAO = new QuestionDAO();
-		AnswerDTO answerDTO = new AnswerDTO();
-		AnswerDAO answerDAO = new AnswerDAO();
-		CommentDTO commentDTO = new CommentDTO();
-		CommentDAO commentDAO = new CommentDAO();
-		SaveDTO saveDTO = new SaveDTO();
-		SaveDAO saveDAO = new SaveDAO();
-		SupportDTO supportDTO = new SupportDTO();
-		SupportDAO supportDAO = new SupportDAO();
 
 		String memberLoginId = request.getParameter("loginId");
 
 		// SearchCondition
-		memberDTO.setLoginId(memberLoginId);
-		questionDTO.setLoginId(memberLoginId);
-		questionDTO.setSearchCondition("question_null");
-		answerDTO.setLoginId(memberLoginId);
-		answerDTO.setSearchCondition("answer_null");
-		commentDTO.setLoginId(memberLoginId);
-		commentDTO.setSearchCondition("comment_null");
-		saveDTO.setLoginId(memberLoginId);
-		saveDTO.setSearchCondition("save_null");
-		supportDTO.setLoginId(memberLoginId);
-		supportDTO.setSearchCondition("support_null");
-
-		System.out.println("mDTO : " + memberDTO);
-		
+		memberDTO.setLoginId(memberLoginId);		
 		
 		// DLETE
 		if (memberDAO.delete(memberDTO)) {
 			
+			// 트리거 추가 완료
 			// UPDATE => NULL
 //			questionDAO.update(questionDTO);
 //			answerDAO.update(answerDTO);

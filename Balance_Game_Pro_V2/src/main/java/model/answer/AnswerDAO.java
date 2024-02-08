@@ -18,12 +18,11 @@ public class AnswerDAO {
 	// 회원탈퇴시 'Answers'을 null 값으로 변경하는 SQL
 	private static final String AS_UPDATE = "UPDATE ANSWERS SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
 
-	public ArrayList<AnswerDTO> selectAll(AnswerDTO aDTO) { 
+	private ArrayList<AnswerDTO> selectAll(AnswerDTO aDTO) { 
 		return null;
 	}
 
-	public AnswerDTO selectOne(AnswerDTO aDTO) { 
-	
+	private AnswerDTO selectOne(AnswerDTO aDTO) { 
 		return null;
 	}
 
@@ -74,7 +73,7 @@ public class AnswerDAO {
 	}
 
 	// 댓글 삭제하기 TODO 추후 구현 예정
-	public boolean delete(AnswerDTO aDTO) {
+	private boolean delete(AnswerDTO aDTO) {
 		return false;
 	}
 

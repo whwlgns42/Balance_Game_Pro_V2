@@ -27,7 +27,7 @@ public class CommentAsync extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -49,9 +49,6 @@ public class CommentAsync extends HttpServlet {
 			out.print(json);
 		}
 		
-
-
-
 	}
 
 }

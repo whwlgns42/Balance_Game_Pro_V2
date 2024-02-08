@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import controller.common.Action;
 import controller.common.ActionForward;
 
-
-
 public class JoinPageAction implements Action {
 
 	@Override

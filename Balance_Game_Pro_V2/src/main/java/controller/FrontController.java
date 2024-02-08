@@ -44,14 +44,14 @@ public class FrontController extends HttpServlet {
       String commend = uri.substring(cp.length());
       Action action = handler.getAction(commend);
       ActionForward forward = action.execute(request, response);
-      if (forward == null) { // TODO 구현하기
-         // 에러 상황
+      if (forward == null) { // 에러 상황
     	  System.out.println("에러페이지 요청");
       }
 
       if (forward.isRedirect()) {
          response.sendRedirect(forward.getPath());
-      } else {
+      }
+      else {
          RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
          dispatcher.forward(request, response);
       }

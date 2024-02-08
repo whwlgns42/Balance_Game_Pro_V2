@@ -51,7 +51,8 @@ public class IdSearchAsync extends HttpServlet {
 			System.out.println("건의사항 데이터 있음"); // 조지훈
 			String jsonData = gson.toJson(sugDatas);
 			response.getWriter().print(jsonData);
-		} else {
+		}
+		else {
 			System.out.println("건의사항 데이터 없음"); // 조지훈
 			String jsonData = gson.toJson(sugDatas);
 			response.getWriter().print(jsonData);

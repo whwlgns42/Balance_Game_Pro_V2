@@ -14,8 +14,6 @@ import com.google.gson.Gson;
 
 import model.member.MemberDAO;
 import model.member.MemberDTO;
-import model.support.SupportDAO;
-import model.support.SupportDTO;
 
 @WebServlet("/adminMemberManageSearchAsync.do")
 public class AdminMemberManageSearchAsync extends HttpServlet {
@@ -26,7 +24,7 @@ public class AdminMemberManageSearchAsync extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,7 +45,8 @@ public class AdminMemberManageSearchAsync extends HttpServlet {
 		if(memberData != null) {
 			System.out.println("유저관리 데이터" + memberData);
 			out.print(memberData);
-		}else {
+		}
+		else {
 			out.print(gson.toJson(memberData));
 		}
 	}

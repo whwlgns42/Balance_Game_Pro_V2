@@ -11,11 +11,12 @@ import model.util.JDBCUtil;
 public class CategoryDAO {
 	private Connection conn;
 	private PreparedStatement pstmt;
-	
+
 	//카테고리 전부 가져오는 SQL
 	private static final String SELECTALL="SELECT CGID,CATEGORY FROM CATEGORY";
 
-	public ArrayList<CategoryDTO> selectAll(CategoryDTO sDTO) { // TODO SELECTALL :모든 카테고리 가져오기 
+	public ArrayList<CategoryDTO> selectAll(CategoryDTO sDTO) {
+		// SELECTALL : 모든 카테고리 가져오기 
 		ArrayList<CategoryDTO> datas=new ArrayList<CategoryDTO>();
 
 		conn=JDBCUtil.connect();
@@ -42,22 +43,21 @@ public class CategoryDAO {
 
 	}
 
-	public CategoryDTO selectOne(CategoryDTO sDTO) {
+	private CategoryDTO selectOne(CategoryDTO sDTO) {
 
 		return null;
 	}
 
-	public boolean insert(CategoryDTO sDTO) {
+	private boolean insert(CategoryDTO sDTO) {
 
 		return false;
 	}
 
-	public boolean update(CategoryDTO sDTO) {
+	private boolean update(CategoryDTO sDTO) {
 		return false;
 	}
 
-	public boolean delete(CategoryDTO sDTO) {
-
+	private boolean delete(CategoryDTO sDTO) {
 
 		return false;
 	}

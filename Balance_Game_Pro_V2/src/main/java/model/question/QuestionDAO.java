@@ -33,7 +33,7 @@ public class QuestionDAO {
 	private static final String INSERT_ADMIN = "INSERT INTO QUESTIONS (QID, LOGIN_ID, TITLE, ANSWER_A, ANSWER_B, EXPLANATION,CATEGORY,Q_ACCESS) \r\n"
 			+ "VALUES((SELECT NVL(MAX(QID),0) + 1 FROM QUESTIONS),?,?,?,?,?,?,'T')";
 
-	// TODO SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로
+	// SELECT_ONE : 가져올 문제테이블의 정보를 무작위로 정렬해서 가져와서 맨위에 있는 한개의 행의 데이터만 조회 (랜덤으로
 	// 한개의 문제 정보 가져오기) 찜확인 추가
 	private static final String SELECT_ONE_RANDOM = "SELECT NVL(S.SID, 0) AS SAVE_SID,\r\n"
 			+ "       Q.QID, Q.TITLE, Q.ANSWER_A, Q.ANSWER_B, Q.LOGIN_ID, Q.EXPLANATION, C.CATEGORY\r\n" + "FROM \r\n"

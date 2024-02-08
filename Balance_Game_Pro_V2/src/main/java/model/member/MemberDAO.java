@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.question.QuestionDTO;
 import model.util.JDBCUtil;
 
 public class MemberDAO {
@@ -144,7 +143,7 @@ public class MemberDAO {
 		ResultSet rs = null;
 		conn = JDBCUtil.connect();
 		try {
-			if (mDTO.getSearchCondition().equals("유저조회")) {//유저 상세 조회
+			if (mDTO.getSearchCondition().equals("유저조회")) { //유저 상세 조회
 				// 박찬우
 				pstmt = conn.prepareStatement(SELECTONE_USER);
 				pstmt.setString(1, mDTO.getLoginId());
@@ -160,7 +159,7 @@ public class MemberDAO {
 					data.setCellPhone(rs.getString("CELL_PHONE"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("로그인")) {//로그인 조회
+			} else if (mDTO.getSearchCondition().equals("로그인")) { // 로그인 조회
 
 				pstmt = conn.prepareStatement(LOGIN);
 				pstmt.setString(1, mDTO.getLoginId());
@@ -173,7 +172,7 @@ public class MemberDAO {
 					data.setmAdmin(rs.getString("MADMIN"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("중복확인")) {//회원가입시 아이디 중복확인
+			} else if (mDTO.getSearchCondition().equals("중복확인")) { // 회원가입시 아이디 중복확인
 				// 조지훈
 
 				pstmt = conn.prepareStatement(SELECT_LOGIN_ID);
@@ -184,7 +183,7 @@ public class MemberDAO {
 					data.setLoginId(rs.getString("LOGIN_ID"));
 				}
 
-			}  else if (mDTO.getSearchCondition().equals("2차인증")) {//마이페이지 접근시 비밀번호 확인
+			}  else if (mDTO.getSearchCondition().equals("2차인증")) { // 마이페이지 접근시 비밀번호 확인
 				// 조지훈
 
 				pstmt = conn.prepareStatement(CERTIFICATION);
@@ -197,7 +196,7 @@ public class MemberDAO {
 					data.setmPw(rs.getString("MPW"));
 				}
 
-			} else if (mDTO.getSearchCondition().equals("회원인원수")) {//회원수
+			} else if (mDTO.getSearchCondition().equals("회원인원수")) { // 회원수
 
 				pstmt = conn.prepareStatement(SELECT_CNT);
 
@@ -265,8 +264,6 @@ public class MemberDAO {
 	}
 
 	public boolean delete(MemberDTO mDTO) { // 회원탈퇴
-
-		// 손성용
 
 		conn = JDBCUtil.connect();
 

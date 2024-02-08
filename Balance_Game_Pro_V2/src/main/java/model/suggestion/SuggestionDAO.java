@@ -82,7 +82,7 @@ public class SuggestionDAO {
 	}
 
 	public SuggestionDTO selectOne(SuggestionDTO sDTO) {
-		//건의사항 상세보기
+		// 건의사항 상세보기
 		conn = JDBCUtil.connect();
 		SuggestionDTO data = null;
 		try {
@@ -104,7 +104,7 @@ public class SuggestionDAO {
 	}
 
 	public boolean insert(SuggestionDTO sDTO) {
-		//건의 사항 추가
+		// 건의 사항 추가
 		conn = JDBCUtil.connect();
 		try {
 			pstmt = conn.prepareStatement(INSERT);
@@ -125,7 +125,7 @@ public class SuggestionDAO {
 
 	}
 
-	public boolean update(SuggestionDTO sDTO) {
+	private boolean update(SuggestionDTO sDTO) {
 		return false;
 	}
 

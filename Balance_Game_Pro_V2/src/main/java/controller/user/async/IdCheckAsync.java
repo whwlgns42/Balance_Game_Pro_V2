@@ -1,13 +1,13 @@
 package controller.user.async;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.common.ActionForward;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
@@ -41,7 +41,8 @@ public class IdCheckAsync extends HttpServlet {
 		if (idDoubleCheckRes == null) {
 			System.out.println("사용 가능한 아이디");
 			response.getWriter().print(idDoubleCheckRes != null ? 1 : 0);
-		} else {
+		}
+		else {
 			System.out.println(idDoubleCheckRes.getLoginId() + " 는 중복된 아이디 ");
 			response.getWriter().print(idDoubleCheckRes != null ? 1 : 0);
 		}

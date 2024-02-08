@@ -20,7 +20,8 @@ public class AlertPageAction implements Action{
 				request.setAttribute("status", request.getParameter("status"));
 				request.setAttribute("msg", request.getParameter("msg"));
 				request.setAttribute("redirect", request.getParameter("redirect"));
-			}else {
+			}
+			else {
 				request.setAttribute("status", request.getParameter("status"));
 				request.setAttribute("msg", request.getParameter("msg"));
 				request.setAttribute("redirect", request.getParameter("redirect"));
@@ -29,8 +30,7 @@ public class AlertPageAction implements Action{
 		
 		forward.setPath("alert.jsp");
 		forward.setRedirect(false);
-		return forward;
-		
+		return forward;		
 		
 	}
 

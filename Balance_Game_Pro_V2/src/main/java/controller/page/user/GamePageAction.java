@@ -66,9 +66,6 @@ public class GamePageAction implements Action {
 			session.removeAttribute("qList");
 		}
 		
-
-		
-
 		return forward;
 	}
 

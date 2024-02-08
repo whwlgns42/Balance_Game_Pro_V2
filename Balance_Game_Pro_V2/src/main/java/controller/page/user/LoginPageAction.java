@@ -22,5 +22,4 @@ public class LoginPageAction implements Action {
 			return forward;
 		}
 
-
 }

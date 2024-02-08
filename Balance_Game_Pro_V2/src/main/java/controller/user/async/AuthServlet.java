@@ -9,11 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.nurigo.sdk.NurigoApp;
-import net.nurigo.sdk.message.exception.NurigoMessageNotReceivedException;
-import net.nurigo.sdk.message.model.Message;
-import net.nurigo.sdk.message.service.DefaultMessageService;
-
 @WebServlet("/authServlet")
 public class AuthServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +19,7 @@ public class AuthServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -40,6 +35,7 @@ public class AuthServlet extends HttpServlet {
 		// 생성된 인증번호를 JSON 응답으로 전송
 		response.getWriter().write(authNumber);
 
+//      돈 나갈예정이라 막아놓음
 //		DefaultMessageService messageService = NurigoApp.INSTANCE.initialize("NCS6ZHPOOM5UZPWE", "UG5ONIDCC9V05JCNXNXFSMYYZOMHCYOH", "https://api.coolsms.co.kr"); // Message
 //		// 패키지가 중복될 경우 net.nurigo.sdk.message.model.Message로 치환하여 주세요
 //		Message message = new Message();

@@ -88,7 +88,7 @@ public class CommentDAO {
 
 	}
 
-	public CommentDTO selectOne(CommentDTO cDTO) {
+	private CommentDTO selectOne(CommentDTO cDTO) {
 		return null;
 	}
 

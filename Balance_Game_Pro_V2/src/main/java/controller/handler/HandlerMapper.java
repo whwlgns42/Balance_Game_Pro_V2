@@ -37,7 +37,6 @@ import controller.page.user.UserSuggestionAction;
 import controller.page.user.UserSuggestionPageAction;
 import controller.page.user.WishListDetailPageAction;
 import controller.page.user.WishListPageAction;
-import controller.user.GameAction;
 import controller.user.JoinAction;
 import controller.user.LoginAction;
 import controller.user.LogoutAction;
@@ -45,8 +44,6 @@ import controller.user.MakeTitleAction;
 import controller.user.MyPageUpdateAction;
 import controller.user.PwCheckAcion;
 import controller.user.ResignAction;
-import controller.user.ResultAction;
-import controller.user.SponsorAction;
 
 public class HandlerMapper {
 	// 멤버변수
@@ -67,7 +64,6 @@ public class HandlerMapper {
 		mappings.put("/wishListPage.do", new WishListPageAction());
 		mappings.put("/makeTitle.do", new MakeTitleAction());
 		mappings.put("/makeTitlePage.do", new MakeTitlePageAction());
-		mappings.put("/result.do", new ResultAction());
 		mappings.put("/resultPage.do", new ResultPageAction());
 		mappings.put("/titleDetailPage.do", new TitleDetailPageAction());
 		mappings.put("/titleListPage.do", new TitleListPageAction());
@@ -75,10 +71,8 @@ public class HandlerMapper {
 		mappings.put("/mypageUpdate.do", new MyPageUpdateAction());
 		mappings.put("/pwCheck.do", new PwCheckAcion());	
 		mappings.put("/pwCheckPage.do", new PwCheckPageAcion());
-		mappings.put("/game.do", new GameAction());
 		mappings.put("/gamePage.do", new GamePageAction());
 		mappings.put("/sponsorPage.do", new SponsorPageAction());
-		mappings.put("/sponsor.do", new SponsorAction());
 		mappings.put("/wishListDetailPage.do", new WishListDetailPageAction());
 		mappings.put("/userSuggestionAction.do", new UserSuggestionAction());
 		mappings.put("/userSuggestionPageAction.do", new UserSuggestionPageAction());

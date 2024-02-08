@@ -20,22 +20,19 @@ import model.question.QuestionDTO;
 @WebServlet("/answerAsync.do")
 public class AnswerAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
- 
-    public AnswerAsync() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+
+	public AnswerAsync() {
+		super();
+	}
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		System.out.println("들어옴");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
@@ -59,13 +56,12 @@ public class AnswerAsync extends HttpServlet {
 		qDTO.setSearchCondition("문제상세조회");
 		qDTO.setqId(Integer.parseInt(request.getParameter("qId")));
 		qDTO.setLoginId(request.getParameter("loginId"));
-		
+
 		Gson gson=new Gson();
 		out.print(gson.toJson(qDAO.selectOne(qDTO)));
-		
-		
-		
-		
+
+
+
 	}
 
 }
