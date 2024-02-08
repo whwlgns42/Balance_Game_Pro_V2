@@ -1,54 +1,45 @@
-// 필터링 함수
-function filterByAmount(minAmount, maxAmount, supportList) {
-	return supportList.filter(supporter => supporter.total >= minAmount && supporter.total <= maxAmount);
-	console.log("filter 로그: " + supportList.filter(supporter => supporter.total >= minAmount && supporter.total <= maxAmount));
-}
-var btnValue = document.getElementById("btnRank");
 console.log("[로그] rangeSlider.js");
 $(document).ready(function() {
+    $("#btn").click(function() {
+        var inputVal = document.querySelector('#range_1');
+        const minAmount = parseFloat(inputVal.value.split(";")[0]);
+        const maxAmount = parseFloat(inputVal.value.split(";")[1]);
 
-	$("#btn").click(function() {
-		if (btnValue == btnRank) {
+        // 세션 스토리지에서 데이터 가져오기
+        const userInfoObj = JSON.parse(sessionStorage.getItem('userInfoObj'));
 
-			$.ajax({
-				type: "POST",
-				url: 'AdminSupportManageDateAsync.do',
-				dataType: 'json',
-				success: function(datas) {
-					if (datas == "실패") {
-						console.log("실패");
-					} else {
-						// datas가 이미 JSON 형태로 전송된 것으로 가정
-						const supportList = datas;
+        if(userInfoObj) {
+            // 필터링 함수 호출
+            const filteredData = filterByAmount(minAmount, maxAmount, userInfoObj);
+            var i = 1;
+            let elem = "<tr>";
+            filteredData.forEach(supporter => {
+                elem += "<td>" + i + "</td>";
+                elem += "<td>" + supporter.loginId + "(" + supporter.name + ")" + "</td>";
+                if(userInfoObj.id == '최신순') {
+                    elem += "<td>" + supporter.amount + "</td>";
+                } else if(userInfoObj.id == '후원순') {
+                    elem += "<td>" + supporter.total + "</td>";
+                }
+                elem += "<td>" + supporter.date + "</td>";
+                elem += "</tr>";
+                i++;
+            });
 
-						console.log("[로그] 서버에서 받아온 후원자 데이터: ", supportList);
-
-						var inputVal = document.querySelector('#range_1');
-						const minAmount = parseFloat(inputVal.value.split(";")[0]);
-						const maxAmount = parseFloat(inputVal.value.split(";")[1]);
-
-						// 필터링 함수 호출
-						const filteredData = filterByAmount(minAmount, maxAmount, supportList);
-
-						console.log("로그[ ", filteredData, " ]");
-
-						var i = 1;
-						let elem = "<tr>";
-						filteredData.forEach(supporter => {
-							elem += "<td>" + i + "</td>";
-							elem += "<td>" + supporter.loginId + "(" + supporter.name + ")" + "</td>";
-							elem += "<td>" + supporter.total + "</td>";
-							elem += "<td>" + supporter.date + "</td>";
-							elem += "</tr>";
-						});
-
-						$("table tbody").html(elem);
-					}
-				},
-				error: function(error) {
-					console.log("error: " + error);
-				}
-			});
-		}
-	});
+            $("table tbody").html(elem);
+        } else {
+            console.log("세션 스토리지에서 데이터를 가져올 수 없습니다.");
+        }
+    });
 });
+
+// 필터링 함수
+function filterByAmount(minAmount, maxAmount, supportList) {
+    console.log("filter 로그: " + supportList.datas[0].name);
+    if(supportList.id == '후원순'){
+        return supportList.datas.filter(supporter => supporter.total >= minAmount && supporter.total <= maxAmount);
+    } else if(supportList.id == '최신순'){
+        return supportList.datas.filter(supporter => supporter.amount >= minAmount && supporter.amount <= maxAmount);
+    }
+}
+
