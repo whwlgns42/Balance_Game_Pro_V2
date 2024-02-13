@@ -24,7 +24,7 @@ public class SupportDAO {
 	private static final String SELECTALL_RANKING = "SELECT \r\n"
 			+ "    S.LOGIN_ID,\r\n"
 			+ "    SUM(S.AMOUNT) AS TOTAL,\r\n"
-			+ "    M.NAME,\r\n"
+			+ "    NVL(M.NAME,'탈퇴한 사용자') AS NAME,\r\n"
 			+ "    RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC, MIN(S.REG_DATE)) AS RANKING \r\n"
 			+ "FROM \r\n"
 			+ "    SUPPORT S \r\n"
@@ -42,7 +42,7 @@ public class SupportDAO {
 	private static final String SELECTALL_RANKING_ADMIN="SELECT \r\n"
 			+ "			 S.LOGIN_ID,\r\n"
 			+ "			SUM(S.AMOUNT) AS TOTAL,\r\n"
-			+ "			M.NAME,\r\n"
+			+ "			NVL(M.NAME,'탈퇴한 사용자') AS NAME\r\n"
 			+ "			RANK() OVER (ORDER BY SUM(S.AMOUNT) DESC, MIN(S.REG_DATE)) AS RANKING,\r\n"
 			+ "			MAX(S.REG_DATE) AS LAST_SUPPORT_DATE \r\n"
 			+ "			FROM \r\n"
@@ -55,7 +55,7 @@ public class SupportDAO {
 			+ "			 S.LOGIN_ID, M.NAME";
 	
 	//최근 후원 순으로 정렬 SQL
-	private static final String SELECTALL_DATE_ORDER_ADMIN="SELECT S.LOGIN_ID,S.AMOUNT, M.NAME,S.REG_DATE FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID ORDER BY S.REG_DATE DESC";
+	private static final String SELECTALL_DATE_ORDER_ADMIN="SELECT NVL(S.LOGIN_ID,'탈퇴한 사용자') AS LOGIN_ID,S.AMOUNT,NVL(M.NAME,'탈퇴한 사용자') AS NAME,S.REG_DATE FROM SUPPORT S JOIN MEMBER M ON S.LOGIN_ID = M.LOGIN_ID ORDER BY S.REG_DATE DESC";
 	
 	// 회원탈퇴시 'Support'을 null 값으로 변경 SQL
 	private static final String SP_UPDATE = "UPDATE SUPPORT SET LOGIN_ID = NULL WHERE LOGIN_ID = ?";
