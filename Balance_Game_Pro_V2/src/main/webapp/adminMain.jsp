@@ -246,8 +246,8 @@
 									<h3 class="card-title">건의사항</h3>
 									<div class="card-tools">
 										<div style="margin-left: 66px;">
-											<label>이름 검색</label>
-											<input id="searchName" type="checkbox">
+											<!-- <label>이름 검색</label>
+											<input id="searchName" type="checkbox"> -->
 										</div>
 										<div class="input-group input-group-sm" style="width: 150px;">
 
@@ -280,6 +280,7 @@
 											<c:forEach var="data" items="${sugDatas}">
 												<tr onclick="location.href = 'adminSuggestionDetailPageAction.do?sugId=${data.sugId}'">
 													<td id="loginIdData">${data.loginId}</td>
+													<td id="nameData">${data.name}</td>
 													<td id="titleData">${data.title}</td>
 												</tr>
 											</c:forEach>
@@ -365,31 +366,7 @@
 								searchLoginId();
 							});
 
-							function initDatas() {
-								var tableBody = $("#suggestionTableBody");
-								if (!loadDatas || loadDatas.length === 0) {
-									// 데이터가 없을 경우 메시지 출력
-									tableBody
-											.html('<tr><td colspan="2">데이터가 없습니다.</td></tr>');
-									return;
-								}
-								var html = "";
-								for (var i = 0; i < loadDatas.length; i++) {
-									var sugId = loadDatas[i].sugId;
-									var loginId = loadDatas[i].loginId;
-									var title = loadDatas[i].title;
-									html += '<tr data-sugId="'
-											+ sugId
-											+ '" onclick="location.href=\'adminSuggestionDetailPageAction.do?sugId='
-											+ sugId + '\'">';
-									html += '<td id="loginIdData">' + loginId
-											+ '</td>';
-									html += '<td id="titleData">' + title
-											+ '</td>';
-									html += '</tr>';
-								}
-								tableBody.html(html);
-							}
+							
 							function updateTableRow(result) {
 								var tableBody = $("#suggestionTableBody");
 
@@ -419,15 +396,18 @@
 								tableBody.html(html);
 							}
 							function searchLoginId() {
-								var searchLoginIdData = $("#searchLoginId").val();
-								var searchNameMode = $("#searchName").prop("checked");
-								
+								var searchLoginIdData = $("#searchLoginId")
+										.val();
+								/* var searchNameMode = $("#searchName").prop(
+										"checked"); */
+
 								$.ajax({
 									url : "idSearchAsync",
 									type : "POST",
 									data : {
-										searchData : searchLoginIdData,
-										searchNameMode: searchNameMode // 체크박스 상태를 전달
+										searchData : searchLoginIdData
+										/* searchNameMode : searchNameMode */
+									// 체크박스 상태를 전달
 									},
 									dataType : 'json',
 									success : function(result) {

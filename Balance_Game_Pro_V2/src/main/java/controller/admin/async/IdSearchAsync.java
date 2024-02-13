@@ -1,4 +1,4 @@
-package controller.user.async;
+package controller.admin.async;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,15 +34,14 @@ public class IdSearchAsync extends HttpServlet {
 
 	private void doAction(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		SuggestionDTO suggestionDTO = new SuggestionDTO();
 		SuggestionDAO suggestionDAO = new SuggestionDAO();
 		suggestionDTO.setLoginId(request.getParameter("searchData"));
+		System.out.println(request.getParameter("searchData") + " <<< 검색 파라미터");
 		suggestionDTO.setSearchCondition("아이디조회");
-		if(request.getParameter("searchNameMode").equals("true")) {
-			suggestionDTO.setSearchCondition("이름조회");
-			
-		}
+//		if(request.getParameter("searchNameMode").equals("true")) { // 최종 추가
+//			suggestionDTO.setSearchCondition("이름조회"); // 최종 추가
+//		}
 		ArrayList<SuggestionDTO> sugDatas = suggestionDAO.selectAll(suggestionDTO);
 		Gson gson = new Gson();
 		response.setContentType("application/json;charset=UTF-8");
