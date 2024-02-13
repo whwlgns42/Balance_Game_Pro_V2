@@ -266,7 +266,6 @@
 										<thead>
 											<tr>
 												<th>ID</th>
-												<th>이름</th>
 												<th>제목</th>
 											</tr>
 										</thead>
@@ -281,7 +280,6 @@
 											<c:forEach var="data" items="${sugDatas}">
 												<tr onclick="location.href = 'adminSuggestionDetailPageAction.do?sugId=${data.sugId}'">
 													<td id="loginIdData">${data.loginId}</td>
-													<td id="nameData">${data.name}</td>
 													<td id="titleData">${data.title}</td>
 												</tr>
 											</c:forEach>
