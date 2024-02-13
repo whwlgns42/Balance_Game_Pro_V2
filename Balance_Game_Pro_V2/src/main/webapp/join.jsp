@@ -294,7 +294,10 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 	        icon: "warning"
 	    });
 	}
-
+	
+	let authAttempts = 0; // 인증 시도 횟수
+ 	let cooldownTime = 180; // 3분 (초 단위)
+	let cooldownTimer; // 타이머 변수
 	// 성공 메세지 출력 함수
 	function showSuccess(title, text) {
 	    Swal.fire({
