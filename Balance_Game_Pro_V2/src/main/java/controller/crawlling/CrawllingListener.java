@@ -69,24 +69,20 @@ public class CrawllingListener implements ServletContextListener {
 		}
 
 		Elements answer = doc.select(".tt_article_useless_p_margin p:contains(^)");
-
-		
 		i = 0;
 		for (int j = 0; j < answer.size(); j += 2) {
 			String answer_A = answer.get(j).text();
 			String resultAns_A = answer_A.replaceAll("\\^", "");
-//			datas.get(i);
 			datas.get(i).setAnswer_A(resultAns_A);
 
 			String answer_B = answer.get(j + 1).text();
 			String resultAns_B = answer_B.replaceAll("\\^", "");
 			datas.get(i).setAnswer_B(resultAns_B);
 			datas.get(i).setLoginId("관리자");
-			
 			i++;
 		}
 		Elements explains = doc.select(".tt_article_useless_p_margin p:contains(~)");
-		System.out.println("log: explains: " + explains);
+		System.out.println("[로그] explains: " + explains);
 		i=0;
 		for(int j=0; i<explains.size(); j++) {
 			String explain = explains.get(j).text();

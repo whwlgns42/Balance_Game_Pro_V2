@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import model.support.SupportDAO;
 import model.support.SupportDTO;
 
-@WebServlet("/AdminSupportManageDateAsync")
+@WebServlet("/adminSupportManageDateAsync")
 public class AdminSupportManageDateAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,8 +29,8 @@ public class AdminSupportManageDateAsync extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
-		Gson gson = new Gson();
+		PrintWriter out = response.getWriter(); // 비동기 응답을 해줌
+		Gson gson = new Gson(); // Json으로 데이터를 받기 위함
 		
 		SupportDTO sDTO = new SupportDTO();
 		SupportDAO sDAO = new SupportDAO();
@@ -39,11 +39,11 @@ public class AdminSupportManageDateAsync extends HttpServlet {
 		ArrayList<SupportDTO> sDateDatas = sDAO.selectAll(sDTO);
 		System.out.println("[로그: 최신순 ]"+sDateDatas);
 		
-		if(sDateDatas == null) {
+		if(sDateDatas == null) {// 데이터가 없다면
 			out.print("실패");
 			return;
 		}
-		out.print(gson.toJson(sDateDatas));
+		out.print(gson.toJson(sDateDatas)); 
 		System.out.println("[로그: 최신순]"+gson.toJson(sDateDatas));
 	}
 }

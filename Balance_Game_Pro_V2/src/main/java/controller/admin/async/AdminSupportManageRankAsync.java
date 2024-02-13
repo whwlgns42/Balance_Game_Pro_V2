@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import model.support.SupportDAO;
 import model.support.SupportDTO;
 
-@WebServlet("/AdminSupportManageRankAsync")
+@WebServlet("/adminSupportManageRankAsync")
 public class AdminSupportManageRankAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
