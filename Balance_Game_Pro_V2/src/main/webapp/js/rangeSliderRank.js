@@ -10,7 +10,7 @@ $(document).ready(function () {
 
         $.ajax({
             type: "POST",
-            url: 'AdminSupportManageRankAsync.do',
+            url: 'AdminSupportManageRankAsync',
             dataType: 'json',
             success: function (datas) {
                 if (datas == "실패") {

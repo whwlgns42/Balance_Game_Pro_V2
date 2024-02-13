@@ -4,7 +4,7 @@ $(document).ready(function(){
         console.log("[로그] sponsorListDate.js 진입");
         $.ajax({
             type:"POST",
-            url: "AdminSupportManageDateAsync.do",
+            url: "AdminSupportManageDateAsync",
             dataType:"json",
             success:function(datas){
                 if(datas == "실패"){

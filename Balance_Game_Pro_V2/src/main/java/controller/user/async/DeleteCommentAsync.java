@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.comment.CommentDAO;
 import model.comment.CommentDTO;
 
-@WebServlet("/deleteCommentAsync.do")
+@WebServlet("/deleteCommentAsync")
 public class DeleteCommentAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

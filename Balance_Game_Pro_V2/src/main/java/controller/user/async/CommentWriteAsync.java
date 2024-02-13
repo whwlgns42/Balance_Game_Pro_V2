@@ -17,7 +17,7 @@ import model.member.MemberDAO;
 import model.member.MemberDTO;
 
 
-@WebServlet("/commentWriteAsync.do")
+@WebServlet("/commentWriteAsync")
 public class CommentWriteAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

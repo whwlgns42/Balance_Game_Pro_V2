@@ -377,7 +377,7 @@ th {
 										.val();
 
 								$.ajax({
-									url : "adminMemberManageSearchAsync.do",
+									url : "adminMemberManageSearchAsync",
 									type : "POST",
 									data : {
 										searchData : searchLoginIdData

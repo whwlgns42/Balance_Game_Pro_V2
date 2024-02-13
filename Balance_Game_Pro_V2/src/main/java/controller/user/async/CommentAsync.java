@@ -17,7 +17,7 @@ import model.comment.CommentDTO;
 
 
 
-@WebServlet("/commentAsync.do")
+@WebServlet("/commentAsync")
 public class CommentAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

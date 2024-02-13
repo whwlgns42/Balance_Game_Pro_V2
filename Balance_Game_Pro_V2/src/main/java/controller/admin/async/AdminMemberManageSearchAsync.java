@@ -15,7 +15,7 @@ import com.google.gson.Gson;
 import model.member.MemberDAO;
 import model.member.MemberDTO;
 
-@WebServlet("/adminMemberManageSearchAsync.do")
+@WebServlet("/adminMemberManageSearchAsync")
 public class AdminMemberManageSearchAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

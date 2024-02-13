@@ -5,7 +5,7 @@ function commentAll(qId) {
 
 	$.ajax({
 		type: "POST",
-		url: "commentAsync.do",
+		url: "commentAsync",
 		data: {
 			'qId': qId
 		},

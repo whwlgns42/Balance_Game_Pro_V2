@@ -17,7 +17,7 @@ import model.question.QuestionDAO;
 import model.question.QuestionDTO;
 
 
-@WebServlet("/answerAsync.do")
+@WebServlet("/answerAsync")
 public class AnswerAsync extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

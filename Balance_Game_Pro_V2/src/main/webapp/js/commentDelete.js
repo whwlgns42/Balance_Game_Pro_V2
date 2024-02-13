@@ -3,7 +3,7 @@ $(".commentDelete").on("click", function() {
     var cId = $(this).closest("tr").find(".cId").val();
     $.ajax({
         type: "POST",
-        url: "DeleteCommentAsync.do",
+        url: "deleteCommentAsync",
         data: { 'cId': cId },
         dataType: 'text',
         success: function(data) {

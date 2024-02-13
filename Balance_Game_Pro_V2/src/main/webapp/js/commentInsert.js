@@ -32,7 +32,7 @@ $("#write").on("click", function() {
 	if (content) {
 		$.ajax({
 			type: "POST",
-			url: "commentWriteAsync.do",
+			url: "commentWriteAsync",
 			data: {
 				'qId': qId,
 				'loginId': loginId,

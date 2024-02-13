@@ -2,7 +2,7 @@
 function totalAnswer(qId, loginId, answerValue) {
     $.ajax({
         type: "POST",
-        url: "answerAsync.do",
+        url: "answerAsync",
         data: {
             'qId': qId,
             'loginId': loginId,

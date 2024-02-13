@@ -19,7 +19,7 @@ $(".save").on("click", function() {
 		//https://luahius.tistory.com/158
 		$.ajax({
 			type: "POST",
-			url: "saveAsync.do",
+			url: "saveAsync",
 			data: {
 				'loginId': loginId,
 				'qId': saveId
