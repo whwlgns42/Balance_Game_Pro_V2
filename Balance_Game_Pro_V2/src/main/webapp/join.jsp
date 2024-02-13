@@ -68,12 +68,12 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 							<div class="row gtr-uniform">
 								<div class="col-12">
 									<label for="name">이름</label>
-									<input type="text" name="name" id="name" placeholder="Name" value="테스트" />
+									<input type="text" name="name" id="name" placeholder="Name"  />
 								</div>
 
 								<div class="col-12-xsmall">
 									<label for="loginId">아이디</label>
-									<input type="text" class="loginId" name="loginId" id="loginIdCheck" placeholder="ID" value="asdff" />
+									<input type="text" class="loginId" name="loginId" id="loginIdCheck" placeholder="ID"  />
 									<div>
 										<font id="id_feedback" size="2"></font>
 									</div>
@@ -82,22 +82,22 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 
 								<div class="col-12">
 									<label for="mPw">비밀번호</label>
-									<input type="password" name="mPw" id="mPw" placeholder="password" value="123qwe123!@#" />
+									<input type="password" name="mPw" id="mPw" placeholder="password"  />
 								</div>
 
 								<div class="col-12">
 									<label for="mpwCh">비밀번호확인</label>
-									<input type="password" name="mpwCh" id="mpwCh" placeholder="PasswordCk" value="123qwe123!@#" />
+									<input type="password" name="mpwCh" id="mpwCh" placeholder="PasswordCk" />
 								</div>
 
 								<div class="col-12">
 									<label for="age">나이</label>
-									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="this.value=this.value.replace(/[^0-9]/g,'');" value="12" />
+									<input type="text" name="age" id="age" placeholder="나이를 입력하세요" oninput="this.value=this.value.replace(/[^0-9]/g,'');" />
 								</div>
 
 								<div class="col-12">
 									<label for="email">이메일</label>
-									<input type="email" name="email" id="email" placeholder="Email" value="asgsd@naver.com" />
+									<input type="email" name="email" id="email" placeholder="Email" />
 								</div>
 
 								<div class="col-12">
