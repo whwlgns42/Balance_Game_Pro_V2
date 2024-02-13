@@ -266,6 +266,7 @@
 										<thead>
 											<tr>
 												<th>ID</th>
+												<th>이름</th>
 												<th>제목</th>
 											</tr>
 										</thead>
