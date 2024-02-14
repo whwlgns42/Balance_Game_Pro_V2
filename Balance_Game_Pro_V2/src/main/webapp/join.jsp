@@ -171,6 +171,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 
 	<script>
 	
+	    let authStatus = 0;
 	// 사용자가 제출한 폼을 유효성 검사하는 함수
 	function validateForm() {
 	    // 입력된 값 가져오기
@@ -295,9 +296,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 	    });
 	}
 	
-	let authAttempts = 0; // 인증 시도 횟수
- 	let cooldownTime = 180; // 3분 (초 단위)
-	let cooldownTimer; // 타이머 변수
+	
 	// 성공 메세지 출력 함수
 	function showSuccess(title, text) {
 	    Swal.fire({
@@ -349,7 +348,10 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 	    feedback.css('color', color);
 	    feedback.css('font-size', '20px');
 	}
-
+	
+	let authAttempts = 0; // 인증 시도 횟수
+ 	let cooldownTime = 180; // 3분 (초 단위)
+	let cooldownTimer; // 타이머 변수
 	// 인증번호 발송 함수
 	function sendAuthNum() {
 	    let cellPhone = $("#cellPhone").val();
@@ -372,6 +374,7 @@ function jusoCallBack(roadAddrPart1,addrDetail){
 	                authNum = data;
 	                showSuccess("발송완료", "인증번호를 발송했습니다.");
 	                authAttempts++; // 인증문자 발송 횟수 증가
+	            	console.log(data);
 	                
 	                // 3분 타이머 설정
 	                cooldownTimer = setInterval(function () {
