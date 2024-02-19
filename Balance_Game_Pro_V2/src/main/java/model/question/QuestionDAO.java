@@ -118,7 +118,7 @@ public class QuestionDAO {
 					data.setTitle(rs.getString("TITLE"));
 					data.setLoginId(rs.getString("LOGIN_ID"));
 					data.setExplanation(rs.getString("EXPLANATION"));
-
+					data.setRegdate(rs.getString("REG_DATE"));
 					datas.add(data);
 				}
 				rs.close();
